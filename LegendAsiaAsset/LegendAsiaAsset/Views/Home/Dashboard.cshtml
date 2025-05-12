@@ -1,0 +1,203 @@
+﻿@model LegendAsiaAsset.Models.Home
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .fieldset span {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        const LaptopList = [];
+        const DeskTopList = [];
+        LaptopList.push(@Model.LaptopList[0])
+        LaptopList.push(@Model.LaptopList[1])
+        LaptopList.push(@Model.LaptopList[2])
+        LaptopList.push(@Model.LaptopList[3])
+        LaptopList.push(@Model.LaptopList[4])
+
+        DeskTopList.push(@Model.DeskTopList[0])
+        DeskTopList.push(@Model.DeskTopList[1])
+        DeskTopList.push(@Model.DeskTopList[2])
+        DeskTopList.push(@Model.DeskTopList[3])
+        DeskTopList.push(@Model.DeskTopList[4])
+
+
+    </script>
+    <script src="~/js/Dashboard.js" asp-append-version="true"></script>
+    <script src="~/lib/apexcharts/apexcharts.js" asp-append-version="true"></script>
+</head>
+@* <div class="row">
+    <div class="two alt-two">
+    <h1 class="Heading">
+    <span><i class="fa-solid fa-gauge"></i> Dashboard</span>
+    </h1>
+    </div>
+    </div> *@
+
+<fieldset>
+    <div class="row">
+        <div class="two alt-two">
+            <h1 class="Heading">
+                <span><i class="fa-solid fa-globe"></i> Global Data</span>
+            </h1>
+        </div>
+    </div>
+    <div class="app-main">
+        <div class="row">
+            <div class="col text-end">
+                <span class="mt-4" style="font-size: 11px;">ACTIVE <i class="fa-solid fa-1x fa-square" style="color:green;"></i></span>&nbsp;&nbsp;&nbsp;
+                <span style="font-size: 11px;">DEACTIVE <i class="fa-solid fa-1x fa-square" style="color:red;"></i></span>
+            </div>
+            <div class="col text-end">
+                <span class="mt-4" style="font-size: 11px;">AVAILABLE <i class="fa-solid fa-1x fa-square" style="color:green;"></i></span>&nbsp;&nbsp;&nbsp;
+                <span style="font-size: 11px;">ASSIGNED <i class="fa-solid fa-1x fa-square" style="color:#FFC107;"></i></span>
+            </div>
+            <div class="col text-end">
+                <span class="mt-4" style="font-size: 11px;">AVAILABLE <i class="fa-solid fa-1x fa-square" style="color:green;"></i></span>&nbsp;&nbsp;&nbsp;
+                <span style="font-size: 11px;">UNAVAILABLE <i class="fa-solid fa-1x fa-square" style="color:GRAY;"></i></span>
+            </div>
+        </div>
+        <div class="chart-row three">
+            <div class="chart-container-wrapper">
+                <div class="chart-container">
+                    <div class="chart-info-wrapper">
+                        <h2>Users - <span id="UserCount">@Model.UserDetails.UserCount</span></h2>
+                        <span id="UserCount" style="color:green">@Model.UserDetails.ActiveCount</span>&nbsp;/&nbsp;
+                        <span id="UserCount" style="color:red">@Model.UserDetails.DeactiveCount</span>
+                    </div>
+                    <div class="chart-svg">
+                        <svg viewBox="0 0 36 36" class="circular-chart green">
+                            <path class="circle-bg" d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path class="circle" stroke-dasharray="@Model.UserDetails.ActiveUserPec, 100" d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <text x="18" y="20.35" class="percentage">@Model.UserDetails.ActiveUserPec %</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container-wrapper">
+                <div class="chart-container">
+                    <div class="chart-info-wrapper">
+                        <h2>ITAsset - <span id="ITAssetCount">@Model.ITAssetDetailsModel.ITAssetCount</span></h2>
+                        <span id="ITAssetCount" style="color:green">@Model.ITAssetDetailsModel.ITAssetAvailable</span>&nbsp;/&nbsp;
+                        <span id="ITAssetCount" style="color:#FFC107">@Model.ITAssetDetailsModel.ITAssetAssigned</span>
+                    </div>
+                    <div class="chart-svg">
+                        <svg viewBox="0 0 36 36" class="circular-chart yellow">
+                            <path class="circle-bg" d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path class="circle text-dark" stroke-dasharray="@Model.ITAssetDetailsModel.ActiveITAssetPec, 100" d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <text x="18" y="20.35" class="percentage">@Model.ITAssetDetailsModel.ActiveITAssetPec %</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container-wrapper">
+                <div class="chart-container">
+                    <div class="chart-info-wrapper">
+                        <h2>Infra - <span id="InfraCount">@Model.InfrastructureModel.InfraCount</span></h2>
+                        <span id="InfraCount" style="color:green">@Model.InfrastructureModel.InfraCountActive</span>&nbsp;/&nbsp;
+                        <span id="InfraCount" style="color:gray">@Model.InfrastructureModel.InfraCountDeactive</span>
+                    </div>
+                    <div class="chart-svg">
+                        <svg viewBox="0 0 36 36" class="circular-chart gray">
+                            <path class="circle-bg" d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path class="circle" stroke-dasharray="@Model.InfrastructureModel.ActiveInfraPec, 100" d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <text x="18" y="20.35" class="percentage">@Model.InfrastructureModel.ActiveInfraPec %</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+       @*  <div id="wrapper">
+            <div class="content-area">
+                <div class="container-fluid">
+                    <div class="main">
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div id="bar"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> *@
+    </div>
+</fieldset>
+
+<fieldset class="fieldset mb-3">
+    <div class="row">
+        <div class="mb-4">
+            <legend class="mb-2">
+                &nbsp;LOCATIONS &nbsp;
+            </legend>
+        </div>
+    </div>
+    <div class="mb-3">
+        @* <span class="chip primary">Regions</span> *@
+       @*  <span class="badge rounded-pill text-bg-secondary regions" value="Asia"><i class="fa-solid fa-check"></i> ASIA</span>&nbsp; *@
+       @*  <span class="badge rounded-pill text-bg-secondary regions" value="North America"><i class="fa-solid fa-check"></i> NORTH AMERICA</span>&nbsp;
+        <span class="badge rounded-pill text-bg-secondary regions" value="South America"><i class="fa-solid fa-check"></i> SOUTH AMERICA</span>&nbsp;
+        <span class="badge rounded-pill text-bg-secondary regions" value="Europe"><i class="fa-solid fa-check"></i> EUROPE</span>&nbsp;
+        <span class="badge rounded-pill text-bg-secondary regions" value="Oceania"><i class="fa-solid fa-check"></i> OCEANIA</span>&nbsp; *@
+    </div>
+    <div id="countryData" class="mb-3">
+    </div>
+    <div id="locationData" class="mb-3">
+    </div>
+
+    <div id="DashboardGridFieldset">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="mb-4 mt-4">
+                        <legend>
+                            &nbsp;IT ASSET GRID &nbsp;
+                        </legend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <table id="DashboardGrid" class="table table-bordered table-striped">
+                        </table>
+                        <div id="DashboardPager"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="mb-4 mt-4">
+                        <legend>
+                            &nbsp;INFRASTRUCTURE GRID &nbsp;
+                        </legend>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <table id="DashboardInfraGrid" class="table table-bordered table-striped">
+                        </table>
+                        <div id="DashboardInfraPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+</html>

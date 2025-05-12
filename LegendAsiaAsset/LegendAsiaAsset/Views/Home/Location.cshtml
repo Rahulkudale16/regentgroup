@@ -1,0 +1,119 @@
+﻿@model LegendAsiaAsset.Models.Home
+
+<script src="~/js/Location.js" asp-append-version="true"></script>
+
+<!-- Page Heading Starts -->
+<div class="row">
+    <div class="two alt-two">
+        <h1 class="Heading">
+            <span><i class="fa-solid fa-location-dot"></i> Location</span>
+        </h1>
+    </div>
+</div>
+<!-- Page Heading Ends -->
+<!--Create Button trigger modal -->
+<div class="row mb-3">
+    <div class="col-lg-3">
+        <button type="button" class="btn btn-outline-purple" data-bs-toggle="modal" data-bs-target="#CreateLocation" id="CreateButtonLocation">
+            <i class="fa-solid fa-square-plus"></i>&nbsp; Create Location
+        </button>
+    </div>
+</div>
+<!--Create Button trigger modal -->
+<!-- Dropdowns Starts -->
+<fieldset class="fieldset mb-3">
+    <div class="row">
+        <div class="col-lg-3">
+            @Html.LabelFor(model => model.LocationModel.Region, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.LocationModel.Region, new SelectList(ViewBag.RegionLocation, "Text", "Text"),"Select Region", new { @id = "RegionLocation" })
+            @Html.ValidationMessageFor(model => model.LocationModel.Region, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-3">
+            @Html.LabelFor(model => model.LocationModel.Country, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.LocationModel.Country, new SelectList(ViewBag.CountryLocation, "Text", "Text"),"Select Country", new { @id = "CountryLocation" })
+            @Html.ValidationMessageFor(model => model.LocationModel.Country, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-3">
+            @Html.LabelFor(model => model.LocationModel.Location, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.LocationModel.Location, new SelectList(ViewBag.LocationLOC, "Value", "Text"),"Select Location", new { @id = "LocLocation" })
+            @Html.ValidationMessageFor(model => model.LocationModel.Location, "", new { @class = "text-danger" })
+        </div>
+        @Html.HiddenFor(model => model.LocationModel.IDLocation, new{ @Id = "LocationIDLoc" })
+    </div>
+</fieldset>
+<!-- Dropdowns Starts -->
+<!-- Search Options Starts -->
+<div class="row mb-3">
+    <div class="col">
+        <div class="btn-group">
+            <button type="button" id="SearchLocation" class="btn btn-outline-purple"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button type="reset" id="ResetLocation" class="btn btn-outline-purple"><i class="fa-solid fa-arrow-rotate-left"></i> Reset</button>
+            <button type="button" class="btn btn-outline-success" id="ExportExcelLocation"><i class="fa-solid fa-file-excel"></i>&nbsp; Export</button>
+        </div>
+    </div>
+</div>
+<!-- Search Options Ends -->
+<!-- Location Grid Starts -->
+<fieldset>
+    <div class="row">
+        <div class="col">
+            <table id="LocationGrid" class="table table-bordered table-striped" style="width:100%">
+            </table>
+            <div id="LocationPager" style="text-align: center; height:30px"></div>
+        </div>
+    </div>
+</fieldset>
+<!-- Location Grid Ends -->
+<!-- Create Modal Starts -->
+<div class="modal fade" id="CreateLocation" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color:#6F42C1;">
+                <div class="col-lg-6">
+                    <h4><i class="fa-solid fa-user"></i>&nbsp;<b id="IDLocationDis"></b></h4>
+                </div>
+                <div class="col" style="display:flex">
+                    <div class="col-lg-12 text-end">
+                        <span class="" id="CreationLOC" style="font-size:11px;"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body row justify-content-center">
+                <div class="row">
+                    <div class="col-lg-6">
+                        @Html.LabelFor(model => model.LocationModel.Region, htmlAttributes: new { @class = "form-label" })
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.DropDownListFor(model => model.LocationModel.Region, new SelectList(ViewBag.RegionLocation, "Text", "Value"), "Select Region",  new { @id = "RegionLoc" , @class="form-control checkValidLOC"})
+                        <span class="invalid-feedback">Region is mandatory </span>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.LocationModel.Country, htmlAttributes: new { @class = "form-label" })
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.DropDownListFor(model => model.LocationModel.Country, new SelectList(ViewBag.CountryLocation, "Text", "Value"), "Select Country",  new { @id = "CountryLoc", @class="form-control checkValidLOC"})
+                        <span class="invalid-feedback">Country is mandatory </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.LocationModel.Location, htmlAttributes: new { @class = "form-label" })
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.EditorFor(model => model.LocationModel.Location,  new { htmlAttributes = new { @class = "form-control checkValidloc", @id = "LocationLoc"} })
+                        <span class="invalid-feedback">Location is mandatory </span>
+                    </div>
+                    @Html.HiddenFor(model => model.LocationModel.IDLocation, new{ @Id = "LocationID" })
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <div class="d-flex flex-row align-content-center">
+                    <div class="btn-group">
+                        <button id="SaveLocation" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                        <button id="UpdateLocationNEW" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Update</button>
+                        <button id="CloseLocation" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button> &nbsp;
+                        <label class="switch mt-0" id="statusShow1"> <input type="checkbox" id="LocStatus"><span class="slider"></span></label>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Create Modal Ends -->

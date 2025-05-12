@@ -1,0 +1,398 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using LegendAsiaAsset.Data
+
+@model LegendAsiaAsset.Models.Home
+<script src="~/js/UserDetails.js" asp-append-version="true"></script>
+@{
+    string userName = string.Empty;
+    string Role = string.Empty;
+    if (User != null)
+    {
+        userName = (User.Identity?.Name ?? string.Empty).ToUpper();
+        Role = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty;
+    }
+    var routeData = ViewContext.RouteData.Values["Controller"];
+    string? currentControllerName = routeData?.ToString();
+    var userIdentity = User?.Identity;
+
+    <script>
+        var RoleUser = "@Role";
+    </script>
+}
+<!-- Page heading Starts -->
+<div class="row">
+    <div class="two alt-two">
+        <h1 class="Heading">
+            <span><i class="fa-solid fa-user"></i> User</span>
+        </h1>
+    </div>
+</div>
+<!-- Page heading Ends -->
+<!--Create Button trigger modal -->
+<div class="row mb-3">
+    <div class="col-lg-3">
+        <button type="button" class="btn btn-outline-purple" data-bs-toggle="modal" data-bs-target="#CreateUserDetails" id="CreateButton">
+            <i class="fa-solid fa-square-plus"></i>&nbsp; Create User
+        </button>
+    </div>
+</div>
+<!--Create Button trigger modal -->
+<!-- Dropdown fields Starts -->
+<fieldset class="fieldset mb-3" style="top:63px;z-index:1000;">
+    <div class="row">
+        <div class="col">
+            @Html.LabelFor(model => model.UserDetails.Role, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.UserDetails.Role, new SelectList(ViewBag.RoleUserDetails, "Value", "Text"), "Select Role", new { @id = "RoleUserDetails" })
+            @Html.ValidationMessageFor(model => model.UserDetails.Role, "", new { @class = "text-danger" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.UserDetails.Department, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.UserDetails.Department, new SelectList(ViewBag.DepartmentUserDetails, "Value", "Text"), "Select Department", new { @id = "DepartmentUserDetails" })
+            @Html.ValidationMessageFor(model => model.UserDetails.Department, "", new { @class = "text-danger" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.UserDetails.Designation, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.UserDetails.Designation, new SelectList(ViewBag.DesignationUserDetails, "Value", "Text"), "Select Designation", new { @id = "DesignationUserDetails" })
+            @Html.ValidationMessageFor(model => model.UserDetails.Designation, "", new { @class = "text-danger" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.UserDetails.UserName, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.UserDetails.UserName, new SelectList(ViewBag.UserNameUserDetails, "Value", "Text"), "Select User Name", new { @id = "UserNameUserDetails" })
+            @Html.ValidationMessageFor(model => model.UserDetails.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            @Html.LabelFor(model => model.UserDetails.Location, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.UserDetails.Location, new SelectList(ViewBag.LocationOnly, "Text", "Value"), "Select Location", new { @id = "LocationUserDetails" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.UserDetails.EmailID, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.UserDetails.EmailID, new SelectList(ViewBag.EmailUserDetails, "Text", "Value"), "Select EmailID", new { @id = "EmaillIDUserDetails" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.UserDetails.Domain, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.UserDetails.Domain, new SelectList(ViewBag.DomainOnly, "Text", "Value"), "Select Domain", new { @id = "DomainUserDetails" })
+        </div>
+    </div>
+</fieldset>
+<!-- Dropdown fields Ends -->
+<!-- Search Options Starts -->
+<div class="row mb-3">
+    <div class="col">
+        <div class="btn-group">
+            <button type="button" id="SearchUserDetails" class="btn btn-outline-purple"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button type="reset" id="ResetUserDetails" class="btn btn-outline-purple"><i class="fa-solid fa-arrow-rotate-left"></i> Reset</button>
+            <button type="button" id="ExportExcelUser" class="btn btn-outline-success"><i class="fa-solid fa-file-excel"></i>&nbsp; Export</button>
+        </div>
+    </div>
+</div>
+<!-- Search Options Ends -->
+<!--User Details Grid Starts -->
+<fieldset class="fieldset mb-3" style="top:63px;">
+    <div class="row">
+        <div class="col">
+            <table id="UserDetailsGrid" class="table table-bordered table-striped">
+            </table>
+            <div id="UserDetailsPager"></div>
+        </div>
+    </div>
+</fieldset>
+<!--User Details Grid Ends -->
+<!-- Create Modal Starts -->
+<div class="modal fade" id="CreateUserDetails" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color:#6F42C1;">
+                <div class="col-lg-4">
+                    <h4><i class="fa-solid fa-user"></i>&nbsp;<b id="IDUserDis"></b></h4>
+                </div>
+                <div class="col" style="display:flex">
+                    <div class="col-lg-10 text-end">
+                        <span class="" id="CreationUD" style="font-size:11px;"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body row justify-content-center">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.UserDetails.FullName, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.FullName, new { htmlAttributes = new { @class = "form-control checkvalidud", @id = "FullNameUD" } })
+                                <span class="invalid-feedback">Full Name is mandatory </span>
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                @Html.LabelFor(model => model.UserDetails.Role, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.DropDownListFor(model => model.UserDetails.Role, new SelectList(ViewBag.RoleUserDetails, "Text", "Value"), "Select Role", new { @id = "RoleUD", @class = "checkvalidUD" })
+                                <span class="invalid-feedback">Role is mandatory </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.UserDetails.Department, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.Department, new { htmlAttributes = new { @class = "form-control checkvalidud", @id = "DepartmentUD" } })
+                                <span class="invalid-feedback">Department is mandatory </span>
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                @Html.LabelFor(model => model.UserDetails.Designation, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.Designation, new { htmlAttributes = new { @class = "form-control checkvalidud", @id = "DesignationUD" } })
+                                <span class="invalid-feedback">Designation is mandatory </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.UserDetails.UserName, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.UserName, new { htmlAttributes = new { @class = "form-control checkvalidud", @id = "UserNameUD" } })
+                                <span class="invalid-feedback">UserName is mandatory </span>
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                @Html.LabelFor(model => model.UserDetails.Location, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.DropDownListFor(model => model.UserDetails.IDLocation, new SelectList(ViewBag.LocationUD, "Text", "Value"), "Select Location", new { @id = "LocationUD", @class = "checkvalidUD" })
+                                <span class="invalid-feedback">Location is mandatory </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.UserDetails.EmailID, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.EmailID, new { htmlAttributes = new { @class = "form-control checkvalidud", @id = "EmailIDUD" } })
+                                <span class="invalid-feedback">Email ID is mandatory </span>
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                @Html.LabelFor(model => model.UserDetails.Unit, htmlAttributes: new { @class = "form-label" })
+                                @Html.EditorFor(model => model.UserDetails.Unit, new { htmlAttributes = new { @class = "form-control", @id = "UnitUD" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 mb-3">
+                                @Html.LabelFor(model => model.UserDetails.Domain, htmlAttributes: new { @class = "form-label" })
+                                @Html.EditorFor(model => model.UserDetails.Domain, new { htmlAttributes = new { @class = "form-control", @id = "DomainUD" } })
+                            </div>
+                            @Html.HiddenFor(model => model.UserDetails.IDUser, new { @Id = "UserID" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <div class="d-flex flex-row align-content-center">
+                    <button id="SaveUserDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Save</button>&nbsp;
+                    <button id="CloseUD" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button> &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Create Modal Ends -->
+<!-- All Update Modal Starts -->
+<div class="modal fade" id="UpdateAllDetails" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color:#6F42C1;">
+                <div class="col-lg-4">
+                    <h4><i class="fa-solid fa-user"></i>&nbsp;<b id="IDUserLatest"></b></h4>
+                </div>
+                <div class="col" style="display:flex">
+                    <div class="col-lg-10 text-end">
+                        <span class="" id="CreationLatest" style="font-size:11px;"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body row justify-content-center">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.UserDetails.FullName, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.FullName, new { htmlAttributes = new { @class = "form-control", @id = "FullNameUpdate" } })
+                                @Html.ValidationMessageFor(model => model.UserDetails.FullName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                @Html.LabelFor(model => model.UserDetails.Role, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.DropDownListFor(model => model.UserDetails.Role, new SelectList(ViewBag.RoleUserDetails, "Text", "Value"), "Select Role", new { @id = "RoleUpdate" })
+                                @Html.ValidationMessageFor(model => model.UserDetails.Role, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.UserDetails.Department, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.Designation, new { htmlAttributes = new { @class = "form-control checkvalidud", @id = "DepartmentUpdate" } })
+                                @Html.ValidationMessageFor(model => model.UserDetails.Department, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                @Html.LabelFor(model => model.UserDetails.Designation, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.Designation, new { htmlAttributes = new { @class = "form-control checkvalidud", @id = "DesignationUpdate" } })
+                                @Html.ValidationMessageFor(model => model.UserDetails.Designation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.UserDetails.UserName, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.UserName, new { htmlAttributes = new { @class = "form-control", @id = "UserNameUpdate" } })
+                                @Html.ValidationMessageFor(model => model.UserDetails.UserName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                @Html.LabelFor(model => model.UserDetails.Location, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.DropDownListFor(model => model.UserDetails.IDLocation, new SelectList(ViewBag.LocationUD, "Text", "Value"), "Select Location", new { @id = "LocationUpdate" })
+                                @Html.ValidationMessageFor(model => model.UserDetails.Location, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.UserDetails.EmailID, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.EmailID, new { htmlAttributes = new { @class = "form-control", @id = "EmailIDUpdate" } })
+                                @Html.ValidationMessageFor(model => model.UserDetails.EmailID, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-lg-6 mb-3">
+                                @Html.LabelFor(model => model.UserDetails.Unit, htmlAttributes: new { @class = "form-label" })
+                                @Html.EditorFor(model => model.UserDetails.Unit, new { htmlAttributes = new { @class = "form-control", @id = "UnitUpdate" } })
+                                @Html.ValidationMessageFor(model => model.UserDetails.Unit, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 mb-3">
+                                @Html.LabelFor(model => model.UserDetails.Domain, htmlAttributes: new { @class = "form-label" })
+                                @Html.EditorFor(model => model.UserDetails.Domain, new { htmlAttributes = new { @class = "form-control", @id = "DomainUpdate" } })
+                                @Html.ValidationMessageFor(model => model.UserDetails.Domain, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.HiddenFor(model => model.UserDetails.IDUser, new { @Id = "UserID" })
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <!--upload file buttons and selections-->
+                        <div class="row">
+                            <div class="col-lg-2 mt-1">
+                                @Html.LabelFor(model => model.UserDetails.File, htmlAttributes: new { @class = "form-label" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.UserDetails.File, new { @type = "file", @multiple = "multiple", @class = "form-control", @id = "DocFileName", @accept = ".pdf,.doc,.docx,.txt,.xls,.xlsx,.csv,.pptx,.png,.jpeg,.jpg,.msg,.ppt" })
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-purple" id="SaveFile"> <i class="fa-solid fa-file-arrow-up"></i> Upload File</button>
+                                    <button type="button" class="btn btn-outline-danger" id="DeleteFile"> <i class="fa-solid fa-trash"></i>  Delete File</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--upload file buttons and selections close-->
+                        <div class="row">
+                            <!-- Document Upload Grid Starts -->
+                            <fieldset class="fieldset mb-3" style="top:63px;">
+                                <legend class="mb-2" ">
+                                    &nbsp;DOC UPLOAD GRID &nbsp;
+                                </legend>
+                                <div class="row">
+                                    <div class="col">
+                                        <table id="fileuploadGrid" class="table table-bordered table-striped">
+                                        </table>
+                                        <div id="fileuploadPager">
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col text-center">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-outline-purple" id="EditfileuploadGrid" onclick="startEdit('fileuploadGrid')"><i class="fa-solid fa-pen"></i>  Edit Doc Type</button>
+                                                    <button type="button" class="btn btn-outline-purple" id="SavefileuploadGrid" onclick="saveRows('fileuploadGrid')" disabled><i class="fa-solid fa-floppy-disk"></i>  Save Doc Type</button>
+                                                    <button class="btn btn-outline-danger" id="CancelfileuploadGrid" type="button" onclick="cancelRows('fileuploadGrid')" disabled><i class="fa-solid fa-cancel"></i> Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <!-- Document Upload Grid Ends -->
+                        </div>
+                                @*                         <div class="row">
+                        <!--Assign Grid Starts -->
+                        <fieldset class="fieldset mb-3" style="top:63px;">
+                        <legend class="mb-2" ">
+                        &nbsp;ASSIGN GRID &nbsp;
+                        </legend>
+                        <div class="row">
+                        <div class="col">
+                        <table id="AssignGrid" class="table table-bordered table-striped">
+                        </table>
+                        <div id="AssignPager"></div>
+                        </div>
+                        </div>
+                        <div class="row mt-2">
+                        <div class="col text-center">
+                        <div class="btn-group" id="ButtonsFieldset">
+                        <button type="reset" id="RevokeButton1" class="btn btn-outline-success"><i class="fa-solid fa-arrow-rotate-left"></i> Available</button>&nbsp;
+                        <button type="button" id="RepairButton1" class="btn btn-outline-danger"><i class="fa-solid fa-magnifying-glass"></i> Repair</button>&nbsp;
+                        <button type="button" id="ScrappedITAsset1" class="btn btn-outline-secondary"><i class="fa-solid fa-dumpster-fire"></i>&nbsp; Scrapped</button>
+                        </div>
+                        </div>
+                        </div>
+                        </fieldset>
+                        <!--Assign Grid Ends -->
+                        </div> *@
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <div class="d-flex flex-row align-content-center">
+                    <div class="btn-group">
+                                @* <button id="AssignITAssetDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Assign</button> *@
+                        <button id="UpdateUserDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Update</button>
+                        <button id="DeleteUserDetails" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>&nbsp; Delete</button>
+                        @* <button id="TransferUserDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Transfer</button> *@
+                        @* <button id="ResetPassword" name="Submit" value="Save" class="btn btn-outline-danger"><i class="fa-solid fa-floppy-disk"></i> Reset Password</button> *@
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button>&nbsp;
+                        <label class="switch mt-0" id="statusShow"> <input type="checkbox" id="userStatus" class="statusCheck"><span class="slider"></span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- All Update Modal Ends -->
+<!-- File Upload Starts -->
+<div class="modal fade justify-content-center" id="errorFileUpload" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" style="--bs-modal-width: 701px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Upload Status</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="close"></button>
+            </div>
+            <div class="modal-body row justify-content-center">
+                <div class="col-lg-12">
+                    <table id="filestatus"></table>
+                </div>
+
+                <table class="col-lg-11" id="filestatus"></table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- File Upload Ends -->
+<!--doc upload view modal start here-->
+<div class="modal fade" id="msdsPdfViewer" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h3 class="modal-title">PDF Viewer</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="close"></button>
+            </div>
+            <div class="modal-body row justify-content-center">
+                <iframe id="msdsPdfObject" name="msdsPdfObject" width="800" onload="resizeIframe(this)" src=""></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<!--doc upload view modal Ends here-->

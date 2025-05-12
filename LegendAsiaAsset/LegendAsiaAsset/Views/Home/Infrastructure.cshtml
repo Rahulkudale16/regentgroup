@@ -1,0 +1,158 @@
+﻿@model LegendAsiaAsset.Models.Home
+<script src="~/js/Infrastructure.js" asp-append-version="true"></script>
+<!-- Page Heading Starts -->
+<div class="row">
+    <div class="two alt-two">
+        <h1 class="Heading">
+            <span><i class="fa-solid fa-road-bridge"></i> Infrastructure</span>
+        </h1>
+    </div>
+</div>
+<!-- Page Heading Starts -->
+<!--Create Button trigger modal -->
+<div class="row mb-3">
+    <div class="col-lg-3">
+        <button type="button" class="btn btn-outline-purple" data-bs-toggle="modal" data-bs-target="#CreateInfra" id="CreateBtnInfra">
+            <i class="fa-solid fa-square-plus"></i>&nbsp; Create Infrastructure
+        </button>
+    </div>
+</div>
+<!--Create Button trigger modal -->
+<!-- Dropdowns Starts -->
+<fieldset class="fieldset mb-3" style="top:63px;z-index:1000;">
+    <div class="row">
+        <div class="col">
+            @Html.LabelFor(model => model.InfrastructureModel.SerialNumber, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.InfrastructureModel.SerialNumber, new SelectList(ViewBag.SerialNumberInfra, "Value", "Text"), "Select Serialnumber", new { @class = "", @id = "SerialNoInfra" })
+            @Html.ValidationMessageFor(model => model.InfrastructureModel.SerialNumber, "", new { @class = "text-danger" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.InfrastructureModel.Model, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.InfrastructureModel.Model, new SelectList(ViewBag.ModelInfra, "Value", "Text"), "Select Model", new { @class = "", @id = "ModelInfra" })
+            @Html.ValidationMessageFor(model => model.InfrastructureModel.Model, "", new { @class = "text-danger" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.InfrastructureModel.Brand, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.InfrastructureModel.Brand, new SelectList(ViewBag.BrandInfra, "Value", "Text"), "Select Brand" , new { @class = "", @id = "BrandInfra" })
+            @Html.ValidationMessageFor(model => model.InfrastructureModel.Brand, "", new { @class = "text-danger" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.InfrastructureModel.AssetType, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.InfrastructureModel.AssetType, new SelectList(ViewBag.AssetTypeInfra, "Value", "Text"), "Select AssetType" , new { @class = "", @id = "AssetTypeInfra" })
+            @Html.ValidationMessageFor(model => model.InfrastructureModel.AssetType, "", new { @class = "text-danger" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.UserDetails.Location, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.UserDetails.Location, new SelectList(ViewBag.LocationOnly, "Text", "Value"), "Select Location", new { @id = "LocationInfraDetails" })
+        </div>
+    </div>
+</fieldset>
+<!-- Dropdowns Ends -->
+<!-- Search Options Starts -->
+<div class="row mb-3">
+    <div class="col">
+        <div class="btn-group">
+            <button type="button" id="SearchInfra" class="btn btn-outline-purple"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button type="reset" id="ResetInfra" class="btn btn-outline-purple"><i class="fa-solid fa-arrow-rotate-left"></i> Reset</button>
+            <button type="button" class="btn btn-outline-success" id="ExportExcelInfra"><i class="fa-solid fa-file-excel"></i>&nbsp; Export</button>
+        </div>
+    </div>
+</div>
+<!-- Search Options Ends -->
+<!-- Infrastructure Grid Starts -->
+<fieldset class="fieldset mb-3" style="top:63px;">
+    <div class="row">
+        <div class="col">
+            <table id="InfrastructureGrid" class="table table-bordered table-striped">
+            </table>
+            <div id="InfrastructurePager"></div>
+        </div>
+    </div>
+</fieldset>
+<!-- Infrastructure Grid Ends -->
+<!-- Create Modal Starts -->
+<div class="modal fade" id="CreateInfra" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color:#6F42C1;">
+                <div class="col-lg-6">
+                    <h4><i class="fa-solid fa-user"></i>&nbsp;<b id="IDInfraDis"></b></h4>
+                </div>
+                <div class="col" style="display:flex">
+                    <div class="col-lg-12 text-end">
+                        <span class="" id="CreationInfraData" style="font-size:11px;"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body row justify-content-center">
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.InfrastructureModel.AssetType, htmlAttributes: new { @class = "form-label" })
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.EditorFor(Model => Model.InfrastructureModel.AssetType , new { htmlAttributes = new { @class = "form-control checkValidInfra", @id = "AssetTypeInfra1" } } )
+                        <span class="invalid-feedback">Asset Type is mandatory </span>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.InfrastructureModel.Brand, htmlAttributes: new { @class = "form-label" })
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.EditorFor(Model => Model.InfrastructureModel.Brand , new { htmlAttributes = new { @class = "form-control checkValidInfra", @id = "BrandInfra1" } } )
+                        <span class="invalid-feedback">Brand is mandatory </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.InfrastructureModel.Model, htmlAttributes: new { @class = "form-label" })
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.EditorFor(Model => Model.InfrastructureModel.Model , new { htmlAttributes = new { @class = "form-control checkValidInfra", @id = "ModelInfra1" } } )
+                        <span class="invalid-feedback">Model is mandatory </span>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.InfrastructureModel.SerialNumber, htmlAttributes: new { @class = "form-label" })
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.EditorFor(Model => Model.InfrastructureModel.SerialNumber , new { htmlAttributes = new { @class = "form-control checkValidInfra", @id = "SerialNumberInfra" } } )
+                        <span class="invalid-feedback">Serial Number is mandatory </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.InfrastructureModel.PurchaseYear, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(Model => Model.InfrastructureModel.PurchaseYear,"{0:yyyy-MM-dd}", new { htmlAttributes = new { @type = "Date", @class = "form-control", @id = "PurchaseYearInfra" } } )
+                        @* <span class="invalid-feedback">Purchase Year is mandatory </span> *@
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.InfrastructureModel.Location, htmlAttributes: new { @class = "form-label" })
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.DropDownListFor(model => model.InfrastructureModel.Location, new SelectList(ViewBag.LocationInfra, "Text", "Value"), "Select Location",  new { @id = "LocationInfra", @class = "form-control checkValidINF" })
+                        <span class="invalid-feedback">Location is mandatory </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.InfrastructureModel.Remark, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(Model => Model.InfrastructureModel.Remark, new { htmlAttributes = new { @class = "form-control", @id = "RemarkInfra" } } )
+                        @Html.ValidationMessageFor(model => model.InfrastructureModel.Remark, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.InfrastructureModel.Unit, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(Model => Model.InfrastructureModel.Unit, new { htmlAttributes = new { @class = "form-control", @id = "UnitInfra" } })
+                        @Html.ValidationMessageFor(model => model.InfrastructureModel.Unit, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @Html.HiddenFor(model => model.InfrastructureModel.IDInfra, new{ @Id = "InfraID" })
+            </div>
+            <div class="modal-footer justify-content-center">
+                <div class="d-flex flex-row align-content-center">
+                    <button id="SaveInfra" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Save</button>&nbsp;
+                    <button id="UpdateInfra" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Update</button>&nbsp;
+                    @* <button id="TransferInfra" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Transfer</button>&nbsp; *@
+                    <button id="DeleteInfra" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>&nbsp; Delete</button>&nbsp;
+                    <button id="CloseInfra" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button> &nbsp;
+                    <label class="switch" id="statusInfra"> <input type="checkbox" id="InfraStatus" class="statusCheck"><span class="slider1"></span></label> &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>
+<!-- Create Modal Ends -->

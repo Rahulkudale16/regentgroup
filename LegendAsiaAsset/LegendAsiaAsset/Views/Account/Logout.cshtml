@@ -1,0 +1,47 @@
+﻿@model LegendAsiaAsset.Models.UserDetails
+
+@{
+    Layout = null;
+    ViewData["Title"] = "LOGOUT";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-select/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <title>Legend Asia | Logout</title>
+
+    <style>
+        .login100-form-btn {
+            width: fit-content;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-logout100 col">
+                <div class="col align-self-center">
+                    <span class="login100-form-title">
+                        <b>You have been logged out.</b>
+                    </span>
+
+                    <div class="wrap-input100 validate-input" data-validate="Username is required">
+                        <h3 class="login100-form-title text-center">Thank you for visiting @Html.Raw(TempData["LogoutUser"] ?? string.Empty)</h3>
+                    </div>
+                    <br />
+                    <div class="container-login100-form-btn justify-content-center">
+                        <button onclick="location.href='@Url.Action("Login", "Account")'" class="login100-form-btn fw-bold">
+                            LOGIN AGAIN &nbsp;<i id="loginLogo" class="fa-solid fa-lg fa-right-to-bracket fa-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

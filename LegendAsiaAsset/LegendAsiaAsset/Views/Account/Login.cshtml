@@ -1,0 +1,94 @@
+﻿@model LegendAsiaAsset.Models.UserDetails
+<script src="~/js/Login.js" asp-append-version="true"></script>
+@{
+    Layout = null;
+    ViewData["Title"] = "Login";
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/image/Star.png">
+    <title>Legend Asia | Login</title>
+</head>
+
+<body>
+    @using (Html.BeginForm(FormMethod.Post, new { @class = "form" }))
+    {
+        <div class="containerLogin">
+            <div class="forms-containerLogin" id="LoginContent">
+                <div class="signin-signup">
+                    <formLogin action="#" class="sign-in-form">
+                        @* First Logo *@ 
+                        <h2 class="titleLogin text-center">
+                            <img src="~/image/RegentGroup.png" class="img-fluid" style="max-width:70%;" />
+                        </h2>
+                        @* Input Fields to Add data. *@
+                        <div class="input-field" id="UserNameLogin">
+                            <i class="fa-solid fa-user"></i>
+                            @Html.AntiForgeryToken()
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form__input", placeholder = "UserName" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger text-start" })
+                        </div>
+                        <div class="input-field" id="PasswordLogin">
+                            <i class="fa-solid fa-lock"></i>
+                            @Html.PasswordFor(model => model.Password, new { @class = "form__input", placeholder = "Password" })<br><br>
+                            @Html.ValidationMessageFor(model => model.Password, @Html.Raw(TempData["Error"]).ToString(), new { @class = "text-danger fw-bold" })
+                        </div>
+                        <p class="mt-3">
+                            <a href="@Url.Action("ForgotPassword","Account")" , id="Forgotword">Forgot Password? </a>
+                        </p>
+                        <button class="btnLogin solid mt-3" id="Login">Login</button>
+                    </formLogin>
+                </div>
+            </div>
+            <div class="panels-container">
+                <div class="panel left-panel">
+                    <div class="content">
+                    </div>
+                    <img src="~/image/Login.png" class="imageLogin" alt="" />
+                </div>
+            </div>
+        </div>
+    }
+   
+    <script src="~/lib/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="~/lib/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/js/Login.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+
+
+<style>
+    button {
+        background: #fff;
+        border: none;
+        padding: 10px 20px;
+        display: inline-block;
+        font-size: 15px;
+        font-weight: 600;
+        width: 120px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transform: skew(-21deg);
+    }
+</style>
+
+@* <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("OTP").style.display = "none";
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("EmailIDLogin").style.display = "none";
+    });
+
+    document.getElementById("Forgotword").addEventListener("click", function () {
+        document.getElementById("OTP").style.display = "block";
+        document.getElementById("UserNameLogin").style.display = "none";
+        document.getElementById("PasswordLogin").style.display = "none";
+        document.getElementById("Login").style.display = "none";
+        document.getElementById("Forgotword").style.display = "none";
+        document.getElementById("EmailIDLogin").style.display = "block";
+    });
+</script> *@
