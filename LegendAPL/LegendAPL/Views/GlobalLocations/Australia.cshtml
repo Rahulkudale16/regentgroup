@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "Australia";
+}
+
+
+<script src="~/Content/js/site.js"></script>
+<script src="~/Content/lib/d3/d3.min.js"></script>
+<script src="~/Content/lib/topojson/topojson.min.js"></script>
+<script src="~/Content/js/Datamaps.js"></script>
+<script src="~/Content/js/MapData.js"></script>
+<script src="~/Content/js/datamaps.markers.js"></script>
+
+<!-- Page Header Start -->
+<div class="bradcam_area bradcam_bg_22 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="bradcam_text">
+                    <h3>Australia</h3>
+                    <p> <a href="@Url.Action("index","Home")">Home</a> / <a href="@Url.Action("GlobalLocations","GlobalLocations")">Global Locations</a> / Australia</p>
+                </div>
+            </div>
+            @*<div class="col-xl-6">
+                    <div class="bradcam_text">
+                        <h3>12 Countries</h3>
+                        <h3>20 Regional Offices</h3>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+<!-- Menus Starts -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 mb-3" data-aos="zoom-out">
+            <p style="font-weight:700;font-size:18px;">
+                <a href="@Url.Action("Headquarters","GlobalLocations")" class="hover-underline-animation">Headquarters</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("Singapore","GlobalLocations")" class="hover-underline-animation">Singapore</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("Indonesia","GlobalLocations")" class="hover-underline-animation">Indonesia</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("Australia","GlobalLocations")" class="underline-2">Australia</a>
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Menus Ends -->
+<div class="SingaporeGL container">
+    <div class="row">
+        <div class="col-12">
+            <h5 style="font-size: 20px;margin-top:10px;line-height: 22px !important;" data-aos="fade-left">Melbourne (Head Office)</h5>
+            <h5 style="padding: 0px 0px 0px 0px; font-size: 18px; line-height: 22px !important;color:#183682;" data-aos="fade-left"> REGENT LOGISTICS (AUSTRALIA) PTY LTD </h5>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                Factory 1 / 73 Dohertys Road Laverton North VIC 3026
+                <br>
+                Main : <a href="tel: +61 (03) 9863 6197"> + 61 (03) 9863 6197</a>
+            </p>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                <strong style="font-size: 15px; padding: 10px 0px 0px 0px; font-weight: bold; line-height: 22px !important;">Troy Eiken</strong>
+                <br>
+                Managing Director
+                <br><a href="mailto:troy.eiken@regentlogistics.com.au" style="font-size: 15px; line-height: 22px !important;">troy.eiken@regentlogistics.com.au</a>
+            </p>
+            <p style="border-bottom: 1px solid #183682; margin-top: 30px; width: 100vh;" data-aos="fade-right"></p>
+        </div>
+    </div>
+    <!--<div class="row">
+        <div class="col-12">-->
+            <!-- BranchOffice -->
+            <!--<h5 style="font-size: 20px; line-height: 22px !important; " data-aos="fade-left">Legend Mechanical Services</h5>
+            <h5 style="padding: 0px 0px 0px 0px; font-size: 18px; line-height: 22px !important;color:#183682;" data-aos="fade-left">LEGEND TRUCK & MECHANICAL SERVICES PTY LTD</h5>
+            <p class="obiz" style="font-size: 15px;" data-aos="fade-left">
+                Factory 1 73 Dohertys Road Laverton North 3026
+                <br>
+                Tel :-  <a href="tel: +61 (03) 9863 6197">  +61 (03) 9863 6197</a>
+            </p>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                <strong style="font-size: 15px; padding: 10px 0px 0px 0px; font-weight: bold; line-height: 22px !important;">Anthony Gregson</strong>
+                <br>
+                Fleet Manager
+                <br><a href="mailto:anthony.gregson@legendlogistics.com.au" style="font-size: 15px; line-height: 22px !important;">anthony.gregson@legendlogistics.com.au</a>
+            </p>
+            <p style="border-bottom: 1px solid #183682; margin-top: 30px; width: 100vh;" data-aos="fade-right"></p>
+        </div>
+    </div>-->
+    <div class="row">
+        <div class="col-12">
+            <!-- BranchOffice -->
+            <h5 style="font-size: 20px; line-height: 22px !important; " data-aos="fade-left">Regent Logistics Yard (Melbourne)</h5>
+            <h5 style="padding: 0px 0px 0px 0px; font-size: 18px; line-height: 22px !important;color:#183682;" data-aos="fade-left">REGENT LOGISTICS (AUSTRALIA) PTY LTD</h5>
+
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                26 – 50 Cherry Lane, Laverton North 3026, Victoria
+                <br>
+                Main :  <a href="tel: +61 (03) 9863 6197"> + 61 (03) 9863 6197</a>
+            </p>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                <strong style="font-size: 15px; padding: 10px 0px 0px 0px; font-weight: bold; line-height: 22px !important;">Troy Eiken</strong>
+                <br>
+                Managing Director
+                <br><a href="mailto:troy.eiken@regentlogistics.com.au" style="font-size: 15px; line-height: 22px !important;">troy.eiken@regentlogistics.com.au</a>
+            </p>
+            <p style="border-bottom: 1px solid #183682; margin-top: 30px; width: 100vh;" data-aos="fade-right"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <!-- BranchOffice -->
+            <h5 style="font-size: 20px; line-height: 22px !important;" data-aos="fade-left">Adelaide (Branch Office)</h5>
+            <h5 style="padding: 0px 0px 0px 0px; font-size: 18px; line-height: 22px !important;color:#183682;   " data-aos="fade-left">REGENT LOGISTICS (AUSTRALIA) PTY LTD</h5>
+
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                73 – 87 Heaslip Road, Burton SA 5110
+                <br />
+                Main : <a href="tel: +61 (03) 9863 6197">  + 61 (03) 9863 6197</a>
+            </p>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                <strong style="font-size: 15px; padding: 10px 0px 0px 0px; font-weight: bold; line-height: 22px !important;">Syd Redfern</strong>
+                <br>
+                National Operations Manager
+                <br><a href="mailto:syd.redfern@regentlogistics.com.au" style="font-size: 15px; line-height: 22px !important;">syd.redfern@regentlogistics.com.au</a>
+                <br>
+                Mobile : <a href="tel: +61 (04) 7256 5760">  + 61 (04) 7256 5760</a>
+            </p>
+            <p style="border-bottom: 1px solid #183682; margin-top: 30px; width: 100vh;" data-aos="fade-right"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <!-- BranchOffice -->
+            <h5 style="font-size: 20px; line-height: 22px !important;" data-aos="fade-left">Perth (Branch Office)</h5>
+            <h5 style="padding: 0px 0px 0px 0px; font-size: 18px; line-height: 22px !important;color:#183682;" data-aos="fade-left">REGENT LOGISTICS (AUSTRALIA) PTY LTD</h5>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                Lot 700 Terminal Road, Kewdale, Perth, Western Australia 6105
+                <br />
+                Main :  <a href="tel: +61 (03) 9863 6197">  + 61 (03) 9863 6197</a>
+            </p>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                <strong style="font-size: 15px; padding: 10px 0px 0px 0px; font-weight: bold; line-height: 22px !important;">Marcus Plenderleith</strong>
+                <br>
+                Operations Manager
+                <br><a href="marcus.plenderleith@regentlogistics.com.au" style="font-size: 15px; line-height: 22px !important;">marcus.plenderleith@regentlogistics.com.au</a>
+                <br>
+                Mobile : <a href="Mobile: +61 (04) 1237 5452">  + 61 (04) 1237 5452</a>
+            </p>
+        </div>
+    </div>
+</div><br /><br />
+<!-- Content Ends -->

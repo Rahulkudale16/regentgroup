@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Life & Work at Regent";
+}
+
+<script src="~/Content/js/site.js"></script>
+
+<!-- Page Header Start -->
+<div class="bradcam_area bradcamLegendPeople mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>Life & Work at Regent</h3>
+                    <p> <a href="@Url.Action("index","Home")">Home</a> / About / Regent People / Life & Work at Regent</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header Ends -->
+
+<div class="container">
+    <!-- Column1 -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-7 SpacingArea1" data-aos="fade-right" data-delay="3000">
+            <h1 class="mb-4 pm12"> Contributing to Society & Environmental. <br />Make a Positive IMPACT</h1>
+            <p style="text-align:justify;">
+                Regent believes in giving back to society. We support and engage our people in social and environmental work.
+                As part of our Corporate Social Responsibility (CSR) efforts, Regent organises quarterly CSR events for our people to come together,
+                collaborate and do volunteer work. With this, our people can represent Regent in the community and give back through volunteering efforts.
+            </p>
+            <p style="color:black;">
+                <a href="@Url.Action("CSR","About")" style="font-size: 15px;" class="MoreContent">
+                    Read More &nbsp;
+                    <i class="fa-solid fa-angles-right"></i>
+                </a>
+            </p>
+        </div>
+        <div class="col-lg-5" data-aos="fade-left" data-delay="3000">
+            <img src="~/Content/images/LegendPeople/LifeWork/NewNew.jpg" class="img-fluid" style="border-radius: 15px;" />
+        </div>
+    </div>
+
+    <!-- Column2 -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-5" data-aos="fade-right" data-delay="5000">
+            <img src="~/Content/images/LegendPeople/JoinUs11.png" class="img-fluid" style="border-radius:15px;" />
+        </div>
+        <div class="col-lg-7 SpacingArea2" data-aos="fade-left" data-delay="5000">
+            <h1 class="mb-4 pm12"> We are ONE Big Team</h1>
+            <p style="text-align:justify;">
+                One Regent Team, towards One Regent&apos;s Mission: To enhance customer satisfaction by delivering reliable and innovative logistics solutions
+                with full conformance and commitment.
+            </p>
+            <p style="text-align:justify;">
+                &apos;Unified in diversity&apos; is our culture in Regent, with different people from all over the world working together to set the standard in logistics.
+                We support each other across our teams and departments to get the work done. At Regent, we are surrounded by diverse, passionate and committed
+                colleagues who have banded together to achieve challenging goals.
+            </p>
+        </div>
+    </div>
+
+    <!-- Column3 -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-7 SpacingArea1" data-aos="fade-right" data-delay="7000">
+            <h1 class="mb-4 pm12"> We Grow TOGETHER</h1>
+            <p style="text-align:justify;">
+                At Regent, there is always someone ready to assist and someone with the technical know-how. The wealth of experience and expertise from colleagues is always at our disposal.
+            </p>
+            <p style="text-align:justify;">
+                Around the world, from country to country, our people form one big family driven by keeping each other knowledgeable in day-to-day operations.
+                Sharing a CAN-DO mindset enables us to achieve our shared goals. We work and grow together to stay one step ahead in everything we do and support each other to succeed.
+            </p>
+        </div>
+        <div class="col-lg-5" data-aos="fade-left" data-delay="7000">
+            <img src="~/Content/images/LegendPeople/GrowTogether1.png" class="img-fluid" style="border-radius:15px;" />
+        </div>
+    </div>
+</div>
+
+<style>
+    .MoreContent {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .MoreContent::after {
+            content: "";
+            display: block;
+            height: 4px;
+            width: 16%;
+            background-color: #183682;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .MoreContent:hover::after {
+            transform: scaleY(1);
+        }
+</style>

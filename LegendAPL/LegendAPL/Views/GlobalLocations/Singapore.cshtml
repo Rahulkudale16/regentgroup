@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "Singapore";
+}
+
+<script src="~/Content/js/site.js"></script>
+<script src="~/Content/lib/d3/d3.min.js"></script>
+<script src="~/Content/lib/topojson/topojson.min.js"></script>
+<script src="~/Content/js/Datamaps.js"></script>
+<script src="~/Content/js/MapData.js"></script>
+<script src="~/Content/js/datamaps.markers.js"></script>
+
+<!-- Page Header Start -->
+<div class="bradcam_area bradcam_bg_35 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="bradcam_text">
+                    <h3>Singapore</h3>
+                    <p> <a href="@Url.Action("index","Home")">Home</a> / <a href="@Url.Action("GlobalLocations","GlobalLocations")">Global Locations</a> / Singapore</p>
+                </div>
+            </div>
+            @*<div class="col-xl-6">
+                    <div class="bradcam_text">
+                        <h3>12 Countries</h3>
+                        <h3>20 Regional Offices</h3>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+<!-- Page Header Ends -->
+<!-- Menus Starts -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 mb-3" data-aos="zoom-out">
+            <p style="font-weight:700;font-size:18px;">
+                <a href="@Url.Action("Headquarters","GlobalLocations")" class="hover-underline-animation">Headquarters</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("Singapore","GlobalLocations")" class="underline-2">Singapore</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("Indonesia","GlobalLocations")" class="hover-underline-animation">Indonesia</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("Australia","GlobalLocations")" class="hover-underline-animation">Australia</a>
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Menus Ends -->
+<!-- Content Starts -->
+<div class="SingaporeGL container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h5 style="padding: 0px 0px 0px 0px;margin-top:10px; font-size: 18px; font-weight: bold;color:#183682;" data-aos="fade-left">
+                REGENT LOGISTICS PTE LTD
+            </h5>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                31 Jurong Port Road, #08-11M Jurong Logistics Hub, Singapore 619115
+                <br>
+                Main :  <a href="tel: +65 6262 6455"> + 65 6262 6455</a>
+            </p>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                <strong style="font-size:15px; padding:10px 0px 0px 0px;font-weight:bold;line-height:22px !important;">Keith Tan</strong>
+                <br>
+                General Manager
+                <br>
+                @*<a href="mailto:keith.tan@regentgroup.sg" style="font-size: 15px; line-height: 22px !important;">keith.tan@regentgroup.sg </a>*@
+            </p>
+            <p style="border-bottom: 1px solid #183682; margin-top: 30px;width:100vh;" data-aos="fade-right"></p>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h5 style="padding: 0px 0px 0px 0px; font-size: 18px; font-weight: bold; color: #183682;" data-aos="fade-left">REGENT CARRIER PTE LTD </h5>
+                <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                    3 HarbourFront Place, #04-03/04 HarbourFront Tower 2, Singapore 099254
+                    <br>
+                    Main :  <a href="tel: +65 6262 6455"> + 65 6262 6455</a>
+                </p>
+                <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                    <strong style="font-size:15px; padding:10px 0px 0px 0px;font-weight:bold;line-height:22px !important;">Simon Pang </strong>
+                    <br>
+                    Head of Operations, BreakbulK & Marine Logistics
+                    <br>
+                    @*<a href="mailto:sebastian.goh@regentgroup.sg " style="font-size: 15px; line-height: 22px !important;">sebastian.goh@regentgroup.sg  </a>*@
+                </p>
+                @*<p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                        <strong style="font-size:15px; padding:10px 0px 0px 0px;font-weight:bold;line-height:22px !important;">Cher Wei Kee </strong>
+                        <br>
+                        Line Manager, Commercial
+                        <br>
+                        <a href="mailto:weikee.cher@regentgroup.sg " style="font-size: 15px; line-height: 22px !important;">weikee.cher@regentgroup.sg  </a>
+                    </p>*@
+            </div>
+            <p style="border-bottom: 1px solid #183682; margin-top: 30px;width:100vh;" data-aos="fade-right"></p>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h5 style="padding: 0px 0px 0px 0px; font-size: 18px; font-weight: bold; color: #183682;" data-aos="fade-left">REGENT SHIPMANAGEMENT PTE LTD </h5>
+                <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                    3 HarbourFront Place, #04-03/04 HarbourFront Tower 2, Singapore 099254
+                    <br>
+                    Main :  <a href="tel: +65 6262 6455"> + 65 6262 6455</a>
+                </p>
+                <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                    <strong style="font-size:15px; padding:10px 0px 0px 0px;font-weight:bold;line-height:22px !important;">Simon Pang </strong>
+                    <br>
+                    Head of Operations, BreakbulK & Marine Logistics
+                    <br>
+                    @*<a href="mailto:sebastian.goh@regentgroup.sg " style="font-size: 15px; line-height: 22px !important;">sebastian.goh@regentgroup.sg  </a>*@
+                </p>
+                @*<p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                        <strong style="font-size:15px; padding:10px 0px 0px 0px;font-weight:bold;line-height:22px !important;">Cher Wei Kee </strong>
+                        <br>
+                        Line Manager, Commercial
+                        <br>
+                        <a href="mailto:weikee.cher@regentgroup.sg " style="font-size: 15px; line-height: 22px !important;">weikee.cher@regentgroup.sg  </a>
+                    </p>*@
+            </div>
+            <p style="border-bottom: 1px solid #183682; margin-top: 30px;width:100vh;" data-aos="fade-right"></p>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h5 style="padding: 0px 0px 0px 0px; font-size: 18px; font-weight: bold; color: #183682;" data-aos="fade-left">BATAMINDO SHIPPING & WAREHOUSING PTE LTD</h5>
+                <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                   Office : 3 Harbourfront Place #04-03/04, Harbourfront Tower Two, Singapore 099254
+                    <br>
+                    Main :  <a href="tel: +65 6591 5188"> + 65 6591 5188</a>
+                </p>
+                <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                    Warehouse : Blk 519 #01-107 Kampong Bahru Road, Keppel Distripark Singapore 099449
+                    <br>
+                    Main :  <a href="tel: +65 6325 2147"> + 65 6325 2147 </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<!-- Content Ends -->
+<!-- Css -->
+<style>
+    .SG_Awards {
+        padding-right: 2em;
+        transition: 1s !important;
+        max-height: 35px;
+    }
+
+    .SG_Awards1 {
+        padding-right: 2em;
+        transition: 1s !important;
+        max-height: 50px;
+    }
+
+    .SG_Awards2 {
+        padding-right: 2em;
+        transition: 1s !important;
+        max-height: 60px;
+        padding-top: 8px;
+    }
+
+    .SG_Awards3 {
+        padding-right: 2em;
+        transition: 1s !important;
+        max-height: 50px;
+        padding-top: 6px;
+    }
+
+    g .datamaps-subunits {
+        transform: translate(-336.818, -111.554) scale(1.31951, 1.31951) !important;
+    }
+</style>
+<!-- Css -->

@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Headquarters";
+}
+
+<script src="~/Content/js/site.js"></script>
+<script src="~/Content/lib/d3/d3.min.js"></script>
+<script src="~/Content/lib/topojson/topojson.min.js"></script>
+<script src="~/Content/js/Datamaps.js"></script>
+<script src="~/Content/js/MapData.js"></script>
+<script src="~/Content/js/datamaps.markers.js"></script>
+
+<!-- Page Header Start -->
+<div class="bradcam_area bradcam_bg_35 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="bradcam_text">
+                    <h3>Headquarters</h3>
+                    <p> <a href="@Url.Action("index","Home")">Home</a> / <a href="@Url.Action("GlobalLocations","GlobalLocations")">Global Locations</a> / Headquarters</p>
+                </div>
+            </div>
+            @*<div class="col-xl-6">
+                    <div class="bradcam_text">
+                        <h3>12 Countries</h3>
+                        <h3>20 Regional Offices</h3>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+<!-- Page Header Ends -->
+<!-- Menus Starts -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 mb-3" data-aos="zoom-out">
+            <p style="font-weight:700;font-size:18px;">
+                <a href="@Url.Action("Headquarters","GlobalLocations")" class="underline-2">Headquarters</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("Singapore","GlobalLocations")" class="hover-underline-animation">Singapore</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("Indonesia","GlobalLocations")" class="hover-underline-animation">Indonesia</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("Australia","GlobalLocations")" class="hover-underline-animation">Australia</a>
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Menus Ends -->
+<!-- Content Starts -->
+<div class="SingaporeGL container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h5 style="padding: 0px 0px 0px 0px;margin-top:10px; font-size: 18px; font-weight: bold;color:#183682;" data-aos="fade-left">REGENT GROUP PTE LTD </h5>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                3 HarbourFront Place, #04-03/04 HarbourFront Tower 2, Singapore 099254
+                <br>
+                Main :  <a href="tel: +65 6262 6455"> + 65 6262 6455</a>
+            </p>
+            <p class="obiz" style="font-size: 15px; line-height: 22px !important;" data-aos="fade-left">
+                <strong style="font-size:15px; padding:10px 0px 0px 0px;font-weight:bold;line-height:22px !important;">Eddie Leong</strong>
+                <br>
+                Chief Executive Officer
+                @*<br>
+        <a href="mailto:eddie.leong@regentgroup.sg" style="font-size: 15px; line-height: 22px !important;">eddie.leong@regentgroup.sg </a>*@
+            </p>
+        </div>
+</div>
+<br />
+<!-- Content Ends -->
+<!-- Css -->
+<style>
+    .SG_Awards {
+        padding-right: 2em;
+        transition: 1s !important;
+        max-height: 35px;
+    }
+
+    .SG_Awards1 {
+        padding-right: 2em;
+        transition: 1s !important;
+        max-height: 50px;
+    }
+
+    .SG_Awards2 {
+        padding-right: 2em;
+        transition: 1s !important;
+        max-height: 60px;
+        padding-top: 8px;
+    }
+
+    .SG_Awards3 {
+        padding-right: 2em;
+        transition: 1s !important;
+        max-height: 50px;
+        padding-top: 6px;
+    }
+
+    g .datamaps-subunits {
+        transform: translate(-336.818, -111.554) scale(1.31951, 1.31951) !important;
+    }
+</style>
+<!-- Css -->

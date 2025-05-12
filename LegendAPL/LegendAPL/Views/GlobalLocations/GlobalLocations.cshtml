@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "GlobalLocations";
+}
+
+<script src="~/Content/js/site.js"></script>
+<script src="~/Content/lib/d3/d3.min.js"></script>
+<script src="~/Content/lib/topojson/topojson.min.js"></script>
+<script src="~/Content/js/Datamaps.js"></script>
+<script src="~/Content/js/MapData.js"></script>
+<script src="~/Content/js/datamaps.markers.js"></script>
+
+<!-- Page Header Start -->
+<div class="bradcam_area bradcam_bg_38 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="bradcam_text">
+                    <h3>Global Locations</h3>
+                    <p><a href="@Url.Action("index","Home")">Home</a> / <a href="@Url.Action("GlobalLocations","GlobalLocations")">Global Locations</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header Ends -->
+<!--Maps Starts -->
+<div class="container">
+    <div class="row globalCol">
+        <div class="col-lg-4">
+            <a href="@Url.Action("Singapore","GlobalLocations")">
+                <div class="card786 text-center">
+                    <img src="~/Content/images/Maps/Singapore.jpg" alt="Card Back" style="max-width:70%;">
+                    <img src="~/Content/images/Maps/Singapore1.jpg" class="img-top" alt="Card Front" style="max-width:70%;">
+                    <h5 class="hmm">
+                        <button12>
+                            <span class="box1213">
+                                Singapore
+                            </span>
+                        </button12>
+                    </h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-4">
+            <a href="@Url.Action("Indonesia","GlobalLocations")">
+                <div class="card786 text-center">
+                    <img src="~/Content/images/Maps/Indonesia.jpg" alt="Card Back" style="max-width:70%;">
+                    <img src="~/Content/images/Maps/Indonesia1.jpg" class="img-top" alt="Card Front" style="max-width:70%;">
+                    <h5 class="hmm">
+                        <button12>
+                            <span class="box1213">
+                                Indonesia
+                            </span>
+                        </button12>
+                    </h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-4">
+            <a href="@Url.Action("Australia","GlobalLocations")">
+                <div class="card786 text-center">
+                    <img src="~/Content/images/Maps/Australia.jpg" style="max-width:70%;" alt="card back" />
+                    <img src="~/Content/images/Maps/Australia1.jpg" class="img-top" alt="Card Front" style="max-width:70%;" />
+                    <h5 class="hmm">
+                        <button12>
+                            <span class="box1213">
+                                Australia
+                            </span>
+                        </button12>
+                    </h5>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Map Ends -->

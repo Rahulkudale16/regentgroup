@@ -1,0 +1,216 @@
+﻿﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Regent Group</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/images/Regent.png">
+
+    @*Styles*@
+    <link rel="stylesheet" href="~/Content/lib/font-awesome/css/all.css" />
+    <link rel="stylesheet" href="~/Content/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/lib/OwlCarousel2/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/Content/lib/Swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="~/Content/lib/aos/aos.css" />
+    <link rel="stylesheet" href="~/Content/css/style.css" />
+
+    @*Scripts*@
+    <script src="~/Content/lib/jquery/jquery.min.js"></script>
+    <script src="~/Content/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/lib/Swiper/swiper-bundle.min.js"></script>
+    <script src="~/Content/lib/aos/aos.js"></script>
+    <script src="~/Content/lib/OwlCarousel2/owl.carousel.min.js"></script>
+    <script src="~/Content/lib/counterup2/index.js"></script>
+    <script src="~/Content/js/site.js"></script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XMWBTREKTV');
+    </script>
+</head>
+
+<body>
+    <!---------================================== Loading Animation Part Starts Here ===========================---------->
+    <div class="preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------=================================== Loading Animation Part Ends Here ============================------------->
+    <!-- ======================================== Header Starts =========================================================--->
+    <!-- ======= Header Starts ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <div class="col-md-2 justify-content-end" style="margin-left:5vh;">
+                <a href="@Url.Action("index","Home")">
+                    <img src="~/Content/images/RegentGroup.png" class="responsiveExtra" alt="" id="companyLogo">
+                </a>
+            </div>
+            <div class="col-md-10 d-flex justify-content-center" style="cursor:pointer;">
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li class="dropdown custom-dropdown" style="font-weight:bold;">
+                            <a href="#"><span>About</span> <i class="fa-solid fa-chevron-down"></i></a>
+                            <ul>
+                                <li class="dropdown-item"><a href="@Url.Action("AboutUs","About")">About Us</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("OurVisionMissionAndValues","About")">Our Vision, Mission & Values</a></li>
+                                @*<li class="dropdown-item"><a href="@Url.Action("RegentPeople","About")">Regent People</a></li>*@
+                                <li class="dropdown-item"><a href="@Url.Action("QHSPolicy","About")">QHS Policy</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("ComplianceAndGovernance","About")">Compliance & Governance</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("Career","About")">Career</a></li>
+                            </ul>
+                        <li class="dropdown custom-dropdown">
+                            <a href="@Url.Action("OurSolutions","OurSolutions")"><span>Our Solutions</span> <i class="fa-solid fa-chevron-down"></i></a>
+                            <ul>
+                                <li class="dropdown dropdown-item custom-dropdown">
+                                    <a href="@Url.Action("SpecialisedLogistics","OurSolutions")">Specialised Logistics</a>
+                                    <ul>
+                                        <li class="dropdown-item"><a onclick='dropdownsearch("#GeneralCargoTrucking")'> General Cargo Trucking</a></li>
+                                        <li class="dropdown-item"><a onclick='dropdownsearch("#DangerousGoodsTrucking")'> Dangerous Goods Trucking</a></li>
+                                        <li class="dropdown-item"><a onclick='dropdownsearch("#HealthcareLogistics")'> Healthcare Logistics</a></li>
+                                        <li class="dropdown-item"><a onclick='dropdownsearch("#YachtTransport")'> Yacht Logistics</a></li>
+                                        <li class="dropdown-item"><a onclick='dropdownsearch("#AutomotiveLogistics")'> Automotive Logistics</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-item custom-dropdown">
+                                    <a href="@Url.Action("MarineLogistics","OurSolutions")">Marine Logistics (Breakbulk / RORO services)</a>
+                                    <ul>
+                                        <li class="dropdown-item"><a onclick='dropdownsearchCarrier("#LinerService")'> Liner Service</a></li>
+                                        <li class="dropdown-item"><a onclick='dropdownsearchCarrier("#TrampingService")'>Tramping Service</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-item custom-dropdown">
+                                    <a href="@Url.Action("RegionalFeederServices","OurSolutions")">Regional Feeder Services</a>
+                                    <ul>
+                                        <li class="dropdown-item"><a onclick='dropdownsearchOS("#LinerServices")'> Liner Services (Container/LOLO Services) </a></li>
+                                        <li class="dropdown-item"><a onclick='dropdownsearchOS("#LessthanContainerLoad")'>Less-than-Container Load (LCL) Consolidation</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-item"><a onclick="DoubleData()"> Heavy Haulage and Line Haul</a></li>
+                            </ul>
+                        <li class="dropdown custom-dropdown">
+                            <a href="#"><span>Fleet</span> <i class="fa-solid fa-chevron-down"></i></a>
+                            <ul>
+                                <li class="dropdown-item"><a href="@Url.Action("LandingCraft","Fleet")">Landing Craft</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("TugBoat","Fleet")">Tug Boat</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("Barge","Fleet")">Barge</a></li>
+                            </ul>
+
+                        <li><a href="@Url.Action("GlobalLocations","GlobalLocations")">Global Locations</a></li>
+
+                        <li>
+                            <a class="nav-link scrollto" href="@Url.Action("AllNews","InvestorAndMedia")"><span>News</span></a>
+                        </li>
+                        <li>
+                            <a class="nav-link scrollto" href="@Url.Action("Contact","Contact")"><span>Contact</span></a>
+                        </li>
+                    </ul>
+                    <i class="fa fa-list mobile-nav-toggle"></i>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ======= Header Ends ======= -->
+    <!---======================================== Header Ends ============================================================-->
+    <!---======================================== Progress Wrap Starts ===================================================-->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!--========================================= Progress Wrap Starts ===================================================-->
+    <!--========================================= BACK TOP TOP PART START ================================================-->
+    <a href="#" class="back-to-top"><i class="fa-solid fa-angle-up" style="padding-top: 11px;"></i></a>
+    <!--========================================= BACK TOP TOP PART ENDS =================================================-->
+    <!--========================================= RenderBody Starts ======================================================-->
+    <div class="">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <!--========================================= RenderBody Ends ========================================================-->
+    <!--========================================= Footer Starts ==========================================================-->
+    <footer id="footer" class="footer" style="background-image: url('../Content/images/RegentNewImage.png');">
+        <div class="footer-content position-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <a href="@Url.Action("index","Home")">
+                                <img src="~/Content/images/RegentGroup.png" class="responsivefooter">
+                            </a><br /><br />
+                                      <p style="padding-left:20px;">
+                                          3 HarbourFront Place, #04-03/04 <br /> HarbourFront Tower 2, Singapore 099254<br /><br />
+                                          @*531 Upper Cross Street, #04-59 Honglim Complex,<br /> Singapore 050531<br /><br />*@
+
+                                          <strong>Tel :-  </strong> <a href="tel: 65 6262 6455" style="color:white;"> +65 6262 6455</a><br>
+
+                                          <strong>Email :-  </strong> <a href="mailto:info.singapore@regentgroup.sg" style="color:white;"> info.singapore@regentgroup.sg</a><br>
+                                      </p>
+                            <div class="social-links d-flex mt-3" style="padding-left:20px;">
+                                <a href="https://www.linkedin.com/company/14600652/admin/dashboard/" class="d-flex align-items-center justify-content-center"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://www.facebook.com/share/oXYuSW2oAQGCP7U2/?mibextid=JRoKGi" class="d-flex align-items-center justify-content-center"><i class="fa-brands fa-facebook"></i></a>
+                                @*<a href="https://www.youtube.com/watch?v=gR3kMT1Dxgs" class="d-flex align-items-center justify-content-center"><i class="fa-brands fa-youtube"></i></a>*@
+                            </div>
+                        </div>
+                    </div><!-- End footer info column-->
+
+                    <div class="col-lg-3 footer-links">
+                        <h4>About</h4>
+                        <ul>
+                            <li><a href="@Url.Action("AboutUs","About")">About Us</a></li>
+                            <li><a href="@Url.Action("OurVisionMissionAndValues","About")">Our Vision, Mission & Values</a></li>
+                            @*<li><a href="@Url.Action("LegendPeople","About")">Legend People</a></li>*@
+                            <li><a href="@Url.Action("QHSPolicy","About")">QHS Policy</a></li>
+                            <li><a style="line-height:1.4" href="@Url.Action("ComplianceAndGovernance","About")">Compliance & Governance</a></li>
+                            <li><a href="@Url.Action("Career","About")">Career</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 footer-links">
+                        <h4><a href="@Url.Action("OurSolutions","OurSolutions")" class="footerWord">Our Solutions</a></h4>
+                        <ul>
+                            <li><a href="@Url.Action("SpecialisedLogistics","OurSolutions")"> Specialised Logistics</a></li>
+                            <li><a href="@Url.Action("MarineLogistics","OurSolutions")">Marine Logistics (Breakbulk / RORO services)</a></li>
+                            <li><a href="@Url.Action("RegionalFeederServices","OurSolutions")">Regional Feeder Services</a></li>
+                            <li><a onclick="DoubleData()">Heavy Haulage & Line Haul</a></li>
+                        </ul>
+                    </div><!-- End footer links column-->
+
+                    <div class="col-lg-2 col-md-3 footer-links" style="margin-top:-2.5px;">
+                        <a href="@Url.Action("LandingCraft","Fleet")" class="footerWord">Fleet</a><br /><br />
+                        <a href="@Url.Action("GlobalLocations","GlobalLocations")" class="footerWord">Global Locations</a><br /><br />
+                        <a href="@Url.Action("AllNews","InvestorAndMedia")" class="footerWord">News</a><br /><br />
+                        <a href="@Url.Action("Contact","Contact")" class="footerWord">Contact</a><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-legal text-center position-relative">
+            <div class="container">
+                <div class="copyright" style="font-size:18px;">
+                    &copy; Copyright <strong><span>2025</span></strong>. All Rights Reserved | Regent Group
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--========================================= Footer Ends =============================================================-->
+</body>
+</html>

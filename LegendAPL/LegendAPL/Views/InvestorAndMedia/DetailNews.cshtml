@@ -1,0 +1,256 @@
+﻿@model LegendALP.Models.NewsModel
+
+@{
+    ViewBag.Title = "Detail News";
+}
+
+<script src="~/Content/js/site.js"></script>
+<script type="text/javascript">
+    var newsImg = "@Html.Raw(Model.NewsIMGPath)";
+    var newText = "@Html.Raw(Model.NewsText)"
+</script>
+<!-- Page Header Start -->
+<div class="bradcam_area bradcamNews mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>Detail News</h3>
+                    <p><a href="@Url.Action("index","Home")">Home</a> / Detail News</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header Ends -->
+
+<style>
+    .AllData {
+        display: none;
+    }
+
+    h3 {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    .content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        background-color: #f1f1f1;
+        width: 60%;
+    }
+
+    .obiz {
+        font-size: 15px;
+        /*font-family: 'Helvetica', 'Arial', sans-serif;*/
+        font-weight: 300;
+        /*color: #6b6a6a;*/
+        /*padding: 20px 0px 10px 0px;*/
+        text-align: justify;
+        /*line-height: 2.0em;*/
+    }
+
+    .responsive {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    .content {
+        margin-top: 0px;
+    }
+
+    .our_facilitics_area h3 {
+        font-size: 20px;
+    }
+
+    .callout {
+        /*padding: 5px;*/
+        background-color: rgba(33,33,33,.1);
+        /*color: rgb(33,33,33);*/
+        border-left: solid rgb(33,33,33) 5px;
+        /*width: 200px;*/
+        border-radius: 3px;
+        /*float:left;*/
+        margin: 10px;
+        /*height:auto;*/
+    }
+
+    .callout-blue {
+        background-color: rgba(99,173,259,.1);
+        border-left-color: rgb(99,173,259);
+    }
+
+    .callout-orange {
+        background-color: rgba(232,136,59,.1);
+        border-left-color: rgb(232,136,59);
+    }
+
+    .callout-green {
+        background-color: rgba(78,203,105,.1);
+        border-left-color: rgb(78,203,105);
+    }
+
+    .callout-yellow {
+        background-color: rgba(241,233,32,.1);
+        border-left-color: rgb(241,233,32);
+    }
+
+    .callout-red {
+        background-color: rgba(226,56,40,.1);
+        border-left-color: rgb(226,56,40);
+    }
+
+    .Data {
+        width: auto;
+        height: auto;
+        margin: auto;
+        /*background-color: rgba(33,33,33,.1);*/
+        transition: 0.3s ease all;
+    }
+
+    #myVideo {
+        position: static;
+        height: 100%;
+        width: 80%;
+        bottom: 0;
+        right: 0;
+        filter: brightness(100%);
+    }
+
+    #IMP {
+        color: rgba(24,54,130,1);
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        @if (@Model.ContactDetails.Count == 0)
+        {
+            <div class="col-lg-8 mb-4">
+                <div style="padding:20px;">
+                    <div id=@Model.IDNews>
+                        <h3 style="padding:20px 0px 0px 0px">
+                            @Model.NewsHeader
+                        </h3>
+                        <span>
+                            <i class="fa-solid fa-clock"></i> @Model.NewsDate
+                        </span>
+                        <br>
+                        <br>
+                        <div class="text-center mb-3" id="newsimage">
+                            <img src=@Model.NewsIMGPath>
+                        </div>
+                        <div id="newtext"></div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-lg-8 mb-4" style="border-right: 1px solid lightgray; padding-right: 30px;">
+                <div style="padding:20px;">
+                    <div id=@Model.IDNews>
+                        <h3 style="padding:20px 0px 0px 0px">
+                            @Model.NewsHeader
+                        </h3>
+                        <span>
+                            <i class="fa-solid fa-clock"></i> @Model.NewsDate
+                        </span>
+                        <br>
+                        <br>
+                        <div class="text-center mb-3" id="newsimage">
+                            <img src=@Model.NewsIMGPath>
+                        </div>
+                        <div id="newtext"></div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @if (@Model.ContactDetails.Count == 0)
+        {
+
+        }
+        else
+        {
+            <div class="col-lg-4">
+                <h3 class="RelatedHeading">Other Articles</h3>
+                @for (int i = 0; i < @Model.ContactDetails.Count(); i++)
+                {
+                    <div class="row" onclick="GoToNews('@Model.ContactDetails[i].IDNews')" style="cursor:pointer;">
+                        <h4 class="RelatedHeading1">@Model.ContactDetails[i].NewsHeader</h4>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <img src=@Model.ContactDetails[i].NewsIMGPath class="img-fluid" />
+                            </div>
+                            <div class="col-lg-8 align-self-center">
+                                <span class="RelatedHeading3"> <i class="fa-solid fa-clock"></i> @Model.ContactDetails[i].NewsDate</span><br />
+                                <span class="RelatedHeading2">
+                                    @Model.ContactDetails[i].NewsText
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="border-bottom: 1px solid lightgray; margin-top: 30px;" data-aos="fade-right"></p>
+                }
+            </div>
+        }
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#newsimage").html(newsImg);
+        $("#newtext").html(newText);
+    });
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
+
+    function GoToNews(idNews) {
+        $.ajax({
+            type: "Post",
+            url: "GoToNews",
+            data: { idNews },
+            success: function (success) {
+                if (success) {
+                    window.location.reload();
+                }
+            }
+        })
+    }
+</script>

@@ -1,0 +1,1048 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C2AA4584-B4ED-4251-BB7F-C35CE97B0C35}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LegendAPL</RootNamespace>
+    <AssemblyName>LegendAPL</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44325</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CareerController.cs" />
+    <Compile Include="Controllers\ComplianceController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\FleetController.cs" />
+    <Compile Include="Controllers\GlobalLocationsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvestorAndMediaController.cs" />
+    <Compile Include="Controllers\OurSolutionsController.cs" />
+    <Compile Include="Data\Constant.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContactDetails.cs" />
+    <Compile Include="Models\NewsModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\A.png" />
+    <Content Include="Content\images\AutomotiveNew.png" />
+    <Content Include="Content\images\AllNews\N19\ACAXLegend.png" />
+    <Content Include="Content\images\Background.jpg" />
+    <Content Include="Content\images\Bradcam\1.jpg" />
+    <Content Include="Content\images\Bradcam\2.jpg" />
+    <Content Include="Content\images\Bradcam\3.jpg" />
+    <Content Include="Content\images\Bradcam\4.jpg" />
+    <Content Include="Content\images\Bradcam\Board.jpg" />
+    <Content Include="Content\images\Bradcam\Board1.jpg" />
+    <Content Include="Content\images\Bradcam\BradCamLegendPeople.jpg" />
+    <Content Include="Content\images\Bradcam\Contact1.jpg" />
+    <Content Include="Content\images\Bradcam\5.jpg" />
+    <Content Include="Content\images\Bradcam\6.jpg" />
+    <Content Include="Content\images\Bradcam\7.jpg" />
+    <Content Include="Content\images\Bradcam\8.jpg" />
+    <Content Include="Content\images\Bradcam\LatestNews.jpg" />
+    <Content Include="Content\images\Bradcam\Leadership.jpg" />
+    <Content Include="Content\images\Bradcam\New.jpg" />
+    <Content Include="Content\images\Bradcam\Trailer.jpg" />
+    <Content Include="Content\images\DangerousGoodsTrucking.jpg" />
+    <Content Include="Content\images\GeneralCargoTrucking.jpg" />
+    <Content Include="Content\images\Heavy\HeavyHaulage.jpg" />
+    <Content Include="Content\images\Heavy\InfrastructureLogistics.jpg" />
+    <Content Include="Content\images\Heavy\ModularBuilding.jpg" />
+    <Content Include="Content\images\Heavy\modularbuildings.jpg" />
+    <Content Include="Content\images\Heavy\NationalLine.jpg" />
+    <Content Include="Content\images\Heavy\PrecastConcrete.jpg" />
+    <Content Include="Content\images\Heavy\RoadTrain.jpg" />
+    <Content Include="Content\images\image.png" />
+    <Content Include="Content\images\LastTime.png" />
+    <Content Include="Content\images\LegendAusSpecialised.jpg" />
+    <Content Include="Content\images\LegendVirgo.jpeg" />
+    <Content Include="Content\images\LLCraft.png" />
+    <Content Include="Content\images\LLCraft1.jpg" />
+    <Content Include="Content\images\Maps\Australia1.jpg" />
+    <Content Include="Content\images\Maps\Australia.jpg" />
+    <Content Include="Content\images\Maps\Indonesia.jpg" />
+    <Content Include="Content\images\Maps\Indonesia1.jpg" />
+    <Content Include="Content\images\Maps\Singapore.jpg" />
+    <Content Include="Content\images\Maps\Singapore1.jpg" />
+    <Content Include="Content\images\Mission.jpg" />
+    <Content Include="Content\images\NewRegent.jfif" />
+    <Content Include="Content\images\NewRegent1.jfif" />
+    <Content Include="Content\images\NEW\65.png" />
+    <Content Include="Content\images\NEW\Edited.jpg" />
+    <Content Include="Content\images\NEW\LessthanContainerLoad.png" />
+    <Content Include="Content\images\NEW\LinerServices.png" />
+    <Content Include="Content\images\NEW\TrampingServices.png" />
+    <Content Include="Content\images\NEW\truck.jpeg" />
+    <Content Include="Content\images\NEW\truck1.jpeg" />
+    <Content Include="Content\images\OurSolutions\GeneralCargoTrucking.png" />
+    <Content Include="Content\images\OurSolutions\LastMileHealth.jpg" />
+    <Content Include="Content\images\OurSolutions\Offshore.png" />
+    <Content Include="Content\images\OurSolutions\Rollout1.jpg" />
+    <Content Include="Content\images\OurSolutions\Services1.jpg" />
+    <Content Include="Content\images\OurSolutions\SpecialisedRegent.jpg" />
+    <Content Include="Content\images\OurSolutions\TrampingService.jpg" />
+    <Content Include="Content\images\OurSolutions\LifeScienceLogistics.jpg" />
+    <Content Include="Content\images\Regent.jfif" />
+    <Content Include="Content\images\Regent.png" />
+    <Content Include="Content\images\RegentGroup.png" />
+    <Content Include="Content\images\RegentLasr.jfif" />
+    <Content Include="Content\images\RegentLast.jfif" />
+    <Content Include="Content\images\RegentNew.jfif" />
+    <Content Include="Content\images\RegentNewImage.png" />
+    <Content Include="Content\images\RegentR.png" />
+    <Content Include="Content\images\RegentStar.png" />
+    <Content Include="Content\images\RegentTruck.jpg" />
+    <Content Include="Content\images\RegentVessel\Batamindo New.jpg" />
+    <Content Include="Content\images\RegentVessel\Batamindo.jpg" />
+    <Content Include="Content\images\RegentVessel\Batamindo1.jpg" />
+    <Content Include="Content\images\RegentVessel\EddieSign.png" />
+    <Content Include="Content\images\RegentVessel\RegentGroup.png" />
+    <Content Include="Content\images\RegentVessel\RegentGroup1.png" />
+    <Content Include="Content\images\RegentVessel\RegentVan.png" />
+    <Content Include="Content\images\RegentVessel\Regent1.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent11.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent10.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent13.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent9.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent8.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent7.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent6.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent5.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent4.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent3.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent2.jpeg" />
+    <Content Include="Content\images\RegentVessel\Regent12.jpg" />
+    <Content Include="Content\images\UpdatedImages\AboutUsNew.jpg" />
+    <Content Include="Content\images\UpdatedImages\Barge\BATAMINDO V 12.jpg" />
+    <Content Include="Content\images\UpdatedImages\Barge\BATAMINDOIII.jpg" />
+    <Content Include="Content\images\UpdatedImages\Barge\BATAMINDOV.jpg" />
+    <Content Include="Content\images\UpdatedImages\Barge\PROFIT BRILLIANCE 1.jpg" />
+    <Content Include="Content\images\UpdatedImages\Barge\Profit Sandalford.jpg" />
+    <Content Include="Content\images\UpdatedImages\Barge\PROFITBRILLIANCE.jpg" />
+    <Content Include="Content\images\UpdatedImages\Barge\PROFITSANDALFORD.jpg" />
+    <Content Include="Content\images\UpdatedImages\BATAMINDO V 12.jpg" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\RegentGemini.jpg" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\A.png" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\DangerousGoodsTrucking.jpg" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\GeneralCargoTrucking.jpg" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\Picture1.png" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\Regent8.jpeg" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\Warehousing.jpg" />
+    <Content Include="Content\images\UpdatedImages\Index\heavylift.jpeg" />
+    <Content Include="Content\images\UpdatedImages\Index\RegentIndex.png" />
+    <Content Include="Content\images\UpdatedImages\Index\MarineLogistics.png" />
+    <Content Include="Content\images\UpdatedImages\Index\Scaniatrucks.jpeg" />
+    <Content Include="Content\images\UpdatedImages\LandingCraft\AYU 48.jpg" />
+    <Content Include="Content\images\UpdatedImages\LandingCraft\Libra 8 .jpg" />
+    <Content Include="Content\images\UpdatedImages\LandingCraft\RegentGemini.jpg" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\Troy.jpg" />
+    <Content Include="Content\images\UpdatedImages\Logos\LegendLogistics.png" />
+    <Content Include="Content\images\Vision.jpg" />
+    <Content Include="Content\lib\d3\d3.js" />
+    <Content Include="Content\lib\d3\d3.min.js" />
+    <Content Include="Content\fonts\Montserrat\OFL.txt" />
+    <Content Include="Content\images\AllNews\N19\LegendGrouplogo.jpg" />
+    <Content Include="Content\images\AllNews\N23\Batam.jpeg" />
+    <Content Include="Content\images\AllNews\N23\BestManaged1.jpeg" />
+    <Content Include="Content\images\AllNews\N23\BestManaged2.jpeg" />
+    <Content Include="Content\images\AllNews\N23\BlankCollage .png" />
+    <Content Include="Content\images\AllNews\N23\HoustonBuilding.jpg" />
+    <Content Include="Content\images\AllNews\N23\New.png" />
+    <Content Include="Content\images\FoodTank.jpg" />
+    <Content Include="Content\images\Legend.png" />
+    <Content Include="Content\images\LegendPeople\CareerTransformation.png" />
+    <Content Include="Content\images\LegendPeople\ContributingSocietyEnvironmental.png" />
+    <Content Include="Content\images\LegendPeople\CSRContent.png" />
+    <Content Include="Content\images\LegendPeople\EducationalSponsorship.png" />
+    <Content Include="Content\images\LegendPeople\EmployeeGrowth\CareerTransformation.png" />
+    <Content Include="Content\images\LegendPeople\EmployeeGrowth\EducationalSponsorship.png" />
+    <Content Include="Content\images\LegendPeople\EmployeeGrowth\GlobalTalent.png" />
+    <Content Include="Content\images\LegendPeople\EmployeeGrowth\InHouse.png" />
+    <Content Include="Content\images\LegendPeople\EmployeeGrowth\JobRotation.png" />
+    <Content Include="Content\images\LegendPeople\EmployeeGrowth\OverseasSecondment.png" />
+    <Content Include="Content\images\LegendPeople\GrowTogether.png" />
+    <Content Include="Content\images\LegendPeople\GrowTogether1.png" />
+    <Content Include="Content\images\LegendPeople\GRT.png" />
+    <Content Include="Content\images\LegendPeople\JobRotationandCrossTraining.png" />
+    <Content Include="Content\images\LegendPeople\JoinUs11.png" />
+    <Content Include="Content\images\LegendPeople\LifeWork\NewNew.jpg" />
+    <Content Include="Content\images\LegendPeople\ONEBigTeam.png" />
+    <Content Include="Content\images\LegendPeople\OverseasSecondment.png" />
+    <Content Include="Content\images\LegendPeople\TrainingCourses.png" />
+    <Content Include="Content\images\LegendTank.jpg" />
+    <Content Include="Content\images\Mark.png" />
+    <Content Include="Content\images\RedSGP.png" />
+    <Content Include="Content\images\Star.png" />
+    <Content Include="Content\images\TankContainer.jpg" />
+    <Content Include="Content\images\UpdatedImages\Board\Lim Yeow Beng2.jpg" />
+    <Content Include="Content\images\UpdatedImages\Career\AccountingFinance.jpg" />
+    <Content Include="Content\images\UpdatedImages\Career\Containershipping.jpg" />
+    <Content Include="Content\images\UpdatedImages\Career\GlobalFreight.jpg" />
+    <Content Include="Content\images\UpdatedImages\Career\ISOTankDivision.jpg" />
+    <Content Include="Content\images\UpdatedImages\Career\joblisting_commercial.jpg" />
+    <Content Include="Content\images\UpdatedImages\Career\Operations.jpg" />
+    <Content Include="Content\images\UpdatedImages\Career\SalesRepresentive.jpg" />
+    <Content Include="Content\images\UpdatedImages\Career\TankContainerDivision.jpg" />
+    <Content Include="Content\images\UpdatedImages\Career\trafficcontroller.jpg" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\CountriesName\Africa.png" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\CountriesName\Europe.png" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\CountriesName\IndianSubcontinent.png" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\CountriesName\MiddleEast.png" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\CountriesName\NorthAmerica.png" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\CountriesName\NorthAsia.png" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\CountriesName\Oceania.png" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\CountriesName\SouthAmerica.png" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\CountriesName\SoutheastAsia.png" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\fivestar.jpg" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\India_ISO9001.png" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\SAM1.jpg" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\SLA.jpg" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\SQAS.jpg" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\WPG.jpeg" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\Eddie.jpg" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\Louis.png" />
+    <Content Include="Content\images\UpdatedImages\Logos\10AniLogo.png" />
+    <Content Include="Content\images\UpdatedImages\Logos\LegendLogoMain%282%29.png" />
+    <Content Include="Content\images\UpdatedImages\Logos\LegendLogoMain.png" />
+    <Content Include="Content\images\UpdatedImages\Logos\LegendLogoMainMobile.png" />
+    <Content Include="Content\images\UpdatedImages\Logos\LegendLogoWhiteNew.png" />
+    <Content Include="Content\images\UpdatedImages\Logos\LogoOnlyStar.png" />
+    <Content Include="Content\images\UpdatedImages\Logos\Only Star Logo White.png" />
+    <Content Include="Content\images\UpdatedImages\Logos\only star logo.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\3rdPartyLogistics.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\AutomotiveLogistics.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\Breakbulk&amp;RORO.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\BulkLiquidLogistics.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\DangerousGoodsTrucking.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\DomesticServicesViaRail.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\FoodGrade.jpg" />
+    <Content Include="Content\images\UpdatedImages\Solutions\FoodGradeTank.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\LastMileTransportation\InstantUploadPOD.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\LastMileTransportation\LastMinuteDelivery.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\LastMileTransportation\ManPowerSupply.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\LastMileTransportation\Pick&amp;Pack.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\LastMileTransportation\ShipmentTracking.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\LastMileTransportation\Warehousing&amp;Fulfilment.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\Port1.jpg" />
+    <Content Include="Content\images\UpdatedImages\Solutions\Port2.jpg" />
+    <Content Include="Content\images\UpdatedImages\Solutions\PortAgencyServices.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\RegionalContainerShipping.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\RegionalFeederServices.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\TankContainerDepot.jpg" />
+    <Content Include="Content\images\UpdatedImages\Solutions\TankContainerManagement.png" />
+    <Content Include="Content\images\UpdatedImages\Solutions\yachtTransport.png" />
+    <Content Include="Content\js\Datamaps.js" />
+    <Content Include="Content\js\datamaps.markers.js" />
+    <Content Include="Content\js\MapData.js" />
+    <Content Include="Content\js\site.js" />
+    <Content Include="Content\lib\aos\aos.css" />
+    <Content Include="Content\lib\aos\aos.js" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.rtl.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-utilities.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-utilities.min.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.esm.js" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.esm.min.js" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\lib\counterup2\index.js" />
+    <Content Include="Content\lib\counterup2\index.min.js" />
+    <Content Include="Content\lib\font-awesome\css\all.css" />
+    <Content Include="Content\lib\font-awesome\css\all.min.css" />
+    <Content Include="Content\lib\font-awesome\css\brands.css" />
+    <Content Include="Content\lib\font-awesome\css\brands.min.css" />
+    <Content Include="Content\lib\font-awesome\css\fontawesome.css" />
+    <Content Include="Content\lib\font-awesome\css\fontawesome.min.css" />
+    <Content Include="Content\lib\font-awesome\css\regular.css" />
+    <Content Include="Content\lib\font-awesome\css\regular.min.css" />
+    <Content Include="Content\lib\font-awesome\css\solid.css" />
+    <Content Include="Content\lib\font-awesome\css\solid.min.css" />
+    <Content Include="Content\lib\font-awesome\css\svg-with-js.css" />
+    <Content Include="Content\lib\font-awesome\css\svg-with-js.min.css" />
+    <Content Include="Content\lib\font-awesome\css\v4-font-face.css" />
+    <Content Include="Content\lib\font-awesome\css\v4-font-face.min.css" />
+    <Content Include="Content\lib\font-awesome\css\v4-shims.css" />
+    <Content Include="Content\lib\font-awesome\css\v4-shims.min.css" />
+    <Content Include="Content\lib\font-awesome\css\v5-font-face.css" />
+    <Content Include="Content\lib\font-awesome\css\v5-font-face.min.css" />
+    <Content Include="Content\lib\font-awesome\js\all.js" />
+    <Content Include="Content\lib\font-awesome\js\all.min.js" />
+    <Content Include="Content\lib\font-awesome\js\brands.js" />
+    <Content Include="Content\lib\font-awesome\js\brands.min.js" />
+    <Content Include="Content\lib\font-awesome\js\conflict-detection.js" />
+    <Content Include="Content\lib\font-awesome\js\conflict-detection.min.js" />
+    <Content Include="Content\lib\font-awesome\js\fontawesome.js" />
+    <Content Include="Content\lib\font-awesome\js\fontawesome.min.js" />
+    <Content Include="Content\lib\font-awesome\js\regular.js" />
+    <Content Include="Content\lib\font-awesome\js\regular.min.js" />
+    <Content Include="Content\lib\font-awesome\js\solid.js" />
+    <Content Include="Content\lib\font-awesome\js\solid.min.js" />
+    <Content Include="Content\lib\font-awesome\js\v4-shims.js" />
+    <Content Include="Content\lib\font-awesome\js\v4-shims.min.js" />
+    <Content Include="Content\lib\font-awesome\sprites\brands.svg" />
+    <Content Include="Content\lib\font-awesome\sprites\regular.svg" />
+    <Content Include="Content\lib\font-awesome\sprites\solid.svg" />
+    <Content Include="Content\lib\jquery\jquery.js" />
+    <Content Include="Content\lib\jquery\jquery.min.js" />
+    <Content Include="Content\lib\jquery\jquery.slim.js" />
+    <Content Include="Content\lib\jquery\jquery.slim.min.js" />
+    <Content Include="Content\lib\OwlCarousel2\assets\ajax-loader.gif" />
+    <Content Include="Content\lib\OwlCarousel2\assets\owl.carousel.css" />
+    <Content Include="Content\lib\OwlCarousel2\assets\owl.carousel.min.css" />
+    <Content Include="Content\lib\OwlCarousel2\assets\owl.theme.default.css" />
+    <Content Include="Content\lib\OwlCarousel2\assets\owl.theme.default.min.css" />
+    <Content Include="Content\lib\OwlCarousel2\assets\owl.theme.green.css" />
+    <Content Include="Content\lib\OwlCarousel2\assets\owl.theme.green.min.css" />
+    <Content Include="Content\lib\OwlCarousel2\assets\owl.video.play.png" />
+    <Content Include="Content\lib\OwlCarousel2\owl.carousel.js" />
+    <Content Include="Content\lib\OwlCarousel2\owl.carousel.min.js" />
+    <Content Include="Content\lib\Swiper\swiper-bundle.css" />
+    <Content Include="Content\lib\Swiper\swiper-bundle.js" />
+    <Content Include="Content\lib\Swiper\swiper-bundle.min.css" />
+    <Content Include="Content\lib\Swiper\swiper-bundle.min.js" />
+    <Content Include="Content\lib\Swiper\swiper-bundle.min.mjs" />
+    <Content Include="Content\lib\Swiper\swiper-bundle.mjs" />
+    <Content Include="Content\lib\topojson\topojson.js" />
+    <Content Include="Content\lib\topojson\topojson.min.js" />
+    <Content Include="Content\video\Carrier.mp4" />
+    <Content Include="Content\video\LegendDND2022.mp4" />
+    <Content Include="Content\video\LegendFinalvideo.mp4" />
+    <Content Include="Content\video\LegendKandla.mp4" />
+    <Content Include="Content\video\Menit.mp4" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="libman.json" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-utilities.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.esm.js.map" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.esm.min.js.map" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Content\lib\bootstrap\scss\_accordion.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_alert.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_badge.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_button-group.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_buttons.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_card.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_carousel.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_close.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_containers.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_dropdown.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_forms.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_functions.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_grid.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_helpers.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_images.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_list-group.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_maps.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_mixins.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_modal.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_nav.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_navbar.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_offcanvas.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_pagination.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_placeholders.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_popover.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_progress.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_reboot.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_root.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_spinners.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_tables.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_toasts.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_tooltip.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_transitions.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_type.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_utilities.scss" />
+    <Content Include="Content\lib\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="Content\lib\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="Content\lib\bootstrap\scss\bootstrap-utilities.scss" />
+    <Content Include="Content\lib\bootstrap\scss\bootstrap.scss" />
+    <Content Include="Content\lib\bootstrap\scss\forms\_floating-labels.scss" />
+    <Content Include="Content\lib\bootstrap\scss\forms\_form-check.scss" />
+    <Content Include="Content\lib\bootstrap\scss\forms\_form-control.scss" />
+    <Content Include="Content\lib\bootstrap\scss\forms\_form-range.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_variables-dark.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_variables.scss" />
+    <Content Include="Content\lib\bootstrap\scss\forms\_form-select.scss" />
+    <Content Include="Content\lib\bootstrap\scss\forms\_form-text.scss" />
+    <Content Include="Content\lib\bootstrap\scss\forms\_input-group.scss" />
+    <Content Include="Content\lib\bootstrap\scss\forms\_labels.scss" />
+    <Content Include="Content\lib\bootstrap\scss\forms\_validation.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_clearfix.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_color-bg.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_colored-links.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_focus-ring.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_icon-link.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_position.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_ratio.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_stacks.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_stretched-link.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_text-truncation.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_visually-hidden.scss" />
+    <Content Include="Content\lib\bootstrap\scss\helpers\_vr.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_backdrop.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_banner.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_caret.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_color-mode.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_color-scheme.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_container.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_table-variants.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_transition.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_utilities.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_visually-hidden.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_api.scss" />
+    <Content Include="Content\lib\bootstrap\scss\vendor\_rfs.scss" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-v4compatibility.ttf" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="Content\lib\jquery\jquery.min.map" />
+    <Content Include="Content\lib\jquery\jquery.slim.min.map" />
+    <Content Include="Content\lib\Swiper\swiper-bundle.min.js.map" />
+    <Content Include="Content\lib\Swiper\swiper-bundle.min.mjs.map" />
+    <Content Include="Content\images\AllNews\N18\legend2.webp" />
+    <Content Include="Content\images\AllNews\N18\news5.webp" />
+    <Content Include="Content\images\AllNews\N18\news6.webp" />
+    <Content Include="Content\images\AllNews\N18\news9.webp" />
+    <Content Include="Content\images\AllNews\N19\LegendGrouplogo.webp" />
+    <Content Include="Content\images\AllNews\N19\news2.webp" />
+    <Content Include="Content\images\AllNews\N19\news3.webp" />
+    <Content Include="Content\images\AllNews\N19\Truck%28Edited%29.webp" />
+    <Content Include="Content\images\AllNews\N20\30dec2020.webp" />
+    <Content Include="Content\images\AllNews\N20\FeederAnnouncement.webp" />
+    <Content Include="Content\images\AllNews\N20\LegendLogoMain%282%29.webp" />
+    <Content Include="Content\images\AllNews\N20\new13nov2020.webp" />
+    <Content Include="Content\images\AllNews\N20\Newscania.webp" />
+    <Content Include="Content\images\AllNews\N20\Singapore.webp" />
+    <Content Include="Content\images\AllNews\N20\VietnamAnnoucement.webp" />
+    <Content Include="Content\images\AllNews\N21\AwardImage.webp" />
+    <Content Include="Content\images\AllNews\N21\Legend_and_EDBI_V2_modified1.webp" />
+    <Content Include="Content\images\AllNews\N21\Netherlands.webp" />
+    <Content Include="Content\images\AllNews\N21\NewOfficeKarachi.webp" />
+    <Content Include="Content\images\AllNews\N21\NSADepot.webp" />
+    <Content Include="Content\images\AllNews\N21\Pasir.webp" />
+    <Content Include="Content\images\AllNews\N21\ShanghaiChina.webp" />
+    <Content Include="Content\images\AllNews\N21\WGTPcopy.webp" />
+    <Content Include="Content\images\AllNews\N22\1.webp" />
+    <Content Include="Content\images\AllNews\N22\10AniLogo.webp" />
+    <Content Include="Content\images\AllNews\N22\2.webp" />
+    <Content Include="Content\images\AllNews\N22\2000.webp" />
+    <Content Include="Content\images\AllNews\N22\4.webp" />
+    <Content Include="Content\images\AllNews\N22\bradcam21.webp" />
+    <Content Include="Content\images\AllNews\N22\Dubai.webp" />
+    <Content Include="Content\images\AllNews\N22\e50OG.webp" />
+    <Content Include="Content\images\AllNews\N22\ISO14001.webp" />
+    <Content Include="Content\images\AllNews\N22\Jakarta1.webp" />
+    <Content Include="Content\images\AllNews\N22\Jakarta2.webp" />
+    <Content Include="Content\images\AllNews\N22\Legendlogisticsopensperthdepot.webp" />
+    <Content Include="Content\images\AllNews\N22\LegendTanklogo.webp" />
+    <Content Include="Content\images\AllNews\N22\QAI_ISO 22000.webp" />
+    <Content Include="Content\images\AllNews\N22\Tenders.webp" />
+    <Content Include="Content\images\AllNews\N23\Budgetimage.webp" />
+    <Content Include="Content\images\AllNews\N23\Budgetimage1.webp" />
+    <Content Include="Content\images\AllNews\N23\Budgetimage2.webp" />
+    <Content Include="Content\images\AllNews\N23\CombineMundraQingdao.webp" />
+    <Content Include="Content\images\AllNews\N23\DubaiTrucks.webp" />
+    <Content Include="Content\images\AllNews\N23\DubaiTrucks1.webp" />
+    <Content Include="Content\images\AllNews\N23\DubaiTrucks2.webp" />
+    <Content Include="Content\images\AllNews\N23\DubaiTrucks3.webp" />
+    <Content Include="Content\images\AllNews\N23\Kandla.webp" />
+    <Content Include="Content\images\AllNews\N23\MainPoultry.webp" />
+    <Content Include="Content\images\AllNews\N23\Mundra.webp" />
+    <Content Include="Content\images\AllNews\N23\Poultry1.webp" />
+    <Content Include="Content\images\AllNews\N23\Poultry2.webp" />
+    <Content Include="Content\images\AllNews\N23\Qingdao.webp" />
+    <Content Include="Content\images\AllNews\N23\Seoul.webp" />
+    <Content Include="Content\images\AllNews\N23\Seoul1.webp" />
+    <Content Include="Content\images\AllNews\N23\Seoul2.webp" />
+    <Content Include="Content\images\AllNews\N23\Seoul3.webp" />
+    <Content Include="Content\images\CountryFlags\Bangladesh.webp" />
+    <Content Include="Content\images\CountryFlags\China.webp" />
+    <Content Include="Content\images\CountryFlags\India.webp" />
+    <Content Include="Content\images\CountryFlags\Indonesia.webp" />
+    <Content Include="Content\images\CountryFlags\Malaysia.webp" />
+    <Content Include="Content\images\CountryFlags\Myanmar.webp" />
+    <Content Include="Content\images\CountryFlags\Singapore.webp" />
+    <Content Include="Content\images\CountryFlags\Thailand.webp" />
+    <Content Include="Content\images\CountryFlags\Vietnam.webp" />
+    <Content Include="Content\images\CSR\1.webp" />
+    <Content Include="Content\images\CSR\10.webp" />
+    <Content Include="Content\images\CSR\11.webp" />
+    <Content Include="Content\images\CSR\12.webp" />
+    <Content Include="Content\images\CSR\13.webp" />
+    <Content Include="Content\images\CSR\2.webp" />
+    <Content Include="Content\images\CSR\3.webp" />
+    <Content Include="Content\images\CSR\4.webp" />
+    <Content Include="Content\images\CSR\5.webp" />
+    <Content Include="Content\images\CSR\6.webp" />
+    <Content Include="Content\images\CSR\7.webp" />
+    <Content Include="Content\images\CSR\8.webp" />
+    <Content Include="Content\images\CSR\9.webp" />
+    <Content Include="Content\images\LegendPeople\EmployeementGrowth.webp" />
+    <Content Include="Content\images\LegendPeople\JoinUs.webp" />
+    <Content Include="Content\images\UpdatedImages\4.webp" />
+    <Content Include="Content\images\UpdatedImages\Barge\img-2508.webp" />
+    <Content Include="Content\images\UpdatedImages\Barge\img-2510.webp" />
+    <Content Include="Content\images\UpdatedImages\Board\Lim Yeow Beng2.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\AgencyNetwork.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\bradcam11.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\bradcam12.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\bradcam21.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\bradcam3.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\bradcam4.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\bradcam5.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\bradcam6.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\bradcam7.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\bradcam8.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\Career1.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\Contact.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\cropped_1.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\CSR.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\edited.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\InvestorRelations.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\Legend 2510_edited.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\Legend Bravo.Edited.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\LegendSpecialised.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\LegendTank.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\LocalCharges.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\NewImage1.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\SailingSchedule.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\SingaporetoBatamfeederservice.webp" />
+    <Content Include="Content\images\UpdatedImages\breadcrumb\Trucking_edited.webp" />
+    <Content Include="Content\images\UpdatedImages\GlobalLocation\SQAS.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\LegendGroupResized.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Trailer.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\BestManaged.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\Celebrating2022.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\cert1.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\cert2.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\E5_Logotype.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\FIATA Logo.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\IAS.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\ISO14001_logo.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\ISO45001_logo.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\ISO9001_logo.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\QAI_ISO 22000.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Certificates\SCIC.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\AutomotiveLogistics.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\Breakbulkshipping.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\Bulkliquidlogistics.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\ISOtanktransportservices.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\legend1.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\legend2.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\legend3.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\legend4.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\LegendReeferContainers.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\LegendTank1.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\NSADepot.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\SingaporetoBatamfeederservice.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\SpecialTrailer.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\Truck3.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Gallery\Warehousinganddistributionservices.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Services\LegendCarrier.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Services\LegendFintech.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Services\LegendGlobal.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Services\LegendSpecialised.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Services\LegendTank.webp" />
+    <Content Include="Content\images\UpdatedImages\Index\Services\TradeLogic1.webp" />
+    <Content Include="Content\images\UpdatedImages\LandingCraft\Alpha.webp" />
+    <Content Include="Content\images\UpdatedImages\LandingCraft\img-caocao.webp" />
+    <Content Include="Content\images\UpdatedImages\LandingCraft\LegendAquarius%285%29Resized.webp" />
+    <Content Include="Content\images\UpdatedImages\LandingCraft\LEGENDGEMINI.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Alex.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Blank.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Ck.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Dennis.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\EddieLeong.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Eugene.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Fintech.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Genie.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\KT.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Louis1.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\RoyChew.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Sam.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\TroyEiken.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\CK Than.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\Dennis Wong.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\Eddie.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\Eugene Tan.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\KT Tay.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\Louis.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\Sam Ong.webp" />
+    <Content Include="Content\images\UpdatedImages\LeadershipTeam\Original\Troy.webp" />
+    <Content Include="Content\images\UpdatedImages\QHS\cert2.webp" />
+    <Content Include="Content\images\UpdatedImages\QHS\HealthImage2.webp" />
+    <Content Include="Content\images\UpdatedImages\QHS\IAS.webp" />
+    <Content Include="Content\images\UpdatedImages\QHS\ISO14001_logo.webp" />
+    <Content Include="Content\images\UpdatedImages\QHS\ISO45001_logo.webp" />
+    <Content Include="Content\images\UpdatedImages\QHS\ISO9001_logo.webp" />
+    <Content Include="Content\images\UpdatedImages\QHS\QAI_ISO 22000.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\AutomotiveLogistics - Copy.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\AutomotiveLogistics.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\BulkLiquidLogistics.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\ConstructionLogistics.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\Container4.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\ContainerShippingBussiness1.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\GlobalFreightManagement - Copy.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\GlobalFreightManagement.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\Last-mile.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\legend-logistic0257.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\LegendTankMerge.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\OperationalTransparency.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\Precast&amp;infrastructurelogistics.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\RealizationDefault.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\Regionalfeederservcies.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\supplychainfinancing.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\TankContainerDepot.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\TankContainerMan.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\Tradecreditinsurance.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\TradeLogic.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\Truck %28Edited%29.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\UniqueProprietaryDatasets.webp" />
+    <Content Include="Content\images\UpdatedImages\Solutions\windpower.webp" />
+    <Content Include="Content\images\UpdatedImages\TugBoat\Delta.webp" />
+    <Content Include="Content\images\UpdatedImages\TugBoat\Edited.webp" />
+    <Content Include="Content\images\UpdatedImages\TugBoat\img-bravo.webp" />
+    <Content Include="Content\documents\05062022\Batam to Singapore_Jun 2022.pdf" />
+    <Content Include="Content\documents\05062022\Bintan to Singapore_Jun 2022.pdf" />
+    <Content Include="Content\documents\05062022\CISC Service_Mar to Nov 2022.pdf" />
+    <Content Include="Content\documents\05062022\Port Kelang to Kuala Tanjung_May to Aug 22.pdf" />
+    <Content Include="Content\documents\06062023\Legend Barge 2508.pdf" />
+    <Content Include="Content\documents\06062023\Legend Libra.pdf" />
+    <Content Include="Content\documents\13122022\Batam to Singapore_Dec 2022.pdf" />
+    <Content Include="Content\documents\13122022\Bintan to Singapore_Dec 2022.pdf" />
+    <Content Include="Content\documents\13122022\CISC Service.pdf" />
+    <Content Include="Content\documents\13122022\Port Klang to Kuala Tanjung_Dec 2022.pdf" />
+    <Content Include="Content\documents\13122022\Singapore to Pasir Gudang_Nov 2022 to Jan 2023.pdf" />
+    <Content Include="Content\documents\18112022\IGAlpha.pdf" />
+    <Content Include="Content\documents\18112022\IGBarge2508.pdf" />
+    <Content Include="Content\documents\18112022\IGCaocao.pdf" />
+    <Content Include="Content\documents\18112022\IGDelta.pdf" />
+    <Content Include="Content\documents\18112022\LegendAquarius.pdf" />
+    <Content Include="Content\documents\18112022\LegendBarge2510.pdf" />
+    <Content Include="Content\documents\18112022\LegendBravo.pdf" />
+    <Content Include="Content\documents\18112022\LegendGemini.pdf" />
+    <Content Include="Content\documents\18112022\LegendTaurus.pdf" />
+    <Content Include="Content\documents\24032023\Whistleblow Policy Ver3 270423.pdf" />
+    <Content Include="Content\documents\UpdatedPDF\Legend Barge 2508.pdf" />
+    <Content Include="Content\documents\05 Jul_Press Release_Legend Logistics raises strategic investment from EDBI.pdf" />
+    <Content Include="Content\documents\13 Sep 22_Press_Release.pdf" />
+    <Content Include="Content\documents\Bangladesh.pdf" />
+    <Content Include="Content\documents\Batam Sailing Schedule_Aug 2021.pdf" />
+    <Content Include="Content\documents\Batam Sailing Schedule_June 2021.pdf" />
+    <Content Include="Content\documents\Batam Sailing Schedule_May 2021.pdf" />
+    <Content Include="Content\documents\Batam Sailing Schedule_Oct 21.pdf" />
+    <Content Include="Content\documents\Batam to Singapore_Dec 20 %283%29.pdf" />
+    <Content Include="Content\documents\Batam to Singapore_Dec 20.pdf" />
+    <Content Include="Content\documents\Batam to Singapore_Feb 21.pdf" />
+    <Content Include="Content\documents\Batam to Singapore_Jul 2021.pdf" />
+    <Content Include="Content\documents\Batam to Singapore_Mar 2021.pdf" />
+    <Content Include="Content\documents\Bintan Sailing Schedule_Aug 2021.pdf" />
+    <Content Include="Content\documents\Bintan Sailing Schedule_Jul 2021.pdf" />
+    <Content Include="Content\documents\Bintan Sailing Schedule_June 2021.pdf" />
+    <Content Include="Content\documents\Bintan Sailing Schedule_May 2021.pdf" />
+    <Content Include="Content\documents\Bintan Sailing Schedule_Oct 2021.pdf" />
+    <Content Include="Content\documents\Bintan to Singapore_Dec 20 %283%29.pdf" />
+    <Content Include="Content\documents\Bintan to Singapore_Dec 20.pdf" />
+    <Content Include="Content\documents\Bintan to Singapore_Feb 21.pdf" />
+    <Content Include="Content\documents\Bintan to Singapore_Feb 211.pdf" />
+    <Content Include="Content\documents\Bintan to Singapore_Mar 2021.pdf" />
+    <Content Include="Content\documents\BizSafe_012020.pdf" />
+    <Content Include="Content\documents\China.pdf" />
+    <Content Include="Content\documents\CISC SCHEDULE.pdf" />
+    <Content Include="Content\documents\CISC Schedule_Jul %2721 to Jan %2722.pdf" />
+    <Content Include="Content\documents\FIVE Service.pdf" />
+    <Content Include="Content\documents\IG ALPHA.pdf" />
+    <Content Include="Content\documents\IG BARGE 2508.pdf" />
+    <Content Include="Content\documents\IG BARGE 2510.pdf" />
+    <Content Include="Content\documents\IG BRAVO.pdf" />
+    <Content Include="Content\documents\IG CAOCAO.pdf" />
+    <Content Include="Content\documents\IG DELTA.pdf" />
+    <Content Include="Content\documents\IG MULAN.pdf" />
+    <Content Include="Content\documents\IG SUNTZU.pdf" />
+    <Content Include="Content\documents\IG-Logistics-AQUARIUS.pdf" />
+    <Content Include="Content\documents\IG-Logistics-BARGE-2508.pdf" />
+    <Content Include="Content\documents\IG-Logistics-BARGE-2510.pdf" />
+    <Content Include="Content\documents\IG-Logistics-BRAVO.pdf" />
+    <Content Include="Content\documents\IG-Logistics-CAOCAO.pdf" />
+    <Content Include="Content\documents\IG-Logistics-MULAN.pdf" />
+    <Content Include="Content\documents\IG-Logistics-SUNTZU.pdf" />
+    <Content Include="Content\documents\India.pdf" />
+    <Content Include="Content\documents\Indonesia.pdf" />
+    <Content Include="Content\documents\Kuala Tanjung to Pasir Gudang_Sep 21 to Feb 22.pdf" />
+    <Content Include="Content\documents\LEGEND ALPHA %281%29.pdf" />
+    <Content Include="Content\documents\LEGEND ALPHA.pdf" />
+    <Content Include="Content\documents\LEGEND AQUARIUS %281%29.pdf" />
+    <Content Include="Content\documents\LEGEND AQUARIUS %282%29.pdf" />
+    <Content Include="Content\documents\LEGEND AQUARIUS.pdf" />
+    <Content Include="Content\documents\LEGEND BARGE 2508 %281%29.pdf" />
+    <Content Include="Content\documents\LEGEND BARGE 2508.pdf" />
+    <Content Include="Content\documents\LEGEND BARGE 2510 %281%29.pdf" />
+    <Content Include="Content\documents\LEGEND BARGE 2510.pdf" />
+    <Content Include="Content\documents\LEGEND BRAVO %281%29.pdf" />
+    <Content Include="Content\documents\LEGEND BRAVO.pdf" />
+    <Content Include="Content\documents\LEGEND CAOCAO %281%29.pdf" />
+    <Content Include="Content\documents\LEGEND CAOCAO.pdf" />
+    <Content Include="Content\documents\LEGEND DELTA %281%29.pdf" />
+    <Content Include="Content\documents\LEGEND DELTA.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Anti-Bribery and Corruption Policy - 21.12.20.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Audit and Risk Management Committee Charter.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Board Charter - 21.12.20.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Board Performance Evalutation Policy - 21.12.20.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Code of Conduct - 21.12.20.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Continuous Disclosure Policy.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Diversity Policy - 21.12.20.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Environmental, Social and Governance Policy - 21.12.20.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Remuneration and Nomination Committee Charter.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Security Trading Policy.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Shareholder Communications Policy.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Social Media Policy - 21.12.20.pdf" />
+    <Content Include="Content\documents\Legend Logistics - Whistle Blower Policy - 21.12.20.pdf" />
+    <Content Include="Content\documents\LEGEND MULAN %281%29.pdf" />
+    <Content Include="Content\documents\LEGEND MULAN.pdf" />
+    <Content Include="Content\documents\LEGEND SUNTZU %281%29.pdf" />
+    <Content Include="Content\documents\LEGEND SUNTZU.pdf" />
+    <Content Include="Content\documents\LocalCharges-Bangladesh.pdf" />
+    <Content Include="Content\documents\LocalCharges-China.pdf" />
+    <Content Include="Content\documents\LocalCharges-India.pdf" />
+    <Content Include="Content\documents\LocalCharges-Indonesia.pdf" />
+    <Content Include="Content\documents\LocalCharges-Malaysia.pdf" />
+    <Content Include="Content\documents\LocalCharges-Myanmar.pdf" />
+    <Content Include="Content\documents\LocalCharges-Thailand.pdf" />
+    <Content Include="Content\documents\LocalCharges-Vietnam.pdf" />
+    <Content Include="Content\documents\Malaysia.pdf" />
+    <Content Include="Content\documents\Myanmar.pdf" />
+    <Content Include="Content\documents\Port Kelang to Kuala Tanjung_Dec 20 to Apr 21.pdf" />
+    <Content Include="Content\documents\Port Kelang to Kuala Tanjung_Jul 21 to Dec 21.pdf" />
+    <Content Include="Content\documents\Port Kelang to Kuala Tanjung_May to Sep 21.pdf" />
+    <Content Include="Content\documents\Port Klang and Singapore to India West Coast.pdf" />
+    <Content Include="Content\documents\Port Klang_Singapore to India West Coast_Apr 21 to Dec 21.pdf" />
+    <Content Include="Content\documents\PressReleaseACA.pdf" />
+    <Content Include="Content\documents\PressReleaseContainerFeederService.pdf" />
+    <Content Include="Content\documents\QAI_ISO_45001_2018.pdf" />
+    <Content Include="Content\documents\QAI_ISO_9001_20015.pdf" />
+    <Content Include="Content\documents\Sailing Schedule %28updated 6 August 2020%29.pdf" />
+    <Content Include="Content\documents\Sailing Schedule PK to KTJ %28updated 1 December 2020%29.pdf" />
+    <Content Include="Content\documents\SCHEDULE EX PKL - DEC 2022.pdf" />
+    <Content Include="Content\documents\Singapore.pdf" />
+    <Content Include="Content\documents\TankTracking.csv" />
+    <Content Include="Content\documents\Thailand.pdf" />
+    <Content Include="Content\documents\Vietnam.pdf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-Black.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-BlackItalic.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-Bold.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-BoldItalic.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-ExtraBold.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-ExtraLight.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-Italic.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-Light.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-LightItalic.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-Medium.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-MediumItalic.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-Regular.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-SemiBold.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-SemiBoldItalic.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-Thin.ttf" />
+    <Content Include="Content\fonts\Montserrat\Montserrat-ThinItalic.ttf" />
+    <Content Include="Content\documents\UpdatedPDF\LegendVirgo.pdf" />
+    <Content Include="Content\images\OurSolutions\About2.webp" />
+    <Content Include="Content\images\OurSolutions\MobicononHouseMovingTrailer.webp" />
+    <Content Include="Content\images\OurSolutions\Services6.webp" />
+    <Content Include="Content\images\OurSolutions\Rollout.webp" />
+    <Content Include="Content\images\OurSolutions\Gallery31.webp" />
+    <Content Include="Content\images\OurSolutions\Gallery8.webp" />
+    <Content Include="Content\documents\Latest\RegentBravo.pdf" />
+    <Content Include="Content\documents\Latest\RegentGemini.pdf" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\About\QHSPolicy.cshtml" />
+    <Content Include="Views\About\CSR.cshtml" />
+    <Content Include="Views\About\Career.cshtml" />
+    <Content Include="Views\About\EmployeeGrowthDevelopment.cshtml" />
+    <Content Include="Views\About\LifeWorkAtRegent.cshtml" />
+    <Content Include="Views\Career\CareerDetails.cshtml" />
+    <Content Include="Views\Compliance\Compliance.cshtml" />
+    <Content Include="Views\Contact\Contact.cshtml" />
+    <Content Include="Views\Fleet\LandingCraft.cshtml" />
+    <Content Include="Views\Fleet\TugBoat.cshtml" />
+    <Content Include="Views\InvestorAndMedia\DetailNews.cshtml" />
+    <Content Include="Views\InvestorAndMedia\InvestorRelations.cshtml" />
+    <Content Include="Views\InvestorAndMedia\LegendWhistleBlowingChannels.cshtml" />
+    <Content Include="Views\InvestorAndMedia\AllNews.cshtml" />
+    <Content Include="Views\InvestorAndMedia\News2018.cshtml" />
+    <Content Include="Views\InvestorAndMedia\News2019.cshtml" />
+    <Content Include="Views\InvestorAndMedia\News2020.cshtml" />
+    <Content Include="Views\InvestorAndMedia\News2021.cshtml" />
+    <Content Include="Views\InvestorAndMedia\News2022.cshtml" />
+    <Content Include="Views\InvestorAndMedia\News2023.cshtml" />
+    <Content Include="Views\OurSolutions\LocalCharges.cshtml" />
+    <Content Include="Views\OurSolutions\SailingSchedule.cshtml" />
+    <Content Include="Views\OurSolutions\HeavyHaulageandLineHaul.cshtml" />
+    <Content Include="Views\OurSolutions\SpecialisedLogistics.cshtml" />
+    <Content Include="Views\OurSolutions\MarineLogistics.cshtml" />
+    <Content Include="Views\About\ComplianceAndGovernance.cshtml" />
+    <Content Include="Views\About\AboutUs.cshtml" />
+    <Content Include="Views\GlobalLocations\Australia.cshtml" />
+    <Content Include="Views\GlobalLocations\GlobalLocations.cshtml" />
+    <Content Include="Views\GlobalLocations\Singapore.cshtml" />
+    <Content Include="Views\GlobalLocations\Indonesia.cshtml" />
+    <Content Include="Views\OurSolutions\OurSolutions.cshtml" />
+    <Content Include="Views\GlobalLocations\Headquarters.cshtml" />
+    <Content Include="Views\InvestorAndMedia\News2024.cshtml" />
+    <Content Include="Views\About\OurVisionMissionAndValues.cshtml" />
+    <Content Include="Views\OurSolutions\RegionalFeederServices.cshtml" />
+    <Content Include="Views\InvestorAndMedia\News2025.cshtml" />
+    <Content Include="Views\Fleet\Barge.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53695</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44325/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

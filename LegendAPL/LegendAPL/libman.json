@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "aos@2.3.4",
+      "destination": "Content/lib/aos/"
+    },
+    {
+      "library": "bootstrap@5.3.2",
+      "destination": "Content/lib/bootstrap/"
+    },
+    {
+      "library": "counterup2@2.0.2",
+      "destination": "Content/lib/counterup2/"
+    },
+    {
+      "library": "font-awesome@6.4.2",
+      "destination": "Content/lib/font-awesome/"
+    },
+    {
+      "library": "jquery@3.7.1",
+      "destination": "Content/lib/jquery/"
+    },
+    {
+      "library": "OwlCarousel2@2.3.4",
+      "destination": "Content/lib/OwlCarousel2/"
+    },
+    {
+      "library": "topojson@3.0.2",
+      "destination": "Content/lib/topojson/"
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "News 2020";
+}
+
+<script src="~/Content/js/site.js"></script>
+
+<!-- Page Header Start -->
+<div class="bradcam_area bradcamNews mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>News 2020</h3>
+                    <p> <a href="@Url.Action("index","Home")">Home</a> / News 2020</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header Ends -->
+
+<div class="container-fluid mb-4">
+    <div class="row" style="padding:0px 0px 5px 0px;">
+        <div class="col-lg-12">
+            <div class="section_title text-center mb-80">
+                <h2 style="float: left; margin-left: 10px; margin-left: 30px;">OUR NEWS</h2>
+                <div class="devider">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Menus start -->
+<div class="container-fluid mb-4">
+    <div class="row" style="padding:0px 0px 5px 0px;">
+        <div class="col-lg-12" data-aos="zoom-out">
+            <p style="font-weight: 700; font-size: 25px; margin-left: 10px; margin-left: 30px;">
+                <a href="@Url.Action("AllNews","InvestorAndMedia")" class="hover-underline-animation"> All News</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("News2025","InvestorAndMedia")" class="hover-underline-animation">2025</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("News2024","InvestorAndMedia")" class="hover-underline-animation">2024</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("News2023","InvestorAndMedia")" class="hover-underline-animation">2023</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("News2022","InvestorAndMedia")" class="hover-underline-animation">2022</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("News2021","InvestorAndMedia")" class="hover-underline-animation">2021</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("News2020","InvestorAndMedia")" class="underline-2">2020</a> &nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("News2019","InvestorAndMedia")" class="hover-underline-animation">2019</a>&nbsp;<span style="color: gray">|</span>&nbsp;
+                <a href="@Url.Action("News2018","InvestorAndMedia")" class="hover-underline-animation">2018</a>
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Menus start -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 mb-3 content">
+            <a href="@Url.Action("DetailNews","InvestorAndMedia", new {idNews = "Dec3020"})">
+                <div class="swiper-slide1 swiper-slide--20201">
+                    <span>30 Dec 2020</span>
+                    <div>
+                        <h2>
+                            Legend Carrier Group completes acquisition of IG Logistics Group
+                        </h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-4 mb-3 content">
+            <a href="@Url.Action("DetailNews","InvestorAndMedia", new {idNews = "Nov1320"})">
+                <div class="swiper-slide1 swiper-slide--20202">
+                    <span>13 Nov 2020</span>
+                    <div>
+                        <h2>
+                            Legend Logistics Group wins the SMEs Excellence Growth Award at the ASEAN Business Awards 2020
+                        </h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-4 mb-3 content">
+            <a href="@Url.Action("DetailNews","InvestorAndMedia", new {idNews = "Oct0920"})">
+                <div class="swiper-slide1 swiper-slide--20203">
+                    <span>09 Oct 2020</span>
+                    <div>
+                        <h2>
+                            Legend Australia takes delivery of two brand new Scania trucks
+                        </h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 mb-3 content">
+            <a href="@Url.Action("DetailNews","InvestorAndMedia", new {idNews = "Aug1020"})">
+                <div class="swiper-slide1 swiper-slide--20204">
+                    <span>10 Aug 2020</span>
+                    <div>
+                        <h2>
+                            Legend Singapore celebrates National Day 2020
+                        </h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <div class="col-lg-4 content">
+            <a href="@Url.Action("DetailNews","InvestorAndMedia", new {idNews = "Jul2320"})">
+                <div class="swiper-slide1 swiper-slide--20205">
+                    <span>23 Jul 2020</span>
+                    <div>
+                        <h2>
+                            Change of company name to Legend Logistics Limited
+                        </h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-4 mb-3 content">
+            <a href="@Url.Action("DetailNews","InvestorAndMedia", new {idNews = "Mar2520"})">
+                <div class="swiper-slide1 swiper-slide--20206">
+                    <span>25 Mar 2020</span>
+                    <div>
+                        <h2>
+                            Commencement of feeder (COC) service between Port Klang & Kuala Tanjung Port
+                        </h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .content {
+        display: none;
+    }
+
+    #loadMore {
+        width: 200px;
+        color: #fff;
+        display: block;
+        text-align: center;
+        margin: 20px auto;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        background-color: rgba(24,54,130,1);
+        transition: .3s;
+    }
+
+        #loadMore:hover {
+            color: rgba(24,54,130,1);
+            background-color: #fff;
+            border: 1px solid rgba(24,54,130,1);
+            text-decoration: none;
+        }
+
+    .line {
+        content: "";
+        width: 100%;
+        height: 3px;
+        bottom: -5px;
+        left: 0;
+        background-color: #1C3682;
+        visibility: visible;
+        width: 55px;
+        transition: all 0.3s ease-in-out 0s;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $(".content").slice(0, 6).show();
+        $("#loadMore").on("click", function (e) {
+            e.preventDefault();
+            $(".content:hidden").slice(0, 6).slideDown();
+            if ($(".content:hidden").length == 0) {
+                $("#loadMore").hide();
+            }
+        });
+
+    })
+</script>

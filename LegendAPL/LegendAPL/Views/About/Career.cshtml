@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewBag.Title = "Career";
+}
+
+<script src="~/Content/js/site.js"></script>
+
+<!-- Page Header Start -->
+<div class="bradcam_area bradcam_bg_10">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3 style="font-size:35px!important">CAREER OPPORTUNITIES</h3>
+                    <p> <a href="@Url.Action("index","Home")">Home</a> / About / Career Opportunities</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header Ends -->
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        @*<div class="col-4" style="text-align: -webkit-center;">
+            <div class="wrapper13">
+                <div class="orange-top3 orange-border3"></div>
+                <div class="orange-left3 orange-border3"></div>
+                <div class="orange-right3 orange-border3"></div>
+                <div class="orange-bottom3 orange-border3"></div>
+                <a class="white-card3" href="@Url.Action("CareerDetails","Career", new {idCareer = "CustomerServiceExecutive"})">
+                    <p class="category">Customer Service Executive</p>
+                    <p class="category1">Singapore</p>
+                    <span class="CTA3">View Details</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-4" style="text-align: -webkit-center;">
+            <div class="wrapper13">
+                <div class="orange-top2 orange-border2"></div>
+                <div class="orange-left2 orange-border2"></div>
+                <div class="orange-right2 orange-border2"></div>
+                <div class="orange-bottom2 orange-border2"></div>
+                <a class="white-card2" href="@Url.Action("CareerDetails","Career", new {idCareer = "FinanceExecutiveSeniorFinanceExecutive"})">
+                    <p class="category">Finance Executive / Senior Finance Executive</p>
+                    <p class="category1">Singapore</p>
+                    <span class="CTA2">View Details</span>
+                </a>
+            </div>
+        </div>*@
+        <div class="col-4" style="text-align: -webkit-center;">
+            <div class="wrapper13">
+                <div class="orange-top1 orange-border1"></div>
+                <div class="orange-left1 orange-border1"></div>
+                <div class="orange-right1 orange-border1"></div>
+                <div class="orange-bottom1 orange-border1"></div>
+                <a class="white-card1" href="@Url.Action("CareerDetails","Career", new {idCareer = "TrafficController"})">
+                    <p class="category">Traffic Controller</p>
+                    <p class="category1">Singapore</p>
+                    <span class="CTA1">View Details</span>
+                </a>
+            </div>
+        </div>
+        @*<div class="col-4" style="text-align: -webkit-center;">
+            <div class="wrapper13">
+                <div class="orange-top2 orange-border2"></div>
+                <div class="orange-left2 orange-border2"></div>
+                <div class="orange-right2 orange-border2"></div>
+                <div class="orange-bottom2 orange-border2"></div>
+                <a class="white-card2" href="@Url.Action("CareerDetails","Career", new {idCareer = "AccountsExecutive"})">
+                    <p class="category">Accounts Executive</p>
+                    <p class="category1">Singapore</p>
+                    <span class="CTA2">View Details</span>
+                </a>
+            </div>
+        </div>*@
+    </div>
+</div><br /><br />
+
+<style>
+    .background {
+        width: 50%;
+        padding: 0 2em;
+        margin: 1.5em auto;
+        position: relative;
+        background: white;
+        border: 2px solid purple;
+        border-radius: 3px;
+        filter: drop-shadow(6px 6px 6px rgba(14, 51, 119, 0.7));
+        /* hide the overflow of the pseudo elements */
+        overflow: hidden;
+    }
+</style>
+
+<script>
+    $('.white-card').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('shrink');
+        $('.orange-border').addClass('grow');
+        $('.orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('grow');
+        $('.CTA').addClass('active');
+    });
+
+    $('.white-card').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('grow');
+        $('.orange-border').addClass('shrink');
+        $('.orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('shrink');
+        $('.CTA').removeClass('active');
+    });
+
+    $('.white-card1').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('shrink');
+        $('.orange-border1').addClass('grow');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border4').removeClass('grow');
+        $('.CTA1').addClass('active');
+    });
+
+    $('.white-card1').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('grow');
+        $('.orange-border1').addClass('shrink');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border4').removeClass('shrink');
+        $('.CTA1').removeClass('active');
+    });
+
+    $('.white-card2').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('shrink');
+        $('.orange-border2').addClass('grow');
+        $('.orange-border, .orange-border1, .orange-border3, .orange-border4').removeClass('grow');
+        $('.CTA2').addClass('active');
+    });
+
+    $('.white-card2').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('grow');
+        $('.orange-border3').addClass('shrink');
+        $('.orange-border, .orange-border1, .orange-border3, .orange-border4').removeClass('shrink');
+        $('.CTA2').removeClass('active');
+    });
+
+    $('.white-card3').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('shrink');
+        $('.orange-border3').addClass('grow');
+        $('.orange-border, .orange-border2, .orange-border1, .orange-border4').removeClass('grow');
+        $('.CTA3').addClass('active');
+    });
+
+    $('.white-card3').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('grow');
+        $('.orange-border3').addClass('shrink');
+        $('.orange-border, .orange-border2, .orange-border1, .orange-border4').removeClass('shrink');
+        $('.CTA3').removeClass('active');
+    });
+
+    $('.white-card4').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('shrink');
+        $('.orange-border4').addClass('grow');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1').removeClass('grow');
+        $('.CTA4').addClass('active');
+    });
+
+    $('.white-card4').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4').removeClass('grow');
+        $('.orange-border4').addClass('shrink');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1').removeClass('shrink');
+        $('.CTA4').removeClass('active');
+    });
+
+    $('.white-card5').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6').removeClass('shrink');
+        $('.orange-border5').addClass('grow');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border6').removeClass('grow');
+        $('.CTA5').addClass('active');
+    });
+
+    $('.white-card5').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border6, .orange-border5').removeClass('grow');
+        $('.orange-border5').addClass('shrink');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border6').removeClass('shrink');
+        $('.CTA5').removeClass('active');
+    });
+
+    $('.white-card6').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6').removeClass('shrink');
+        $('.orange-border6').addClass('grow');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5').removeClass('grow');
+        $('.CTA6').addClass('active');
+    });
+
+    $('.white-card6').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6').removeClass('grow');
+        $('.orange-border6').addClass('shrink');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5').removeClass('shrink');
+        $('.CTA6').removeClass('active');
+    });
+
+    $('.white-card7').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6, .orange-border7 ').removeClass('shrink');
+        $('.orange-border7').addClass('grow');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5, .orange-border6').removeClass('grow');
+        $('.CTA7').addClass('active');
+    });
+
+    $('.white-card7').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6, .orange-border7').removeClass('grow');
+        $('.orange-border7').addClass('shrink');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5, .orange-border6').removeClass('shrink');
+        $('.CTA7').removeClass('active');
+    });
+
+    $('.white-card8').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8 ').removeClass('shrink');
+        $('.orange-border8').addClass('grow');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5, .orange-border6, .orange-border7').removeClass('grow');
+        $('.CTA8').addClass('active');
+    });
+
+    $('.white-card8').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8').removeClass('grow');
+        $('.orange-border8').addClass('shrink');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5, .orange-border6, .orange-border7').removeClass('shrink');
+        $('.CTA8').removeClass('active');
+    });
+
+    $('.white-card9').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8, .orange-border9 ').removeClass('shrink');
+        $('.orange-border9').addClass('grow');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8').removeClass('grow');
+        $('.CTA9').addClass('active');
+    });
+
+    $('.white-card9').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8, .orange-border9').removeClass('grow');
+        $('.orange-border9').addClass('shrink');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8').removeClass('shrink');
+        $('.CTA9').removeClass('active');
+    });
+
+    $('.white-card10').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8, .orange-border9, .orange-border10').removeClass('shrink');
+        $('.orange-border10').addClass('grow');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8, .orange-border9').removeClass('grow');
+        $('.CTA10').addClass('active');
+    });
+
+    $('.white-card10').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8, .orange-border9, .orange-border10').removeClass('grow');
+        $('.orange-border10').addClass('shrink');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8, .orange-border9').removeClass('shrink');
+        $('.CTA10').removeClass('active');
+    });
+
+    $('.white-card11').mouseenter(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8, .orange-border9, .orange-border10, .orange-border11 ').removeClass('shrink');
+        $('.orange-border11').addClass('grow');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8, .orange-border9, .orange-border10 ').removeClass('grow');
+        $('.CTA11').addClass('active');
+    });
+
+    $('.white-card11').mouseleave(function () {
+        $('.orange-border, .orange-border1, .orange-border2, .orange-border3, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8, .orange-border9, .orange-border10, .orange-border11').removeClass('grow');
+        $('.orange-border11').addClass('shrink');
+        $('.orange-border, .orange-border2, .orange-border3, .orange-border1, .orange-border4, .orange-border5, .orange-border6, .orange-border7, .orange-border8, .orange-border9, .orange-border10').removeClass('shrink');
+        $('.CTA11').removeClass('active');
+    });
+</script>

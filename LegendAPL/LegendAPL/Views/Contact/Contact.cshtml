@@ -1,0 +1,381 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+}
+
+<!-- Page Header Start -->
+<div class="bradcam_area bradcamContact">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>Contact</h3>
+                    <p> <a href="@Url.Action("index","Home")">Home</a> / Contact </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header Ends -->
+<!-- <section> begin ============================-->
+<div id="Example46">
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 col-md-12">
+                    <div class="wrapper">
+                        <div class="row no-gutters">
+                            <div class="col-md-6 d-flex align-items-stretch" data-aos="fade-right">
+                                <div class="info-wrap w-100 p-lg-5 p-4" style="background-color:#183682;">
+                                    <h3 class="mb-5 mt-md-4 halfUnderline" style="font-size:30px;font-weight:bold;">Contact Info</h3>
+                                    <span style="font-size:17px;color:white;text-align:justify;" data-aos="fade-up">
+                                        Get in touch with us today to explore how Regent Logistics Group can revolutionize your supply chain. Whether you have questions, need information, 
+                                        or want to learn more about our services, our dedicated team is here to assist you every step of the way.
+                                    </span>
+                                    <div class="dbox w-100 d-flex align-items-start mt-5">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa-solid fa-location-dot"></span>
+                                        </div>
+                                        <div class="text pl-3" style="color:white;font-size:17px;">
+                                            <p>
+                                                3 HarbourFront Place, #04-03/04 HarbourFront Tower 2, Singapore 099254
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-100 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa-solid fa-phone"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p>
+                                                <a href="tel:65 6262 6455" style="color: white; font-size: 17px;">+65 6262 6455</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-100 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa-solid fa-paper-plane"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p>
+                                                <a href="mailto:info.singapore@regentgroup.sg" style="color: white; font-size: 17px;">info.singapore@regentgroup.sg</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 d-flex align-items-stretch" data-aos="fade-left">
+                                <div class="contact-wrap w-100 p-md-5 p-4">
+                                    <h3 class="mb-5 halfUnderline1" style="font-size:30px;font-weight:bold;color:#183682;">Get in Touch with Us</h3>
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <div class="textfield-outlined">
+                                                <input id="input-one" type="text" placeholder="" class="name" value="" name="name" required><label for="input-one">Name</label>
+                                                <div class="forleftalign,top ,alert-danger collapse" style="background-color:transparent;color:red" id="nameAlert">
+                                                    Name is Required *
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="textfield-outlined">
+                                                <input id="input-two" type="text" placeholder=" " class="email" value="" name="email required"><label for="input-two">Email</label>
+                                                <div class="forleftalign,top ,alert-danger collapse" style="background-color:transparent;color:red" id="emailAlert">
+                                                    Email is Required *
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="textfield-outlined">
+                                        <input id="input-three" type="text" placeholder=" " class="subject" value="" name="subject" required><label for="input-three">Subject</label>
+                                        <div class="forleftalign,top ,alert-danger collapse" style="background-color:transparent;color:red" id="subjectAlert">
+                                            Subject is Required *
+                                        </div>
+                                    </div>
+
+                                    <div class="textfield-outlined">
+                                        <textarea id="input-four" cols="30" rows="10" placeholder=" " class="message" name="message" required></textarea><label for="input-four">Message</label>
+                                        <div class="forleftalign,top ,alert-danger collapse" style="background-color:transparent;color:red" id="messageAlert">
+                                            Message is Required *
+                                        </div>
+                                    </div>
+                                    <div id="contactForm">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <button type="button" id="submit" class="theme-btn btnSubmit"> Send Message</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map_sec" data-aos="zoom-in">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="map_inner">
+                        <h4 style="font-weight:800;font-size:30px;color:#183682;">Find Us on Google Map</h4>
+                        <div class="map_bind">
+                            <h3 class="MapsNewHeading">Headquarters</h3>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15955.38424869402!2d103.8187738!3d1.2649131!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1b0a0fc0b88d%3A0x10899a0d39e7e0f9!2sREGENT%20GROUP%20PTE%20LTD!5e0!3m2!1sen!2sin!4v1720524456213!5m2!1sen!2sin" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+
+    .halfUnderline:after {
+        background-color: white;
+        bottom: -10px;
+        height: 3px;
+        width: 20%;
+        position: relative;
+        content: "";
+        display: block;
+    }
+
+    .halfUnderline1:after {
+        background-color: Black;
+        bottom: -10px;
+        height: 3px;
+        width: 15%;
+        position: relative;
+        content: "";
+        display: block;
+    }
+
+    .no-gutters > .col, .no-gutters > [class*="col-"] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .info-wrap .dbox .text {
+        width: calc(100% - 50px);
+    }
+
+    .pl-3, .px-3 {
+        padding-left: 1rem !important;
+    }
+
+    .ftco-section {
+        padding: 4em 0;
+    }
+
+    .ftco-no-pt {
+        padding-top: 0;
+    }
+
+    .ftco-no-pb {
+        padding-bottom: 0;
+    }
+
+    .heading-section {
+        font-size: 28px;
+        color: #000;
+    }
+
+    .img {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    .form-control {
+        height: 52px;
+        background: #fff;
+        color: #000;
+        font-size: 14px;
+        border-radius: 2px;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+        .form-control::-webkit-input-placeholder {
+            /* Chrome/Opera/Safari */
+            color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        .form-control::-moz-placeholder {
+            /* Firefox 19+ */
+            color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        .form-control:-ms-input-placeholder {
+            /* IE 0+ */
+            color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        .form-control:-moz-placeholder {
+            /* Firefox 18- */
+            color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        .form-control:focus, .form-control:active {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+    textarea.form-control {
+        height: inherit !important;
+    }
+
+    .wrapper {
+        width: 100%;
+        -webkit-box-shadow: 0px 21px 41px -13px rgba(0, 0, 0, 0.18);
+        -moz-box-shadow: 0px 21px 41px -13px rgba(0, 0, 0, 0.18);
+        box-shadow: 0px 21px 41px -13px rgba(0, 0, 0, 0.18);
+    }
+
+    .contact-wrap {
+        margin-top: -30px;
+        margin-bottom: -30px;
+        /*margin-left:-25px;*/
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border-radius: 25px;
+    }
+
+    /* .info-wrap{
+        margin-left:-25px;
+    }*/
+
+    .info-wrap h3 {
+        color: #fff;
+    }
+
+    .info-wrap .dbox {
+        width: 100%;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 25px;
+    }
+
+        .info-wrap .dbox:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-wrap .dbox p {
+            margin-bottom: 0;
+        }
+
+            .info-wrap .dbox p span {
+                font-weight: bold;
+                color: #fff;
+                font-size: 18px;
+            }
+
+            .info-wrap .dbox p a {
+                color: #fff;
+                font-size: 15px;
+            }
+
+        .info-wrap .dbox .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+            .info-wrap .dbox .icon span {
+                font-size: 20px;
+                color: #fff;
+            }
+
+        .info-wrap .dbox .text {
+            width: calc(100% - 50px);
+        }
+
+    #contactForm .error {
+        color: red;
+        font-size: 12px;
+    }
+
+    #contactForm .form-control {
+        font-size: 16px;
+    }
+
+    #message {
+        resize: vertical;
+    }
+
+    #form-message-warning, #form-message-success {
+        display: none;
+    }
+
+    #form-message-warning {
+        color: red;
+    }
+
+    #form-message-success {
+        color: #28a745;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .submitting {
+        float: left;
+        width: 100%;
+        padding: 10px 0;
+        display: none;
+        font-size: 16px;
+        font-weight: bold;
+    }
+</style>
+
+<script src="~/Content/js/site.js"></script>
+
+<script>
+    $(".name").bind("keyup focusout", function () {
+        var item = $(".name").val();
+        var alert = $("#nameAlert");
+        if ((item == "")) {
+            alert.show();
+        }
+        else {
+            alert.hide();
+        }
+    });
+
+    $(".email").bind("keyup focusout", function () {
+        var item = $(".email").val();
+        var alert = $("#emailAlert");
+        if ((item == "")) {
+            alert.show();
+        }
+        else {
+            alert.hide();
+        }
+    });
+
+    $(".subject").bind("keyup focusout", function () {
+        var item = $(".subject").val();
+        var alert = $("#subjectAlert");
+        if ((item == "")) {
+            alert.show();
+        }
+        else {
+            alert.hide();
+        }
+    });
+
+    $(".message").bind("keyup focusout", function () {
+        var item = $(".message").val();
+        var alert = $("#messageAlert");
+        if ((item == "")) {
+            alert.show();
+        }
+        else {
+            alert.hide();
+        }
+    });
+</script>
