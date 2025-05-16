@@ -37,5 +37,8 @@ namespace LegendAsiaAsset.Contracts
         public Task<ResponseModel> OTPDetails(UserDetails userDetails);
         public Task<int> GetOTPDetailsBack(string EmailID);
         public Task<bool> ChangePassword(string EmailID, string Password);
+        public Task<string> GetUserID(string EmailID);
+        public Task<string> GetLocationfromID13(int IDLocation);
+
     }
 }

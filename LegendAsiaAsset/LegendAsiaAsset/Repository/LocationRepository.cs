@@ -17,13 +17,17 @@ namespace LegendAsiaAsset.Repository
     {
         private readonly DapperContext _context;
         private readonly IHttpContextAccessor _contextAccessor;
-
         public LocationRepository(DapperContext context, IHttpContextAccessor contextAccessor)
         {
             _context = context;
             _contextAccessor = contextAccessor;
         }
-
+        private string GetUserName()
+        {
+            var claimName = _contextAccessor.HttpContext?.User.FindFirst(ClaimTypes.Name);
+            string? currentUserName = claimName?.Value;
+            return currentUserName ?? string.Empty;
+        }
         public async Task<List<LocationModel>> GetLocationList(LocationModel locationModel)
         {
             try
@@ -44,14 +48,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         public async Task<List<LocationModel>> GetRegionFromLocation()
         {
             try
@@ -68,14 +72,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<LocationModel>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         public async Task<List<LocationModel>> GetCountryFromLocation()
         {
             try
@@ -92,14 +96,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<LocationModel>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         public async Task<List<LocationModel>> GetLocationFromLocation(string Region)
         {
             try
@@ -118,14 +122,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<LocationModel>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         public async Task<List<LocationModel>> GetLocationFromLocation1()
         {
             try
@@ -142,14 +146,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<LocationModel>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         public async Task<List<LocationModel>> GetLocationFinal()
         {
             try
@@ -166,14 +170,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<LocationModel>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         public async Task<ResponseModel> SaveLocation(LocationModel locationModel)
         {
             string currentUserName = GetUserName();
@@ -213,8 +217,8 @@ namespace LegendAsiaAsset.Repository
                     //bool isDuplicateFound = Convert.ToBoolean(parameters.Get<bool>("@IsDuplicateFound"));
 
 
-                      int isDuplicateFoundInt = parameters.Get<int>("@IsDuplicateFound"); // Convert INT value to
-                      bool isDuplicateFound = isDuplicateFoundInt == 1 ? true : false;
+                    int isDuplicateFoundInt = parameters.Get<int>("@IsDuplicateFound"); // Convert INT value to
+                    bool isDuplicateFound = isDuplicateFoundInt == 1 ? true : false;
 
                     if (isDuplicateFound)
                     {
@@ -238,7 +242,7 @@ namespace LegendAsiaAsset.Repository
                         //        responseModel.ResponseMessage = string.Format(Constant.LocationDuplicateMessage, locationModel.Location);
                         //    }
                         //}
-                       
+
                     }
                     else
                     {
@@ -260,7 +264,8 @@ namespace LegendAsiaAsset.Repository
 
                     }
                     //}
-                };
+                }
+                ;
                 return responseModel;
             }
             catch (Exception)
@@ -268,7 +273,6 @@ namespace LegendAsiaAsset.Repository
                 throw;
             }
         }
-
         public async Task<bool> UpdateLocation(LocationModel locationModel)
         {
             string currentUserName = GetUserName();
@@ -298,20 +302,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         return false;
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        private string GetUserName()
-        {
-            var claimName = _contextAccessor.HttpContext?.User.FindFirst(ClaimTypes.Name);
-            string? currentUserName = claimName?.Value;
-            return currentUserName ?? string.Empty;
-        }
-
         public async Task<List<string>> GetCoutriesData(string regionName)
         {
 
@@ -330,14 +328,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<string>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         public async Task<List<string>> GetLocationData(string countryName)
         {
 
@@ -356,14 +354,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<string>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         public async Task<List<LocationModel>> GetLocationID(string Region, string Country, string Location1)
         {
 
@@ -402,14 +400,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<LocationModel>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         public async Task<bool> GetStatusLoc(LocationModel locationModel)
         {
             try
@@ -431,6 +429,24 @@ namespace LegendAsiaAsset.Repository
                     {
                         return false;
                     }
+                }
+                ;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<string> GetLocationID(string Location)
+        {
+            try
+            {
+                string query = string.Format("select distinct(IDLocation) from Location where Location = '{0}' AND Status = 'ACTIVE'", Location);
+
+                using (var connection = _context.CreateConnection())
+                {
+                    var locationDetails = await connection.QueryFirstOrDefaultAsync<string>(query);
+                    return locationDetails;
                 };
             }
             catch (Exception)

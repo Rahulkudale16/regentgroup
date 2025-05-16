@@ -1,4 +1,7 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Spreadsheet;
+using LegendAsiaAsset.Context;
 using LegendAsiaAsset.Contracts;
 using LegendAsiaAsset.Data;
 using LegendAsiaAsset.Models;
@@ -25,13 +28,19 @@ namespace LegendAsiaAsset.Controllers
         private readonly ILocationRepository _locationRepository;
         private readonly IITAssetDetailsRepository _ITAssetDetailsRepository;
         private readonly IInfrastructureRepository _infrastructureRepository;
-        public HomeController(ILogger<HomeController> logger, IUserDetailsRepository userDetailsRepository, ILocationRepository locationRepository, IITAssetDetailsRepository iTAssetDetailsRepository, IInfrastructureRepository infrastructureRepository)
+        private readonly DapperContext _context;
+        private readonly IHttpContextAccessor _contextAccessor;
+
+        public HomeController(ILogger<HomeController> logger, IUserDetailsRepository userDetailsRepository, ILocationRepository locationRepository, IITAssetDetailsRepository iTAssetDetailsRepository, IInfrastructureRepository infrastructureRepository, DapperContext context, IHttpContextAccessor contextAccessor)
         {
+            
             _logger = logger;
             _userDetailsRepository = userDetailsRepository;
             _locationRepository = locationRepository;
             _ITAssetDetailsRepository = iTAssetDetailsRepository;
             _infrastructureRepository = infrastructureRepository;
+            _context = context;
+            _contextAccessor = contextAccessor;
         }
         [Authorize]
         public async Task<IActionResult> Home()
@@ -196,7 +205,9 @@ namespace LegendAsiaAsset.Controllers
             bool success = true;
             return Json(new { CountryDrop, LocationDrop, success });
         }
+
         //-------------------------------------------------------------------------------User List View Methods Starts
+
         public async Task<JsonResult> GetUserdata(string sidx, string sort, int page, int rows)
         {
             UserDetails userDetails = new();
@@ -266,12 +277,85 @@ namespace LegendAsiaAsset.Controllers
         public async Task<JsonResult> GetStatusUD(UserDetails userDetails)
         {
             var cs = await _userDetailsRepository.GetStatusUD(userDetails);
+            _ = MailSendUserStatusUpdatedData(userDetails);
             return Json(cs);
+        }
+        public async Task<IActionResult> MailSendUserStatusUpdatedData(UserDetails userDetails)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Updated User's Status Details";
+                body = string.Format("Dear Admin,<br/><br/> Please find User detail. <br/><br/> User ID : {0} <br/> Status : {1} <br/> Updated By : {2} " +
+                    "<br/><br/>  With regards, <br/> Legend IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>", 
+                    userDetails.IDUser,userDetails.Status,currentUserName);
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception)
+            {}
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
         }
         public async Task<JsonResult> GetStatusLoc(LocationModel locationModel)
         {
             var cs = await _locationRepository.GetStatusLoc(locationModel);
+            _ = MailSendLocStatusUpdatedData(locationModel);
             return Json(cs);
+        }
+        public async Task<IActionResult> MailSendLocStatusUpdatedData(LocationModel locationModel)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Updated Location's Status Details";
+                body = string.Format("Dear Admin,<br/><br/> Please find User detail. <br/><br/> Location ID : {0} <br/> Status : {1} <br/> Updated By : {2} " +
+                    "<br/><br/>  With regards, <br/> Legend IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                    locationModel.IDLocation, locationModel.Status, currentUserName);
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception)
+            { }
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
         }
         public async Task<JsonResult> ResetPasswordDetails(UserDetails userDetails)
         {
@@ -279,7 +363,6 @@ namespace LegendAsiaAsset.Controllers
             _ = ResetPassWordMail(ResetPassword);
             return Json(ResetPassword);
         }
-
         [HttpPost]
         public async Task<IActionResult> SaveUserDetails(UserDetails userDetails)
         {
@@ -300,10 +383,7 @@ namespace LegendAsiaAsset.Controllers
                     {
                         _ = MailSend(userDetails);
                     }
-                    //if (userDetails.Role == "USER")
-                    //{
-                    //    _ = MailSendUserDetails(userDetails);
-                    //}
+                    _ = MailSendCreationUserData(userDetails);
                 }
                 success = resposnse.Success;
                 duplicate = resposnse.Duplicate;
@@ -311,10 +391,10 @@ namespace LegendAsiaAsset.Controllers
             else
             {
                 success = await _userDetailsRepository.UpdateUserDetails(userDetails);
+                _ = MailSendUpdateUserData(userDetails);
             }
             return Json(new { success, userData, duplicate });
         }
-
         [HttpPost]
         public async Task<IActionResult> DeleteUserDetails(int IDUser)
         {
@@ -324,9 +404,48 @@ namespace LegendAsiaAsset.Controllers
 
             var response1 = await _userDetailsRepository.DeleteAssignAssetDetails(IDUser);
             var response = await _userDetailsRepository.DeleteUserDetails(IDUser);
+            _ = MailSendDeleteUserData(IDUser);
             return Json(new { response1, response, userData });
         }
+        public async Task<IActionResult> MailSendDeleteUserData(int IDUser)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                string body = string.Empty;
+                MailMessage mail = new();
 
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Deleted User's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Deleted Asset Details are provided below. " +
+                    "<br/><br/>User ID : {0} <br/> Deleted By : {1} <br/><br/>" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                  IDUser, currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
         [HttpPost]
         public async Task<IActionResult> DeleteITAssetDetails(int IDAsset)
         {
@@ -334,9 +453,49 @@ namespace LegendAsiaAsset.Controllers
             UserDetails userData = new();
 
             var response = await _ITAssetDetailsRepository.DeleteITAssetDetails(IDAsset);
+            _ = MailSendDeleteAssetData(IDAsset);
             return Json(new { response, userData });
         }
+        public async Task<IActionResult> MailSendDeleteAssetData(int IDAsset)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                string body = string.Empty;
+                MailMessage mail = new();
 
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Deleted Asset's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Deleted Asset Details are provided below. " +
+                    "<br/><br/>Asset ID : {0} <br/> Deleted By : {1} <br/><br/>" +
+                    "" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                  IDAsset, currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
         [HttpPost]
         public async Task<IActionResult> DeleteInfra(int IDInfra)
         {
@@ -344,9 +503,51 @@ namespace LegendAsiaAsset.Controllers
             InfrastructureModel InfraData = new();
 
             var response = await _infrastructureRepository.DeleteInfra(IDInfra);
+            _ = MailSendDeleteInfraData(IDInfra);
             return Json(new { response, InfraData });
         }
+        public async Task<IActionResult> MailSendDeleteInfraData(int IDInfra)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                //var AssetBasedID = await _ITAssetDetailsRepository.GetAssetID(iTAssetDetailsModel.SerialNumber);
+                //var LocationDet = (await _infrastructureRepository.GetLocationfromID12(iTAssetDetailsModel.Location));
+                string body = string.Empty;
+                MailMessage mail = new();
 
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Deleted Infrastructure's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Deleted Infrastructure Details are provided below. " +
+                    "<br/><br/>Infra ID : {0} <br/> Deleted By : {1} <br/><br/>" +
+                    "" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                  IDInfra, currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
         //public async Task<ActionResult>GeneratePassword(UserDetails userDetails)
         //{
         //    bool success = await _userDetailsRepository.GeneratePassword(userDetails);
@@ -359,7 +560,6 @@ namespace LegendAsiaAsset.Controllers
         //        return Json(new { success = false });
         //    }
         //}
-
         public IActionResult MailSend(UserDetails userDetails)
         {
             try
@@ -386,15 +586,10 @@ namespace LegendAsiaAsset.Controllers
                 };
                 smtp.Send(mail);
             }
-            catch (Exception)
-            {
-
-            }
+            catch (Exception){}
 
             return Json(new { success = true, msg = "Mail Request Send successfully" });
-
         }
-
         public async Task<IActionResult> MailSendUserDetails(UserDetails userDetails)
         {
             try
@@ -445,7 +640,100 @@ namespace LegendAsiaAsset.Controllers
             return Json(new { success = true, msg = "Mail Request Send successfully" });
 
         }
+        private string GetUserName()
+        {
+            var claimName = _contextAccessor.HttpContext?.User.FindFirst(ClaimTypes.Name);
+            string? currentUserName = claimName?.Value;
+            return currentUserName ?? string.Empty;
+        }
+        public async Task<IActionResult> MailSendCreationUserData(UserDetails userDetails)
+        {
 
+            string? currentUserName = GetUserName();
+            try
+            {
+                var LocationDet = (await _userDetailsRepository.GetLocationfromID13(userDetails.IDLocation));
+                var UserBasedID = await _userDetailsRepository.GetUserID(userDetails.EmailID);
+
+                string body = string.Empty;
+                //string requestSendBy = User?.FindFirst(ClaimTypes.Email)?.Value ?? string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Newly Created User's Details";
+                body = string.Format("Dear Admin,<br/><br/> The user details are provided below. " +
+                    "<br/><br/>User ID : {0}<br/> Full Name : {1} <br/> Role : {2} <br/> Department : {3} <br/> Designation : {4} <br/> UserName : {5} <br/> Unit : {6} <br/> Location : {7} <br/> Email ID : {8} <br/>" +
+                    "Created By : {9}<br/><br>  " +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                   UserBasedID, userDetails.FullName, userDetails.Role, userDetails.Department, userDetails.Designation, userDetails.UserName, userDetails.Unit, LocationDet, userDetails.EmailID, currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception){}
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
+        public async Task<IActionResult> MailSendUpdateUserData(UserDetails userDetails)
+        {
+
+            string? currentUserName = GetUserName();
+            try
+            {
+                var LocationDet = (await _userDetailsRepository.GetLocationfromID13(userDetails.IDLocation));
+                var UserBasedID = await _userDetailsRepository.GetUserID(userDetails.EmailID);
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Updated User's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Updated user details are provided below. " +
+                    "<br/><br/>User ID : {0} <br/> Full Name : {1} <br/> Role : {2} <br/> Department : {3} <br/> Designation : {4} <br/> UserName : {5} <br/> Unit : {6} <br/> Location : {7} <br/> Email ID : {8} <br/>" +
+                    "Updated By : {9}<br/><br>  " +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                    UserBasedID, userDetails.FullName, userDetails.Role, userDetails.Department, userDetails.Designation, userDetails.UserName, userDetails.Unit, LocationDet, userDetails.EmailID, currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
         public IActionResult ResetPassWordMail(ResponseModel responsemodel)
         {
             try
@@ -480,7 +768,6 @@ namespace LegendAsiaAsset.Controllers
             return Json(new { success = true, msg = "Mail Request Send successfully" });
 
         }
-
         [HttpPost] //30/10
         public async Task<IActionResult> UploadFiles(UserDetails userDetails)
         {
@@ -576,7 +863,6 @@ namespace LegendAsiaAsset.Controllers
             }
             return Json(new { messages = messages });
         }
-
         public async Task<JsonResult> GetFileData(int page, int rows)
         {
             int IDUser = 0;
@@ -620,13 +906,11 @@ namespace LegendAsiaAsset.Controllers
             };
             return Json(jsonData);
         }
-
         public IActionResult SearchIDWisedocGrid(int IDUser)
         {
             TempData["IDUser"] = IDUser;
             return Json(new { success = true });
         }
-
         [HttpPost]
         public async Task<IActionResult> DeleteFiles(List<int> AllData, string userName, string IDUser)
         {
@@ -650,7 +934,6 @@ namespace LegendAsiaAsset.Controllers
             }
             return Json(new { success = true });
         }
-
         public async Task<IActionResult> DownloadDocFile(string IDuser, string DocName)
         {
             string fileType = User.FindFirst(x => x.Type == "FileType")?.Value ?? string.Empty;
@@ -679,7 +962,6 @@ namespace LegendAsiaAsset.Controllers
                 return Json(new { message = "No data found for the given file name" });
             }
         }
-
         [HttpPost]
         public async Task<IActionResult> SaveDocType(IFormCollection postData)
         {
@@ -698,7 +980,6 @@ namespace LegendAsiaAsset.Controllers
 
             return Json(new { success });
         }
-
         public async Task<JsonResult> DestroyRenderDropdowns()
         {
             List<ITAssetDetailsModel> iTAssetDetails4 = await _ITAssetDetailsRepository.GetSerialNoAssign();
@@ -708,7 +989,6 @@ namespace LegendAsiaAsset.Controllers
 
             return Json(new { SerialNoList });
         }
-
         public async Task<JsonResult> DestroyRenderUDDropdowns()
         {
             List<UserDetails> userDetails = await _userDetailsRepository.GetRoleFromUserDetails();
@@ -741,9 +1021,9 @@ namespace LegendAsiaAsset.Controllers
             return Json(new { RoleList, DepartmentList, DesignationList, UserNameList, EmailIDList });
         }
 
-
         //-------------------------------------------------------------------------------User List View Methods Ends
         //-------------------------------------------------------------------------------Location List View Methods Starts
+
         public async Task<JsonResult> GetLocationdata(string sidx, string sort, int page, int rows)
         {
             LocationModel locationModel = new();
@@ -784,40 +1064,38 @@ namespace LegendAsiaAsset.Controllers
             };
             return Json(jsonData);
         }
-
         [HttpPost]
         public async Task<IActionResult> SaveLocationNew(LocationModel locationModel)
         {
             bool success = false;
             bool duplicate = false;
 
-            if (locationModel.IDLocation == null)
+            if (locationModel.IDLocation == 0)
             {
                 var response = await _locationRepository.SaveLocation(locationModel);
                 success = response.Success;
                 duplicate = response.Duplicate;
+                _ = MailSendCreationLocationData(locationModel);
             }
             else
             {
                 success = await _locationRepository.UpdateLocation(locationModel);
+                _ = MailSendUpdateLocationData(locationModel);
             }
             return Json(new { success, duplicate });
         }
-
         [HttpPost]
         public ActionResult SearchButtonLocation(LocationModel locationModel)
         {
             TempData["LocationModel"] = JsonConvert.SerializeObject(locationModel);
             return Json(new { success = true });
         }
-
         [HttpPost]
         public IActionResult ResetButtonLocation()
         {
             TempData["LocationModel"] = null;
             return Json(new { success = true });
         }
-
         //public async Task<JsonResult> DestroyRenderLocationDropdowns()
         //{
         //    List<LocationModel> locationModels = await _locationRepository.GetRegionFromLocation();
@@ -842,6 +1120,104 @@ namespace LegendAsiaAsset.Controllers
 
         //-------------------------------------------------------------------------------Location List View Methods Ends
         //-------------------------------------------------------------------------------ITAsset List View Methods Starts
+
+        public async Task<IActionResult> MailSendCreationLocationData(LocationModel locationModel)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                var LocationBasedID = await _locationRepository.GetLocationID(locationModel.Location);
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Newly Created Location's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Location Details are provided below. " +
+                    "<br/><br/>Location ID : {0} <br/> Region : {1} <br/> Country : {2} <br/> Location : {3} <br/> Created By : {4}<br/><br>" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                  LocationBasedID, locationModel.Region.ToUpper(),  locationModel.Country.ToUpper(), locationModel.Location.ToUpper(), currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
+        public async Task<IActionResult> MailSendUpdateLocationData(LocationModel locationModel)
+        {
+
+            string? currentUserName = GetUserName();
+            try
+            {
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var LocationBasedID = await _locationRepository.GetLocationID(locationModel.Location);
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Updated Location's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Updated Location Details are provided below. " +
+                    "<br/><br/>Location ID : {0} <br/> Region : {1} <br/> Country : {2} <br/> Location : {3} <br/> Updated By : {4}<br/><br>" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                    LocationBasedID, locationModel.Region.ToUpper(), locationModel.Country.ToUpper(), locationModel.Location.ToUpper(), currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
+
+        public async Task<JsonResult> GetCountriesData(string regionName)
+        {
+            var cs = await _locationRepository.GetCoutriesData(regionName);
+            return Json(cs);
+        }
+
+        public async Task<JsonResult> GetLocationcontent(string countryName)
+        {
+            var cs = await _locationRepository.GetLocationData(countryName);
+            return Json(cs);
+        }
+
+        //-------------------------------------------------------------------------------Location List View Methods Ends
+        //-------------------------------------------------------------------------------ITAsset List View Methods Starts
+
         public async Task<JsonResult> GetITAssetdata(string sidx, string sort, int page, int rows)
         {
             string Region = string.Empty;
@@ -998,27 +1374,23 @@ namespace LegendAsiaAsset.Controllers
             };
             return Json(jsonData);
         }
-
         [HttpPost]
         public IActionResult SearchButtonITAsset(ITAssetDetailsModel itassetdetailmodel)
         {
             TempData["ITAssetDetailsModel"] = JsonConvert.SerializeObject(itassetdetailmodel);
             return Json(new { success = true });
         }
-
         [HttpPost]
         public IActionResult ResetButtonITAsset()
         {
             TempData["itassetdetailmodel"] = null;
             return Json(new { success = true });
         }
-
         public async Task<JsonResult> GetStatusITAsset(ITAssetDetailsModel iTAssetDetailsModel)
         {
             var cs = await _ITAssetDetailsRepository.GetStatusITAsset(iTAssetDetailsModel);
             return Json(cs);
         }
-
         [HttpPost]
         public async Task<IActionResult> SaveITAssetDetails1(ITAssetDetailsModel iTAssetDetailsModel)
         {
@@ -1030,14 +1402,15 @@ namespace LegendAsiaAsset.Controllers
                 var response = await _ITAssetDetailsRepository.SaveITAssetDetails(iTAssetDetailsModel);
                 success = response.Success;
                 duplicate = response.Duplicate;
+                _ = MailSendCreationAssetData(iTAssetDetailsModel);
             }
             else
             {
                 success = await _ITAssetDetailsRepository.UpdateITAssetDetails(iTAssetDetailsModel);
+                _ = MailSendUpdateAssetData(iTAssetDetailsModel);
             }
             return Json(new { success, duplicate });
         }
-
         public async Task<JsonResult> DestroyRenderITAssetDropdowns()
         {
             List<ITAssetDetailsModel> iTAssetDetailsModels = await _ITAssetDetailsRepository.GetHostnameDropdownList();
@@ -1088,8 +1461,104 @@ namespace LegendAsiaAsset.Controllers
 
             return Json(new { HostNameList, AssetTypeList, BrandList, ModelList, CountryList, StatusList, FullNameList, LocationList, SerialNrList });
         }
+
+        public async Task<IActionResult> MailSendCreationAssetData(ITAssetDetailsModel iTAssetDetailsModel)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                var AssetBasedID = await _ITAssetDetailsRepository.GetAssetID(iTAssetDetailsModel.SerialNumber);
+                var LocationDet = (await _infrastructureRepository.GetLocationfromID12(iTAssetDetailsModel.Location));
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Newly Created Asset's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Asset Details are provided below. " +
+                    "<br/><br/>Asset ID : {0} <br/> Host Name : {1} <br/> Asset Type : {2} <br/> Brand : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> " +
+                    "Unit No: {6} <br/> CPU : {7} <br/> Memory : {8} <br/> HDD : {9} <br/> Monitor : {10} <br/> Keyboard : {11} <br/> Mouse : {12} <br/> OS : {13} <br/> " +
+                    "MS Office : {14} <br/> Domain : {15} <br/> Software : {16} <br/> Location : {17} <br/> Remark : {18} <br/> Created By : {19} <br/><br/>" +
+                    "" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                  AssetBasedID, iTAssetDetailsModel.HostName, iTAssetDetailsModel.AssetType, iTAssetDetailsModel.Brand, iTAssetDetailsModel.SerialNumber, iTAssetDetailsModel.PurchaseYear,
+                  iTAssetDetailsModel.Unit,iTAssetDetailsModel.CPU,iTAssetDetailsModel.Memory,iTAssetDetailsModel.HDD,iTAssetDetailsModel.Monitor,iTAssetDetailsModel.Keyboard,iTAssetDetailsModel.Mouse,
+                  iTAssetDetailsModel.OS,iTAssetDetailsModel.MSOffice,iTAssetDetailsModel.Domain,iTAssetDetailsModel.Software,LocationDet,iTAssetDetailsModel.Remark,currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
+        public async Task<IActionResult> MailSendUpdateAssetData(ITAssetDetailsModel iTAssetDetailsModel)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                var AssetBasedID = await _ITAssetDetailsRepository.GetAssetID(iTAssetDetailsModel.SerialNumber);
+                var RemarkData = await _ITAssetDetailsRepository.GetRemark(AssetBasedID);
+                var LocationDet = (await _infrastructureRepository.GetLocationfromID12(iTAssetDetailsModel.Location));
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Updated Asset's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Updated Asset Details are provided below. " +
+                    "<br/><br/>Asset ID : {0} <br/> Host Name : {1} <br/> Asset Type : {2} <br/> Brand : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> " +
+                    "Unit No: {6} <br/> CPU : {7} <br/> Memory : {8} <br/> HDD : {9} <br/> Monitor : {10} <br/> Keyboard : {11} <br/> Mouse : {12} <br/> OS : {13} <br/> " +
+                    "MS Office : {14} <br/> Domain : {15} <br/> Software : {16} <br/> Location : {17} <br/> Remark : {18} <br/> Updated By : {19} <br/><br/>" +
+                    "" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                  AssetBasedID, iTAssetDetailsModel.HostName, iTAssetDetailsModel.AssetType, iTAssetDetailsModel.Brand, iTAssetDetailsModel.SerialNumber, iTAssetDetailsModel.PurchaseYear,
+                  iTAssetDetailsModel.Unit, iTAssetDetailsModel.CPU, iTAssetDetailsModel.Memory, iTAssetDetailsModel.HDD, iTAssetDetailsModel.Monitor, iTAssetDetailsModel.Keyboard, iTAssetDetailsModel.Mouse,
+                  iTAssetDetailsModel.OS, iTAssetDetailsModel.MSOffice, iTAssetDetailsModel.Domain, iTAssetDetailsModel.Software, LocationDet, RemarkData, currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
+
         //-------------------------------------------------------------------------------ITAsset List View Methods Ends
         //-------------------------------------------------------------------------------Infrastructure List View Methods Starts
+
         public async Task<JsonResult> GetInfrastructuredata(string sidx, string sort, int page, int rows)
         {
             string Region = string.Empty;
@@ -1183,9 +1652,44 @@ namespace LegendAsiaAsset.Controllers
         public async Task<JsonResult> GetStatusInfra(InfrastructureModel infrastructureModel)
         {
             var cs = await _infrastructureRepository.GetStatusInfra(infrastructureModel);
+            _ = MailSendInfraStatusUpdatedData(infrastructureModel);
             return Json(cs);
         }
+        public async Task<IActionResult> MailSendInfraStatusUpdatedData(InfrastructureModel infrastructureModel)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                string body = string.Empty;
+                MailMessage mail = new();
 
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Updated Infrastructure's Status Details";
+                body = string.Format("Dear Admin,<br/><br/> Please find User detail. <br/><br/> User ID : {0} <br/> Status : {1} <br/> Updated By : {2} " +
+                    "<br/><br/>  With regards, <br/> Legend IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                    infrastructureModel.IDInfra, infrastructureModel.Status, currentUserName);
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception)
+            { }
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+        }
         [HttpPost]
         public async Task<IActionResult> SaveInfraStructure(InfrastructureModel infrastructureModel)
         {
@@ -1197,10 +1701,12 @@ namespace LegendAsiaAsset.Controllers
                 var response = await _infrastructureRepository.SaveInfrastructure(infrastructureModel);
                 success = response.Success;
                 duplicate = response.Duplicate;
+                _ = MailSendCreationInfraData(infrastructureModel);
             }
             else
             {
                 success = await _infrastructureRepository.UpdateInfrastructure(infrastructureModel);
+                _ = MailSendUpdateInfraData(infrastructureModel);
             }
             return Json(new { success, duplicate });
         }
@@ -1247,19 +1753,94 @@ namespace LegendAsiaAsset.Controllers
 
             return Json(new { SerialNoList, ModelList, BrandList, AssetTypeList });
         }
+
+        public async Task<IActionResult> MailSendCreationInfraData(InfrastructureModel infrastructureModel)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                var InfraBasedID = await _infrastructureRepository.GetInfraID(infrastructureModel.SerialNumber);
+                var LocationDet = (await _infrastructureRepository.GetLocationfromID12(infrastructureModel.Location));
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Newly Created Infrastructure's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Infrastructure Details are provided below. " +
+                    "<br/><br/>Infrastructure ID : {0} <br/> Asset Type : {1} <br/> Brand : {2} <br/> Model : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> Location : {6} <br/> " +
+                    "Remark : {7} <br/> Unit : {8} <br/> Created By : {9}<br/><br>" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                  InfraBasedID, infrastructureModel.AssetType, infrastructureModel.Brand, infrastructureModel.Model, infrastructureModel.SerialNumber,
+                  infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit, currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
+        public async Task<IActionResult> MailSendUpdateInfraData(InfrastructureModel infrastructureModel)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                var InfraBasedID = await _infrastructureRepository.GetInfraID(infrastructureModel.SerialNumber);
+                var LocationDet = (await _infrastructureRepository.GetLocationfromID12(infrastructureModel.Location));
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Updated Infrastructure's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Updated Infrastructure Details are provided below. " +
+                    "<br/><br/>Infrastructure ID : {0} <br/> Asset Type : {1} <br/> Brand : {2} <br/> Model : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> Location : {6} <br/> Remark : {7} <br/> Unit : {8} <br/> Updated By : {9} <br/><br>" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                  InfraBasedID, infrastructureModel.AssetType, infrastructureModel.Brand, infrastructureModel.Model, infrastructureModel.SerialNumber, infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit, currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
+        }
+        
         //-------------------------------------------------------------------------------Infrastructure List View Methods Ends
 
-        public async Task<JsonResult> GetCountriesData(string regionName)
-        {
-            var cs = await _locationRepository.GetCoutriesData(regionName);
-            return Json(cs);
-        }
 
-        public async Task<JsonResult> GetLocationcontent(string countryName)
-        {
-            var cs = await _locationRepository.GetLocationData(countryName);
-            return Json(cs);
-        }
 
         public JsonResult GetManipulationITAssetGrid(string Region, string Country, string Location1)
         {
@@ -1563,7 +2144,51 @@ namespace LegendAsiaAsset.Controllers
         public async Task<IActionResult> AssignITAsset(ITAssetDetailsModel iTAssetDetailsModel)
         {
             bool success = await _ITAssetDetailsRepository.AddAssignDetails(iTAssetDetailsModel);
+            _ = MailSendAssignAssetData(iTAssetDetailsModel);
             return Json(new { success });
+        }
+
+        public async Task<IActionResult> MailSendAssignAssetData(ITAssetDetailsModel iTAssetDetailsModel)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                var AssetBasedID = await _ITAssetDetailsRepository.GetAssetID(iTAssetDetailsModel.SerialNumber);
+                var LocationDet = (await _infrastructureRepository.GetLocationfromID12(iTAssetDetailsModel.Location));
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Assigned Asset's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Assign Asset Details are provided below. " +
+                    "<br/><br/>Asset ID : {0} <br/> User ID : {1} <br/> Serial Number : {2} <br/> Updated By : {3} <br/><br/>" +
+                    "" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                  AssetBasedID, iTAssetDetailsModel.FullName,iTAssetDetailsModel.SerialNumber, currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
         }
 
         [HttpGet]
@@ -1590,9 +2215,53 @@ namespace LegendAsiaAsset.Controllers
             {
                 _ = await _ITAssetDetailsRepository.LastUserValue(UserID, SerialNr);
                 _ = await _ITAssetDetailsRepository.DeleteAssignedAssetByUserID(UserID, SerialNr);
+                _ = MailSendRemoveAssignAssetData(UserID, SerialNr, Status);
             }
 
             return Json(new { success = true });
+        }
+
+        public async Task<IActionResult> MailSendRemoveAssignAssetData(int UserID, string SerialNr, string Status)
+        {
+            string? currentUserName = GetUserName();
+            try
+            {
+                var AssetBasedID = await _ITAssetDetailsRepository.GetAssetID(SerialNr);
+                //var LocationDet = (await _infrastructureRepository.GetLocationfromID12(iTAssetDetailsModel.Location));
+                string body = string.Empty;
+                MailMessage mail = new();
+
+                var AdminEmailID = await _userDetailsRepository.GetAdminEmailID();
+
+                foreach (var test in AdminEmailID)
+                {
+                    mail.To.Add(test.EmailID);
+                }
+
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
+                mail.Subject = "Updated Asset's Details";
+                body = string.Format("Dear Admin,<br/><br/> The Assign Asset Details are provided below. " +
+                    "<br/><br/>Asset ID : {0} <br/> User ID : {1} <br/> Serial Number : {2} <br/> Status : {3} <br/> Updated By : {4} <br/><br/>" +
+                    "" +
+                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                  AssetBasedID, UserID,SerialNr,Status,currentUserName.ToUpper());
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new()
+                {
+                    Host = "smtp.office365.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    EnableSsl = true
+                };
+                smtp.Send(mail);
+            }
+            catch (Exception) { }
+
+            return Json(new { success = true, msg = "Mail Request Send successfully" });
+
         }
 
         [HttpPost]

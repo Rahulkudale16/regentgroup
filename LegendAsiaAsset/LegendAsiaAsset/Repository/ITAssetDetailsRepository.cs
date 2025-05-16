@@ -998,5 +998,40 @@ namespace LegendAsiaAsset.Repository
 
             }
         }
+        public async Task<string> GetAssetID(string SerialNumber)
+        {
+            try
+            {
+                string query = string.Format("select distinct(IDAsset) from ITAssetDetails where SerialNumber = '{0}'", SerialNumber);
+
+                using (var connection = _context.CreateConnection())
+                {
+                    var ITAssetData = await connection.QueryFirstOrDefaultAsync<string>(query);
+                    return ITAssetData;
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<string> GetRemark(string IDAsset)
+        {
+            try
+            {
+                string query = string.Format("select distinct(Remark) from ITAssetDetails where IDAsset = '{0}'", IDAsset);
+
+                using (var connection = _context.CreateConnection())
+                {
+                    var Remark = await connection.QueryFirstOrDefaultAsync<string>(query);
+                    return Remark;
+                }
+                ;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

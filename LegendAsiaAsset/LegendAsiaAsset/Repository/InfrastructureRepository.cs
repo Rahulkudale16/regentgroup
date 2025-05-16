@@ -442,5 +442,43 @@ namespace LegendAsiaAsset.Repository
                 throw;
             }
         }
+
+        public async Task<string> GetInfraID(string SerialNumber)
+        {
+            try
+            {
+                string query = string.Format("select distinct(IDInfra) from Infrastructure where SerialNumber = '{0}'", SerialNumber);
+
+                using (var connection = _context.CreateConnection())
+                {
+                    var InfraData = await connection.QueryFirstOrDefaultAsync<string>(query);
+                    return InfraData;
+                }
+                ;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<string> GetLocationfromID12(string Location)
+        {
+            try
+            {
+                string query = string.Format("select distinct(Location) from Location where IDLocation = '{0}'", Location);
+
+                using (var connection = _context.CreateConnection())
+                {
+                    var InfraData = await connection.QueryFirstOrDefaultAsync<string>(query);
+                    return InfraData;
+                }
+                ;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -1002,6 +1002,23 @@ namespace LegendAsiaAsset.Repository
                 throw;
             }
         }
+        public async Task<string> GetUserID(string EmailID)
+        {
+            try
+            {
+                string query = string.Format("select distinct(IDUser) from UserDetails where EmailID = '{0}' AND Status = 'ACTIVE'", EmailID);
+
+                using (var connection = _context.CreateConnection())
+                {
+                    var UserID = await connection.QueryFirstOrDefaultAsync<string>(query);
+                    return UserID;
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         //public async Task<UserDetails> GetActualOTPBack(string EmailID, int OTP)
         //{
@@ -1028,5 +1045,24 @@ namespace LegendAsiaAsset.Repository
         //        throw;
         //    }
         //}
+
+        public async Task<string> GetLocationfromID13(int IDLocation)
+        {
+            try
+            {
+                string query = string.Format("select distinct(Location) from Location where IDLocation = '{0}'", IDLocation);
+
+                using (var connection = _context.CreateConnection())
+                {
+                    var InfraData = await connection.QueryFirstOrDefaultAsync<string>(query);
+                    return InfraData;
+                }
+                ;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

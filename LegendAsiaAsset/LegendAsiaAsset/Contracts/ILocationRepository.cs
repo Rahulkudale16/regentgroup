@@ -15,7 +15,7 @@ namespace LegendAsiaAsset.Contracts
         public Task<List<string>> GetCoutriesData(string regionName);
         public Task<List<string>> GetLocationData(string countryName);
         public Task<List<LocationModel>> GetLocationID(string Region, string Country, string Location1);
-
         public Task<bool> GetStatusLoc(LocationModel locationModel);
+        public Task <string> GetLocationID(string Location);
     }
 }
