@@ -1,0 +1,157 @@
+﻿﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BSW</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/images/Regent.png">
+
+    @*Styles*@
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/aos/aos.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    @*Scripts*@
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/aos/aos.js"></script>
+    <script src="~/js/site.js"></script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XMWBTREKTV');
+    </script>
+</head>
+
+<body>
+    <!-- ======================================== Header Starts =========================================================--->
+    <!-- ======= Header Starts ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <div class="col-md-2 justify-content-end" style="margin-left:5vh;">
+                <a href="@Url.Action("index", "Home")">
+                    <img src="~/images/index/batamindo-logo.png" class="responsiveExtra" alt="" id="companyLogo">
+                </a>
+            </div>
+            <div class="col-md-10 d-flex justify-content-center" style="cursor:pointer;">
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li class="dropdown custom-dropdown" style="font-weight:bold;">
+                            <a href="#"><span>Corporate Profile</span> <i class="fa-solid fa-chevron-down"></i></a>
+                            <ul>
+                                <li class="dropdown-item"><a href="@Url.Action("AboutUs", "CorporateProfile")">About Us</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("OurTeam", "CorporateProfile")">Our Team</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("CorporateMilestones", "CorporateProfile")">Corporate Milestones</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("OurGlobalNetwork", "CorporateProfile")">Our Global Network</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("SafetyAndSecurity", "CorporateProfile")">Safety & Security</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("AwardsAndAccolades", "CorporateProfile")">Awards And Accolades</a></li>
+                            </ul>
+                        <li class="dropdown custom-dropdown">
+                            <a href="@Url.Action("OurSolutions", "OurSolutions")"><span>Our Service Offerings</span> <i class="fa-solid fa-chevron-down"></i></a>
+                            <ul>
+                                <li class="dropdown-item"><a href="@Url.Action("Overview", "OurServiceOfferings")">Overview</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("FeederServices", "OurServiceOfferings")">Feeder Services</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("FreightForwarding", "OurServiceOfferings")">Freight Forwarding</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("Trucking", "OurServiceOfferings")">Trucking</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("WarehouseServices", "OurServiceOfferings")">Warehouse Services</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("ProjectCargo", "OurServiceOfferings")">Project Cargo</a></li>
+                            </ul>
+
+
+                        <li><a href="@Url.Action("OurValueProposition", "OurValueProposition")">Our Value Proposition</a></li>
+
+                        <li>
+                            <a class="nav-link scrollto" href="@Url.Action("Newsroom", "Newsroom")"><span>Newsroom</span></a>
+                        </li>
+                        <li>
+                            <a class="nav-link scrollto" href="@Url.Action("ContactUs", "ContactUs")"><span>Contact Us</span></a>
+                        </li>
+                    </ul>
+                    <i class="fa fa-list mobile-nav-toggle"></i>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ======= Header Ends ======= -->
+    <!---======================================== Header Ends ============================================================-->
+    <!--========================================= RenderBody Starts ======================================================-->
+    <div class="">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <!--========================================= RenderBody Ends ========================================================-->
+    <!--========================================= Footer Starts ==========================================================-->
+    <footer id="footer" class="footer" style="background-image: url('../images/index/footer-bg.png');">
+        <div class="footer-content position-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <a href="@Url.Action("index", "Home")">
+                                <img src="~/images/index/batamindo-logo.png" class="responsivefooter">
+                            </a><br /><br />
+                            <p style="/* padding-left:20px; */">
+                                28 Genting Lane Platinum 28, #07-08 <br />Singapore 349585<br /><br />
+
+                                <strong>Tel :-  </strong> <a href="tel: 65 6591 5188" style="color:white;"> +65 6591 5188</a><br>
+
+                                <strong>Email :-  </strong> <a href="mailto:info.enquiry@bsw.com.sg" style="color:white;"> enquiry@bsw.com.sg</a><br>
+                            </p>
+                           @*  <div class="social-links d-flex mt-3" style="padding-left:20px;">
+                                <a href="https://www.linkedin.com/company/14600652/admin/dashboard/" class="d-flex align-items-center justify-content-center"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://www.facebook.com/share/oXYuSW2oAQGCP7U2/?mibextid=JRoKGi" class="d-flex align-items-center justify-content-center"><i class="fa-brands fa-facebook"></i></a> *@
+                                @*<a href="https://www.youtube.com/watch?v=gR3kMT1Dxgs" class="d-flex align-items-center justify-content-center"><i class="fa-brands fa-youtube"></i></a>*@
+                            @* </div> *@
+                        </div>
+                    </div><!-- End footer info column-->
+
+                    <div class="col-lg-3 footer-links">
+                        <h4>Corporate Profile</h4>
+                        <ul>
+                            <li><a href="@Url.Action("AboutUs", "CorporateProfile")">About Us</a></li>
+                            <li><a href="@Url.Action("OurTeam", "CorporateProfile")">Our Team</a></li>
+                            @*<li><a href="@Url.Action("CorporateMilestones","CorporateProfile")">Corporate Milestones</a></li>*@
+                            <li><a href="@Url.Action("OurGlobalNetwork", "CorporateProfile")">Our Global Network</a></li>
+                            <li><a style="line-height:1.4" href="@Url.Action("SafetyAndSecurity", "CorporateProfile")">Safety & Security</a></li>
+                            <li><a href="@Url.Action("AwardsAndAccolades", "CorporateProfile")">Awards And Accolades</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 footer-links">
+                        <h4>Our Service Offerings</h4>
+                        <ul>
+                            <li><a href="@Url.Action("Overview", "OurServiceOfferings")"> Overview</a></li>
+                            <li><a href="@Url.Action("FeederServices", "OurServiceOfferings")">Feeder Services</a></li>
+                            <li><a href="@Url.Action("FreightForwarding", "OurServiceOfferings")">Freight Forwarding</a></li>
+                            <li><a href="@Url.Action("Trucking", "OurServiceOfferings")">Trucking</a></li>
+                            <li><a href="@Url.Action("WarehouseServices", "OurServiceOfferings")">Warehouse Services</a></li>
+                            <li><a href="@Url.Action("ProjectCargo", "OurServiceOfferings")">Project Cargo</a></li>
+                        </ul>
+                    </div><!-- End footer links column-->
+
+                    <div class="col-lg-2 col-md-3 footer-links" style="margin-top:-2.5px;">
+                        <a href="@Url.Action("OurValueProposition", "OurValueProposition")" class="footerWord">Our Value Proposition</a><br /><br />
+                        <a href="@Url.Action("Newsroom", "Newsroom")" class="footerWord">Newsroom</a><br /><br />
+                        <a href="@Url.Action("ContactUs", "ContactUs")" class="footerWord">ContactUs</a><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-legal text-center position-relative">
+            <div class="container">
+                <div class="copyright" style="font-size:18px;">
+                    &copy; Copyright <strong><span>2025</span></strong>. All Rights Reserved | Batamindo Shipping & Warehousing Pte Ltd (Co. Reg. No. 199002977M).
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--========================================= Footer Ends =============================================================-->
+</body>
+</html>
