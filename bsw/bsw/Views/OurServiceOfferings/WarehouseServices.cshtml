@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Warehouse Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!-- Page Header Start -->
+<div class="bradcam_area bradcam_contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>Overview</h3>
+                    <p> <a href="@Url.Action("index", "Home")">Home</a> / Overview</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header Ends -->
+<!-- Main Content for Overview Page Starts Here -->
+<div class="GrayArea1">
+    <div class="container">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-7 order-2 order-lg-1" style="padding: 0px 30px 0px 30px;">
+                <p class="Universe">
+                    In order to provide you a one-stop logistics service, we have distribution 
+                    centres in Singapore and Batam to cater to raw materials and finished products.
+                </p>
+                <p class="Universe">Services include:</p>
+                <ul>
+                    <li>Inbound consolidation of raw materials<img src="../images/spacer.gif" width="1" height="8" /></li>
+                    <li>Storage and inventory management<img src="../images/spacer.gif" width="1" height="8" /></li>
+                    <li>Value-added services such as pickings, packing and labeling<img src="../images/spacer.gif" width="1" height="8" /></li>
+                    <li>Over flow storage<img src="../images/spacer.gif" width="1" height="8" /></li>
+                    <li>Milkrun delivery to factory<img src="../images/spacer.gif" width="1" height="8" /></li>
+                    <li>Consolidation of finished products for export                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-5 order-1 order-lg-2 mt-1">
+                <img src="~/images/OurServiceOfferings/services-warehouse.jpg" class="img-fluid" style="border-radius:15px;" />
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Main Content for Overview Page Ends Here -->

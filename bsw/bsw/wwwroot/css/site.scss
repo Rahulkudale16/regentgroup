@@ -61,7 +61,7 @@ a:hover {
 }
 
 #header {
-    background-color: red;
+    background-color: transparent;
     transition: all 0.5s;
     z-index: 997;
     padding: 20px 0;
@@ -2687,193 +2687,8 @@ textarea:focus {
     display: inline;
 }
 
-.bradcam_bg_1 {
-    background-image: url(../images/UpdatedImages/breadcrumb/bradcam12.webp);
-}
-
-.bradcam_bg_2 {
-    background-image: url(../images/UpdatedImages/breadcrumb/bradcam4.webp);
-}
-
-.bradcam_bg_3 {
-    background-image: url(../images/UpdatedImages/breadcrumb/bradcam7.webp);
-}
-
-.bradcam_bg_4 {
-    background-image: url(../images/UpdatedImages/breadcrumb/bradcam5.webp);
-}
-
-.bradcam_bg_5 {
-    background-image: url(../images/UpdatedImages/breadcrumb/bradcam3.webp);
-}
-
-.bradcam_bg_6 {
-    background-image: url(../images/UpdatedImages/breadcrumb/bradcam6.webp);
-}
-
-.bradcam_bg_7 {
-    background-image: url(../images/UpdatedImages/breadcrumb/bradcam11.webp);
-}
-
-.bradcam_bg_8 {
-    background-image: url(../images/UpdatedImages/breadcrumb/bradcam12.webp);
-}
-
-.bradcam_bg_9 {
-    background-image: url(../images/UpdatedImages/breadcrumb/bradcam8.webp);
-}
-
-.bradcam_bg_10 {
-    background-image: url(../images/UpdatedImages/breadcrumb/Career1.webp);
-}
-
-.bradcam_bg_11 {
-    background-image: url(../images/UpdatedImages/breadcrumb/Contact.webp);
-}
-
-.bradcam_bg_12 {
-    background-image: url(../images/UpdatedImages/LegendFintech/TradeLogic.webp);
-}
-
-.bradcam_bg_13 {
-    background-image: url(../images/UpdatedImages/breadcrumb/CSR.webp);
-}
-
-.bradcam_bg_14 {
-    background-image: url(../images/UpdatedImages/breadcrumb/SailingSchedule.webp);
-}
-
-.bradcam_bg_15 {
-    background-image: url(../images/UpdatedImages/breadcrumb/AgencyNetwork.webp);
-}
-
-.bradcam_bg_16 {
-    background-image: url(../images/UpdatedImages/breadcrumb/LegendSpecialised.webp);
-}
-
-.bradcam_bg_17 {
-    background-image: url(../images/UpdatedImages/breadcrumb/LocalCharges.webp);
-}
-
-.bradcam_bg_18 {
-    background-image: url(../images/UpdatedImages/breadcrumb/Trucking_edited.webp);
-}
-
-.bradcam_bg_19 {
-    background-image: url(../images/RegentVessel/Regent2.jpeg);
-}
-
-.bradcam_bg_20 {
-    background-image: url('../images/UpdatedImages/breadcrumb/Legend 2510_edited.webp');
-}
-
-.bradcam_bg_21 {
-    background-image: url('../images/RegentVessel/Regent14.jpg');
-}
-
-.bradcam_bg_22 {
-    background-image: url('../images/UpdatedImages/breadcrumb/NewImage1.webp');
-}
-
-.bradcam_bg_23 {
-    background-image: url('../images/UpdatedImages/breadcrumb/Contact.webp');
-}
-
-.bradcam_bg_24 {
-    background-image: url('../images/UpdatedImages/breadcrumb/LegendTank.webp');
-}
-
-.bradcam_bg_25 {
-    background-image: url('../images/UpdatedImages/breadcrumb/InvestorRelations.webp');
-}
-
-.bradcam_bg_26 {
-    background-image: url('../images/Background.jpg');
-}
-
-.bradcam_bg_27 {
-    background-image: url('../images/UpdatedImages/breadcrumb/edited.webp');
-}
-
-.bradcam_bg_28 {
-    background-image: url('../images/Bradcam/5.jpg');
-}
-
-.bradcam_bg_31 {
-    background-image: url('../images/A.png');
-}
-
-.bradcam_bg_30 {
-    background-image: url('../images/UpdatedImages/breadcrumb/RegentGemini.jpg');
-}
-
-#mybannerIMG, .bradcam_bg_29 {
-    background-image: url('../images/RegentVessel/Regent2.jpeg');
-}
-
-.bradcam_bg_39 {
-    background-image: url('../images/LLCraft.png');
-}
-
-.bradcamContact {
-    background-image: url('../images/Bradcam/Contact1.jpg');
-}
-
-.bradcam_bg_32 {
-    background-image: url('../images/LLCraft.jpg');
-}
-
-.bradcam_bg_33 {
-    background-image: url('../images/LLCraft1.jpg');
-}
-
-.bradcam_bg_34 {
-    background-image: url('../images/NewRegent.jfif');
-}
-
-.bradcam_bg_35 {
-    background-image: url('../images/RegentNew.jfif');
-}
-
-.bradcam_bg_36 {
-    background-image: url('../images/LLCraft.png');
-}
-
-.bradcam_bg_37 {
-    background-image: url('../images/RegentLast.jfif');
-}
-
-.bradcam_bg_38 {
-    background-image: url('../images/RegentNewImage.png');
-}
-
-.bradcam_bg_40 {
-    background-image: url('../images/NEW/truck1.jpeg');
-}
-
-.bradcam_bg_41 {
-    background-image: url('../images/UpdatedImages/Barge/BATAMINDO V 12.jpg');
-}
-
-
-.bradcamLegendPeople {
-    background-image: url('../images/Bradcam/BradCamLegendPeople.jpg');
-}
-
-.bradcamBoard {
-    background-image: url('../images/Bradcam/Trailer.jpg');
-}
-
-.bradcamLeadership {
-    background-image: url('../images/Bradcam/New.jpg');
-}
-
-.bradcamQHS {
-    background-image: url('../images/Bradcam/8.jpg');
-}
-
-.bradcamNews {
-    background-image: url('../images/Bradcam/LatestNews.jpg');
+.bradcam_contact {
+    background-image: url(../images/bradcam/ContactLO.jpg);
 }
 
 /* Bradcam Area Css Starts */
@@ -9132,4 +8947,13 @@ nav > div:last-child > .active:after {
 .losange .los1 img {
     width: 100%;
     height: auto;
+}
+
+
+
+
+/*Custom CSS*/
+.FreeSpace{
+    padding-top:10vh;
+    padding-bottom:10vh;
 }

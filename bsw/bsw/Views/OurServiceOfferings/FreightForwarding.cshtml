@@ -1,5 +1,40 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Freight Forwarding";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!-- Page Header Start -->
+<div class="bradcam_area bradcam_contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>Overview</h3>
+                    <p> <a href="@Url.Action("index", "Home")">Home</a> / Overview</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header Ends -->
+<!-- Main Content for Overview Page Starts Here -->
+<div class="GrayArea1">
+    <div class="container">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-7 order-2 order-lg-1" style="padding: 0px 30px 0px 30px;">
+                <p class="Universe">
+                    BSW provides both sea and air freight services to/from  Batam and Singapore. 
+                    Our operations base in PSA port allowing us to make reliable transhipment 
+                    services for both inbound and outbound cargo via Singapore to international destinations.
+                </p>
+                <p class="Universe">
+                    We engage a number of agents overseas such as in Indonesia, Malaysia and China to coordinate cross-border trade.
+                </p>
+            </div>
+            <div class="col-lg-5 order-1 order-lg-2 mt-1">
+                <img src="~/images/OurServiceOfferings/services-overview.jpg" class="img-fluid" style="border-radius:15px;" />
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Main Content for Overview Page Ends Here -->
