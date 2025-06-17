@@ -2,7 +2,6 @@
 
 $(document).ready(function () {
 
-
     var pageShowWorked;
     $.jgrid.defaults.styleUI = 'Bootstrap5';
     $.jgrid.defaults.iconSet = 'fontAwesome';

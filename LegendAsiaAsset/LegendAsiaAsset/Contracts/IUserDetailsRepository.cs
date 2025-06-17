@@ -15,7 +15,8 @@ namespace LegendAsiaAsset.Contracts
         public Task<List<UserDetails>> GetFullNameUserDetails();
         public Task<ResponseModel> SaveUserDetails(UserDetails userDetails);
         //public Task<bool> GeneratePassword(UserDetails userDetails);
-        public Task<bool> UpdateUserDetails(UserDetails userDetails);
+        public Task<ResponseModel> UpdateUserDetails(UserDetails userDetails);
+        public Task<bool> UpdateAssetDetails(UserDetails userDetails);
         public Task<LocationModel> GetLocationfromID(int IDLocation);
         public Task<ResponseModel> ResetUserDetails(UserDetails userDetails);
         //  public Task<bool> SetActiveDeactive(int iduser);
@@ -39,6 +40,7 @@ namespace LegendAsiaAsset.Contracts
         public Task<bool> ChangePassword(string EmailID, string Password);
         public Task<string> GetUserID(string EmailID);
         public Task<string> GetLocationfromID13(int IDLocation);
+        public Task<List<ITAssetDetailsModel>> GetDomainFinalUser();
 
     }
 }

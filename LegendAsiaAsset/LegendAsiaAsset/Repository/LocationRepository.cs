@@ -273,11 +273,12 @@ namespace LegendAsiaAsset.Repository
                 throw;
             }
         }
-        public async Task<bool> UpdateLocation(LocationModel locationModel)
+        public async Task<ResponseModel> UpdateLocation(LocationModel locationModel)
         {
             string currentUserName = GetUserName();
             try
             {
+                ResponseModel responseModel = new();
                 string sp = "SP_InsertUpdateLocation2";
 
                 var parameters = new DynamicParameters();
@@ -294,16 +295,28 @@ namespace LegendAsiaAsset.Repository
                 using (var connection = _context.CreateConnection())
                 {
                     int userDetails1 = await connection.ExecuteAsync(sp, parameters, commandType: CommandType.StoredProcedure);
-                    if (userDetails1 == 1)
+
+                    int isDuplicateFoundInt = parameters.Get<int>("@IsDuplicateFound"); // Convert INT value to
+                    bool isDuplicateFound = isDuplicateFoundInt == 1 ? true : false;
+
+                    if (isDuplicateFound)
                     {
-                        return true;
+
+                        responseModel.Success = false;
+                        responseModel.Duplicate = true;
                     }
                     else
                     {
-                        return false;
+                        if (userDetails1 == 1)
+                        {
+                            responseModel.Success = true;
+                        }
+                        responseModel.Success = true;
+                        responseModel.Duplicate = false;
                     }
-                }
-                ;
+                    
+                };
+                return responseModel;
             }
             catch (Exception)
             {

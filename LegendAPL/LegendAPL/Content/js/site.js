@@ -442,4 +442,8 @@ function DoubleData() {
     window.open("https://www.legendlogistics.com.au/");
     window.location.href = "../OurSolutions/HeavyHaulageandLineHaul";
 }    
+
+function DoubleData1() {
+    window.open("http://www.bsw.com.sg/");
+}    
     

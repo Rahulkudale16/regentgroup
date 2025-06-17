@@ -503,8 +503,9 @@ $(document).ready(function () {
         var Location = $('#LocationUserDetails').val();
         var EmailID = $('#EmaillIDUserDetails').val();
         var Domain = $('#DomainUserDetails').val();
+        var Status = $('#StatusUserDetails').val();
 
-        if (Role != "" || Department != "" || Designation != "" || UserName != "" || Location != "" || EmailID != "" || Domain != "") {
+        if (Role != "" || Department != "" || Designation != "" || UserName != "" || Location != "" || EmailID != "" || Domain != "" || Status != "") {
             $.ajax({
                 type: "POST",
                 url: 'SearchButtonUD',
@@ -515,7 +516,8 @@ $(document).ready(function () {
                     UserName,
                     Location,
                     EmailID,
-                    Domain
+                    Domain,
+                    Status
                 },
                 dataType: "json",
                 success: function (result) {
@@ -592,7 +594,7 @@ $(document).ready(function () {
         var IDLocation = $('#LocationUD').val();
         var Location = $('#LocationUD').val();
         var Domain = $('#DomainUD').val();
-        if (FullName == '' || Role == '' || Department == '' || Designation == '' || UserName == '' || EmailID == '' || IDLocation == '') {
+        if (FullName == '' || Role == '' || Department == '' || Designation == '' || UserName == '' || EmailID == '' || IDLocation == '' || Domain == '') {
             $('#warningToastMessage').text('Please fill mandatory fields.');
             $('#warningToast').toast("show");
             $('#loading').hide();
@@ -687,7 +689,7 @@ $(document).ready(function () {
         var Domain = $('#DomainUpdate').val();
         var IDLocation = $('#LocationUpdate').val();
         var Location = $('#LocationUpdate').val();
-        if (FullName == "" || Role == "" || Department == "" || Designation == "" || UserName == "" || EmailID == "" || IDLocation == "") {
+        if (FullName == "" || Role == "" || Department == "" || Designation == "" || UserName == "" || EmailID == "" || IDLocation == "" || Domain == "") {
             $('#warningToastMessage').text('Please fill mandatory fields.');
             $('#warningToast').toast("show");
             $('#loading').hide();
@@ -717,6 +719,18 @@ $(document).ready(function () {
                         $('#successToast').toast("show");
                         $('#UpdateAllDetails').modal("hide");
                         DestroyRenderUDDropdowns();
+                    }
+                    else {
+                        if (result.duplicate == true) {
+                            $('#warningToastMessage').text('Dupliatation of record is not allowed.');
+                            $('#warningToast').toast("show");
+                            $("#loading").hide();
+                        }
+                        else {
+                            $('#warningToastMessage').text('No search parameter selected.');
+                            $('#warningToast').toast("show");
+                            $("#loading").hide();
+                        }
                     }
 
                 }
@@ -838,9 +852,11 @@ $(document).ready(function () {
         var Designation = $("#DesignationUserDetails").val();
         var UserName = $("#UserNameUserDetails").val();
         var Location = $("#LocationUserDetails").val();
+        var Status = $("#StatusUserDetails").val();
+        var Domain = $("#DomainUserDetails").val();
 
         //'../Home/DownloadDocFile?IDUser=' + IDUser + '&&DocName=' + DocName;
-        var url = '../Home/ExportUserData?Role=' + Role + '&&Department=' + Department + '&&Designation=' + Designation + '&&UserName=' + UserName + '&&Location=' + Location;
+        var url = '../Home/ExportUserData?Role=' + Role + '&&Department=' + Department + '&&Designation=' + Designation + '&&UserName=' + UserName + '&&Location=' + Location + '&&Status=' + Status + '&&Domain=' + Domain;
         //var url = "ExportUserData" ;
         window.open(url);
     });

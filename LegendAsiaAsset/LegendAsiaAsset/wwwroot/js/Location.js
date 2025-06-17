@@ -245,9 +245,17 @@ $(document).ready(function () {
                         //DestroyRenderLocationDropdowns()
                     }
                     else {
-                        $('#warningToastMessage').text('No search parameter selected.');
-                        $('#warningToast').toast("show");
-                        $("#loading").hide();
+                        if (result.duplicate == true) {
+                            $('#warningToastMessage').text('Dupliatation of record is not allowed.');
+                            $('#warningToast').toast("show");
+                            $("#loading").hide();
+                        }
+                        else {
+                            $('#warningToastMessage').text('No search parameter selected.');
+                            $('#warningToast').toast("show");
+                            $("#loading").hide();
+                        }
+                        
                     }
                 }
             });

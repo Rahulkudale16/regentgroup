@@ -332,6 +332,9 @@
                 else if (iTAssetstatus.toUpperCase() == "SCRAPPED") {
                     selectedRowIds[selectedRowIndex]['viewStatus'] = "<span class='badge bg-secondary bg-gradient'>SCRAPPED</span>";
                 }
+                else if (iTAssetstatus.toUpperCase() == "DEACTIVE") {
+                    selectedRowIds[selectedRowIndex]['viewStatus'] = "<span class='badge bg-secondary bg-gradient'>DEACTIVE</span>";
+                }
 
                 selectedRowIds[selectedRowIndex]['view'] = "<button style='border:none; background:transparent;cursor:auto;'>" + idAssetDis + "</button>"
                 selectedRowIds[selectedRowIndex]['UpdateAsset'] = "<button class='fw-bold getITAssetUpdate' style='border:none; background:transparent;color:purple;' data-rowid='" + idAsset + "'><i class='fa-solid fa-eye'></i></button>"; //
@@ -433,6 +436,19 @@
         var ModifiedOn = data.ModifiedOn;
         var creationdetITAsset = "Modified by " + ModfiedBy + " on " + ModifiedOn;
         $('#CreationITAS').html(creationdetITAsset);
+
+        if (data.Status == 'DEACTIVE' || data.Status == 'SCRAPPED') {
+            $("#UpdateITAssetDetails").hide();
+            $("#ScrappedITAsset").hide();
+            $("#RepairButton").hide();
+            $("#DeactiveButton").hide();
+        }
+        else {
+            $("#UpdateITAssetDetails").show();
+            $("#ScrappedITAsset").show();
+            $("#RepairButton").show();
+            $("#DeactiveButton").show();
+        }
     });
 
     $("#ActivityLog").attr('readonly', 'readonly');
@@ -452,7 +468,8 @@
         var Location = $("#LocationITAssetDetails").val();
         var SerialNumber = $("#SerialNrITAssetDetails").val();
         var Country = $("#CountryITAsset").val();
-        var url = '../Home/ExportITAssetData?HostName=' + HostName + '&&AssetType=' + AssetType + '&&Brand=' + Brand + '&&Model=' + Model + '&&Status=' + Status + '&&FullName=' + FullName + '&&Location=' + Location + '&&SerialNumber=' + SerialNumber + '&&Country=' + Country;
+        var Domain = $("#DomainDRITAsset").val();
+        var url = '../Home/ExportITAssetData?HostName=' + HostName + '&&AssetType=' + AssetType + '&&Brand=' + Brand + '&&Model=' + Model + '&&Status=' + Status + '&&FullName=' + FullName + '&&Location=' + Location + '&&SerialNumber=' + SerialNumber + '&&Country=' + Country + '&&Domain=' + Domain;
         //var url = "ExportITAssetData";
         window.open(url);
     });
@@ -547,7 +564,7 @@
         var MSOffice = $('#MSOfficeITAsset').val().toUpperCase();
         var Domain = $('#DomainITAsset').val().toUpperCase();
 
-        if (AssetType == '' || Brand == '' || Model == '' || SerialNumber == '' || Location == '') {
+        if (AssetType == '' || Brand == '' || Model == '' || SerialNumber == '' || Location == '' || PurchaseYear == "" || Domain == "") {
             $('#warningToastMessage').text('Please fill mandatory fields.');
             $('#warningToast').toast("show");
             $("#loading").hide();
@@ -641,7 +658,7 @@
         var Designation = $('#DesignationITAsset').val();
         var Domain = $('#DomainITAsset').val();
         var Department = $('#DepartmentITAsset').val();
-        if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || Location == "") {
+        if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || Location == "" || PurchaseYear == "" || Domain == "") {
             $('#warningToastMessage').text('Please fill mandatory fields.');
             $('#warningToast').toast("show");
             $("#loading").hide();
@@ -688,6 +705,18 @@
                         $('#CreateITAssetDetails').modal("hide");
                         $("#loading").hide();
                         DestroyRenderITAssetDropdowns();
+                    }
+                    else {
+                        if (result.duplicate == true) {
+                            $('#warningToastMessage').text('Dupliatation of record is not allowed.');
+                            $('#warningToast').toast("show");
+                            $("#loading").hide();
+                        }
+                        else {
+                            $('#warningToastMessage').text('No search parameter selected.');
+                            $('#warningToast').toast("show");
+                            $("#loading").hide();
+                        }
                     }
                 }
             });
@@ -861,11 +890,13 @@
         $('#DesignationITAsset').val('');
         $('#LastUserText').val('');
         $('#StatusText').val('');
+        $('#DomainITAsset').val('');
         $("#IDAssetDis").html("New IT Asset");
         $("#statusITAsset").hide();
         $('#CreationITAS').html("");
         $('#RevokeButton').hide();
         $('#RepairButton').hide();
+        $('#DeactiveButton').hide();
         $('#ScrappedITAsset').hide();
     });
 
@@ -1139,6 +1170,16 @@
         $("#loading").show();
         //var SelectedRows = AssignGrid.jqGrid('getGridParam', 'selarrrow');
         UpdateAssestStatus1("SCRAPPED");
+        reload('ITAssetDetailsGrid');
+        reload('AssignGrid');
+        $("#loading").hide();
+        window.location.reload();
+    });
+
+    $("#DeactiveButton").click(function () {
+        $("#loading").show();
+        //var SelectedRows = AssignGrid.jqGrid('getGridParam', 'selarrrow');
+        UpdateAssestStatus1("DEACTIVE");
         reload('ITAssetDetailsGrid');
         reload('AssignGrid');
         $("#loading").hide();

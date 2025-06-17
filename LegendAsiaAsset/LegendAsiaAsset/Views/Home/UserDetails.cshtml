@@ -73,7 +73,11 @@
         </div>
         <div class="col">
             @Html.LabelFor(model => model.UserDetails.Domain, htmlAttributes: new { @class = "form-label" })
-            @Html.DropDownListFor(model => model.UserDetails.Domain, new SelectList(ViewBag.DomainOnly, "Text", "Value"), "Select Domain", new { @id = "DomainUserDetails" })
+            @Html.DropDownListFor(model => model.UserDetails.Domain, new SelectList(ViewBag.DomainOnlyUser, "Text", "Value"), "Select Domain", new { @id = "DomainUserDetails" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.UserDetails.Status, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.UserDetails.Status, new SelectList(ViewBag.Status, "Text", "Value"), "Select Status", new { @id = "StatusUserDetails" })
         </div>
     </div>
 </fieldset>
@@ -174,7 +178,9 @@
                         <div class="row">
                             <div class="col-lg-6 mb-3">
                                 @Html.LabelFor(model => model.UserDetails.Domain, htmlAttributes: new { @class = "form-label" })
-                                @Html.EditorFor(model => model.UserDetails.Domain, new { htmlAttributes = new { @class = "form-control", @id = "DomainUD" } })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                                @Html.EditorFor(model => model.UserDetails.Domain, new { htmlAttributes = new { @class = "form-control checkvalidud", @id = "DomainUD" } })
+                                <span class="invalid-feedback">Domain is mandatory </span>
                             </div>
                             @Html.HiddenFor(model => model.UserDetails.IDUser, new { @Id = "UserID" })
                         </div>
@@ -267,6 +273,7 @@
                         <div class="row">
                             <div class="col-lg-6 mb-3">
                                 @Html.LabelFor(model => model.UserDetails.Domain, htmlAttributes: new { @class = "form-label" })
+                                <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
                                 @Html.EditorFor(model => model.UserDetails.Domain, new { htmlAttributes = new { @class = "form-control", @id = "DomainUpdate" } })
                                 @Html.ValidationMessageFor(model => model.UserDetails.Domain, "", new { @class = "text-danger" })
                             </div>
@@ -349,7 +356,7 @@
                     <div class="btn-group">
                                 @* <button id="AssignITAssetDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Assign</button> *@
                         <button id="UpdateUserDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Update</button>
-                        <button id="DeleteUserDetails" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>&nbsp; Delete</button>
+                        @* <button id="DeleteUserDetails" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>&nbsp; Delete</button> *@
                         @* <button id="TransferUserDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Transfer</button> *@
                         @* <button id="ResetPassword" name="Submit" value="Save" class="btn btn-outline-danger"><i class="fa-solid fa-floppy-disk"></i> Reset Password</button> *@
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button>&nbsp;

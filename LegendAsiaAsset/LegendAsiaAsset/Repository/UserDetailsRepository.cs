@@ -114,6 +114,7 @@ namespace LegendAsiaAsset.Repository
                 parameter.Add("Location", userDetails.Location, DbType.String, ParameterDirection.Input);
                 parameter.Add("EmailID", userDetails.EmailID, DbType.String, ParameterDirection.Input);
                 parameter.Add("Domain", userDetails.Domain, DbType.String, ParameterDirection.Input);
+                parameter.Add("Status", userDetails.Status, DbType.String, ParameterDirection.Input);
                 using (var connection = _context.CreateConnection())
                 {
                     var userDetails1 = await connection.QueryAsync<UserDetails>(sp, parameter, commandType: CommandType.StoredProcedure);
@@ -333,11 +334,12 @@ namespace LegendAsiaAsset.Repository
                 throw;
             }
         }
-        public async Task<bool> UpdateUserDetails(UserDetails userDetails)
+        public async Task<ResponseModel> UpdateUserDetails(UserDetails userDetails)
         {
             string currentUserName = GetUserName();
             try
             {
+                ResponseModel responseModel = new();
                 string sp = "SP_InsertUpdateUserDetails1";
 
                 var parameters = new DynamicParameters();
@@ -360,6 +362,49 @@ namespace LegendAsiaAsset.Repository
                 using (var connection = _context.CreateConnection())
                 {
                     int userDetails1 = await connection.ExecuteAsync(sp, parameters, commandType: CommandType.StoredProcedure);
+                    int isDuplicateFoundInt = parameters.Get<int>("@IsDuplicateFound"); // Convert INT value to
+                    bool isDuplicateFound = isDuplicateFoundInt == 1 ? true : false;
+                    if (isDuplicateFound)
+                    {
+                        responseModel.Success = false;
+                        responseModel.Duplicate = true;
+
+                    }
+                    else
+                    {
+                        if (userDetails1 == 1)
+                        {
+                            responseModel.Success = true;
+                        }
+                       
+                        responseModel.Success = true;
+                        responseModel.Duplicate = false;
+                    }
+                };
+                return responseModel;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<bool> UpdateAssetDetails(UserDetails userDetails)
+        {
+            string currentUserName = GetUserName();
+            try
+            {
+                string sp = "SP_UpdateAssetDetailsfromUser";
+
+                var parameters = new DynamicParameters();
+                parameters.Add("IDUser", userDetails.IDUser, DbType.Int16, ParameterDirection.Input);
+                parameters.Add("FullName", userDetails.FullName.ToUpper(), DbType.String, ParameterDirection.Input);
+                parameters.Add("Department", userDetails.Department.ToUpper(), DbType.String, ParameterDirection.Input);
+                parameters.Add("Designation", userDetails.Designation.ToUpper(), DbType.String, ParameterDirection.Input);
+                parameters.Add("Domain", userDetails.Domain?.ToUpper(), DbType.String, ParameterDirection.Input);
+                parameters.Add("EmailID", userDetails.EmailID.ToUpper(), DbType.String, ParameterDirection.Input);
+                using (var connection = _context.CreateConnection())
+                {
+                    int userDetails1 = await connection.ExecuteAsync(sp, parameters, commandType: CommandType.StoredProcedure);
                     if (userDetails1 == 1)
                     {
                         return true;
@@ -368,7 +413,8 @@ namespace LegendAsiaAsset.Repository
                     {
                         return false;
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
@@ -1056,6 +1102,31 @@ namespace LegendAsiaAsset.Repository
                 {
                     var InfraData = await connection.QueryFirstOrDefaultAsync<string>(query);
                     return InfraData;
+                }
+                ;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<ITAssetDetailsModel>> GetDomainFinalUser()
+        {
+            try
+            {
+                string sp = "SP_GetDomainfromUser";
+                using (var connection = _context.CreateConnection())
+                {
+                    var locationDetails = await connection.QueryAsync<ITAssetDetailsModel>(sp, commandType: CommandType.StoredProcedure);
+                    if (locationDetails != null)
+                    {
+                        return locationDetails.AsList();
+                    }
+                    else
+                    {
+                        return new List<ITAssetDetailsModel>();
+                    }
                 }
                 ;
             }

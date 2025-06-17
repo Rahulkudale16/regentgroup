@@ -47,7 +47,7 @@ namespace LegendAsiaAsset.Data
                     Text = "USER",
                     Value = "USER"
                 },
-                
+
             };
             return role;
         }
@@ -197,7 +197,7 @@ namespace LegendAsiaAsset.Data
                     Text = "FINANCIAL CONTROLLER",
                     Value = "FINANCIAL CONTROLLER"
                 },
-                 
+
                  new SelectListItem()
                  {
                      Text = "CHIEF FINANCIAL OFFICER",
@@ -505,6 +505,42 @@ namespace LegendAsiaAsset.Data
                 },
             };
             return Brand;
+        }
+
+        public static List<SelectListItem> GetStatus()
+        {
+            List<SelectListItem> Status = new()
+            {
+                new SelectListItem
+                {
+                    Text = "ACTIVE",
+                    Value = "ACTIVE"
+                },
+                new SelectListItem
+                {
+                    Text = "DEACTIVE",
+                    Value = "DEACTIVE"
+                },
+            };
+            return Status;
+        }
+
+        public static List<SelectListItem> GetStatusInfra()
+        {
+            List<SelectListItem> Status = new()
+            {
+                new SelectListItem
+                {
+                    Text = "AVAILABLE",
+                    Value = "AVAILABLE"
+                },
+                new SelectListItem
+                {
+                    Text = "UNAVAILABLE",
+                    Value = "UNAVAILABLE"
+                },
+            };
+            return Status;
         }
 
         public static string UploadDocFilePath(string fileType)

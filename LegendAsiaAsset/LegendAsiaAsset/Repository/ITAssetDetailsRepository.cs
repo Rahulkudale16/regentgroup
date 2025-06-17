@@ -521,11 +521,12 @@ namespace LegendAsiaAsset.Repository
                 throw;
             }
         }
-        public async Task<bool> UpdateITAssetDetails(ITAssetDetailsModel iTAssetDetailsModel)
+        public async Task<ResponseModel> UpdateITAssetDetails(ITAssetDetailsModel iTAssetDetailsModel)
         {
             string currentUserName = GetUserName();
             try
             {
+                ResponseModel responseModel = new();
                 string sp = "SP_UpdateITAssetDetails";
 
                 var parameters = new DynamicParameters();
@@ -555,18 +556,31 @@ namespace LegendAsiaAsset.Repository
                 parameters.Add("HeadPhone", iTAssetDetailsModel.HeadPhone, DbType.String, ParameterDirection.Input);
                 parameters.Add("MSOffice", iTAssetDetailsModel.MSOffice, DbType.String, ParameterDirection.Input);
                 parameters.Add("LastUser", iTAssetDetailsModel.LastUser, DbType.String, ParameterDirection.Input);
+                parameters.Add("IsDuplicateFound", DbType.Boolean, direction: ParameterDirection.Output);
                 using (var connection = _context.CreateConnection())
                 {
                     var iTAssetDetailsModel1 = await connection.ExecuteAsync(sp, parameters, commandType: CommandType.StoredProcedure);
-                    if (iTAssetDetailsModel1 == 1)
+
+                    int isDuplicateFoundInt = parameters.Get<int>("@IsDuplicateFound"); // Convert INT value to
+                    bool isDuplicateFound = isDuplicateFoundInt == 1 ? true : false;
+
+                    if (isDuplicateFound)
                     {
-                        return true;
+                        responseModel.Success = false;
+                        responseModel.Duplicate = true;
+
                     }
                     else
                     {
-                        return false;
+                        if (iTAssetDetailsModel1 == 1)
+                        {
+                            responseModel.Success = true;
+                        }
+                        responseModel.Success = false;
+                        responseModel.Duplicate = true;
                     }
                 };
+                return responseModel;
             }
             catch (Exception)
             {

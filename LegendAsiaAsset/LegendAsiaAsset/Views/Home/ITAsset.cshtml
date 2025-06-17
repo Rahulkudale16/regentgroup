@@ -159,7 +159,9 @@
                 <div class="row">
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.PurchaseYear, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.PurchaseYear,"{0:yyyy-MM-dd}", new { htmlAttributes = new { @type = "Date", @class = "form-control", @id = "PurchaseYearText" } } )
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.PurchaseYear, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @type = "Date", @class = "form-control checkValidita", @id = "PurchaseYearText" } })
+                        <span class="invalid-feedback">Purchase Year is mandatory </span>
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Unit, htmlAttributes: new { @class = "form-label" })
@@ -212,8 +214,10 @@
                 <div class="row">
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Domain, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Domain, new { htmlAttributes = new { @class = "form-control", @id = "DomainITAsset" } })
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Domain, new { htmlAttributes = new { @class = "form-control checkValidita", @id = "DomainITAsset" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Domain, "", new { @class = "text-danger" })
+                        <span class="invalid-feedback">Domain is mandatory </span>
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Software, htmlAttributes: new { @class = "form-label" })
@@ -268,12 +272,13 @@
             <div class="modal-footer justify-content-center">
                 <div class="d-flex flex-row align-content-center">
                     <button type="reset" id="RevokeButton" class="btn btn-outline-success"><i class="fa-solid fa-arrow-rotate-left"></i> Available</button>&nbsp;
+                    <button type="reset" id="DeactiveButton" class="btn btn-outline-danger"><i class="fa-solid fa-power-off"></i> DeActive</button>&nbsp;
                     <button type="button" id="RepairButton" class="btn btn-outline-danger"><i class="fa-solid fa-magnifying-glass"></i> Repair</button>&nbsp;
                     <button type="button" id="ScrappedITAsset" class="btn btn-outline-secondary"><i class="fa-solid fa-dumpster-fire"></i>&nbsp; Scrapped</button>&nbsp;
                     @* <button id="TransferITAssetDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Transfer</button>&nbsp; *@
                     <button id="SaveITAssetDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Save</button>&nbsp;
                     <button id="UpdateITAssetDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Update</button>&nbsp;
-                    <button id="DeleteITAssetDetails" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>&nbsp; Delete</button>
+                    @* <button id="DeleteITAssetDetails" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>&nbsp; Delete</button> *@
                     <button id="CloseITAsset" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button> &nbsp;
                 </div>
             </div>

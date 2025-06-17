@@ -45,6 +45,10 @@
             @Html.LabelFor(model => model.UserDetails.Location, htmlAttributes: new { @class = "form-label" })
             @Html.DropDownListFor(model => model.UserDetails.Location, new SelectList(ViewBag.LocationOnly, "Text", "Value"), "Select Location", new { @id = "LocationInfraDetails" })
         </div>
+        <div class="col">
+            @Html.LabelFor(model => model.UserDetails.Status, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.UserDetails.Status, new SelectList(ViewBag.StatusInfra, "Text", "Value"), "Select Status", new { @id = "StatusInfraDetails" })
+        </div>
     </div>
 </fieldset>
 <!-- Dropdowns Ends -->
@@ -116,8 +120,9 @@
                 <div class="row">
                     <div class="col-lg-6 mb-3">
                         @Html.LabelFor(model => model.InfrastructureModel.PurchaseYear, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.InfrastructureModel.PurchaseYear,"{0:yyyy-MM-dd}", new { htmlAttributes = new { @type = "Date", @class = "form-control", @id = "PurchaseYearInfra" } } )
-                        @* <span class="invalid-feedback">Purchase Year is mandatory </span> *@
+                        <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
+                        @Html.EditorFor(Model => Model.InfrastructureModel.PurchaseYear, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @type = "Date", @class = "form-control checkValidInfra", @id = "PurchaseYearInfra" } })
+                        <span class="invalid-feedback">Purchase Year is mandatory </span>
                     </div>
                     <div class="col-lg-6 mb-3">
                         @Html.LabelFor(model => model.InfrastructureModel.Location, htmlAttributes: new { @class = "form-label" })
@@ -145,7 +150,7 @@
                     <button id="SaveInfra" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Save</button>&nbsp;
                     <button id="UpdateInfra" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Update</button>&nbsp;
                     @* <button id="TransferInfra" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Transfer</button>&nbsp; *@
-                    <button id="DeleteInfra" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>&nbsp; Delete</button>&nbsp;
+                    @* <button id="DeleteInfra" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>&nbsp; Delete</button>&nbsp; *@
                     <button id="CloseInfra" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button> &nbsp;
                     <label class="switch" id="statusInfra"> <input type="checkbox" id="InfraStatus" class="statusCheck"><span class="slider1"></span></label> &nbsp;
                 </div>

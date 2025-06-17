@@ -52,6 +52,8 @@ namespace LegendAsiaAsset.Controllers
             ViewBag.CountryLocation = Constant.GetCountry("");
             //ViewBag.CountryLocation = new SelectList(string.Empty, "Text", "Text");
             ViewBag.AssetType = Constant.GetAssetType();
+            ViewBag.Status = Constant.GetStatus();
+            ViewBag.StatusInfra = Constant.GetStatusInfra();
             //ViewBag.Brand = Constant.GetBrand();
             //ViewBag.Designation = Constant.GetDesignationDropdown();
 
@@ -81,6 +83,7 @@ namespace LegendAsiaAsset.Controllers
             ViewBag.CountryOnly = (await _ITAssetDetailsRepository.GetCountryFinal()).Where(x => !string.IsNullOrEmpty(x.Country)).Select(x => new SelectListItem { Text = x.Country, Value = x.Country });
             ViewBag.LastUserITAsset = (await _ITAssetDetailsRepository.GetLastUserDropdownList()).Where(x => !string.IsNullOrEmpty(x.LastUser)).Select(x => new SelectListItem { Text = x.LastUser, Value = x.LastUser });
             ViewBag.DomainOnly = (await _ITAssetDetailsRepository.GetDomainFinal()).Where(x => !string.IsNullOrEmpty(x.Domain)).Select(x => new SelectListItem { Text = x.Domain, Value = x.Domain });
+            ViewBag.DomainOnlyUser = (await _userDetailsRepository.GetDomainFinalUser()).Where(x => !string.IsNullOrEmpty(x.Domain)).Select(x => new SelectListItem { Text = x.Domain, Value = x.Domain });
             // ITAsset List Dropdown Ends
 
             // Asset List Dropdown Starts
@@ -390,8 +393,14 @@ namespace LegendAsiaAsset.Controllers
             }
             else
             {
-                success = await _userDetailsRepository.UpdateUserDetails(userDetails);
-                _ = MailSendUpdateUserData(userDetails);
+                var response = await _userDetailsRepository.UpdateUserDetails(userDetails);
+                if(response.Success)
+                {
+                    success = await _userDetailsRepository.UpdateAssetDetails(userDetails);
+                    _ = MailSendUpdateUserData(userDetails);
+                }
+                success = response.Success;
+                duplicate = response.Duplicate;
             }
             return Json(new { success, userData, duplicate });
         }
@@ -1073,14 +1082,24 @@ namespace LegendAsiaAsset.Controllers
             if (locationModel.IDLocation == 0)
             {
                 var response = await _locationRepository.SaveLocation(locationModel);
+                if (response.Success)
+                {
+                    _ = MailSendCreationLocationData(locationModel);
+                }
                 success = response.Success;
                 duplicate = response.Duplicate;
-                _ = MailSendCreationLocationData(locationModel);
+                
             }
             else
             {
-                success = await _locationRepository.UpdateLocation(locationModel);
-                _ = MailSendUpdateLocationData(locationModel);
+                var response = await _locationRepository.UpdateLocation(locationModel);
+                if(response.Success)
+                {
+                    _ = MailSendUpdateLocationData(locationModel);
+                }
+                success = response.Success;
+                duplicate = response.Duplicate;
+                
             }
             return Json(new { success, duplicate });
         }
@@ -1400,15 +1419,25 @@ namespace LegendAsiaAsset.Controllers
             if (iTAssetDetailsModel.IDAsset == 0)
             {
                 var response = await _ITAssetDetailsRepository.SaveITAssetDetails(iTAssetDetailsModel);
+                if(response.Success)
+                {
+                    _ = MailSendCreationAssetData(iTAssetDetailsModel);
+                }
                 success = response.Success;
                 duplicate = response.Duplicate;
-                _ = MailSendCreationAssetData(iTAssetDetailsModel);
             }
             else
             {
-                success = await _ITAssetDetailsRepository.UpdateITAssetDetails(iTAssetDetailsModel);
-                _ = MailSendUpdateAssetData(iTAssetDetailsModel);
+                var response = await _ITAssetDetailsRepository.UpdateITAssetDetails(iTAssetDetailsModel);
+                if(response.Success)
+                {
+                    _ = MailSendUpdateAssetData(iTAssetDetailsModel);
+                }
+                
+                success = response.Success;
+                duplicate = response.Duplicate;
             }
+            
             return Json(new { success, duplicate });
         }
         public async Task<JsonResult> DestroyRenderITAssetDropdowns()
@@ -1699,14 +1728,22 @@ namespace LegendAsiaAsset.Controllers
             if (infrastructureModel.IDInfra == 0)
             {
                 var response = await _infrastructureRepository.SaveInfrastructure(infrastructureModel);
+                if(response.Success)
+                {
+                    _ = MailSendCreationInfraData(infrastructureModel);
+                }
                 success = response.Success;
                 duplicate = response.Duplicate;
-                _ = MailSendCreationInfraData(infrastructureModel);
             }
             else
             {
-                success = await _infrastructureRepository.UpdateInfrastructure(infrastructureModel);
-                _ = MailSendUpdateInfraData(infrastructureModel);
+                var response = await _infrastructureRepository.UpdateInfrastructure(infrastructureModel);
+                if (response.Success)
+                {
+                    _ = MailSendUpdateInfraData(infrastructureModel);
+                }
+                success = response.Success;
+                duplicate = response.Duplicate;
             }
             return Json(new { success, duplicate });
         }
@@ -1858,11 +1895,11 @@ namespace LegendAsiaAsset.Controllers
             string filename = "";
             if (userDetails.Location == null)
             {
-                filename = string.Format("LegendAsiaUserList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RegentGroupUserList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
             }
             else
             {
-                filename = string.Format("LegendAsiaUserList-({0})({1}).xlsx", userDetails.Location, DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RegentGroupUserList-({0})({1}).xlsx", userDetails.Location, DateTime.Now.ToString("ddMMyyyy"));
             }
 
 
@@ -1873,7 +1910,7 @@ namespace LegendAsiaAsset.Controllers
                 DataTable dataTable = CreateUserList(weeklyLiftings);
                 using (XLWorkbook xLWorkbook = new())
                 {
-                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "User Data");
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Regent Group User List");
                     //for (int rowIndex = 2; rowIndex <= dataTable.Rows.Count + 1; rowIndex++)
                     //{
                     //    workSheet.Worksheet.Cell(rowIndex, 20).DataType = XLDataType.Number;
@@ -1908,23 +1945,22 @@ namespace LegendAsiaAsset.Controllers
 
         private static DataTable CreateUserList(List<TranslatedUserDetails> UserRecords)
         {
-            DataTable dataTable = new("User Data");
-            dataTable.Columns.AddRange(new DataColumn[7]
+            DataTable dataTable = new("Regent Group User List");
+            dataTable.Columns.AddRange(new DataColumn[8]
                         {
-                      //new DataColumn("IDUser"),
                       new DataColumn("FullName"),
-                      //new DataColumn("Role"),
                       new DataColumn("Department"),
                       new DataColumn("Designation"),
                       new DataColumn("Unit"),
                       new DataColumn("EmailID"),
                       new DataColumn("Location"),
+                      new DataColumn("Domain"),
                       new DataColumn("Status")
                         });
 
             foreach (var item in UserRecords)
             {
-                dataTable.Rows.Add(item.FullName, item.Department, item.Designation, item.Unit, item.EmailID, item.Location, item.Status);
+                dataTable.Rows.Add(item.FullName, item.Department, item.Designation, item.Unit, item.EmailID, item.Location, item.Domain, item.Status);
 
             }
             return dataTable;
@@ -1937,15 +1973,15 @@ namespace LegendAsiaAsset.Controllers
 
             if (iTAssetDetailsModel.Country != null)
             {
-                filename = string.Format("LegendAsiaAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
             }
             else if ((iTAssetDetailsModel.Location != null))
             {
-                filename = string.Format("LegendAsiaAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
             }
             else
             {
-                filename = string.Format("LegendAsiaAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RegentGroupAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
             }
 
             var weeklyLiftings = ObjectTranslation.ConvertITAssetList(await _ITAssetDetailsRepository.GetITAssetDetailsList(iTAssetDetailsModel));
@@ -1955,7 +1991,7 @@ namespace LegendAsiaAsset.Controllers
                 DataTable dataTable = CreateITAssetList(weeklyLiftings);
                 using (XLWorkbook xLWorkbook = new())
                 {
-                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Asset Data");
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Regent Group Asset List");
                     using (MemoryStream stream = new())
                     {
                         xLWorkbook.SaveAs(stream);
@@ -1981,8 +2017,8 @@ namespace LegendAsiaAsset.Controllers
 
         private static DataTable CreateITAssetList(List<TranslatedITAssetDetailsModel> ITAssetRecords)
         {
-            DataTable dataTable = new("Asset Data");
-            dataTable.Columns.AddRange(new DataColumn[22]
+            DataTable dataTable = new("Regent Group Asset List");
+            dataTable.Columns.AddRange(new DataColumn[20]
                         {
                       new DataColumn("HostName"),
                       new DataColumn("AssetType"),
@@ -2002,16 +2038,18 @@ namespace LegendAsiaAsset.Controllers
                       new DataColumn("Monitor"),
                       new DataColumn("Keyboard"),
                       new DataColumn("Mouse"),
-                      new DataColumn("OS"),
-                      new DataColumn("MSOffice"),
-                      new DataColumn("Software"),
-                      new DataColumn("HeadPhone"),
+                      //new DataColumn("OS"),
+                      //new DataColumn("MSOffice"),
+                      //new DataColumn("Software"),
+                      //new DataColumn("HeadPhone"),
+                      new DataColumn("Domain"),
+                      new DataColumn("Status")
                         });
 
             foreach (var item in ITAssetRecords)
             {
-                dataTable.Rows.Add(item.HostName, item.AssetType, item.Brand, item.Model, item.SerialNumber, item.PurchaseYear,
-                    item.FullName, item.EmailID, item.Designation, item.Department, item.Location, item.Unit, item.CPU, item.Memory, item.HDD, item.Monitor, item.Keyboard, item.Mouse, item.OS, item.MSOffice, item.Software, item.HeadPhone);
+                dataTable.Rows.Add(item.HostName,item.AssetType, item.Brand, item.Model, item.SerialNumber, item.PurchaseYear,
+                    item.FullName, item.EmailID, item.Designation, item.Department, item.Location, item.Unit, item.CPU, item.Memory, item.HDD, item.Monitor, item.Keyboard, item.Mouse, item.Domain, item.Status);
 
             }
             return dataTable;
@@ -2021,7 +2059,7 @@ namespace LegendAsiaAsset.Controllers
         public async Task<IActionResult> ExportLocationData(LocationModel locationModel)
         {
 
-            string filename = string.Format("LegendAsiaLocation.xlsx", DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+            string filename = string.Format("RegentGroupLocation.xlsx", DateTime.Now.ToString("yyyyMMddHHmmssfff"));
 
             var weeklyLiftings = ObjectTranslation.ConvertLocationList(await _locationRepository.GetLocationList(locationModel));
 
@@ -2030,7 +2068,7 @@ namespace LegendAsiaAsset.Controllers
                 DataTable dataTable = CreateLocationList(weeklyLiftings);
                 using (XLWorkbook xLWorkbook = new())
                 {
-                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Location Data");
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Regent Group Location List");
                     using (MemoryStream stream = new())
                     {
                         xLWorkbook.SaveAs(stream);
@@ -2056,7 +2094,7 @@ namespace LegendAsiaAsset.Controllers
 
         private static DataTable CreateLocationList(List<TranslatedLocationModel> LocationRecords)
         {
-            DataTable dataTable = new("Location Data");
+            DataTable dataTable = new("Regent Group Location List");
             dataTable.Columns.AddRange(new DataColumn[4]
                         {
                       new DataColumn("Region"),
@@ -2079,11 +2117,11 @@ namespace LegendAsiaAsset.Controllers
             string filename = "";
             if (infrastructureModel.Location == null)
             {
-                filename = string.Format("LegendAsiaInfrastructureList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RegentGroupInfrastructureList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
             }
             else
             {
-                filename = string.Format("LegendAsiaInfrastructureList-({0})({1}).xlsx", infrastructureModel.Location, DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RegentGroupInfrastructureList-({0})({1}).xlsx", infrastructureModel.Location, DateTime.Now.ToString("ddMMyyyy"));
             }
 
             var weeklyLiftings = ObjectTranslation.ConvertInfrastructureList(await _infrastructureRepository.GetInfrastructureList(infrastructureModel));
@@ -2093,7 +2131,7 @@ namespace LegendAsiaAsset.Controllers
                 DataTable dataTable = CreateInfraList(weeklyLiftings);
                 using (XLWorkbook xLWorkbook = new())
                 {
-                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "ITAsset Data");
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Regent Group Infrastructure List");
                     using (MemoryStream stream = new())
                     {
                         xLWorkbook.SaveAs(stream);
@@ -2119,7 +2157,7 @@ namespace LegendAsiaAsset.Controllers
 
         private static DataTable CreateInfraList(List<TranslatedInfrastrutureModel> InfraRecords)
         {
-            DataTable dataTable = new("ITAsset Data");
+            DataTable dataTable = new("Regent Group Infrastructure List");
             dataTable.Columns.AddRange(new DataColumn[8]
                         {
                       new DataColumn("AssetType"),
@@ -2240,7 +2278,7 @@ namespace LegendAsiaAsset.Controllers
 
                 mail.From = new MailAddress("donotreply@regentgroup.sg");
                 mail.Subject = "Updated Asset's Details";
-                body = string.Format("Dear Admin,<br/><br/> The Assign Asset Details are provided below. " +
+                body = string.Format("Dear Admin,<br/><br/> The Updated Asset Details are provided below. " +
                     "<br/><br/>Asset ID : {0} <br/> User ID : {1} <br/> Serial Number : {2} <br/> Status : {3} <br/> Updated By : {4} <br/><br/>" +
                     "" +
                     "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +

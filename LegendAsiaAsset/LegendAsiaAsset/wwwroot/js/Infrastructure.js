@@ -260,7 +260,8 @@ $(document).ready(function () {
         var Brand = $("#BrandInfra").val();
         var AssetType = $("#AssetTypeInfra").val();
         var Location = $("#LocationInfraDetails").val();
-        var url = '../Home/ExportInfraData?SerialNo=' + SerialNo + '&&Model=' + Model + '&&Brand=' + Brand + '&&AssetType=' + AssetType + '&&Location=' + Location;
+        var Status = $('#StatusInfraDetails').val();
+        var url = '../Home/ExportInfraData?SerialNo=' + SerialNo + '&&Model=' + Model + '&&Brand=' + Brand + '&&AssetType=' + AssetType + '&&Location=' + Location + '&&Status=' + Status;
         //var url = "ExportInfraData";
         window.open(url);
     });
@@ -292,7 +293,8 @@ $(document).ready(function () {
         var Brand = $('#BrandInfra').val();
         var AssetType = $('#AssetTypeInfra').val();
         var Location = $('#LocationInfraDetails').val();
-        if (SerialNumber != "" || Model != "" || Brand != "" || AssetType != "" || Location != "") {
+        var Status = $('#StatusInfraDetails').val();
+        if (SerialNumber != "" || Model != "" || Brand != "" || AssetType != "" || Location != "" || Status != "") {
             $.ajax({
                 type: "POST",
                 url: 'SearchButtonInfrastructure',
@@ -301,7 +303,8 @@ $(document).ready(function () {
                     Model,
                     Brand,
                     AssetType,
-                    Location
+                    Location,
+                    Status
                 },
                 dataType: "json",
                 success: function (result) {
@@ -343,7 +346,7 @@ $(document).ready(function () {
         var Remark = $('#RemarkInfra').val().toUpperCase();
         var Unit = $('#UnitInfra').val().toUpperCase();
         var Status = $('#StatusInfra').val();
-        if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || Location == "") {
+        if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || Location == "" || PurchaseYear == "") {
             $('#warningToastMessage').text('Please Fill Mandatory Fields.');
             $('#warningToast').toast("show");
             $('#loading').hide();
@@ -412,7 +415,7 @@ $(document).ready(function () {
         var Remark = $('#RemarkInfra').val().toUpperCase();
         var Unit = $('#UnitInfra').val().toUpperCase();
         var Status = $('#StatusInfra').val();
-        if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || Location == "") {
+        if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || Location == "" || PurchaseYear == "") {
             $('#warningToastMessage').text('Please Fill Mandatory Fields.');
             $('#warningToast').toast("show");
             $('#loading').hide();
@@ -443,8 +446,18 @@ $(document).ready(function () {
                         $('#loading').hide();
                         DestroyRenderInfraDropdowns();
                     }
-
-
+                    else {
+                        if (result.duplicate == true) {
+                            $('#warningToastMessage').text('Dupliatation of record is not allowed.');
+                            $('#warningToast').toast("show");
+                            $("#loading").hide();
+                        }
+                        else {
+                            $('#warningToastMessage').text('No search parameter selected.');
+                            $('#warningToast').toast("show");
+                            $('#loading').hide();
+                        }
+                    }
                 }
             });
         }

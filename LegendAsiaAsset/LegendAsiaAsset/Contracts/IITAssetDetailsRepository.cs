@@ -17,7 +17,7 @@ namespace LegendAsiaAsset.Contracts
         public Task<List<ITAssetDetailsModel>> GetLastUserDropdownList();
         public Task<ResponseModel> SaveITAssetDetails(ITAssetDetailsModel iTAssetDetailsModel);
         public Task<LocationModel> GetLocationfromID(int IDLocation);
-        public Task<bool> UpdateITAssetDetails(ITAssetDetailsModel iTAssetDetailsModel);
+        public Task<ResponseModel> UpdateITAssetDetails(ITAssetDetailsModel iTAssetDetailsModel);
         public Task<int> GetITAssetCount(int ID);
         public Task<bool> GetStatusITAsset(ITAssetDetailsModel iTAssetDetailsModel);
         public Task<List<ITAssetDetailsModel>> GetAssetTypeAssign();

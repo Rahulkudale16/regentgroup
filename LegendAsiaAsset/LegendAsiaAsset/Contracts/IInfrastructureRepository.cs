@@ -14,7 +14,7 @@ namespace LegendAsiaAsset.Contracts
         public Task<List<InfrastructureModel>> GetAssetTypeDropdownList();
         public Task<LocationModel> GetLocationfromID(int IDLocation);
         public Task<ResponseModel> SaveInfrastructure(InfrastructureModel infrastructureModel);
-        public Task<bool> UpdateInfrastructure(InfrastructureModel infrastructureModel);
+        public Task<ResponseModel> UpdateInfrastructure(InfrastructureModel infrastructureModel);
         public Task<int> GetInfraCount(int id);
         public Task<bool> GetStatusInfra(InfrastructureModel infrastructureModel);
         public Task<ResponseModel> TransferInfraDetails(InfrastructureModel infrastructureModel);

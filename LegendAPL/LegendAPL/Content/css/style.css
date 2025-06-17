@@ -313,13 +313,13 @@ a {
     }
 
     .quote1 {
-        margin-left: -25px;
+        margin-left: -54px;
         bottom: 6% !important;
-        width: 20vw;
+        width: 40vw;
     }
 
     .quote2 {
-        margin-left: -20px;
+        margin-left: -40px;
         bottom: 6% !important;
         width: 24vw;
     }
@@ -8923,16 +8923,16 @@ nav {
 }
 
 .item:nth-child(1) {
-    background-image: url("../images/UpdatedImages/Index/heavylift.jpeg");
+    background-image: url("../images/New Images/Batamindo vessel.png");
     background-position: 72% 35%;
 }
 
 .item:nth-child(2) {
-    background-image: url("../images/RegentVessel/Regent12.jpg");
+    background-image: url("../images/UpdatedImages/Index/heavylift.jpeg");
     background-position: 45% 8%;
 }
 
-.item:nth-child(3) {
+/*.item:nth-child(3) {
     background-image: url("../images/NEW/Edited.jpg");
     background-position: 52% 8%;
 }
@@ -8940,7 +8940,7 @@ nav {
 .item:nth-child(4) {
     background-image: url("../images/RegentTruck.jpg");
     background-position: 52% 8%;
-}
+}*/
 
 .quote, .quote1, .quote2, .quote3 {
     position: absolute;
@@ -8953,27 +8953,27 @@ nav {
     transform: translateX(50%);
 }
 
-@media (min-width: 512px) {
-    .quote {
+@media (min-width: 800px) and (max-width: 1280px) {
+    /*.quote {
         left: 15%;
-        /*bottom: 35%;*/
-        /*width: 20vw;*/
-    }
+        bottom: 35%;
+        width: 20vw;
+    }*/
 
     .quote1 {
-        left: 15%;
-        /*bottom: 35%;*/
-        /*width: 20vw;*/
+        left: -14%;
+        /*bottom: 35%;
+        width: 20vw;*/
     }
 
     .quote2 {
-        left: 15%;
+        left: 17%;
     }
 
     /*.quote p, .quote1 p {
-            font-size: 16px !important;*/
-    /*font-style: italic;*/
-    /*}*/
+        font-size: 16px !important;
+        font-style: italic;
+    }*/
 }
 
 @media (min-width: 992px) And (max-width: 1366px) {
@@ -9019,18 +9019,18 @@ nav {
 }
 
 .quote1 {
-    left: -13%;
-    /*bottom: 48%;*/
-    /*width: 30vw;*/
+    left: -2%;
+    /*bottom: 48%;
+    width: 30vw;*/
 }
 
 .quote2 {
-    left: -25%;
+    left: 23%;
 }
 
-.quote3 {
+/*.quote3 {
     left: -23%;
-}
+}*/
 
     .quote p, .quote1 p, .quote2 p, .quote3 p {
         background-color: transparent;
