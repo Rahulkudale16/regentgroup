@@ -14,7 +14,7 @@ namespace LegendAsiaAsset.Repository
 
         public InfrastructureRepository(DapperContext context, IHttpContextAccessor contextAccessor)
         {
-            _context = context; 
+            _context = context;
             _contextAccessor = contextAccessor;
         }
 
@@ -43,7 +43,8 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
@@ -68,7 +69,8 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<InfrastructureModel>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
@@ -92,7 +94,8 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<InfrastructureModel>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
@@ -104,7 +107,7 @@ namespace LegendAsiaAsset.Repository
         {
             try
             {
-                string? sp = "SP_GetBrandFromInfrastructure"; 
+                string? sp = "SP_GetBrandFromInfrastructure";
                 using (var connection = _context.CreateConnection())
                 {
                     var InfrastructureBrand = await connection.QueryAsync<InfrastructureModel>(sp, commandType: CommandType.StoredProcedure);
@@ -116,7 +119,8 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<InfrastructureModel>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
@@ -128,7 +132,7 @@ namespace LegendAsiaAsset.Repository
         {
             try
             {
-                string? sp = "SP_GetAssetTypeFromInfrastructure"; 
+                string? sp = "SP_GetAssetTypeFromInfrastructure";
                 using (var connection = _context.CreateConnection())
                 {
                     var InfrastructureAssetType = await connection.QueryAsync<InfrastructureModel>(sp, commandType: CommandType.StoredProcedure);
@@ -140,7 +144,8 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new List<InfrastructureModel>();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
@@ -168,7 +173,8 @@ namespace LegendAsiaAsset.Repository
                     {
                         return new LocationModel();
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
@@ -193,13 +199,13 @@ namespace LegendAsiaAsset.Repository
 
                 var parameters = new DynamicParameters();
                 parameters.Add("IDInfra", infrastructureModel.IDInfra, DbType.Int16, ParameterDirection.Input);
-                parameters.Add("AssetType",infrastructureModel.AssetType, DbType.String, ParameterDirection.Input);
+                parameters.Add("AssetType", infrastructureModel.AssetType, DbType.String, ParameterDirection.Input);
                 parameters.Add("Brand", infrastructureModel.Brand.ToUpper(), DbType.String, ParameterDirection.Input);
                 parameters.Add("Model", infrastructureModel.Model.ToUpper(), DbType.String, ParameterDirection.Input);
                 parameters.Add("SerialNumber", infrastructureModel.SerialNumber, DbType.String, ParameterDirection.Input);
                 parameters.Add("PurchaseYear", infrastructureModel.PurchaseYear, DbType.DateTime, ParameterDirection.Input);
                 parameters.Add("Remark", infrastructureModel.Remark?.ToUpper(), DbType.String, ParameterDirection.Input);
-                parameters.Add("Unit", infrastructureModel.Unit?? string.Empty, DbType.String, ParameterDirection.Input);
+                parameters.Add("Unit", infrastructureModel.Unit ?? string.Empty, DbType.String, ParameterDirection.Input);
                 parameters.Add("IDLocation", infrastructureModel.Location, DbType.String, ParameterDirection.Input);
                 //parameters.Add("Location", infrastructureModel.Location, DbType.String, ParameterDirection.Input);
                 parameters.Add("Status", "AVAILABLE", DbType.String, ParameterDirection.Input);
@@ -216,7 +222,7 @@ namespace LegendAsiaAsset.Repository
                     {
                         responseModel.Success = false;
                         responseModel.Duplicate = true;
-                        
+
                     }
                     else
                     {
@@ -233,7 +239,8 @@ namespace LegendAsiaAsset.Repository
                         responseModel.Success = true;
                         responseModel.Duplicate = false;
                     }
-                };
+                }
+                ;
                 return responseModel;
             }
             catch (Exception)
@@ -248,7 +255,7 @@ namespace LegendAsiaAsset.Repository
             try
             {
                 ResponseModel responseModel = new();
-                string sp = "SP_InsertUpdateInfrastructure";
+                string sp = "SP_UpdateInfrastructure";
 
                 var parameters = new DynamicParameters();
                 parameters.Add("IDInfra", infrastructureModel.IDInfra, DbType.Int16, ParameterDirection.Input);
@@ -260,7 +267,7 @@ namespace LegendAsiaAsset.Repository
                 parameters.Add("PurchaseYear", infrastructureModel.PurchaseYear, DbType.DateTime, ParameterDirection.Input);
                 parameters.Add("IDLocation", infrastructureModel.Location, DbType.String, ParameterDirection.Input);
                 parameters.Add("Remark", infrastructureModel.Remark?.ToUpper(), DbType.String, ParameterDirection.Input);
-                parameters.Add("Unit", infrastructureModel.Unit?? string.Empty, DbType.String, ParameterDirection.Input);
+                parameters.Add("Unit", infrastructureModel.Unit ?? string.Empty, DbType.String, ParameterDirection.Input);
                 parameters.Add("Status", infrastructureModel.Status, DbType.String, ParameterDirection.Input);
                 parameters.Add("CreatedBy", currentUserName.ToUpper(), DbType.String, ParameterDirection.Input);
                 parameters.Add("ModifiedBy", currentUserName.ToUpper(), DbType.String, ParameterDirection.Input);
@@ -283,11 +290,11 @@ namespace LegendAsiaAsset.Repository
                         if (infrastructure1 == 1)
                         {
                             responseModel.Success = true;
+                            responseModel.Duplicate = false;
                         }
-                        responseModel.Success = true;
-                        responseModel.Duplicate = false;
                     }
-                };
+                }
+                ;
                 return responseModel;
             }
             catch (Exception)
@@ -307,7 +314,8 @@ namespace LegendAsiaAsset.Repository
                 {
                     int infraCount = await connection.QueryFirstOrDefaultAsync<int>(sp, parameter1, commandType: CommandType.StoredProcedure);
                     return infraCount;
-                };
+                }
+                ;
             }
             catch (Exception)
             {
@@ -336,7 +344,8 @@ namespace LegendAsiaAsset.Repository
                     {
                         return false;
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
@@ -392,7 +401,8 @@ namespace LegendAsiaAsset.Repository
                         responseModel.Success = true;
                         responseModel.Duplicate = false;
                     }
-                };
+                }
+                ;
                 return responseModel;
             }
             catch (Exception)
@@ -421,7 +431,8 @@ namespace LegendAsiaAsset.Repository
                     {
                         return false;
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {
@@ -449,7 +460,8 @@ namespace LegendAsiaAsset.Repository
                     {
                         return false;
                     }
-                };
+                }
+                ;
             }
             catch (Exception)
             {

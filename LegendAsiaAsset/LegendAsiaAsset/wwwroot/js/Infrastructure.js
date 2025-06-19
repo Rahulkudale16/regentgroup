@@ -15,6 +15,7 @@ $(document).ready(function () {
     }
 
     var currentPage;
+
     InfrastructureGrid = $('#InfrastructureGrid').jqGrid({
         mtype: 'Get',
         url: 'GetInfrastructuredata',

@@ -321,10 +321,9 @@ namespace LegendAsiaAsset.Repository
                             responseModel.Success = true;
                             string query = "Update UserDetails set IDUserDis = 'USR-00" + userDetails2.IDUser + "' WHERE IDUser  = " + userDetails2.IDUser;
                             _ = await connection.ExecuteAsync(query);
+                            responseModel.Success = true;
+                            responseModel.Duplicate = false;
                         }
-                        responseModel.Success = true;
-                        responseModel.Duplicate = false;
-
                     }
                 };
                 return responseModel;
@@ -340,7 +339,7 @@ namespace LegendAsiaAsset.Repository
             try
             {
                 ResponseModel responseModel = new();
-                string sp = "SP_InsertUpdateUserDetails1";
+                string sp = "SP_UpdateUserDetails"; 
 
                 var parameters = new DynamicParameters();
                 parameters.Add("IDUser", userDetails.IDUser, DbType.Int16, ParameterDirection.Input);
@@ -375,10 +374,10 @@ namespace LegendAsiaAsset.Repository
                         if (userDetails1 == 1)
                         {
                             responseModel.Success = true;
+                            responseModel.Duplicate = false;
                         }
                        
-                        responseModel.Success = true;
-                        responseModel.Duplicate = false;
+                        
                     }
                 };
                 return responseModel;

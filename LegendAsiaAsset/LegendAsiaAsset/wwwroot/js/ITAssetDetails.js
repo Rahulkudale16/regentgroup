@@ -457,6 +457,7 @@
     $("#DesignationITAsset").attr('readonly', 'readonly');
     $("#DepartmentITAsset").attr('readonly', 'readonly');
     $("#LastUserText").attr('readonly', 'readonly');
+    //$("#SerialNumberText").attr('readonly', 'readonly');
 
     $('#ExportExcelITAsset').click(function () {
         var HostName = $("#HostNameITAsset").val();

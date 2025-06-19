@@ -15,6 +15,7 @@ $(document).ready(function () {
     }
 
     var currentPage;
+    //$("#EmailIDUpdate").attr('readonly', 'readonly');
     UserDetailsGrid = $('#UserDetailsGrid').jqGrid({
         mtype: 'Get',
         url: 'GetUserData',
@@ -712,7 +713,7 @@ $(document).ready(function () {
                 },
                 dataType: "json",
                 success: function (result) {
-                    if (result.success) {
+                    if (result.success == true) {
                         reload('UserDetailsGrid');
                         $('#loading').hide();
                         $('#successToastMessage').text('User Updated Successfully');

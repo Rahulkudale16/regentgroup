@@ -568,16 +568,14 @@ namespace LegendAsiaAsset.Repository
                     {
                         responseModel.Success = false;
                         responseModel.Duplicate = true;
-
                     }
                     else
                     {
                         if (iTAssetDetailsModel1 == 1)
                         {
                             responseModel.Success = true;
+                            responseModel.Duplicate = false;
                         }
-                        responseModel.Success = false;
-                        responseModel.Duplicate = true;
                     }
                 };
                 return responseModel;
