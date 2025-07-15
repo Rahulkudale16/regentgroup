@@ -249,6 +249,7 @@
     <Content Include="Content\images\UpdatedImages\Index\RegentIndex.png" />
     <Content Include="Content\images\UpdatedImages\Index\MarineLogistics.png" />
     <Content Include="Content\images\UpdatedImages\Index\Scaniatrucks.jpeg" />
+    <Content Include="Content\images\UpdatedImages\LandingCraft\Ayu28.jpg" />
     <Content Include="Content\images\UpdatedImages\LandingCraft\AYU 48.jpg" />
     <Content Include="Content\images\UpdatedImages\LandingCraft\Libra 8 .jpg" />
     <Content Include="Content\images\UpdatedImages\LandingCraft\RegentGemini.jpg" />
