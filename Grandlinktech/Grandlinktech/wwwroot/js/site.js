@@ -203,43 +203,6 @@
         })
     }
 
-    $(".btnsubmit").on('click', function (event) {
-        if (($(".name").val() == "") || ($(".email").val() == "") || ($(".subject").val() == "") || ($(".message").val() == "")) {
-            if ($(".name").val() == "") { $("#nameAlert").show() }
-            if ($(".email").val() == "") { $("#emailAlert").show() }
-            if ($(".subject").val() == "") { $("#subjectAlert").show() }
-            if ($(".message").val() == "") { $("#messageAlert").show() }
-        }
-        else {
-            SendEmail();
-        }
-    });
-
-    function SendEmail() {
-        var name = $(".name").val();
-        var email = $(".email").val();
-        var subject = $(".subject").val();
-        var message = $(".message").val();
-        $.ajax({
-            type: "POST",
-            url: 'MailSend',
-            data: {
-                name,
-                email,
-                subject,
-                message
-            },
-            dataType: 'json',
-            success: function (result) {
-                alert("Mail Request sent successfully");
-                window.location.reload();
-            },
-            //error: (error) => {
-            //    console.log(JSON.stringify(error));
-            //}
-        });
-    }
-
     window.addEventListener('load', navmenuScrollspy);
     document.addEventListener('scroll', navmenuScrollspy);
 })();

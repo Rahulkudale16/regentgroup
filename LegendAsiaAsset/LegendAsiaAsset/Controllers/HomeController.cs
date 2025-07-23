@@ -2131,7 +2131,7 @@ namespace LegendAsiaAsset.Controllers
                 DataTable dataTable = CreateInfraList(weeklyLiftings);
                 using (XLWorkbook xLWorkbook = new())
                 {
-                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Regent Group Infrastructure List");
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "RegentGroupInfrastructureList");
                     using (MemoryStream stream = new())
                     {
                         xLWorkbook.SaveAs(stream);

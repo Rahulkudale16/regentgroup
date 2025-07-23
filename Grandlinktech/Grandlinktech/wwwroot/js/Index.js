@@ -44,7 +44,7 @@
         }
     });
 
-    $(document).on('click', '.btn-Submit', function () {
+    $(document).on('click', '.btn-submit', function () {
         if (($(".name").val() == "") || ($(".email").val() == "") || ($(".subject").val() == "") || ($(".message").val() == "")) {
             if ($(".name").val() == "") { $("#nameAlert").show() }
             if ($(".email").val() == "") { $("#emailAlert").show() }
