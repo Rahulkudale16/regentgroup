@@ -52,15 +52,15 @@
             if ($(".message").val() == "") { $("#messageAlert").show() }
         }
         else {
-            if ((".email").includes('@') && (".email").includes('.')) {
+            /*if ((".email").includes('@') && (".email").includes('.')) {*/
                 SendEmail();
-            }
-            else {
-                window.alert("Please insert Valid EmailID.");
-                //$('#warningToastMessage').text('Please insert Valid EmailID.');
-                //$('#warningToast').toast("show");
-                $('#loading').hide();
-            }
+            /*}*/
+            //else {
+            //    window.alert("Please insert Valid EmailID.");
+            //    //$('#warningToastMessage').text('Please insert Valid EmailID.');
+            //    //$('#warningToast').toast("show");
+            //    $('#loading').hide();
+            //}
         }
     });
 });
@@ -74,6 +74,7 @@ function SendEmail() {
     $.ajax({
         type: "POST",
         url: '../Home/MailSend',
+        //url: 'MailSend',
         data: {
             name,
             email,
@@ -82,7 +83,7 @@ function SendEmail() {
         },
         dataType: 'json',
         success: function (result) {
-            alert("Mail Request sent successfully");
+            alert("Mail sent successfully");
             window.location.reload();
         },
     });

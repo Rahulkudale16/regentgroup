@@ -2018,38 +2018,38 @@ namespace LegendAsiaAsset.Controllers
         private static DataTable CreateITAssetList(List<TranslatedITAssetDetailsModel> ITAssetRecords)
         {
             DataTable dataTable = new("Regent Group Asset List");
-            dataTable.Columns.AddRange(new DataColumn[20]
+            dataTable.Columns.AddRange(new DataColumn[6]
                         {
-                      new DataColumn("HostName"),
-                      new DataColumn("AssetType"),
-                      new DataColumn("Brand"),
+                      //new DataColumn("HostName"),
+                      //new DataColumn("AssetType"),
+                      //new DataColumn("Brand"),
                       new DataColumn("Model"),
                       new DataColumn("SerialNumber"),
                       new DataColumn("PurchaseYear"),
                       new DataColumn("FullName"),
                       new DataColumn("EmailID"),
-                      new DataColumn("Designation"),
+                      //new DataColumn("Designation"),
                       new DataColumn("Department"),
-                      new DataColumn("Location"),
-                      new DataColumn("Unit"),
-                      new DataColumn("CPU"),
-                      new DataColumn("Memory"),
-                      new DataColumn("HDD"),
-                      new DataColumn("Monitor"),
-                      new DataColumn("Keyboard"),
-                      new DataColumn("Mouse"),
+                      //new DataColumn("Location"),
+                      //new DataColumn("Unit"),
+                      //new DataColumn("CPU"),
+                      //new DataColumn("Memory"),
+                      //new DataColumn("HDD"),
+                      //new DataColumn("Monitor"),
+                      //new DataColumn("Keyboard"),
+                      //new DataColumn("Mouse"),
                       //new DataColumn("OS"),
                       //new DataColumn("MSOffice"),
                       //new DataColumn("Software"),
                       //new DataColumn("HeadPhone"),
-                      new DataColumn("Domain"),
-                      new DataColumn("Status")
+                      //new DataColumn("Domain"),
+                      //new DataColumn("Status")
                         });
 
             foreach (var item in ITAssetRecords)
             {
-                dataTable.Rows.Add(item.HostName,item.AssetType, item.Brand, item.Model, item.SerialNumber, item.PurchaseYear,
-                    item.FullName, item.EmailID, item.Designation, item.Department, item.Location, item.Unit, item.CPU, item.Memory, item.HDD, item.Monitor, item.Keyboard, item.Mouse, item.Domain, item.Status);
+                dataTable.Rows.Add(item.Model, item.SerialNumber, item.PurchaseYear,
+                    item.FullName, item.EmailID, item.Department);
 
             }
             return dataTable;

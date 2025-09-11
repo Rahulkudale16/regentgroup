@@ -1,20 +1,6 @@
-﻿/**
-* Template Name: Strategy
-* Template URL: https://bootstrapmade.com/strategy-bootstrap-agency-template/
-* Updated: Jun 06 2025 with Bootstrap v5.3.6
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
-/* Fonts */
-:root {
-    --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --heading-font: "Nunito Sans", sans-serif;
-    --nav-font: "Raleway", sans-serif;
+﻿@font-face {
+    font-family: Montserrat-Regular;
+    src: url('../fonts/Monteserrat/Montserrat-Regular.ttf');
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
@@ -63,7 +49,7 @@
 body {
     color: var(--default-color);
     background-color: var(--background-color);
-    font-family: var(--default-font);
+    font-family: Montserrat-Regular!important;
 }
 
 a {
@@ -84,7 +70,6 @@ h4,
 h5,
 h6 {
     color: var(--heading-color);
-    font-family: var(--heading-font);
 }
 
 /* PHP Email Form Messages
@@ -245,8 +230,8 @@ h6 {
         color: var(--nav-color);
         padding: 18px 15px;
         font-size: 16px;
-        font-family: var(--nav-font);
-        font-weight: 400;
+        /*font-family: var(--nav-font);*/
+        font-weight: 600;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -364,7 +349,7 @@ h6 {
     .navmenu a:focus {
         color: var(--nav-dropdown-color);
         padding: 10px 20px;
-        font-family: var(--nav-font);
+        /*font-family: var(--nav-font);*/
         font-size: 17px;
         font-weight: 500;
         display: flex;
@@ -487,12 +472,12 @@ h6 {
     font-size: 30px;
     font-weight: 700;
     letter-spacing: 1px;
-    font-family: var(--heading-font);
+    /*font-family: var(--heading-font);*/
 }
 
 .footer .footer-about p {
     font-size: 14px;
-    font-family: var(--heading-font);
+    /*font-family: var(--heading-font);*/
 }
 
 .footer .social-links a {
@@ -736,8 +721,8 @@ section,
 }
 
 .section-title h2 {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 25px;
+    font-weight: 700;
     padding: 0;
     line-height: 1px;
     margin: 0;
@@ -753,7 +738,28 @@ section,
     height: 1px;
     display: inline-block;
     background: var(--accent-color);
-    margin: 4px 10px;
+    margin: 8px 10px;
+}
+
+.section-title1 h2 {
+    font-size: 25px;
+    font-weight: 700;
+    padding: 0;
+    line-height: 1px;
+    margin: 0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    position: relative;
+}
+
+.section-title1 h2::after {
+    content: "";
+    width: 120px;
+    height: 1px;
+    display: inline-block;
+    background: var(--accent-color);
+    margin: 8px 10px;
 }
 
 .section-title div {
@@ -763,7 +769,7 @@ section,
     font-size: 28px;
     font-weight: 700;
     text-transform: uppercase;
-    font-family: var(--heading-font);
+    /*font-family: var(--heading-font);*/
 }
 
 /*--------------------------------------------------------------
@@ -1517,7 +1523,7 @@ section,
 
 .steps .step-number {
     display: inline-block;
-    font-family: var(--heading-font);
+    /*font-family: var(--heading-font);*/
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--accent-color);
@@ -3775,3 +3781,240 @@ section,
 .starter-section {
     /* Add your styles here */
 }
+
+.sec-icon {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.sec-icon::before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    left: -70px;
+    margin-top: -5.5px;
+    top: 60%;
+    background: #333333;
+    width: 50px;
+}
+
+.sec-icon::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    right: -70px;
+    margin-top: -5.5px;
+    top: 60%;
+    background: #333;
+    width: 50px;
+}
+
+/*.advertisers-service-sec {
+    background-color: #f5f5f5;
+}*/
+
+/*.advertisers-service-sec span {
+    color: rgb(255, 23, 131);
+}*/
+
+.advertisers-service-sec .col {
+    padding: 0 1em 1em 1em;
+    text-align: center;
+}
+
+.advertisers-service-sec .service-card {
+    width: 100%;
+    height: 100%;
+    padding: 2em 1.5em;
+    border-radius: 5px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: 0.5s;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    background: #fff;
+}
+
+.advertisers-service-sec .service-card::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#e3a127);
+    position: absolute;
+    left: 0%;
+    top: -98%;
+    z-index: -2;
+    transition: all 0.4s cubic-bezier(0.77, -0.04, 0, 0.99);
+}
+
+.advertisers-service-sec h3 {
+    font-size: 28px;
+    text-transform: capitalize;
+    font-weight: 700;
+    color: #1f194c;
+    margin: 1em 0;
+    z-index: 3;
+}
+
+.advertisers-service-sec p {
+    color: #575a7b;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+    z-index: 3;
+}
+
+.advertisers-service-sec .icon-wrapper {
+    background-color: #2c7bfe;
+    position: relative;
+    margin: auto;
+    font-size: 30px;
+    height: 2.5em;
+    width: 2.5em;
+    color: #ffffff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    transition: 0.5s;
+    z-index: 3;
+}
+
+.advertisers-service-sec .service-card:hover:after {
+    top: 0%;
+}
+
+.service-card .icon-wrapper {
+    background-color: #ffffff;
+    color: #e3a127;
+}
+
+.advertisers-service-sec .service-card:hover .icon-wrapper {
+    /*color: #0dcaf0;*/
+    color: #0d1d26;
+}
+
+.advertisers-service-sec .service-card:hover h3 {
+    color: #ffffff;
+}
+
+.advertisers-service-sec .service-card:hover p {
+    color: #f0f0f0;
+}
+
+
+/*------------------------------------------- CSS for Network Management and Data Security Starts ----------------------------------------------------------*/
+
+
+:root {
+    --red: hsl(0, 78%, 62%);
+    --cyan: hsl(180, 62%, 55%);
+    --orange: hsl(34, 97%, 64%);
+    --blue: hsl(212, 86%, 64%);
+    --varyDarkBlue: hsl(234, 12%, 34%);
+    --grayishBlue: hsl(229, 6%, 66%);
+    --veryLightGray: hsl(0, 0%, 98%);
+    --weight1: 200;
+    --weight2: 400;
+    --weight3: 600;
+}
+
+.attribution {
+    font-size: 11px;
+    text-align: center;
+}
+
+.attribution a {
+    color: hsl(228, 45%, 44%);
+}
+
+h1:first-of-type {
+    font-weight: var(--weight1);
+    color: var(--varyDarkBlue);
+}
+
+h1:last-of-type {
+    color: var(--varyDarkBlue);
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+
+.box p {
+    color: var(--grayishBlue);
+}
+
+.box {
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px 0px var(--grayishBlue);
+    padding: 30px;
+    margin: 20px;
+}
+
+img {
+    float: right;
+}
+
+@media (max-width: 450px) {
+    .box {
+        height: 200px;
+    }
+}
+
+@media (max-width: 950px) and (min-width: 450px) {
+    .box {
+        text-align: center;
+        height: 180px;
+    }
+}
+
+.cyan {
+    border-top: 3px solid var(--cyan);
+}
+
+.red {
+    border-top: 3px solid var(--red);
+}
+
+.blue {
+    border-top: 3px solid var(--blue);
+}
+
+.orange {
+    border-top: 3px solid var(--orange);
+}
+
+
+@media (min-width: 950px) {
+    .row1-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .row2-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box-down {
+        position: relative;
+        top: 150px;
+    }
+
+    .box {
+        width: 20%;
+    }
+
+    .header p {
+        width: 30%;
+    }
+}
+/*------------------------------------------- CSS for Network Management and Data Security Ends ----------------------------------------------------------*/
