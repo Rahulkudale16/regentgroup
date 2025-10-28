@@ -2,7 +2,7 @@
 
 <script src="~/js/ITAssetDetails.js" asp-append-version="true"></script>
 
-<!-- Page Heading Starts-->
+<!--------------------------------------- Page Heading Starts ------------------------------------------------->
 <div class="row">
     <div class="two alt-two">
         <h1 class="Heading">
@@ -10,8 +10,8 @@
         </h1>
     </div>
 </div>
-<!-- Page Heading Ends-->
-<!--Create Button trigger modal -->
+<!--------------------------------------- Page Heading Ends --------------------------------------------------->
+<!--------------------------------------- Create Button trigger modal ----------------------------------------->
 <div class="row mb-3">
     <div class="col-lg-6">
         <div class="btn-group">
@@ -24,8 +24,8 @@
         </div>
     </div>
 </div>
-<!--Create Button trigger modal -->
-<!-- Dropdown fields Starts -->
+<!--------------------------------------- Create Button trigger modal ----------------------------------------->
+<!--------------------------------------- Dropdown fields Starts ---------------------------------------------->
 <fieldset class="fieldset mb-3" style="top:63px;z-index:1000;">
     <div class="row mb-3">
         <div class="col">
@@ -34,7 +34,7 @@
             @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.HostName, "", new { @class = "text-danger" })
         </div>
         <div class="col">
-            @Html.LabelFor(model => model.ITAssetDetailsModel.AssetType, htmlAttributes: new { @class = "form-label"})
+            @Html.LabelFor(model => model.ITAssetDetailsModel.AssetType, htmlAttributes: new { @class = "form-label" })
             @Html.DropDownListFor(model => model.ITAssetDetailsModel.AssetType, new SelectList(ViewBag.AssetTypeITAsset, "Value", "Text"), "Select Asset Type", new { @id = "AssetTypeITAsset" })
             @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.AssetType, "", new { @class = "text-danger" })
         </div>
@@ -85,30 +85,53 @@
         </div>
     </div>
 </fieldset>
-<!-- Dropdown fields Ends -->
-<!-- Search Options Starts -->
-<div class="row mb-3">
-    <div class="col">
+<!--------------------------------------- Dropdown fields Ends ------------------------------------------------>
+<!--------------------------------------- Search Options Starts ----------------------------------------------->
+<div class="row mb-4 mb-3">
+    <div class="col-2">
         <div class="btn-group">
             <button type="button" id="SearchITAssetDetails" class="btn btn-outline-purple"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
             <button type="reset" id="ResetITAssetDetails" class="btn btn-outline-purple"><i class="fa-solid fa-arrow-rotate-left"></i> Reset</button>
-            <button type="button" class="btn btn-outline-success" id="ExportExcelITAsset"><i class="fa-solid fa-file-excel"></i>&nbsp; Export</button>
         </div>
     </div>
+    <div class="col-4 text-end" style="border-right: 5px gray solid;">
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-success" id="ExportExcelITAsset"><i class="fa-solid fa-file-excel"></i>&nbsp; Export Working Asset</button>
+        </div>
+    </div>
+    <div class="col-6">
+        <button type="button" class="btn btn-outline-secondary" id="ExportExcelITAsset1"><i class="fa-solid fa-file-excel"></i>&nbsp; Export Scrapped Asset</button>
+    </div>
 </div>
-<!-- Search Options Ends -->
-<!-- IT Asset Details Grid Starts -->
+<!--------------------------------------- Search Options Ends ------------------------------------------------/->
+<!--------------------------------------- Remaining Layout Starts ---------------------------------------------->
 <fieldset>
-    <div class="row">
-        <div class="col">
+    <div class="row mb-4">
+        <div class="col-6" style="border-right: 5px gray solid;">
+            <div class="row text-center mb-4">
+                <h4>
+                    <span class="mt-4" style="font-size: 17px;"><i class="fa-solid fa-1x fa-square" style="color:green;"></i> AVAILABLE </span>&nbsp;&nbsp;&nbsp;
+                    <span style="font-size: 17px;"><i class="fa-solid fa-1x fa-square" style="color:#FFC107;"></i> ASSIGNED </span>
+                </h4>
+            </div>
             <table id="ITAssetDetailsGrid" class="table table-bordered table-striped" style="width:100%">
             </table>
             <div id="ITAssetDetailsPager" style="text-align: center; height:30px"></div>
         </div>
+        <div class="col-6">
+            <div class="row text-center mb-4">
+                <h4>
+                    <span style="font-size: 17px;"><i class="fa-solid fa-1x fa-square" style="color:GRAY;"></i> SCRAPPED</span>
+                </h4>
+            </div>
+            <table id="ScrappedGrid" class="table table-bordered table-striped" style="width:100%">
+            </table>
+            <div id="ScrappedPager" style="text-align: center; height:30px"></div>
+        </div>
     </div>
 </fieldset>
-<!-- IT Asset Details Grid Ends -->
-<!-- Create Modal Starts -->
+<!--------------------------------------- Remaining Layout Ends ------------------------------------------------>
+<!--------------------------------------- Create Modal Starts -------------------------------------------------->
 <div class="modal fade" id="CreateITAssetDetails" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
@@ -126,13 +149,13 @@
                 <div class="row">
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.HostName, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.HostName , new { htmlAttributes = new { @class = "form-control", @id = "HostNameText" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.HostName, new { htmlAttributes = new { @class = "form-control", @id = "HostNameText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.HostName, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.AssetType, htmlAttributes: new { @class = "form-label" })
                         <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
-                        @Html.DropDownListFor(model => model.ITAssetDetailsModel.AssetType, new SelectList(ViewBag.AssetType, "Value", "Text"), "Select Asset Type", new { @id = "AssetTypeText", @class="form-control checkValidITA" })
+                        @Html.DropDownListFor(model => model.ITAssetDetailsModel.AssetType, new SelectList(ViewBag.AssetType, "Value", "Text"), "Select Asset Type", new { @id = "AssetTypeText", @class = "form-control checkValidITA" })
                         <span class="invalid-feedback">Asset Type is mandatory </span>
 
                     </div>
@@ -146,13 +169,13 @@
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Model, htmlAttributes: new { @class = "form-label" })
                         <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Model , new { htmlAttributes = new { @class = "form-control checkValidita", @id = "ModelText" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Model, new { htmlAttributes = new { @class = "form-control checkValidita", @id = "ModelText" } })
                         <span class="invalid-feedback">Model is mandatory </span>
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.SerialNumber, htmlAttributes: new { @class = "form-label" })
                         <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.SerialNumber , new { htmlAttributes = new { @class = "form-control checkValidita", @id = "SerialNumberText" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.SerialNumber, new { htmlAttributes = new { @class = "form-control checkValidita", @id = "SerialNumberText" } })
                         <span class="invalid-feedback">Serial Number is mandatory </span>
                     </div>
                 </div>
@@ -165,49 +188,49 @@
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Unit, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Unit , new { htmlAttributes = new { @class = "form-control", @id = "UnitText" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Unit, new { htmlAttributes = new { @class = "form-control", @id = "UnitText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Unit, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.CPU, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.CPU , new { htmlAttributes = new { @class = "form-control", @id = "CPUText" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.CPU, new { htmlAttributes = new { @class = "form-control", @id = "CPUText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.CPU, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Memory, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Memory , new { htmlAttributes = new { @class = "form-control", @id = "MemoryText" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Memory, new { htmlAttributes = new { @class = "form-control", @id = "MemoryText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Memory, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.HDD, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.HDD , new { htmlAttributes = new { @class = "form-control", @id = "HDDText" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.HDD, new { htmlAttributes = new { @class = "form-control", @id = "HDDText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.HDD, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Monitor, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Monitor , new { htmlAttributes = new { @class = "form-control", @id = "MonitorITAsset" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Monitor, new { htmlAttributes = new { @class = "form-control", @id = "MonitorITAsset" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Monitor, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Keyboard, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Keyboard, new { htmlAttributes = new { @class = "form-control", @id = "KeyboardITAsset" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Keyboard, new { htmlAttributes = new { @class = "form-control", @id = "KeyboardITAsset" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Keyboard, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Mouse, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Mouse, new { htmlAttributes = new { @class = "form-control", @id = "MouseITAsset" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Mouse, new { htmlAttributes = new { @class = "form-control", @id = "MouseITAsset" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Mouse, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.OS, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.OS , new { htmlAttributes = new { @class = "form-control", @id = "OSText" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.OS, new { htmlAttributes = new { @class = "form-control", @id = "OSText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.OS, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.MSOffice, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.MSOffice, new { htmlAttributes = new { @class = "form-control", @id = "MSOfficeITAsset" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.MSOffice, new { htmlAttributes = new { @class = "form-control", @id = "MSOfficeITAsset" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.MSOffice, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -221,7 +244,7 @@
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Software, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Software, new { htmlAttributes = new { @class = "form-control", @id = "SoftwareText" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Software, new { htmlAttributes = new { @class = "form-control", @id = "SoftwareText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Software, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3">
@@ -232,7 +255,7 @@
                     </div>
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Remark, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Remark, new { htmlAttributes = new { @class = "form-control", @id = "RemarkText" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Remark, new { htmlAttributes = new { @class = "form-control", @id = "RemarkText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Remark, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3 ActivityData">
@@ -242,19 +265,19 @@
                     </div>
                     <div class="col mb-3 ActivityData">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Designation, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Designation , new { htmlAttributes = new { @class = "form-control", @id = "DesignationITAsset" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Designation, new { htmlAttributes = new { @class = "form-control", @id = "DesignationITAsset" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Designation, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col mb-3 ActivityData">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.EmailID, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.EmailID , new { htmlAttributes = new { @class = "form-control", @id = "EmailIDITAsset" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.EmailID, new { htmlAttributes = new { @class = "form-control", @id = "EmailIDITAsset" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.EmailID, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3 ActivityData">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Department, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Department , new { htmlAttributes = new { @class = "form-control", @id = "DepartmentITAsset" } } )
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Department, new { htmlAttributes = new { @class = "form-control", @id = "DepartmentITAsset" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Department, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3 ActivityData">
@@ -272,7 +295,7 @@
             <div class="modal-footer justify-content-center">
                 <div class="d-flex flex-row align-content-center">
                     <button type="reset" id="RevokeButton" class="btn btn-outline-success"><i class="fa-solid fa-arrow-rotate-left"></i> Available</button>&nbsp;
-                    <button type="reset" id="DeactiveButton" class="btn btn-outline-danger"><i class="fa-solid fa-power-off"></i> DeActive</button>&nbsp;
+                    @* <button type="reset" id="DeactiveButton" class="btn btn-outline-danger"><i class="fa-solid fa-power-off"></i> DeActive</button>&nbsp; *@
                     <button type="button" id="RepairButton" class="btn btn-outline-danger"><i class="fa-solid fa-magnifying-glass"></i> Repair</button>&nbsp;
                     <button type="button" id="ScrappedITAsset" class="btn btn-outline-secondary"><i class="fa-solid fa-dumpster-fire"></i>&nbsp; Scrapped</button>&nbsp;
                     @* <button id="TransferITAssetDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Transfer</button>&nbsp; *@
@@ -285,8 +308,8 @@
         </div>
     </div>
 </div>
-<!-- Create Modal Ends -->
-<!-- Assign Modal Starts -->
+<!--------------------------------------- Create Modal Ends ---------------------------------------------------->
+<!--------------------------------------- Assign Modal Starts -------------------------------------------------->
 <div class="modal fade" id="AssignModal" style="background-color:rgba(0,0,0,0.7)" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="modal-content">
@@ -305,16 +328,16 @@
                     <div class="col-lg-6 mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.SerialNumber, htmlAttributes: new { @class = "form-label" })
                         <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
-                        @Html.DropDownListFor(model => model.ITAssetDetailsModel.Model, new SelectList(ViewBag.SerialNoAssign, "Value", "Text"), "Select Serial Number", new { @id = "SerialNumberAssign", @class="form-control checkValidASSIGN" })
+                        @Html.DropDownListFor(model => model.ITAssetDetailsModel.Model, new SelectList(ViewBag.SerialNoAssign, "Value", "Text"), "Select Serial Number", new { @id = "SerialNumberAssign", @class = "form-control checkValidASSIGN" })
                         <span class="invalid-feedback"> Serial Number is mandatory </span>
                     </div>
                     <div class="col-lg-6 mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.FullName, htmlAttributes: new { @class = "form-label" })
                         <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
-                        @Html.DropDownListFor(model => model.ITAssetDetailsModel.FullName, new SelectList(ViewBag.FullNameUserDetails, "Text", "Value"), "Select FullName", new { @id = "FullNameAssign", @class="form-control checkValidASSIGN" })
+                        @Html.DropDownListFor(model => model.ITAssetDetailsModel.FullName, new SelectList(ViewBag.FullNameUserDetails, "Text", "Value"), "Select FullName", new { @id = "FullNameAssign", @class = "form-control checkValidASSIGN" })
                         <span class="invalid-feedback"> Full Name is mandatory </span>
                     </div>
-                    @Html.HiddenFor(model => model.ITAssetDetailsModel.LocationID, new{ @Id = "LocationID" })
+                    @Html.HiddenFor(model => model.ITAssetDetailsModel.LocationID, new { @Id = "LocationID" })
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
@@ -326,4 +349,4 @@
         </div>
     </div>
 </div>
-<!-- Assign Modal Ends -->
+<!--------------------------------------- Assign Modal Ends ---------------------------------------------------->

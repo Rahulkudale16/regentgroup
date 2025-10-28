@@ -32,6 +32,7 @@
             },
             {
                 key: false,
+                hidden: true,
                 name: 'view',
                 width: '100px',
             },
@@ -57,6 +58,7 @@
             },
             {
                 key: false,
+                hidden: true,
                 name: 'HostName',
                 width: '105px',
             },
@@ -73,6 +75,7 @@
             },
             {
                 key: false,
+                hidden: true,
                 name: 'Model',
                 editable: false,
                 width: '130px',
@@ -86,6 +89,7 @@
             {
                 key: false,
                 name: 'PurchaseYear',
+                hidden: true,
                 editable: false,
                 width: '135px',
             },
@@ -100,6 +104,7 @@
                 key: false,
                 hidden: true,
                 name: 'Designation',
+                hidden: true,
                 editable: false,
                 width: '135px',
             },
@@ -131,6 +136,7 @@
             },
             {
                 key: false,
+                hidden: true,
                 name: 'Country',
                 editable: false,
                 width: '95px',
@@ -345,6 +351,339 @@
         }
     });
 
+    ScrappedGrid = $('#ScrappedGrid').jqGrid({
+        mtype: 'Get',
+        url: 'GetScrappedAssetdata',
+        //editurl: '',
+        datatype: 'json',
+        colNames: ['ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'Status', 'View'],
+        colModel: [
+            {
+                key: true,
+                hidden: true,
+                name: 'IDAsset',
+                width: '70px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'view',
+                width: '100px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'IDAssetDis',
+                editable: false,
+                width: '120px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'UserID',
+                editable: false,
+                width: '120px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'IDLocation',
+                width: '90px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'HostName',
+                width: '105px',
+            },
+            {
+                key: false,
+                name: 'AssetType',
+                width: '105px',
+            },
+            {
+                key: false,
+                name: 'Brand',
+                editable: false,
+                width: '100px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Model',
+                editable: false,
+                width: '130px',
+            },
+            {
+                key: false,
+                name: 'SerialNumber',
+                editable: false,
+                width: '130px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'PurchaseYear',
+                editable: false,
+                width: '135px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'EmailID',
+                editable: false,
+                width: '235px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Designation',
+                editable: false,
+                width: '135px',
+            },
+            {
+                key: false,
+                name: 'FullName',
+                editable: false,
+                width: '110px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'LastUser',
+                editable: false,
+                width: '100px',
+            },
+            {
+                key: false,
+                name: 'Location',
+                editable: false,
+                width: '95px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Region',
+                editable: false,
+                width: '95px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Country',
+                editable: false,
+                width: '95px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Unit',
+                editable: false,
+                width: '85px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'CPU',
+                editable: false,
+                width: '80px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Memory',
+                editable: false,
+                width: '100px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'HDD',
+                editable: false,
+                width: '60px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'OS',
+                editable: false,
+                width: '100px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Software',
+                editable: false,
+                width: '100px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Remark',
+                editable: false,
+                width: '70px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Domain',
+                editable: false,
+                width: '70px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Status',
+                editable: false,
+                width: '100px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'ActivityLog',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'CreatedBy',
+                editable: false,
+                width: '125px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'CreatedOn',
+                editable: false,
+                width: '125px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'ModifiedBy',
+                editable: false,
+                width: '125px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'ModifiedOn',
+                editable: false,
+                width: '125px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'Monitor',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'Keyboard',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'Mouse',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'MSOffice',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'HeadPhone',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'Department',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: false,
+                name: 'viewStatus',
+                editable: false,
+                width: '105px',
+            },
+            {
+                key: false,
+                editable: false,
+                name: 'UpdateAsset',
+                width: '65px',
+            },
+
+        ],
+        loadonce: true,
+        responsive: false,
+        gridview: true,
+        autoencode: false,
+        shrinkToFit: true,
+        autowidth: '',
+        pager: '#ScrappedPager',
+        rowNum: 10,
+        rowList: [10, 20, 30, 40],
+        height: 'auto',
+        viewrecords: true,
+        altRows: true,
+        loadtext: 'Loading Data please wait ...',
+        emptyrecords: 'No records to display',
+        multiselect: false,
+        rownumbers: false,
+        ajaxRowOptions: { async: true },
+        loadComplete: function () {
+            $(this).jqGrid('resizeGrid');
+        },
+        gridComplete: function () {  //Active-Deactive Toggle in Table grid
+            var selectedRowIds = ScrappedGrid.jqGrid('getGridParam', 'data');
+            //var selectedRowData = [];
+            for (selectedRowIndex = 0; selectedRowIndex < selectedRowIds.length; selectedRowIndex++) {
+                var temp_var = selectedRowIds[selectedRowIndex]['_id_'];
+                var idAsset = selectedRowIds[selectedRowIndex]['IDAsset'];
+                var idAssetDis = selectedRowIds[selectedRowIndex]['IDAssetDis'];
+                var iTAssetstatus = selectedRowIds[selectedRowIndex]['Status'];
+                var AssetUpdate = selectedRowIds[selectedRowIndex]['UpdateAsset']; //
+
+                if (iTAssetstatus.toUpperCase() == "AVAILABLE") {
+                    selectedRowIds[selectedRowIndex]['viewStatus'] = "<span class='badge bg-success bg-gradient'>AVAILABLE</span>";
+                }
+                else if (iTAssetstatus.toUpperCase() == "ASSIGNED") {
+                    selectedRowIds[selectedRowIndex]['viewStatus'] = "<span class='badge bg-warning bg-gradient'>ASSIGNED</span>";
+                }
+                else if (iTAssetstatus.toUpperCase() == "REPAIR") {
+                    selectedRowIds[selectedRowIndex]['viewStatus'] = "<span class='badge bg-danger bg-gradient'>REPAIR</span>";
+                }
+                else if (iTAssetstatus.toUpperCase() == "SCRAPPED") {
+                    selectedRowIds[selectedRowIndex]['viewStatus'] = "<span class='badge bg-secondary bg-gradient'>SCRAPPED</span>";
+                }
+                else if (iTAssetstatus.toUpperCase() == "DEACTIVE") {
+                    selectedRowIds[selectedRowIndex]['viewStatus'] = "<span class='badge bg-secondary bg-gradient'>DEACTIVE</span>";
+                }
+
+                selectedRowIds[selectedRowIndex]['view'] = "<button style='border:none; background:transparent;cursor:auto;'>" + idAssetDis + "</button>"
+                selectedRowIds[selectedRowIndex]['UpdateAsset'] = "<button class='fw-bold getScrappedUpdate' style='border:none; background:transparent;color:purple;' data-rowid1='" + idAsset + "'><i class='fa-solid fa-eye'></i></button>"; //
+                //selectedRowIds[selectedRowIndex]['UpdateAsset']= "<button type='button' class='btn btn-outline-success btnChkInfo' value='" + idAsset +  "'><i class='fa-solid fa-eye'></i></button>";
+
+                ScrappedGrid.jqGrid('setRowData', temp_var, selectedRowIds[selectedRowIndex]);
+            }
+        }
+    });
+
     $(document).on('click', '.getITAssetUpdate', function () {
 
         if (RoleUser == 'ADMIN') {
@@ -451,13 +790,118 @@
         }
     });
 
+    $(document).on('click', '.getScrappedUpdate', function () {
+
+        if (RoleUser == 'ADMIN') {
+
+            $("#CreateButtonITAsset").show();
+            $("#RevokeButton").show();
+            $("#RepairButton").show();
+            $("#ScrappedITAsset").show();
+            $("#TransferITAssetDetails").show();
+            $("#UpdateITAssetDetails").show();
+            $("#DeleteITAssetDetails").show();
+        }
+        else if (RoleUser == 'HR') {
+
+            // ITAssetDetails
+            $("#CreateButtonITAsset").hide();
+            $("#RevokeButton").hide();
+            $("#RepairButton").hide();
+            $("#ScrappedITAsset").hide();
+            $("#TransferITAssetDetails").hide();
+            $("#UpdateITAssetDetails").hide();
+            $("#DeleteITAssetDetails").hide();
+        }
+        else if (RoleUser == "SUPERUSER") {
+
+            // ITAssetDetails
+            $("#CreateButtonITAsset").show();
+            $("#RevokeButton").show();
+            $("#RepairButton").show();
+            $("#ScrappedITAsset").show();
+            $("#TransferITAssetDetails").show();
+            $("#UpdateITAssetDetails").show();
+            $("#DeleteITAssetDetails").show();
+        }
+
+        var rowId = $(this).data('rowid1');
+        var data = ScrappedGrid.jqGrid('getRowData', rowId);
+        var purchaseYear = moment(data.PurchaseYear, 'DD-MM-YYYY').format('yyyy-MM-DD');
+        //$('#RevokeButton').show();
+        //$('#RepairButton').show();
+        //$('#ScrappedITAsset').show();
+        $('.ActivityData').show();
+        $('#CreateITAssetDetails').modal("show");
+        $('.LastUserField').show();
+        $('#SaveITAssetDetails').hide();
+        $('#CreateAssetITText').hide();
+        //$('#TransferITAssetDetails').show();
+        //$('#UpdateITAssetDetails').show();
+        //$('#DeleteITAssetDetails').show();
+        $('#UpdateAssetITText').show();
+        $('#AssetID').val(data.IDAsset);
+        $('#UserID').val(data.UserID);
+        $('#HostNameText').val(data.HostName);
+        $('#AssetTypeText').selectpicker('val', data.AssetType);
+        $('#BrandText').val(data.Brand);
+        $('#FullNameText').val(data.FullName);
+        $('#DomainITAsset').val(data.Domain);
+        $('#ModelText').val(data.Model);
+        $('#SerialNumberText').val(data.SerialNumber);
+        $('#PurchaseYearText').val(purchaseYear);
+        $('#OfficeText').selectpicker('val', data.IDLocation);
+        $('#UnitText').val(data.Unit);
+        $('#CPUText').val(data.CPU);
+        $('#MemoryText').val(data.Memory);
+        $('#HDDText').val(data.HDD);
+        $('#OSText').val(data.OS);
+        // $('#LastUserText').val(data.LastUser);
+        $('#SoftwareText').val(data.Software);
+        $('#MonitorITAsset').val(data.Monitor);
+        $('#KeyboardITAsset').val(data.Keyboard);
+        $('#MouseITAsset').val(data.Mouse);
+        $('#MSOfficeITAsset').val(data.MSOffice);
+        $('#EmailIDITAsset').val(data.EmailID);
+        $('#DesignationITAsset').val(data.Designation);
+        $('#IDAssetDis').html(data.IDAssetDis);
+        $('#DepartmentITAsset').val(data.Department);
+        var value = data.ActivityLog;
+        var value1 = data.LastUser;
+        value = value.replaceAll('\\n', '\n');
+        value1 = value1.replaceAll('\\n', '\n');
+        // value = value.substring(2);
+        $('#ActivityLog').val(value);
+        $('#LastUserText').val(value1);
+        //var CreatedBy = data.CreatedBy;
+        //var CreatedOn = data.CreatedOn;
+        //var creationdetITAsset = "Created by " + CreatedBy + " on " + CreatedOn;
+        //$('#CreationITAS').html(creationdetITAsset);
+        var ModfiedBy = data.ModifiedBy;
+        var ModifiedOn = data.ModifiedOn;
+        var creationdetITAsset = "Modified by " + ModfiedBy + " on " + ModifiedOn;
+        $('#CreationITAS').html(creationdetITAsset);
+
+        if (data.Status == 'DEACTIVE' || data.Status == 'SCRAPPED') {
+            $("#UpdateITAssetDetails").hide();
+            $("#ScrappedITAsset").hide();
+            $("#RepairButton").hide();
+            $("#DeactiveButton").hide();
+        }
+        else {
+            $("#UpdateITAssetDetails").show();
+            $("#ScrappedITAsset").show();
+            $("#RepairButton").show();
+            $("#DeactiveButton").show();
+        }
+    });
+
     $("#ActivityLog").attr('readonly', 'readonly');
     $("#FullNameText").attr('readonly', 'readonly');
     $("#EmailIDITAsset").attr('readonly', 'readonly');
     $("#DesignationITAsset").attr('readonly', 'readonly');
     $("#DepartmentITAsset").attr('readonly', 'readonly');
     $("#LastUserText").attr('readonly', 'readonly');
-    //$("#SerialNumberText").attr('readonly', 'readonly');
 
     $('#ExportExcelITAsset').click(function () {
         var HostName = $("#HostNameITAsset").val();
@@ -471,7 +915,21 @@
         var Country = $("#CountryITAsset").val();
         var Domain = $("#DomainDRITAsset").val();
         var url = '../Home/ExportITAssetData?HostName=' + HostName + '&&AssetType=' + AssetType + '&&Brand=' + Brand + '&&Model=' + Model + '&&Status=' + Status + '&&FullName=' + FullName + '&&Location=' + Location + '&&SerialNumber=' + SerialNumber + '&&Country=' + Country + '&&Domain=' + Domain;
-        //var url = "ExportITAssetData";
+        window.open(url);
+    });
+
+    $('#ExportExcelITAsset1').click(function () {
+        var HostName = $("#HostNameITAsset").val();
+        var AssetType = $("#AssetTypeITAsset").val();
+        var Brand = $("#BrandITAsset").val();
+        var Model = $("#ModelITAsset").val();
+        var Status = $("#StatusITAsset").val();
+        var FullName = $("#FullNameITAsset").val();
+        var Location = $("#LocationITAssetDetails").val();
+        var SerialNumber = $("#SerialNrITAssetDetails").val();
+        var Country = $("#CountryITAsset").val();
+        var Domain = $("#DomainDRITAsset").val();
+        var url = '../Home/ExportITAssetData1?HostName=' + HostName + '&&AssetType=' + AssetType + '&&Brand=' + Brand + '&&Model=' + Model + '&&Status=' + Status + '&&FullName=' + FullName + '&&Location=' + Location + '&&SerialNumber=' + SerialNumber + '&&Country=' + Country + '&&Domain=' + Domain;
         window.open(url);
     });
 
@@ -522,6 +980,7 @@
                 success: function (result) {
                     if (result.success) {
                         reload('ITAssetDetailsGrid');
+                        reload('ScrappedGrid')
                         $('#successToastMessage').text('Search successfully');
                         $('#successToast').toast("show");
                         $("#loading").hide();
@@ -853,6 +1312,7 @@
             dataType: "json",
             success: function (result) {
                 reload('ITAssetDetailsGrid');
+                reload('ScrappedGrid');
                 $('#loading').hide();
                 $('#successToastMessage').text('Reset successfully');
                 $('#successToast').toast("show");
@@ -1186,6 +1646,27 @@
         $("#loading").hide();
         window.location.reload();
     });
+
+    $("#user-nav-tabs li").on('click', function (e) {
+        var targetLink = $(e.currentTarget.children[0]).attr("href").slice(1);
+
+        var content_map = {
+            c1: "#content1",
+            c2: "#content2"
+        }
+
+        $(e.currentTarget).siblings().removeClass("active");
+
+        $.each(content_map, function (hash, elid) {
+            if (hash == targetLink) {
+                $(elid).show();
+                $(e.currentTarget).addClass("active");
+            } else {
+                $(elid).hide();
+            }
+        });
+    });
+
 })
 
 function reload(tableName) {

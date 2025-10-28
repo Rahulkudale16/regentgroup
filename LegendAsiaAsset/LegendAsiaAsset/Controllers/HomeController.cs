@@ -1347,6 +1347,118 @@ namespace LegendAsiaAsset.Controllers
             };
             return Json(jsonData);
         }
+
+        public async Task<JsonResult> GetScrappedAssetdata(string sidx, string sort, int page, int rows)
+        {
+            string Region = string.Empty;
+            string Country = string.Empty;
+            string Location1 = string.Empty;
+
+            ITAssetDetailsModel itAssetDetailsModel = new();
+
+            if (TempData["ITAssetDetailsModel"] != null)
+            {
+                var ITAsset = TempData["ITAssetDetailsModel"]?.ToString() ?? string.Empty;
+                itAssetDetailsModel = JsonConvert.DeserializeObject<ITAssetDetailsModel>(ITAsset) ?? new ITAssetDetailsModel();
+            }
+            if (TempData["Region"] != null)
+            {
+                Region = TempData["Region"]?.ToString() ?? string.Empty;
+            }
+            if (TempData["Country"] != null)
+            {
+                Country = TempData["Country"]?.ToString() ?? string.Empty;
+            }
+            if (TempData["Location1"] != null)
+            {
+                Location1 = TempData["Location1"]?.ToString() ?? string.Empty;
+            }
+            if (!string.IsNullOrEmpty(Region) || !string.IsNullOrEmpty(Country) || !string.IsNullOrEmpty(Location1))
+            {
+                var Data = await _locationRepository.GetLocationID(Region, Country, Location1);
+                if (Data.Count > 0)
+                {
+                    int Lastindex = Data.Count - 1;
+                    for (int i = 0; i < Data.Count; i++)
+                    {
+                        if (i == Lastindex)
+                        {
+                            itAssetDetailsModel.Remark += Data[i].IDLocation;
+                        }
+                        else
+                        {
+                            itAssetDetailsModel.Remark += Data[i].IDLocation + ",";
+                        }
+                    }
+                }
+            }
+
+            var AssetList = await _ITAssetDetailsRepository.GetScrappedAssetList(itAssetDetailsModel);
+            foreach (var item in AssetList)
+            {
+                var LocationDet = (await _ITAssetDetailsRepository.GetLocationfromID(item.IDLocation));
+                item.Location = LocationDet.Location;
+                item.Region = LocationDet.Region;
+            }
+            
+            var ITAssetList = ObjectTranslation.ConvertITAssetList(AssetList);
+            int totalRecords = 5;
+            var totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
+            var jsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (from ITAssetGrid in ITAssetList
+                        select new
+                        {
+                            ITAssetGrid.IDAsset,
+                            cell = new string[]
+                            {
+                                ITAssetGrid.IDAsset ?? string.Empty,
+                                string.Empty,
+                                ITAssetGrid.IDAssetDis ?? string.Empty,
+                                ITAssetGrid.UserID ?? string.Empty,
+                                ITAssetGrid.IDLocation ?? string.Empty,
+                                ITAssetGrid.HostName ?? string.Empty,
+                                ITAssetGrid.AssetType ?? string.Empty,
+                                ITAssetGrid.Brand ?? string.Empty,
+                                ITAssetGrid.Model ?? string.Empty,
+                                ITAssetGrid.SerialNumber ?? string.Empty,
+                                ITAssetGrid.PurchaseYear ?? string.Empty,
+                                ITAssetGrid.EmailID ?? string.Empty,
+                                ITAssetGrid.Designation ?? string.Empty,
+                                ITAssetGrid.FullName ?? string.Empty,
+                                ITAssetGrid.LastUser ?? string.Empty,
+                                ITAssetGrid.Location ?? string.Empty,
+                                ITAssetGrid.Region ?? string.Empty,
+                                ITAssetGrid.Country ?? string.Empty,
+                                ITAssetGrid.Unit ?? string.Empty,
+                                ITAssetGrid.CPU ?? string.Empty,
+                                ITAssetGrid.Memory ?? string.Empty,
+                                ITAssetGrid.HDD ?? string.Empty,
+                                ITAssetGrid.OS ?? string.Empty,
+                                ITAssetGrid.Software ?? string.Empty,
+                                ITAssetGrid.Remark ?? string.Empty,
+                                ITAssetGrid.Domain ?? string.Empty,
+                                ITAssetGrid.Status ?? string.Empty,
+                                ITAssetGrid.ActivityLog ?? string.Empty,
+                                ITAssetGrid.CreatedBy ?? string.Empty,
+                                ITAssetGrid.CreationTimeStamp ?? string.Empty,
+                                ITAssetGrid.ModifiedBy ?? string.Empty,
+                                ITAssetGrid.ModificationTimeStamp ?? string.Empty,
+                                ITAssetGrid.Monitor ?? string.Empty,
+                                ITAssetGrid.Keyboard ?? string.Empty,
+                                ITAssetGrid.Mouse ?? string.Empty,
+                                ITAssetGrid.MSOffice ?? string.Empty,
+                                ITAssetGrid.HeadPhone ?? string.Empty,
+                                ITAssetGrid.Department ?? string.Empty
+                            }
+                        })
+            };
+            return Json(jsonData);
+        }
+
         public async Task<JsonResult> GetAssigndata(string sidx, string sort, int page, int rows)
         {
             ITAssetDetailsModel iTAssetDetailsModel = new();
@@ -2015,22 +2127,74 @@ namespace LegendAsiaAsset.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ExportITAssetData1(ITAssetDetailsModel iTAssetDetailsModel)
+        {
+            string filename = "";
+
+            if (iTAssetDetailsModel.Country != null)
+            {
+                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
+            }
+            else if ((iTAssetDetailsModel.Location != null))
+            {
+                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
+            }
+            else
+            {
+                filename = string.Format("RegentGroupAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
+            }
+
+            var weeklyLiftings = ObjectTranslation.ConvertITAssetList(await _ITAssetDetailsRepository.GetScrappedAssetList(iTAssetDetailsModel));
+
+            if (weeklyLiftings.Any())
+            {
+                DataTable dataTable = CreateITAssetList(weeklyLiftings);
+                using (XLWorkbook xLWorkbook = new())
+                {
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Regent Group Asset List");
+                    using (MemoryStream stream = new())
+                    {
+                        xLWorkbook.SaveAs(stream);
+                        byte[] byteStream = stream.ToArray();
+                        string contentType = string.Empty;
+                        var contentDisposition = new ContentDisposition
+                        {
+                            FileName = filename,
+                            Inline = true
+                        };
+                        Response.Headers.Add("content-disposition", contentDisposition.ToString());
+                        contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                        return File(byteStream, contentType);
+                    }
+                    ;
+                }
+                ;
+
+            }
+            else
+            {
+                return Json(new { error = "Unable to Export Document. Please contact IT Support" });
+            }
+        }
+
         private static DataTable CreateITAssetList(List<TranslatedITAssetDetailsModel> ITAssetRecords)
         {
             DataTable dataTable = new("Regent Group Asset List");
-            dataTable.Columns.AddRange(new DataColumn[6]
+            dataTable.Columns.AddRange(new DataColumn[9]
                         {
                       //new DataColumn("HostName"),
-                      //new DataColumn("AssetType"),
-                      //new DataColumn("Brand"),
+                      new DataColumn("AssetType"),
+                      new DataColumn("Brand"),
                       new DataColumn("Model"),
                       new DataColumn("SerialNumber"),
                       new DataColumn("PurchaseYear"),
+                      new DataColumn("Location"),
                       new DataColumn("FullName"),
                       new DataColumn("EmailID"),
                       //new DataColumn("Designation"),
                       new DataColumn("Department"),
-                      //new DataColumn("Location"),
+                      
                       //new DataColumn("Unit"),
                       //new DataColumn("CPU"),
                       //new DataColumn("Memory"),
@@ -2048,7 +2212,7 @@ namespace LegendAsiaAsset.Controllers
 
             foreach (var item in ITAssetRecords)
             {
-                dataTable.Rows.Add(item.Model, item.SerialNumber, item.PurchaseYear,
+                dataTable.Rows.Add(item.AssetType,item.Brand,item.Model, item.SerialNumber, item.PurchaseYear,item.Location,
                     item.FullName, item.EmailID, item.Department);
 
             }

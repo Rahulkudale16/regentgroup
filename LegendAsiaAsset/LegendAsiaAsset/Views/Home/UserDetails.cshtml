@@ -199,7 +199,7 @@
 <!-- Create Modal Ends -->
 <!-- All Update Modal Starts -->
 <div class="modal fade" id="UpdateAllDetails" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-l">
         <div class="modal-content">
             <div class="modal-header text-white" style="background-color:#6F42C1;">
                 <div class="col-lg-4">
@@ -213,7 +213,7 @@
             </div>
             <div class="modal-body row justify-content-center">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-12">
                         <div class="row">
                             <div class="col-lg-6">
                                 @Html.LabelFor(model => model.UserDetails.FullName, htmlAttributes: new { @class = "form-label" })
@@ -280,9 +280,9 @@
                             @Html.HiddenFor(model => model.UserDetails.IDUser, new { @Id = "UserID" })
                         </div>
                     </div>
-                    <div class="col-7">
+                    @* <div class="col-7"> *@
                         <!--upload file buttons and selections-->
-                        <div class="row">
+                        @* <div class="row">
                             <div class="col-lg-2 mt-1">
                                 @Html.LabelFor(model => model.UserDetails.File, htmlAttributes: new { @class = "form-label" })
                             </div>
@@ -295,11 +295,11 @@
                                     <button type="button" class="btn btn-outline-danger" id="DeleteFile"> <i class="fa-solid fa-trash"></i>  Delete File</button>
                                 </div>
                             </div>
-                        </div>
+                        </div> *@
                         <!--upload file buttons and selections close-->
-                        <div class="row">
+                        @* <div class="row"> *@
                             <!-- Document Upload Grid Starts -->
-                            <fieldset class="fieldset mb-3" style="top:63px;">
+                            @* <fieldset class="fieldset mb-3" style="top:63px;">
                                 <legend class="mb-2" ">
                                     &nbsp;DOC UPLOAD GRID &nbsp;
                                 </legend>
@@ -320,9 +320,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </fieldset>
+                            </fieldset> *@
                             <!-- Document Upload Grid Ends -->
-                        </div>
+                        @* </div> *@
                                 @*                         <div class="row">
                         <!--Assign Grid Starts -->
                         <fieldset class="fieldset mb-3" style="top:63px;">
@@ -350,7 +350,7 @@
                         </div> *@
                     </div>
                 </div>
-            </div>
+            
             <div class="modal-footer justify-content-center">
                 <div class="d-flex flex-row align-content-center">
                     <div class="btn-group">
@@ -364,7 +364,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
     </div>
 </div>
 <!-- All Update Modal Ends -->
