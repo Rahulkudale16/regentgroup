@@ -1348,6 +1348,117 @@ namespace LegendAsiaAsset.Controllers
             return Json(jsonData);
         }
 
+        public async Task<JsonResult> GetAssignedAssetdata(string sidx, string sort, int page, int rows)
+        {
+            string Region = string.Empty;
+            string Country = string.Empty;
+            string Location1 = string.Empty;
+
+            ITAssetDetailsModel itAssetDetailsModel = new();
+
+            if (TempData["ITAssetDetailsModel"] != null)
+            {
+                var ITAsset = TempData["ITAssetDetailsModel"]?.ToString() ?? string.Empty;
+                itAssetDetailsModel = JsonConvert.DeserializeObject<ITAssetDetailsModel>(ITAsset) ?? new ITAssetDetailsModel();
+            }
+            if (TempData["Region"] != null)
+            {
+                Region = TempData["Region"]?.ToString() ?? string.Empty;
+            }
+            if (TempData["Country"] != null)
+            {
+                Country = TempData["Country"]?.ToString() ?? string.Empty;
+            }
+            if (TempData["Location1"] != null)
+            {
+                Location1 = TempData["Location1"]?.ToString() ?? string.Empty;
+            }
+            if (!string.IsNullOrEmpty(Region) || !string.IsNullOrEmpty(Country) || !string.IsNullOrEmpty(Location1))
+            {
+                var Data = await _locationRepository.GetLocationID(Region, Country, Location1);
+                if (Data.Count > 0)
+                {
+                    int Lastindex = Data.Count - 1;
+                    for (int i = 0; i < Data.Count; i++)
+                    {
+                        if (i == Lastindex)
+                        {
+                            itAssetDetailsModel.Remark += Data[i].IDLocation;
+                        }
+                        else
+                        {
+                            itAssetDetailsModel.Remark += Data[i].IDLocation + ",";
+                        }
+                    }
+                }
+            }
+
+            var AssetList = await _ITAssetDetailsRepository.GetAssignedAssetList(itAssetDetailsModel);
+            foreach (var item in AssetList)
+            {
+                var LocationDet = (await _ITAssetDetailsRepository.GetLocationfromID(item.IDLocation));
+                item.Location = LocationDet.Location;
+                item.Region = LocationDet.Region;
+            }
+
+            var ITAssetList = ObjectTranslation.ConvertITAssetList(AssetList);
+            int totalRecords = 5;
+            var totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
+            var jsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (from AssignedGrid in ITAssetList
+                        select new
+                        {
+                            AssignedGrid.IDAsset,
+                            cell = new string[]
+                            {
+                                AssignedGrid.IDAsset ?? string.Empty,
+                                string.Empty,
+                                AssignedGrid.IDAssetDis ?? string.Empty,
+                                AssignedGrid.UserID ?? string.Empty,
+                                AssignedGrid.IDLocation ?? string.Empty,
+                                AssignedGrid.HostName ?? string.Empty,
+                                AssignedGrid.AssetType ?? string.Empty,
+                                AssignedGrid.Brand ?? string.Empty,
+                                AssignedGrid.Model ?? string.Empty,
+                                AssignedGrid.SerialNumber ?? string.Empty,
+                                AssignedGrid.PurchaseYear ?? string.Empty,
+                                AssignedGrid.EmailID ?? string.Empty,
+                                AssignedGrid.Designation ?? string.Empty,
+                                AssignedGrid.FullName ?? string.Empty,
+                                AssignedGrid.LastUser ?? string.Empty,
+                                AssignedGrid.Location ?? string.Empty,
+                                AssignedGrid.Region ?? string.Empty,
+                                AssignedGrid.Country ?? string.Empty,
+                                AssignedGrid.Unit ?? string.Empty,
+                                AssignedGrid.CPU ?? string.Empty,
+                                AssignedGrid.Memory ?? string.Empty,
+                                AssignedGrid.HDD ?? string.Empty,
+                                AssignedGrid.OS ?? string.Empty,
+                                AssignedGrid.Software ?? string.Empty,
+                                AssignedGrid.Remark ?? string.Empty,
+                                AssignedGrid.Domain ?? string.Empty,
+                                AssignedGrid.Status ?? string.Empty,
+                                AssignedGrid.ActivityLog ?? string.Empty,
+                                AssignedGrid.CreatedBy ?? string.Empty,
+                                AssignedGrid.CreationTimeStamp ?? string.Empty,
+                                AssignedGrid.ModifiedBy ?? string.Empty,
+                                AssignedGrid.ModificationTimeStamp ?? string.Empty,
+                                AssignedGrid.Monitor ?? string.Empty,
+                                AssignedGrid.Keyboard ?? string.Empty,
+                                AssignedGrid.Mouse ?? string.Empty,
+                                AssignedGrid.MSOffice ?? string.Empty,
+                                AssignedGrid.HeadPhone ?? string.Empty,
+                                AssignedGrid.Department ?? string.Empty
+                            }
+                        })
+            };
+            return Json(jsonData);
+        }
+
         public async Task<JsonResult> GetScrappedAssetdata(string sidx, string sort, int page, int rows)
         {
             string Region = string.Empty;
@@ -2129,6 +2240,57 @@ namespace LegendAsiaAsset.Controllers
 
         [HttpGet]
         public async Task<IActionResult> ExportITAssetData1(ITAssetDetailsModel iTAssetDetailsModel)
+        {
+            string filename = "";
+
+            if (iTAssetDetailsModel.Country != null)
+            {
+                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
+            }
+            else if ((iTAssetDetailsModel.Location != null))
+            {
+                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
+            }
+            else
+            {
+                filename = string.Format("RegentGroupAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
+            }
+
+            var weeklyLiftings = ObjectTranslation.ConvertITAssetList(await _ITAssetDetailsRepository.GetAssignedAssetList(iTAssetDetailsModel));
+
+            if (weeklyLiftings.Any())
+            {
+                DataTable dataTable = CreateITAssetList(weeklyLiftings);
+                using (XLWorkbook xLWorkbook = new())
+                {
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Regent Group Asset List");
+                    using (MemoryStream stream = new())
+                    {
+                        xLWorkbook.SaveAs(stream);
+                        byte[] byteStream = stream.ToArray();
+                        string contentType = string.Empty;
+                        var contentDisposition = new ContentDisposition
+                        {
+                            FileName = filename,
+                            Inline = true
+                        };
+                        Response.Headers.Add("content-disposition", contentDisposition.ToString());
+                        contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                        return File(byteStream, contentType);
+                    }
+                    ;
+                }
+                ;
+
+            }
+            else
+            {
+                return Json(new { error = "Unable to Export Document. Please contact IT Support" });
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExportITAssetData2(ITAssetDetailsModel iTAssetDetailsModel)
         {
             string filename = "";
 

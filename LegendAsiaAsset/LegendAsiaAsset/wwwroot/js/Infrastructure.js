@@ -13,6 +13,12 @@ $(document).ready(function () {
 
         $("#CreateBtnInfra").show();
     }
+    else if (RoleUser == "USER") {
+
+        $("#CreateBtnInfra").hide();
+        $("#UpdateInfra").hide();
+        $("#statusInfra").hide();
+    }
 
     var currentPage;
 

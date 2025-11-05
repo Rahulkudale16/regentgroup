@@ -60,11 +60,11 @@
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col">
+        @*  <div class="col">
             @Html.LabelFor(model => model.ITAssetDetailsModel.Status, htmlAttributes: new { @class = "form-label" })
             @Html.DropDownListFor(model => model.ITAssetDetailsModel.Status, new SelectList(ViewBag.StatusITAsset, "Text", "Text"), "Select Status", new { @class = "", @id = "StatusITAsset" })
             @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Status, "", new { @class = "text-danger" })
-        </div>
+        </div> *@
         <div class="col">
             @Html.LabelFor(model => model.ITAssetDetailsModel.FullName, htmlAttributes: new { @class = "form-label" })
             @Html.DropDownListFor(model => model.ITAssetDetailsModel.FullName, new SelectList(ViewBag.FullNameITAsset, "Text", "Text"), "Select FullName", new { @class = "", @id = "FullNameITAsset" })
@@ -100,7 +100,7 @@
         </div>
     </div>
     <div class="col-6">
-        <button type="button" class="btn btn-outline-secondary" id="ExportExcelITAsset1"><i class="fa-solid fa-file-excel"></i>&nbsp; Export Scrapped Asset</button>
+        <button type="button" class="btn btn-outline-warning" id="ExportExcelITAsset1"><i class="fa-solid fa-file-excel"></i>&nbsp; Export Assigned Asset</button>
     </div>
 </div>
 <!--------------------------------------- Search Options Ends ------------------------------------------------/->
@@ -111,7 +111,7 @@
             <div class="row text-center mb-4">
                 <h4>
                     <span class="mt-4" style="font-size: 17px;"><i class="fa-solid fa-1x fa-square" style="color:green;"></i> AVAILABLE </span>&nbsp;&nbsp;&nbsp;
-                    <span style="font-size: 17px;"><i class="fa-solid fa-1x fa-square" style="color:#FFC107;"></i> ASSIGNED </span>
+
                 </h4>
             </div>
             <table id="ITAssetDetailsGrid" class="table table-bordered table-striped" style="width:100%">
@@ -121,9 +121,26 @@
         <div class="col-6">
             <div class="row text-center mb-4">
                 <h4>
-                    <span style="font-size: 17px;"><i class="fa-solid fa-1x fa-square" style="color:GRAY;"></i> SCRAPPED</span>
+                    <span style="font-size: 17px;"><i class="fa-solid fa-1x fa-square" style="color:#FFC107;"></i> ASSIGNED </span>
                 </h4>
             </div>
+            <table id="AssignedGrid" class="table table-bordered table-striped" style="width:100%">
+            </table>
+            <div id="AssignedPager" style="text-align: center; height:30px"></div>
+        </div>
+    </div>
+</fieldset>
+<fieldset id="ScrappedFieldset">
+    <div class="row mb-4 mt-4" style="border-right: 5px gray solid;">
+        <div class="row text-center mb-4">
+            <h4>
+                <span style="font-size: 17px;"><i class="fa-solid fa-1x fa-square mb-3" style="color:GRAY;"></i> SCRAPPED</span>
+            </h4>
+            <div>
+                <button type="button" class="btn btn-outline-secondary" id="ExportExcelITAsset2"><i class="fa-solid fa-file-excel"></i>&nbsp; Export Scrapped Asset</button>
+            </div>
+        </div>
+        <div class="container">
             <table id="ScrappedGrid" class="table table-bordered table-striped" style="width:100%">
             </table>
             <div id="ScrappedPager" style="text-align: center; height:30px"></div>

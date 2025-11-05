@@ -14,6 +14,13 @@ $(document).ready(function () {
         $("#CreateButtonLocation").show();
 
     }
+    else if (RoleUser == "USER") {
+
+        $("#CreateButtonLocation").hide();
+        $("#UpdateLocationNEW").hide();
+        $("#statusShow1").hide();
+
+    }
     // Location Grid Starts
     var currentPage;
     LocationGrid = $('#LocationGrid').jqGrid({

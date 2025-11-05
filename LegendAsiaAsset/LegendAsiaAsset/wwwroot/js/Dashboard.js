@@ -5,7 +5,7 @@ $(document).ready(function () {
     //------------------------------------------------- IT Asset Grid Starts -----------------------------------------------------------//
     DashboardGrid = $('#DashboardGrid').jqGrid({
         mtype: 'Get',
-        url: 'GetITAssetdata',
+        url: 'GetAssignedAssetdata',
         //editurl: '',
         datatype: 'json',
         colNames: ['ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark','Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'Status', 'View'],

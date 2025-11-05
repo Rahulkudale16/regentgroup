@@ -60,6 +60,44 @@ namespace LegendAsiaAsset.Repository
             }
         }
 
+        public async Task<List<ITAssetDetailsModel>> GetAssignedAssetList(ITAssetDetailsModel iTAssetDetailsModel)
+        {
+            try
+            {
+                string sp = "SP_GetAssignedAssetDetails";
+                var parameter = new DynamicParameters();
+                parameter.Add("HostName", iTAssetDetailsModel.HostName, DbType.String, ParameterDirection.Input);
+                parameter.Add("Assettype", iTAssetDetailsModel.AssetType, DbType.String, ParameterDirection.Input);
+                parameter.Add("Brand", iTAssetDetailsModel.Brand, DbType.String, ParameterDirection.Input);
+                parameter.Add("Model", iTAssetDetailsModel.Model, DbType.String, ParameterDirection.Input);
+                parameter.Add("Status", iTAssetDetailsModel.Status, DbType.String, ParameterDirection.Input);
+                parameter.Add("Location", iTAssetDetailsModel.Location, DbType.String, ParameterDirection.Input);
+                parameter.Add("FullName", iTAssetDetailsModel.FullName, DbType.String, ParameterDirection.Input);
+                parameter.Add("LastUser", iTAssetDetailsModel.LastUser, DbType.String, ParameterDirection.Input);
+                parameter.Add("SerialNumber", iTAssetDetailsModel.SerialNumber, DbType.String, ParameterDirection.Input);
+                parameter.Add("Country", iTAssetDetailsModel.Country, DbType.String, ParameterDirection.Input);
+                parameter.Add("Domain", iTAssetDetailsModel.Domain, DbType.String, ParameterDirection.Input);
+                parameter.Add("IDLocations", iTAssetDetailsModel.Remark, DbType.String, ParameterDirection.Input);
+                using (var connection = _context.CreateConnection())
+                {
+                    var iTAssetDetailsModel1 = await connection.QueryAsync<ITAssetDetailsModel>(sp, parameter, commandType: CommandType.StoredProcedure);
+                    if (iTAssetDetailsModel1 != null)
+                    {
+                        return iTAssetDetailsModel1.AsList();
+                    }
+                    else
+                    {
+                        return new();
+                    }
+                }
+                ;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<List<ITAssetDetailsModel>> GetScrappedAssetList(ITAssetDetailsModel iTAssetDetailsModel)
         {
             try

@@ -13,6 +13,11 @@ $(document).ready(function () {
 
         $("#CreateButton").show();
     }
+    else if (RoleUser == "USER") {
+        $("#CreateButton").hide();
+        $("#UpdateUserDetails").hide();
+        $("#statusShow").hide();
+    }
 
     var currentPage;
     //$("#EmailIDUpdate").attr('readonly', 'readonly');
