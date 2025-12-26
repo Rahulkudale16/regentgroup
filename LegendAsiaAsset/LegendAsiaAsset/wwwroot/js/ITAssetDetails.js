@@ -17,7 +17,7 @@
         $("#CreateButtonITAsset").show();
         $("#AssignITAssetDetails").show();
     }
-    else if (RoleUser == "USER") {
+    else if (RoleUser == "USER") {GetITAssetdata
         $("#CreateButtonITAsset").hide();
         $("#AssignITAssetDetails").hide();
         $("#RevokeButton").hide();
@@ -32,8 +32,15 @@
         url: 'GetITAssetdata',
         //editurl: '',
         datatype: 'json',
-        colNames: ['ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'Status', 'View'],
+        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department','LastAssetLocation', 'Status', 'View'],
         colModel: [
+            {
+                key: false,
+                hidden: false,
+                editable: false,
+                name: 'AssetID',
+                width: '65px',
+            },
             {
                 key: true,
                 hidden: true,
@@ -99,7 +106,6 @@
             {
                 key: false,
                 name: 'PurchaseYear',
-                hidden: true,
                 editable: false,
                 width: '135px',
             },
@@ -134,6 +140,7 @@
             },
             {
                 key: false,
+                hidden:true,
                 name: 'Location',
                 editable: false,
                 width: '125px',
@@ -290,6 +297,13 @@
                 hidden: true,
                 editable: false,
                 name: 'Department',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'LastAssetLocation',
                 width: '65px',
             },
             {
@@ -368,8 +382,15 @@
         url: 'GetAssignedAssetdata',
         //editurl: '',
         datatype: 'json',
-        colNames: ['ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'Status', 'View'],
+        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department','LastAssetLocation','Status', 'View'],
         colModel: [
+            {
+                key: false,
+                hidden: false,
+                editable: false,
+                name: 'AssetID',
+                width: '65px',
+            },
             {
                 key: true,
                 hidden: true,
@@ -434,7 +455,6 @@
             },
             {
                 key: false,
-                hidden: true,
                 name: 'PurchaseYear',
                 editable: false,
                 width: '135px',
@@ -468,6 +488,7 @@
             },
             {
                 key: false,
+                hidden:true,
                 name: 'Location',
                 editable: false,
                 width: '140px',
@@ -624,6 +645,13 @@
                 hidden: true,
                 editable: false,
                 name: 'Department',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'LastAssetLocation',
                 width: '65px',
             },
             {
@@ -702,8 +730,15 @@
         url: 'GetScrappedAssetdata',
         //editurl: '',
         datatype: 'json',
-        colNames: ['ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'Status', 'View'],
+        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department','LastAssetLocation', 'Status', 'View'],
         colModel: [
+            {
+                key: false,
+                hidden: false,
+                editable: false,
+                name: 'AssetID',
+                width: '65px',
+            },
             {
                 key: true,
                 hidden: true,
@@ -755,7 +790,7 @@
             },
             {
                 key: false,
-                //hidden: true,
+                hidden: true,
                 name: 'Model',
                 editable: false,
                 width: '130px',
@@ -768,7 +803,6 @@
             },
             {
                 key: false,
-                hidden: true,
                 name: 'PurchaseYear',
                 editable: false,
                 width: '135px',
@@ -803,6 +837,7 @@
             },
             {
                 key: false,
+                hidden:true,
                 name: 'Location',
                 editable: false,
                 width: '95px',
@@ -816,7 +851,7 @@
             },
             {
                 key: false,
-                //hidden: true,
+                hidden: true,
                 name: 'Country',
                 editable: false,
                 width: '95px',
@@ -959,6 +994,13 @@
                 hidden: true,
                 editable: false,
                 name: 'Department',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'LastAssetLocation',
                 width: '65px',
             },
             {
@@ -1080,16 +1122,21 @@
         //$('#RevokeButton').show();
         //$('#RepairButton').show();
         //$('#ScrappedITAsset').show();
-        $('.ActivityData').show();
+        $('.ActivityData').hide();
+        $('.ActivityData1').show();
+        $('.ActivityData2').show();
         $('#CreateITAssetDetails').modal("show");
         $('.LastUserField').show();
         $('#SaveITAssetDetails').hide();
         $('#CreateAssetITText').hide();
+
+
         //$('#TransferITAssetDetails').show();
         //$('#UpdateITAssetDetails').show();
         //$('#DeleteITAssetDetails').show();
         $('#UpdateAssetITText').show();
         $('#AssetID').val(data.IDAsset);
+        $('#IDAssetDisText').val(data.IDAssetDis);
         $('#UserID').val(data.UserID);
         $('#HostNameText').val(data.HostName);
         $('#AssetTypeText').selectpicker('val', data.AssetType);
@@ -1099,13 +1146,13 @@
         $('#ModelText').val(data.Model);
         $('#SerialNumberText').val(data.SerialNumber);
         $('#PurchaseYearText').val(purchaseYear);
-        $('#OfficeText').selectpicker('val', data.IDLocation);
+        $('#OfficeText').val(data.Location);
         $('#UnitText').val(data.Unit);
         $('#CPUText').val(data.CPU);
         $('#MemoryText').val(data.Memory);
         $('#HDDText').val(data.HDD);
         $('#OSText').val(data.OS);
-        // $('#LastUserText').val(data.LastUser);
+        //$('#LastUserText').val(data.LastUser);
         $('#SoftwareText').val(data.Software);
         $('#MonitorITAsset').val(data.Monitor);
         $('#KeyboardITAsset').val(data.Keyboard);
@@ -1115,6 +1162,8 @@
         $('#DesignationITAsset').val(data.Designation);
         $('#IDAssetDis').html(data.IDAssetDis);
         $('#DepartmentITAsset').val(data.Department);
+        $('#RemarkText').val(data.Remark);
+        $('#LastAssetLocation').val(data.LastAssetLocation);
         var value = data.ActivityLog;
         var value1 = data.LastUser;
         value = value.replaceAll('\\n', '\n');
@@ -1130,6 +1179,7 @@
         var ModifiedOn = data.ModifiedOn;
         var creationdetITAsset = "Modified by " + ModfiedBy + " on " + ModifiedOn;
         $('#CreationITAS').html(creationdetITAsset);
+        $('#AssetIDText').val(data.AssetID);
 
         if (data.Status == 'DEACTIVE' || data.Status == 'SCRAPPED') {
             $("#UpdateITAssetDetails").hide();
@@ -1204,6 +1254,8 @@
         //$('#RepairButton').show();
         //$('#ScrappedITAsset').show();
         $('.ActivityData').show();
+        $('.ActivityData1').show();
+        $('.ActivityData2').hide();
         $('#CreateITAssetDetails').modal("show");
         $('.LastUserField').show();
         $('#SaveITAssetDetails').hide();
@@ -1215,6 +1267,7 @@
         $('#AssetID').val(data.IDAsset);
         $('#UserID').val(data.UserID);
         $('#HostNameText').val(data.HostName);
+        $('#IDAssetDisText').val(data.IDAssetDis);
         $('#AssetTypeText').selectpicker('val', data.AssetType);
         $('#BrandText').val(data.Brand);
         $('#FullNameText').val(data.FullName);
@@ -1222,7 +1275,7 @@
         $('#ModelText').val(data.Model);
         $('#SerialNumberText').val(data.SerialNumber);
         $('#PurchaseYearText').val(purchaseYear);
-        $('#OfficeText').selectpicker('val', data.IDLocation);
+        $('#OfficeText').val(data.LastAssetLocation);
         $('#UnitText').val(data.Unit);
         $('#CPUText').val(data.CPU);
         $('#MemoryText').val(data.Memory);
@@ -1238,6 +1291,8 @@
         $('#DesignationITAsset').val(data.Designation);
         $('#IDAssetDis').html(data.IDAssetDis);
         $('#DepartmentITAsset').val(data.Department);
+        $('#RemarkText').val(data.Remark);
+        $('#LastAssetLocation').val(data.LastAssetLocation);
         var value = data.ActivityLog;
         var value1 = data.LastUser;
         value = value.replaceAll('\\n', '\n');
@@ -1253,6 +1308,7 @@
         var ModifiedOn = data.ModifiedOn;
         var creationdetITAsset = "Modified by " + ModfiedBy + " on " + ModifiedOn;
         $('#CreationITAS').html(creationdetITAsset);
+        $('#AssetIDText').val(data.AssetID);
 
         if (data.Status == 'DEACTIVE' || data.Status == 'SCRAPPED') {
             $("#UpdateITAssetDetails").hide();
@@ -1317,7 +1373,9 @@
         //$('#RevokeButton').show();
         //$('#RepairButton').show();
         //$('#ScrappedITAsset').show();
-        $('.ActivityData').show();
+        $('.ActivityData').hide();
+        $('.ActivityData1').show();
+        $('.ActivityData2').show();
         $('#CreateITAssetDetails').modal("show");
         $('.LastUserField').show();
         $('#SaveITAssetDetails').hide();
@@ -1329,6 +1387,7 @@
         $('#AssetID').val(data.IDAsset);
         $('#UserID').val(data.UserID);
         $('#HostNameText').val(data.HostName);
+        $('#IDAssetDisText').val(data.IDAssetDis);
         $('#AssetTypeText').selectpicker('val', data.AssetType);
         $('#BrandText').val(data.Brand);
         $('#FullNameText').val(data.FullName);
@@ -1336,7 +1395,7 @@
         $('#ModelText').val(data.Model);
         $('#SerialNumberText').val(data.SerialNumber);
         $('#PurchaseYearText').val(purchaseYear);
-        $('#OfficeText').selectpicker('val', data.IDLocation);
+        $('#OfficeText').val(data.Location);
         $('#UnitText').val(data.Unit);
         $('#CPUText').val(data.CPU);
         $('#MemoryText').val(data.Memory);
@@ -1352,6 +1411,7 @@
         $('#DesignationITAsset').val(data.Designation);
         $('#IDAssetDis').html(data.IDAssetDis);
         $('#DepartmentITAsset').val(data.Department);
+        $('#LastAssetLocation').val(data.LastAssetLocation);
         var value = data.ActivityLog;
         var value1 = data.LastUser;
         value = value.replaceAll('\\n', '\n');
@@ -1367,6 +1427,7 @@
         var ModifiedOn = data.ModifiedOn;
         var creationdetITAsset = "Modified by " + ModfiedBy + " on " + ModifiedOn;
         $('#CreationITAS').html(creationdetITAsset);
+        $('#AssetIDText').val(data.AssetID);
 
         if (data.Status == 'DEACTIVE' || data.Status == 'SCRAPPED') {
             $("#UpdateITAssetDetails").hide();
@@ -1431,7 +1492,9 @@
         //$('#RevokeButton').show();
         //$('#RepairButton').show();
         //$('#ScrappedITAsset').show();
-        $('.ActivityData').show();
+        $('.ActivityData').hide();
+        $('.ActivityData1').show();
+        $('.ActivityData2').show();
         $('#CreateITAssetDetails').modal("show");
         $('.LastUserField').show();
         $('#SaveITAssetDetails').hide();
@@ -1450,7 +1513,7 @@
         $('#ModelText').val(data.Model);
         $('#SerialNumberText').val(data.SerialNumber);
         $('#PurchaseYearText').val(purchaseYear);
-        $('#OfficeText').selectpicker('val', data.IDLocation);
+        $('#OfficeText').val(data.Location);
         $('#UnitText').val(data.Unit);
         $('#CPUText').val(data.CPU);
         $('#MemoryText').val(data.Memory);
@@ -1466,6 +1529,7 @@
         $('#DesignationITAsset').val(data.Designation);
         $('#IDAssetDis').html(data.IDAssetDis);
         $('#DepartmentITAsset').val(data.Department);
+        $('#LastAssetLocation').val(data.LastAssetLocation);
         var value = data.ActivityLog;
         var value1 = data.LastUser;
         value = value.replaceAll('\\n', '\n');
@@ -1481,6 +1545,7 @@
         var ModifiedOn = data.ModifiedOn;
         var creationdetITAsset = "Modified by " + ModfiedBy + " on " + ModifiedOn;
         $('#CreationITAS').html(creationdetITAsset);
+        $('#AssetIDText').val(data.AssetID);
 
         if (data.Status == 'DEACTIVE' || data.Status == 'SCRAPPED') {
             $("#UpdateITAssetDetails").hide();
@@ -1498,10 +1563,14 @@
 
     $("#ActivityLog").attr('readonly', 'readonly');
     $("#FullNameText").attr('readonly', 'readonly');
+    $("#IDAssetDisText").attr('readonly', 'readonly');
     $("#EmailIDITAsset").attr('readonly', 'readonly');
     $("#DesignationITAsset").attr('readonly', 'readonly');
     $("#DepartmentITAsset").attr('readonly', 'readonly');
-    $("#LastUserText").attr('readonly', 'readonly');
+    $("#LastUserText").attr('readonly', 'readonly'); 
+    $("#OfficeText").attr('readonly', 'readonly');
+    $("#DomainITAsset").attr('readonly', 'readonly');
+    $("#LastAssetLocation").attr('readonly', 'readonly');
 
     $('#ExportExcelITAsset').click(function () {
         var HostName = $("#HostNameITAsset").val();
@@ -1514,7 +1583,9 @@
         var SerialNumber = $("#SerialNrITAssetDetails").val();
         var Country = $("#CountryITAsset").val();
         var Domain = $("#DomainDRITAsset").val();
-        var url = '../Home/ExportITAssetData?HostName=' + HostName + '&&AssetType=' + AssetType + '&&Brand=' + Brand + '&&Model=' + Model + '&&Status=' + Status + '&&FullName=' + FullName + '&&Location=' + Location + '&&SerialNumber=' + SerialNumber + '&&Country=' + Country + '&&Domain=' + Domain;
+        var IDAssetDis = $("#AssetIDITAsset").val();
+        var AssetID = $('#AssetIDAsset').val();
+        var url = '../Home/ExportITAssetData?HostName=' + HostName + '&&AssetType=' + AssetType + '&&Brand=' + Brand + '&&Model=' + Model + '&&Status=' + Status + '&&FullName=' + FullName + '&&Location=' + Location + '&&SerialNumber=' + SerialNumber + '&&Country=' + Country + '&&Domain=' + Domain + '&&IDAssetDis=' + IDAssetDis + '&&AssetID=' + AssetID;
         window.open(url);
     });
 
@@ -1529,7 +1600,9 @@
         var SerialNumber = $("#SerialNrITAssetDetails").val();
         var Country = $("#CountryITAsset").val();
         var Domain = $("#DomainDRITAsset").val();
-        var url = '../Home/ExportITAssetData1?HostName=' + HostName + '&&AssetType=' + AssetType + '&&Brand=' + Brand + '&&Model=' + Model + '&&Status=' + Status + '&&FullName=' + FullName + '&&Location=' + Location + '&&SerialNumber=' + SerialNumber + '&&Country=' + Country + '&&Domain=' + Domain;
+        var IDAssetDis = $("#AssetIDITAsset").val();
+        var AssetID = $('#AssetIDAsset').val();
+        var url = '../Home/ExportITAssetData1?HostName=' + HostName + '&&AssetType=' + AssetType + '&&Brand=' + Brand + '&&Model=' + Model + '&&Status=' + Status + '&&FullName=' + FullName + '&&Location=' + Location + '&&SerialNumber=' + SerialNumber + '&&Country=' + Country + '&&Domain=' + Domain + '&&IDAssetDis=' + IDAssetDis + '&&AssetID=' + AssetID;
         window.open(url);
     });
 
@@ -1544,7 +1617,9 @@
         var SerialNumber = $("#SerialNrITAssetDetails").val();
         var Country = $("#CountryITAsset").val();
         var Domain = $("#DomainDRITAsset").val();
-        var url = '../Home/ExportITAssetData2?HostName=' + HostName + '&&AssetType=' + AssetType + '&&Brand=' + Brand + '&&Model=' + Model + '&&Status=' + Status + '&&FullName=' + FullName + '&&Location=' + Location + '&&SerialNumber=' + SerialNumber + '&&Country=' + Country + '&&Domain=' + Domain;
+        var IDAssetDis = $("#AssetIDITAsset").val();
+        var AssetID = $('#AssetIDAsset').val();
+        var url = '../Home/ExportITAssetData2?HostName=' + HostName + '&&AssetType=' + AssetType + '&&Brand=' + Brand + '&&Model=' + Model + '&&Status=' + Status + '&&FullName=' + FullName + '&&Location=' + Location + '&&SerialNumber=' + SerialNumber + '&&Country=' + Country + '&&Domain=' + Domain + '&&IDAssetDis=' + IDAssetDis + '&&AssetID=' + AssetID;
         window.open(url);
     });
 
@@ -1571,11 +1646,14 @@
         var LastUser = $('#LastUserITAsset').val();
         var Country = $('#CountryITAsset').val();
         var Domain = $('#DomainDRITAsset').val();
+        var IDAssetDis = $('#AssetIDITAsset').val();
+        var AssetID = $('#AssetIDAsset').val();
         if (HostName != "" || AssetType != "" || Brand != "" || Model != "" || Office != "" || FullName != "" || Location != "" || SerialNumber != "" || Country != "" || LastUser != "" || Domain != "") {
             $.ajax({
                 type: "POST",
                 url: 'SearchButtonITAsset',
                 data: {
+                    IDAssetDis,
                     HostName,
                     AssetType,
                     Brand,
@@ -1586,7 +1664,8 @@
                     SerialNumber,
                     Country,
                     LastUser,
-                    Domain
+                    Domain,
+                    AssetID
                 },
 
                 datatype: "json",
@@ -1638,8 +1717,9 @@
         var Mouse = $('#MouseITAsset').val().toUpperCase();
         var MSOffice = $('#MSOfficeITAsset').val().toUpperCase();
         var Domain = $('#DomainITAsset').val().toUpperCase();
+        var AssetID = $('#AssetIDText').val().toUpperCase();
 
-        if (AssetType == '' || Brand == '' || Model == '' || SerialNumber == '' || Location == '' || PurchaseYear == "" || Domain == "") {
+        if (AssetType == '' || Brand == '' || Model == '' || SerialNumber == '' || PurchaseYear == "") {
             $('#warningToastMessage').text('Please fill mandatory fields.');
             $('#warningToast').toast("show");
             $("#loading").hide();
@@ -1647,7 +1727,8 @@
         else {
             $.ajax({
                 type: "POST",
-                url: 'SaveITAssetDetails1',
+                url: 'SaveITAssetDetails2',
+                //url: '../Home/SaveITAssetDetails2',
                 data: {
                     HostName,
                     AssetType,
@@ -1670,7 +1751,8 @@
                     Keyboard,
                     Mouse,
                     MSOffice,
-                    Domain
+                    Domain,
+                    AssetID
                 },
                 dataType: "json",
                 success: function (result) {
@@ -1733,7 +1815,9 @@
         var Designation = $('#DesignationITAsset').val();
         var Domain = $('#DomainITAsset').val();
         var Department = $('#DepartmentITAsset').val();
-        if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || Location == "" || PurchaseYear == "" || Domain == "") {
+        var AssetID = $('#AssetIDText').val().toUpperCase();
+
+        if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || PurchaseYear == "") {
             $('#warningToastMessage').text('Please fill mandatory fields.');
             $('#warningToast').toast("show");
             $("#loading").hide();
@@ -1742,7 +1826,8 @@
 
             $.ajax({
                 type: "POST",
-                url: 'SaveITAssetDetails1',
+                url: 'SaveITAssetDetails2',
+                //url: '../Home/SaveITAssetDetails2',
                 data: {
                     IDAsset,
                     HostName,
@@ -1769,7 +1854,8 @@
                     EmailID,
                     Designation,
                     Department,
-                    Domain
+                    Domain,
+                    AssetID
                 },
                 dataType: "json",
                 success: function (result) {
@@ -1780,6 +1866,7 @@
                         $('#CreateITAssetDetails').modal("hide");
                         $("#loading").hide();
                         DestroyRenderITAssetDropdowns();
+                        window.location.reload();
                     }
                     else {
                         if (result.duplicate == true) {
@@ -1921,6 +2008,8 @@
         $('#CountryITAsset').selectpicker('val', '');
         $('#LastUserITAsset').selectpicker('val', '');
         $('#DomainDRITAsset').selectpicker('val', '');
+        $('#AssetIDITAsset').selectpicker('val', '');
+        $('#AssetIDAsset').selectpicker('val', '');
         $.ajax({
             type: "POST",
             url: 'ResetButtonITAsset',
@@ -1943,6 +2032,8 @@
         $('#UpdateAssetITText').hide();
         $('#TransferITAssetDetails').hide();
         $('.ActivityData').hide();
+        $('.ActivityData1').hide();
+        $('.ActivityData2').hide();
         $('#SaveITAssetDetails').show();
         $('#CreateAssetITText').show();
         $('.LastUserField').hide();
@@ -1976,6 +2067,8 @@
         $('#RepairButton').hide();
         $('#DeactiveButton').hide();
         $('#ScrappedITAsset').hide();
+        $('#BrandText').val('')
+        $('#RemarkText').val('')
     });
 
     $('#AssignAsset').click(function () {

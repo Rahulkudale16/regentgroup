@@ -29,6 +29,8 @@ namespace LegendAsiaAsset.Repository
             {
                 string sp = "SP_GetColumnsITAsseTDetails";
                 var parameter = new DynamicParameters();
+                parameter.Add("AssetID", iTAssetDetailsModel.AssetID, DbType.String, ParameterDirection.Input);
+                parameter.Add("IDAssetDis", iTAssetDetailsModel.IDAssetDis, DbType.String, ParameterDirection.Input);
                 parameter.Add("HostName", iTAssetDetailsModel.HostName, DbType.String, ParameterDirection.Input);
                 parameter.Add("Assettype", iTAssetDetailsModel.AssetType, DbType.String, ParameterDirection.Input);
                 parameter.Add("Brand", iTAssetDetailsModel.Brand, DbType.String, ParameterDirection.Input);
@@ -66,6 +68,8 @@ namespace LegendAsiaAsset.Repository
             {
                 string sp = "SP_GetAssignedAssetDetails";
                 var parameter = new DynamicParameters();
+                parameter.Add("AssetID", iTAssetDetailsModel.AssetID, DbType.String, ParameterDirection.Input);
+                parameter.Add("IDAssetDis", iTAssetDetailsModel.IDAssetDis, DbType.String, ParameterDirection.Input);
                 parameter.Add("HostName", iTAssetDetailsModel.HostName, DbType.String, ParameterDirection.Input);
                 parameter.Add("Assettype", iTAssetDetailsModel.AssetType, DbType.String, ParameterDirection.Input);
                 parameter.Add("Brand", iTAssetDetailsModel.Brand, DbType.String, ParameterDirection.Input);
@@ -104,6 +108,8 @@ namespace LegendAsiaAsset.Repository
             {
                 string sp = "SP_GetScrappedAssetDetails";
                 var parameter = new DynamicParameters();
+                parameter.Add("AssetID", iTAssetDetailsModel.AssetID, DbType.String, ParameterDirection.Input);
+                parameter.Add("IDAssetDis", iTAssetDetailsModel.IDAssetDis, DbType.String, ParameterDirection.Input);
                 parameter.Add("HostName", iTAssetDetailsModel.HostName, DbType.String, ParameterDirection.Input);
                 parameter.Add("Assettype", iTAssetDetailsModel.AssetType, DbType.String, ParameterDirection.Input);
                 parameter.Add("Brand", iTAssetDetailsModel.Brand, DbType.String, ParameterDirection.Input);
@@ -519,6 +525,52 @@ namespace LegendAsiaAsset.Repository
                 throw;
             }
         }
+        public async Task<List<ITAssetDetailsModel>> GetAssetIDDetails()
+        {
+            try
+            {
+                string? sp = "SP_GetAssetIDFromITAssetDetails";
+                using (var connection = _context.CreateConnection())
+                {
+                    var ITAssetOffice = await connection.QueryAsync<ITAssetDetailsModel>(sp, commandType: CommandType.StoredProcedure);
+                    if (ITAssetOffice != null)
+                    {
+                        return ITAssetOffice.AsList();
+                    }
+                    else
+                    {
+                        return new List<ITAssetDetailsModel>();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<List<ITAssetDetailsModel>> GetAssetIDAsset()
+        {
+            try
+            {
+                string? sp = "SP_GetAssetIDDataFromITAssetDetails";
+                using (var connection = _context.CreateConnection())
+                {
+                    var ITAssetOffice = await connection.QueryAsync<ITAssetDetailsModel>(sp, commandType: CommandType.StoredProcedure);
+                    if (ITAssetOffice != null)
+                    {
+                        return ITAssetOffice.AsList();
+                    }
+                    else
+                    {
+                        return new List<ITAssetDetailsModel>();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public async Task<ResponseModel> SaveITAssetDetails(ITAssetDetailsModel iTAssetDetailsModel)
         {
             string currentUserName = GetUserName();
@@ -537,10 +589,6 @@ namespace LegendAsiaAsset.Repository
                 parameters.Add("Model", iTAssetDetailsModel.Model, DbType.String, ParameterDirection.Input);
                 parameters.Add("SerialNumber", iTAssetDetailsModel.SerialNumber, DbType.String, ParameterDirection.Input);
                 parameters.Add("PurchaseYear", iTAssetDetailsModel.PurchaseYear, DbType.DateTime, ParameterDirection.Input);
-                parameters.Add("IDLocation", iTAssetDetailsModel.Location, DbType.String, ParameterDirection.Input);
-                parameters.Add("Location", iTAssetDetailsModel.Location, DbType.String, ParameterDirection.Input);
-                parameters.Add("Region", iTAssetDetailsModel.Region, DbType.String, ParameterDirection.Input);
-                parameters.Add("Country", iTAssetDetailsModel.Country, DbType.String, ParameterDirection.Input);
                 parameters.Add("Unit", iTAssetDetailsModel.Unit?? string.Empty, DbType.String, ParameterDirection.Input);
                 parameters.Add("CPU", iTAssetDetailsModel.CPU, DbType.String, ParameterDirection.Input);
                 parameters.Add("Memory", iTAssetDetailsModel.Memory, DbType.String, ParameterDirection.Input);
@@ -548,7 +596,6 @@ namespace LegendAsiaAsset.Repository
                 parameters.Add("OS", iTAssetDetailsModel.OS, DbType.String, ParameterDirection.Input);
                 parameters.Add("Software", iTAssetDetailsModel.Software, DbType.String, ParameterDirection.Input);
                 parameters.Add("Remark", iTAssetDetailsModel.Remark, DbType.String, ParameterDirection.Input);
-                parameters.Add("Domain", iTAssetDetailsModel.Domain, DbType.String, ParameterDirection.Input);
                 parameters.Add("Status", "AVAILABLE", DbType.String, ParameterDirection.Input);
                 parameters.Add("CreatedBy", currentUserName, DbType.String, ParameterDirection.Input);
                 parameters.Add("ModifiedBy", currentUserName, DbType.String, ParameterDirection.Input);
@@ -560,6 +607,7 @@ namespace LegendAsiaAsset.Repository
                 parameters.Add("Designation", iTAssetDetailsModel.Designation, DbType.String, ParameterDirection.Input);
                 parameters.Add("HeadPhone", iTAssetDetailsModel.HeadPhone, DbType.String, ParameterDirection.Input);
                 parameters.Add("Department", iTAssetDetailsModel.Department, DbType.String, ParameterDirection.Input);
+                parameters.Add("AssetID", iTAssetDetailsModel.AssetID, DbType.String, ParameterDirection.Input);
                 parameters.Add("MSOffice", iTAssetDetailsModel.MSOffice, DbType.String, ParameterDirection.Input);
                 parameters.Add("LastUser", iTAssetDetailsModel.LastUser, DbType.String, ParameterDirection.Input);
                 parameters.Add("IsDuplicateFound", DbType.Boolean, direction: ParameterDirection.Output);
@@ -607,13 +655,13 @@ namespace LegendAsiaAsset.Repository
 
                 var parameters = new DynamicParameters();
                 parameters.Add("IDAsset", iTAssetDetailsModel.IDAsset, DbType.Int16, ParameterDirection.Input);
+                //parameters.Add("IDLocation", iTAssetDetailsModel.Location, DbType.Int16, ParameterDirection.Input);
                 parameters.Add("HostName", iTAssetDetailsModel.HostName, DbType.String, ParameterDirection.Input);
                 parameters.Add("AssetType", iTAssetDetailsModel.AssetType, DbType.String, ParameterDirection.Input);
                 parameters.Add("Brand", iTAssetDetailsModel.Brand ?? string.Empty, DbType.String, ParameterDirection.Input);
                 parameters.Add("Model", iTAssetDetailsModel.Model, DbType.String, ParameterDirection.Input);
                 parameters.Add("SerialNumber", iTAssetDetailsModel.SerialNumber, DbType.String, ParameterDirection.Input);
                 parameters.Add("PurchaseYear", iTAssetDetailsModel.PurchaseYear, DbType.DateTime, ParameterDirection.Input);
-                parameters.Add("IDLocation", iTAssetDetailsModel.Location, DbType.String, ParameterDirection.Input);
                 parameters.Add("Unit", iTAssetDetailsModel.Unit ?? string.Empty, DbType.String, ParameterDirection.Input);
                 parameters.Add("CPU", iTAssetDetailsModel.CPU, DbType.String, ParameterDirection.Input);
                 parameters.Add("Memory", iTAssetDetailsModel.Memory, DbType.String, ParameterDirection.Input);
@@ -629,8 +677,9 @@ namespace LegendAsiaAsset.Repository
                 parameters.Add("EmailID", iTAssetDetailsModel.EmailID, DbType.String, ParameterDirection.Input);
                 parameters.Add("Designation", iTAssetDetailsModel.Designation, DbType.String, ParameterDirection.Input);
                 parameters.Add("Department", iTAssetDetailsModel.Department, DbType.String, ParameterDirection.Input);
+                parameters.Add("AssetID", iTAssetDetailsModel.AssetID, DbType.String, ParameterDirection.Input);
                 parameters.Add("HeadPhone", iTAssetDetailsModel.HeadPhone, DbType.String, ParameterDirection.Input);
-                parameters.Add("MSOffice", iTAssetDetailsModel.MSOffice, DbType.String, ParameterDirection.Input);
+                parameters.Add("MSOffice", iTAssetDetailsModel.MSOffice, DbType.Int16, ParameterDirection.Input);
                 parameters.Add("LastUser", iTAssetDetailsModel.LastUser, DbType.String, ParameterDirection.Input);
                 parameters.Add("IsDuplicateFound", DbType.Boolean, direction: ParameterDirection.Output);
                 using (var connection = _context.CreateConnection())

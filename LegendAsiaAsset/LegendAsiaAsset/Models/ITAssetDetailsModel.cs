@@ -64,7 +64,7 @@ namespace LegendAsiaAsset.Models
 
         public int ITAssetCount { get; set; }
         public double ActiveITAssetPec { get; set; }
-
+        [Display(Name = "Additional ID")]
         public string? IDAssetDis { get; set; }
         public string? ActivityLog { get; set; }
 
@@ -92,5 +92,8 @@ namespace LegendAsiaAsset.Models
         public string? Country { get; set; }
         [Display(Name = "Domain")]
         public string? Domain { get; set; }
+        public string? AssetID { get; set; }
+        [Display(Name = "Previous Location")]
+        public string? LastAssetLocation { get; set; }
     }
 }

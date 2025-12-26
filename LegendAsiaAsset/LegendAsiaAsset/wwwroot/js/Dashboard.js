@@ -8,8 +8,14 @@ $(document).ready(function () {
         url: 'GetAssignedAssetdata',
         //editurl: '',
         datatype: 'json',
-        colNames: ['ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark','Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'Status', 'View'],
+        colNames: ['AssetID','ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark','Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'Status', 'View'],
         colModel: [
+            {
+                key: true,
+                hidden: true,
+                name: 'AssetID',
+                width: '70px',
+            },
             {
                 key: true,
                 hidden: true,
@@ -68,7 +74,6 @@ $(document).ready(function () {
             },
             {
                 key: false,
-                hidden: true,
                 name: 'SerialNumber',
                 editable: false,
                 width: '130px',
@@ -110,6 +115,7 @@ $(document).ready(function () {
             },
             {
                 key: false,
+                hidden:true,
                 name: 'Location',
                 editable: false,
                 width: '95px',
@@ -387,7 +393,6 @@ $(document).ready(function () {
             },
             {
                 key: false,
-                hidden: true,
                 name: 'SerialNumber',
                 editable: false,
                 width: '200px',
@@ -415,6 +420,7 @@ $(document).ready(function () {
             },
             {
                 key: false,
+                hidden:true,
                 name: 'Location',
                 editable: false,
                 width: '150px',

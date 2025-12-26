@@ -120,6 +120,7 @@ namespace LegendAsiaAsset.Data
             {
                 translatedAssetDetailsModel.Add(new TranslatedITAssetDetailsModel
                 {
+                    AssetID = item.AssetID ?? string.Empty,
                     IDAsset = item.IDAsset.ToString(),
                     IDAssign = item.IDAssign.ToString(),
                     UserID = item.UserID.ToString(),
@@ -157,6 +158,7 @@ namespace LegendAsiaAsset.Data
                     Designation = item.Designation ?? string.Empty,
                     HeadPhone = item.HeadPhone ?? string.Empty,
                     Department = item.Department ?? string.Empty,
+                    LastAssetLocation = item.LastAssetLocation ?? string.Empty,
                     ActivityLog = item.ActivityLog ?? string.Empty
                 });
             }

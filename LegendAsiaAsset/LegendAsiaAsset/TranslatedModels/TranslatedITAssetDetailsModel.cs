@@ -67,7 +67,7 @@ namespace LegendAsiaAsset.TranslatedModels
         public string? Region { get; set; }
         public string? Country { get; set; }
         public string? Domain { get; set; }
-
-
+        public string? AssetID { get; set; }
+        public string? LastAssetLocation { get; set; }
     }
 }

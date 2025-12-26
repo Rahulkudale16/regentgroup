@@ -33,6 +33,8 @@ namespace LegendAsiaAsset.Contracts
         public Task<List<ITAssetDetailsModel>> GetSerialNrDropdownList();
         public Task<List<ITAssetDetailsModel>> GetCountryFinal();
         public Task<List<ITAssetDetailsModel>> GetDomainFinal();
+        public Task<List<ITAssetDetailsModel>> GetAssetIDDetails();
+        public Task<List<ITAssetDetailsModel>> GetAssetIDAsset();
         public Task<bool> DeleteITAssetDetails(int IDAsset);
         public Task<ResponseModel> TransferedToAnotherSystem(ITAssetDetailsModel iTAssetDetailsModel);
         public Task<bool> TransferedAndDeleted(ITAssetDetailsModel iTAssetDetailsModel);

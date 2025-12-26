@@ -84,6 +84,8 @@ namespace LegendAsiaAsset.Controllers
             ViewBag.LastUserITAsset = (await _ITAssetDetailsRepository.GetLastUserDropdownList()).Where(x => !string.IsNullOrEmpty(x.LastUser)).Select(x => new SelectListItem { Text = x.LastUser, Value = x.LastUser });
             ViewBag.DomainOnly = (await _ITAssetDetailsRepository.GetDomainFinal()).Where(x => !string.IsNullOrEmpty(x.Domain)).Select(x => new SelectListItem { Text = x.Domain, Value = x.Domain });
             ViewBag.DomainOnlyUser = (await _userDetailsRepository.GetDomainFinalUser()).Where(x => !string.IsNullOrEmpty(x.Domain)).Select(x => new SelectListItem { Text = x.Domain, Value = x.Domain });
+            ViewBag.AssetIDData = (await _ITAssetDetailsRepository.GetAssetIDDetails()).Where(x => !string.IsNullOrEmpty(x.IDAssetDis)).Select(x => new SelectListItem { Text = x.IDAssetDis, Value = x.IDAssetDis });
+            ViewBag.AssetIDAsset = (await _ITAssetDetailsRepository.GetAssetIDAsset()).Where(x => !string.IsNullOrEmpty(x.AssetID)).Select(x => new SelectListItem { Text = x.AssetID, Value = x.AssetID });
             // ITAsset List Dropdown Ends
 
             // Asset List Dropdown Starts
@@ -300,7 +302,7 @@ namespace LegendAsiaAsset.Controllers
                 mail.From = new MailAddress("donotreply@regentgroup.sg");
                 mail.Subject = "Updated User's Status Details";
                 body = string.Format("Dear Admin,<br/><br/> Please find User detail. <br/><br/> User ID : {0} <br/> Status : {1} <br/> Updated By : {2} " +
-                    "<br/><br/>  With regards, <br/> Legend IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>", 
+                    "<br/><br/>  With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>", 
                     userDetails.IDUser,userDetails.Status,currentUserName);
                 mail.Body = body;
                 mail.IsBodyHtml = true;
@@ -341,7 +343,7 @@ namespace LegendAsiaAsset.Controllers
                 mail.From = new MailAddress("donotreply@regentgroup.sg");
                 mail.Subject = "Updated Location's Status Details";
                 body = string.Format("Dear Admin,<br/><br/> Please find User detail. <br/><br/> Location ID : {0} <br/> Status : {1} <br/> Updated By : {2} " +
-                    "<br/><br/>  With regards, <br/> Legend IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                    "<br/><br/>  With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                     locationModel.IDLocation, locationModel.Status, currentUserName);
                 mail.Body = body;
                 mail.IsBodyHtml = true;
@@ -435,7 +437,7 @@ namespace LegendAsiaAsset.Controllers
                 mail.Subject = "Deleted User's Details";
                 body = string.Format("Dear Admin,<br/><br/> The Deleted Asset Details are provided below. " +
                     "<br/><br/>User ID : {0} <br/> Deleted By : {1} <br/><br/>" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> Grandlintech IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   IDUser, currentUserName.ToUpper());
                 mail.Body = body;
@@ -485,7 +487,7 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Deleted Asset Details are provided below. " +
                     "<br/><br/>Asset ID : {0} <br/> Deleted By : {1} <br/><br/>" +
                     "" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   IDAsset, currentUserName.ToUpper());
                 mail.Body = body;
@@ -537,7 +539,7 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Deleted Infrastructure Details are provided below. " +
                     "<br/><br/>Infra ID : {0} <br/> Deleted By : {1} <br/><br/>" +
                     "" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   IDInfra, currentUserName.ToUpper());
                 mail.Body = body;
@@ -582,7 +584,7 @@ namespace LegendAsiaAsset.Controllers
                 //mail.Bcc.Add(Constant.)
                 mail.From = new MailAddress("infolegend@legendgloballogistics.com");
                 mail.Subject = "New UserID created";
-                body = string.Format("Dear {0},<br/><br/> Please find here with your login detail. <br/><br/> User ID: {0} <br/> Password: {1} <br/><br/> With regards, <br/> Legend IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>", userDetails.UserName, userDetails.Password);
+                body = string.Format("Dear {0},<br/><br/> Please find here with your login detail. <br/><br/> User ID: {0} <br/> Password: {1} <br/><br/> With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>", userDetails.UserName, userDetails.Password);
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -626,9 +628,9 @@ namespace LegendAsiaAsset.Controllers
                 //mail.To.Add("AdminEmailID");
                 // mail.CC.Add(Constant.)
                 //mail.Bcc.Add(Constant.)
-                mail.From = new MailAddress("infolegend@legendgloballogistics.com");
+                mail.From = new MailAddress("donotreply@regentgroup.sg");
                 mail.Subject = "Newly Created User's UserDetails";
-                body = string.Format("Dear Admin,<br/><br/> Please find User detail. <br/><br/> Full Name: {0} <br/> Role: {1} <br/> Department: {2} <br/> Designation: {3} <br/> UserName :{4} <br/> Unit :{5} <br/> Location :{6} <br/> Email ID: {7} <br/><br/>  With regards, <br/> Legend IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>", userDetails.FullName, userDetails.Role, userDetails.Department, userDetails.Designation, userDetails.UserName, userDetails.Unit, LocationDet.Location, userDetails.EmailID);
+                body = string.Format("Dear Admin,<br/><br/> Please find User detail. <br/><br/> Full Name: {0} <br/> Role: {1} <br/> Department: {2} <br/> Designation: {3} <br/> UserName :{4} <br/> Unit :{5} <br/> Location :{6} <br/> Email ID: {7} <br/><br/>  With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>", userDetails.FullName, userDetails.Role, userDetails.Department, userDetails.Designation, userDetails.UserName, userDetails.Unit, LocationDet.Location, userDetails.EmailID);
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -636,7 +638,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("infolegend@legendgloballogistics.com", "IL@legend456"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -680,7 +682,7 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The user details are provided below. " +
                     "<br/><br/>User ID : {0}<br/> Full Name : {1} <br/> Role : {2} <br/> Department : {3} <br/> Designation : {4} <br/> UserName : {5} <br/> Unit : {6} <br/> Location : {7} <br/> Email ID : {8} <br/>" +
                     "Created By : {9}<br/><br>  " +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                    UserBasedID, userDetails.FullName, userDetails.Role, userDetails.Department, userDetails.Designation, userDetails.UserName, userDetails.Unit, LocationDet, userDetails.EmailID, currentUserName.ToUpper());
                 mail.Body = body;
@@ -723,7 +725,7 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Updated user details are provided below. " +
                     "<br/><br/>User ID : {0} <br/> Full Name : {1} <br/> Role : {2} <br/> Department : {3} <br/> Designation : {4} <br/> UserName : {5} <br/> Unit : {6} <br/> Location : {7} <br/> Email ID : {8} <br/>" +
                     "Updated By : {9}<br/><br>  " +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                     UserBasedID, userDetails.FullName, userDetails.Role, userDetails.Department, userDetails.Designation, userDetails.UserName, userDetails.Unit, LocationDet, userDetails.EmailID, currentUserName.ToUpper());
                 mail.Body = body;
@@ -1160,7 +1162,7 @@ namespace LegendAsiaAsset.Controllers
                 mail.Subject = "Newly Created Location's Details";
                 body = string.Format("Dear Admin,<br/><br/> The Location Details are provided below. " +
                     "<br/><br/>Location ID : {0} <br/> Region : {1} <br/> Country : {2} <br/> Location : {3} <br/> Created By : {4}<br/><br>" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   LocationBasedID, locationModel.Region.ToUpper(),  locationModel.Country.ToUpper(), locationModel.Location.ToUpper(), currentUserName.ToUpper());
                 mail.Body = body;
@@ -1201,7 +1203,7 @@ namespace LegendAsiaAsset.Controllers
                 mail.Subject = "Updated Location's Details";
                 body = string.Format("Dear Admin,<br/><br/> The Updated Location Details are provided below. " +
                     "<br/><br/>Location ID : {0} <br/> Region : {1} <br/> Country : {2} <br/> Location : {3} <br/> Updated By : {4}<br/><br>" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                     LocationBasedID, locationModel.Region.ToUpper(), locationModel.Country.ToUpper(), locationModel.Location.ToUpper(), currentUserName.ToUpper());
                 mail.Body = body;
@@ -1304,6 +1306,7 @@ namespace LegendAsiaAsset.Controllers
                             ITAssetGrid.IDAsset,
                             cell = new string[]
                             {
+                                ITAssetGrid.AssetID ?? string.Empty,
                                 ITAssetGrid.IDAsset ?? string.Empty,
                                 string.Empty,
                                 ITAssetGrid.IDAssetDis ?? string.Empty,
@@ -1341,7 +1344,8 @@ namespace LegendAsiaAsset.Controllers
                                 ITAssetGrid.Mouse ?? string.Empty,
                                 ITAssetGrid.MSOffice ?? string.Empty,
                                 ITAssetGrid.HeadPhone ?? string.Empty,
-                                ITAssetGrid.Department ?? string.Empty
+                                ITAssetGrid.Department ?? string.Empty,
+                                ITAssetGrid.LastAssetLocation ?? string.Empty,
                             }
                         })
             };
@@ -1415,6 +1419,7 @@ namespace LegendAsiaAsset.Controllers
                             AssignedGrid.IDAsset,
                             cell = new string[]
                             {
+                                AssignedGrid.AssetID ?? string.Empty,
                                 AssignedGrid.IDAsset ?? string.Empty,
                                 string.Empty,
                                 AssignedGrid.IDAssetDis ?? string.Empty,
@@ -1452,7 +1457,8 @@ namespace LegendAsiaAsset.Controllers
                                 AssignedGrid.Mouse ?? string.Empty,
                                 AssignedGrid.MSOffice ?? string.Empty,
                                 AssignedGrid.HeadPhone ?? string.Empty,
-                                AssignedGrid.Department ?? string.Empty
+                                AssignedGrid.Department ?? string.Empty,
+                                AssignedGrid.LastAssetLocation ?? string.Empty
                             }
                         })
             };
@@ -1526,6 +1532,7 @@ namespace LegendAsiaAsset.Controllers
                             ITAssetGrid.IDAsset,
                             cell = new string[]
                             {
+                                ITAssetGrid.AssetID ?? string.Empty,
                                 ITAssetGrid.IDAsset ?? string.Empty,
                                 string.Empty,
                                 ITAssetGrid.IDAssetDis ?? string.Empty,
@@ -1563,7 +1570,8 @@ namespace LegendAsiaAsset.Controllers
                                 ITAssetGrid.Mouse ?? string.Empty,
                                 ITAssetGrid.MSOffice ?? string.Empty,
                                 ITAssetGrid.HeadPhone ?? string.Empty,
-                                ITAssetGrid.Department ?? string.Empty
+                                ITAssetGrid.Department ?? string.Empty,
+                                ITAssetGrid.LastAssetLocation ?? string.Empty,
                             }
                         })
             };
@@ -1634,7 +1642,7 @@ namespace LegendAsiaAsset.Controllers
             return Json(cs);
         }
         [HttpPost]
-        public async Task<IActionResult> SaveITAssetDetails1(ITAssetDetailsModel iTAssetDetailsModel)
+        public async Task<IActionResult> SaveITAssetDetails2(ITAssetDetailsModel iTAssetDetailsModel)
         {
             bool success = false;
             bool duplicate = false;
@@ -1720,7 +1728,7 @@ namespace LegendAsiaAsset.Controllers
             try
             {
                 var AssetBasedID = await _ITAssetDetailsRepository.GetAssetID(iTAssetDetailsModel.SerialNumber);
-                var LocationDet = (await _infrastructureRepository.GetLocationfromID12(iTAssetDetailsModel.Location));
+                //var LocationDet = (await _infrastructureRepository.GetLocationfromID12(iTAssetDetailsModel.Location));
                 string body = string.Empty;
                 MailMessage mail = new();
 
@@ -1736,13 +1744,13 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Asset Details are provided below. " +
                     "<br/><br/>Asset ID : {0} <br/> Host Name : {1} <br/> Asset Type : {2} <br/> Brand : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> " +
                     "Unit No: {6} <br/> CPU : {7} <br/> Memory : {8} <br/> HDD : {9} <br/> Monitor : {10} <br/> Keyboard : {11} <br/> Mouse : {12} <br/> OS : {13} <br/> " +
-                    "MS Office : {14} <br/> Domain : {15} <br/> Software : {16} <br/> Location : {17} <br/> Remark : {18} <br/> Created By : {19} <br/><br/>" +
+                    "MS Office : {14} <br/> Software : {15} <br/> Remark : {16} <br/> Additional ID : {17} <br/> Created By : {18} <br/><br/>" +
                     "" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
-                  AssetBasedID, iTAssetDetailsModel.HostName, iTAssetDetailsModel.AssetType, iTAssetDetailsModel.Brand, iTAssetDetailsModel.SerialNumber, iTAssetDetailsModel.PurchaseYear,
+                  iTAssetDetailsModel.AssetID, iTAssetDetailsModel.HostName, iTAssetDetailsModel.AssetType, iTAssetDetailsModel.Brand, iTAssetDetailsModel.SerialNumber, iTAssetDetailsModel.PurchaseYear,
                   iTAssetDetailsModel.Unit,iTAssetDetailsModel.CPU,iTAssetDetailsModel.Memory,iTAssetDetailsModel.HDD,iTAssetDetailsModel.Monitor,iTAssetDetailsModel.Keyboard,iTAssetDetailsModel.Mouse,
-                  iTAssetDetailsModel.OS,iTAssetDetailsModel.MSOffice,iTAssetDetailsModel.Domain,iTAssetDetailsModel.Software,LocationDet,iTAssetDetailsModel.Remark,currentUserName.ToUpper());
+                  iTAssetDetailsModel.OS,iTAssetDetailsModel.MSOffice,iTAssetDetailsModel.Software,iTAssetDetailsModel.Remark, AssetBasedID, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -1767,7 +1775,7 @@ namespace LegendAsiaAsset.Controllers
             {
                 var AssetBasedID = await _ITAssetDetailsRepository.GetAssetID(iTAssetDetailsModel.SerialNumber);
                 var RemarkData = await _ITAssetDetailsRepository.GetRemark(AssetBasedID);
-                var LocationDet = (await _infrastructureRepository.GetLocationfromID12(iTAssetDetailsModel.Location));
+                //var LocationDet = (await _infrastructureRepository.GetLocationfromID12(iTAssetDetailsModel.Location));
                 string body = string.Empty;
                 MailMessage mail = new();
 
@@ -1783,13 +1791,13 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Updated Asset Details are provided below. " +
                     "<br/><br/>Asset ID : {0} <br/> Host Name : {1} <br/> Asset Type : {2} <br/> Brand : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> " +
                     "Unit No: {6} <br/> CPU : {7} <br/> Memory : {8} <br/> HDD : {9} <br/> Monitor : {10} <br/> Keyboard : {11} <br/> Mouse : {12} <br/> OS : {13} <br/> " +
-                    "MS Office : {14} <br/> Domain : {15} <br/> Software : {16} <br/> Location : {17} <br/> Remark : {18} <br/> Updated By : {19} <br/><br/>" +
+                    "MS Office : {14}<br/> Software : {15} <br/> Remark : {16} <br/> Additional ID : {17} <br/> Updated By : {18} <br/><br/>" +
                     "" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
-                  AssetBasedID, iTAssetDetailsModel.HostName, iTAssetDetailsModel.AssetType, iTAssetDetailsModel.Brand, iTAssetDetailsModel.SerialNumber, iTAssetDetailsModel.PurchaseYear,
+                  iTAssetDetailsModel.AssetID, iTAssetDetailsModel.HostName, iTAssetDetailsModel.AssetType, iTAssetDetailsModel.Brand, iTAssetDetailsModel.SerialNumber, iTAssetDetailsModel.PurchaseYear,
                   iTAssetDetailsModel.Unit, iTAssetDetailsModel.CPU, iTAssetDetailsModel.Memory, iTAssetDetailsModel.HDD, iTAssetDetailsModel.Monitor, iTAssetDetailsModel.Keyboard, iTAssetDetailsModel.Mouse,
-                  iTAssetDetailsModel.OS, iTAssetDetailsModel.MSOffice, iTAssetDetailsModel.Domain, iTAssetDetailsModel.Software, LocationDet, RemarkData, currentUserName.ToUpper());
+                  iTAssetDetailsModel.OS, iTAssetDetailsModel.MSOffice, iTAssetDetailsModel.Software,RemarkData, AssetBasedID, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -1924,7 +1932,7 @@ namespace LegendAsiaAsset.Controllers
                 mail.From = new MailAddress("donotreply@regentgroup.sg");
                 mail.Subject = "Updated Infrastructure's Status Details";
                 body = string.Format("Dear Admin,<br/><br/> Please find User detail. <br/><br/> User ID : {0} <br/> Status : {1} <br/> Updated By : {2} " +
-                    "<br/><br/>  With regards, <br/> Legend IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                    "<br/><br/>  With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                     infrastructureModel.IDInfra, infrastructureModel.Status, currentUserName);
                 mail.Body = body;
                 mail.IsBodyHtml = true;
@@ -2036,7 +2044,7 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Infrastructure Details are provided below. " +
                     "<br/><br/>Infrastructure ID : {0} <br/> Asset Type : {1} <br/> Brand : {2} <br/> Model : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> Location : {6} <br/> " +
                     "Remark : {7} <br/> Unit : {8} <br/> Created By : {9}<br/><br>" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   InfraBasedID, infrastructureModel.AssetType, infrastructureModel.Brand, infrastructureModel.Model, infrastructureModel.SerialNumber,
                   infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit, currentUserName.ToUpper());
@@ -2078,7 +2086,7 @@ namespace LegendAsiaAsset.Controllers
                 mail.Subject = "Updated Infrastructure's Details";
                 body = string.Format("Dear Admin,<br/><br/> The Updated Infrastructure Details are provided below. " +
                     "<br/><br/>Infrastructure ID : {0} <br/> Asset Type : {1} <br/> Brand : {2} <br/> Model : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> Location : {6} <br/> Remark : {7} <br/> Unit : {8} <br/> Updated By : {9} <br/><br>" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   InfraBasedID, infrastructureModel.AssetType, infrastructureModel.Brand, infrastructureModel.Model, infrastructureModel.SerialNumber, infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
@@ -2196,15 +2204,15 @@ namespace LegendAsiaAsset.Controllers
 
             if (iTAssetDetailsModel.Country != null)
             {
-                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RGAvailableAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
             }
             else if ((iTAssetDetailsModel.Location != null))
             {
-                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RGAvailableAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
             }
             else
             {
-                filename = string.Format("RegentGroupAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RGAvailableAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
             }
 
             var weeklyLiftings = ObjectTranslation.ConvertITAssetList(await _ITAssetDetailsRepository.GetITAssetDetailsList(iTAssetDetailsModel));
@@ -2214,7 +2222,7 @@ namespace LegendAsiaAsset.Controllers
                 DataTable dataTable = CreateITAssetList(weeklyLiftings);
                 using (XLWorkbook xLWorkbook = new())
                 {
-                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Regent Group Asset List");
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "RG Available Assets");
                     using (MemoryStream stream = new())
                     {
                         xLWorkbook.SaveAs(stream);
@@ -2245,15 +2253,15 @@ namespace LegendAsiaAsset.Controllers
 
             if (iTAssetDetailsModel.Country != null)
             {
-                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RGAssignedAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
             }
             else if ((iTAssetDetailsModel.Location != null))
             {
-                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RGAssignedAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
             }
             else
             {
-                filename = string.Format("RegentGroupAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RGAssignedAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
             }
 
             var weeklyLiftings = ObjectTranslation.ConvertITAssetList(await _ITAssetDetailsRepository.GetAssignedAssetList(iTAssetDetailsModel));
@@ -2263,7 +2271,7 @@ namespace LegendAsiaAsset.Controllers
                 DataTable dataTable = CreateITAssetList(weeklyLiftings);
                 using (XLWorkbook xLWorkbook = new())
                 {
-                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Regent Group Asset List");
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "RG Assigned Assets");
                     using (MemoryStream stream = new())
                     {
                         xLWorkbook.SaveAs(stream);
@@ -2296,15 +2304,15 @@ namespace LegendAsiaAsset.Controllers
 
             if (iTAssetDetailsModel.Country != null)
             {
-                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RGScrappedAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
             }
             else if ((iTAssetDetailsModel.Location != null))
             {
-                filename = string.Format("RegentGroupAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RGScrappedAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
             }
             else
             {
-                filename = string.Format("RegentGroupAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
+                filename = string.Format("RGScrappedAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
             }
 
             var weeklyLiftings = ObjectTranslation.ConvertITAssetList(await _ITAssetDetailsRepository.GetScrappedAssetList(iTAssetDetailsModel));
@@ -2314,7 +2322,7 @@ namespace LegendAsiaAsset.Controllers
                 DataTable dataTable = CreateITAssetList(weeklyLiftings);
                 using (XLWorkbook xLWorkbook = new())
                 {
-                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "Regent Group Asset List");
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "RG Scrapped Assets");
                     using (MemoryStream stream = new())
                     {
                         xLWorkbook.SaveAs(stream);
@@ -2343,9 +2351,9 @@ namespace LegendAsiaAsset.Controllers
         private static DataTable CreateITAssetList(List<TranslatedITAssetDetailsModel> ITAssetRecords)
         {
             DataTable dataTable = new("Regent Group Asset List");
-            dataTable.Columns.AddRange(new DataColumn[9]
+            dataTable.Columns.AddRange(new DataColumn[10]
                         {
-                      //new DataColumn("HostName"),
+                      new DataColumn("AssetID"),
                       new DataColumn("AssetType"),
                       new DataColumn("Brand"),
                       new DataColumn("Model"),
@@ -2374,9 +2382,54 @@ namespace LegendAsiaAsset.Controllers
 
             foreach (var item in ITAssetRecords)
             {
-                dataTable.Rows.Add(item.AssetType,item.Brand,item.Model, item.SerialNumber, item.PurchaseYear,item.Location,
+                dataTable.Rows.Add(item.AssetID,item.AssetType,item.Brand,item.Model, item.SerialNumber, item.PurchaseYear,item.Location,
                     item.FullName, item.EmailID, item.Department);
 
+            }
+            return dataTable;
+        }
+
+        private static DataTable CreateITAssetListNew(List<TranslatedITAssetDetailsModel> ITAssetRecords)
+        {
+            DataTable dataTable = new("Regent Group Asset List");
+            dataTable.Columns.AddRange(new DataColumn[27]
+                        {
+                      new DataColumn("AssetID"),
+                      new DataColumn("HostName"),
+                      new DataColumn("AssetType"),
+                      new DataColumn("Brand"),
+                      new DataColumn("Model"),
+                      new DataColumn("SerialNumber"),
+                      new DataColumn("PurchaseYear"),
+
+                      new DataColumn("Unit"),
+                      new DataColumn("CPU"),
+                      new DataColumn("Memory"),
+                      new DataColumn("HDD"),
+                      new DataColumn("Monitor"),
+                      new DataColumn("Keyboard"),
+                      new DataColumn("Mouse"),
+                      new DataColumn("OS"),
+                      new DataColumn("MSOffice"),
+                      new DataColumn("Domain"),
+                      new DataColumn("Software"),
+
+                      new DataColumn("Location"),
+                      new DataColumn("Remark"),
+                      new DataColumn("FullName"),
+                      new DataColumn("Designation"),
+                      new DataColumn("EmailID"),
+                      new DataColumn("Department"),
+                      
+                      new DataColumn("LastUser"),
+                      new DataColumn("ActivityLog"),
+                      new DataColumn("Status")
+            });
+
+            foreach (var item in ITAssetRecords)
+            {
+                dataTable.Rows.Add(item.IDAssetDis,item.HostName,item.AssetType, item.Brand, item.Model, item.SerialNumber, item.PurchaseYear,item.Unit,item.CPU,item.Memory,item.HDD,item.Monitor,item.Keyboard,item.Mouse,item.OS,item.MSOffice,item.Domain,
+                item.Software, item.Location, item.Remark, item.FullName, item.Designation, item.EmailID, item.Department, item.LastUser, item.ActivityLog, item.Status);
             }
             return dataTable;
         }
@@ -2534,7 +2587,7 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Assign Asset Details are provided below. " +
                     "<br/><br/>Asset ID : {0} <br/> User ID : {1} <br/> Serial Number : {2} <br/> Updated By : {3} <br/><br/>" +
                     "" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   AssetBasedID, iTAssetDetailsModel.FullName,iTAssetDetailsModel.SerialNumber, currentUserName.ToUpper());
                 mail.Body = body;
@@ -2607,7 +2660,7 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Updated Asset Details are provided below. " +
                     "<br/><br/>Asset ID : {0} <br/> User ID : {1} <br/> Serial Number : {2} <br/> Status : {3} <br/> Updated By : {4} <br/><br/>" +
                     "" +
-                    "With regards, <br/> Regent IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
+                    "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   AssetBasedID, UserID,SerialNr,Status,currentUserName.ToUpper());
                 mail.Body = body;
