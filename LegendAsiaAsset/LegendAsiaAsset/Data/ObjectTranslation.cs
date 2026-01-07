@@ -159,6 +159,8 @@ namespace LegendAsiaAsset.Data
                     HeadPhone = item.HeadPhone ?? string.Empty,
                     Department = item.Department ?? string.Empty,
                     LastAssetLocation = item.LastAssetLocation ?? string.Empty,
+                    InvoiceNo = item.InvoiceNo ?? string.Empty,
+                    PaidBy = item.PaidBy ?? string.Empty,
                     ActivityLog = item.ActivityLog ?? string.Empty
                 });
             }

@@ -608,6 +608,8 @@ namespace LegendAsiaAsset.Repository
                 parameters.Add("HeadPhone", iTAssetDetailsModel.HeadPhone, DbType.String, ParameterDirection.Input);
                 parameters.Add("Department", iTAssetDetailsModel.Department, DbType.String, ParameterDirection.Input);
                 parameters.Add("AssetID", iTAssetDetailsModel.AssetID, DbType.String, ParameterDirection.Input);
+                parameters.Add("InvoiceNo", iTAssetDetailsModel.InvoiceNo, DbType.String, ParameterDirection.Input);
+                parameters.Add("PaidBy", iTAssetDetailsModel.PaidBy, DbType.String, ParameterDirection.Input);
                 parameters.Add("MSOffice", iTAssetDetailsModel.MSOffice, DbType.String, ParameterDirection.Input);
                 parameters.Add("LastUser", iTAssetDetailsModel.LastUser, DbType.String, ParameterDirection.Input);
                 parameters.Add("IsDuplicateFound", DbType.Boolean, direction: ParameterDirection.Output);
@@ -678,9 +680,12 @@ namespace LegendAsiaAsset.Repository
                 parameters.Add("Designation", iTAssetDetailsModel.Designation, DbType.String, ParameterDirection.Input);
                 parameters.Add("Department", iTAssetDetailsModel.Department, DbType.String, ParameterDirection.Input);
                 parameters.Add("AssetID", iTAssetDetailsModel.AssetID, DbType.String, ParameterDirection.Input);
+                parameters.Add("InvoiceNo", iTAssetDetailsModel.InvoiceNo, DbType.String, ParameterDirection.Input);
+                parameters.Add("PaidBy", iTAssetDetailsModel.PaidBy, DbType.String, ParameterDirection.Input);
                 parameters.Add("HeadPhone", iTAssetDetailsModel.HeadPhone, DbType.String, ParameterDirection.Input);
                 parameters.Add("MSOffice", iTAssetDetailsModel.MSOffice, DbType.Int16, ParameterDirection.Input);
                 parameters.Add("LastUser", iTAssetDetailsModel.LastUser, DbType.String, ParameterDirection.Input);
+
                 parameters.Add("IsDuplicateFound", DbType.Boolean, direction: ParameterDirection.Output);
                 using (var connection = _context.CreateConnection())
                 {

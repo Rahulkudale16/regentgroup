@@ -1346,6 +1346,8 @@ namespace LegendAsiaAsset.Controllers
                                 ITAssetGrid.HeadPhone ?? string.Empty,
                                 ITAssetGrid.Department ?? string.Empty,
                                 ITAssetGrid.LastAssetLocation ?? string.Empty,
+                                ITAssetGrid.InvoiceNo ?? string.Empty,
+                                ITAssetGrid.PaidBy ?? string.Empty,
                             }
                         })
             };
@@ -1458,7 +1460,9 @@ namespace LegendAsiaAsset.Controllers
                                 AssignedGrid.MSOffice ?? string.Empty,
                                 AssignedGrid.HeadPhone ?? string.Empty,
                                 AssignedGrid.Department ?? string.Empty,
-                                AssignedGrid.LastAssetLocation ?? string.Empty
+                                AssignedGrid.LastAssetLocation ?? string.Empty,
+                                AssignedGrid.InvoiceNo ?? string.Empty,
+                                AssignedGrid.PaidBy ?? string.Empty
                             }
                         })
             };
@@ -1572,6 +1576,8 @@ namespace LegendAsiaAsset.Controllers
                                 ITAssetGrid.HeadPhone ?? string.Empty,
                                 ITAssetGrid.Department ?? string.Empty,
                                 ITAssetGrid.LastAssetLocation ?? string.Empty,
+                                 ITAssetGrid.InvoiceNo ?? string.Empty,
+                                ITAssetGrid.PaidBy ?? string.Empty
                             }
                         })
             };
@@ -1744,13 +1750,13 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Asset Details are provided below. " +
                     "<br/><br/>Asset ID : {0} <br/> Host Name : {1} <br/> Asset Type : {2} <br/> Brand : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> " +
                     "Unit No: {6} <br/> CPU : {7} <br/> Memory : {8} <br/> HDD : {9} <br/> Monitor : {10} <br/> Keyboard : {11} <br/> Mouse : {12} <br/> OS : {13} <br/> " +
-                    "MS Office : {14} <br/> Software : {15} <br/> Remark : {16} <br/> Additional ID : {17} <br/> Created By : {18} <br/><br/>" +
+                    "MS Office : {14} <br/> Software : {15} <br/> Remark : {16} <br/> Additional ID : {17} <br/>Invoice No : {18} <br/> Paid By : {19} <br/> Created By : {20} <br/><br/>" +
                     "" +
                     "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   iTAssetDetailsModel.AssetID, iTAssetDetailsModel.HostName, iTAssetDetailsModel.AssetType, iTAssetDetailsModel.Brand, iTAssetDetailsModel.SerialNumber, iTAssetDetailsModel.PurchaseYear,
                   iTAssetDetailsModel.Unit,iTAssetDetailsModel.CPU,iTAssetDetailsModel.Memory,iTAssetDetailsModel.HDD,iTAssetDetailsModel.Monitor,iTAssetDetailsModel.Keyboard,iTAssetDetailsModel.Mouse,
-                  iTAssetDetailsModel.OS,iTAssetDetailsModel.MSOffice,iTAssetDetailsModel.Software,iTAssetDetailsModel.Remark, AssetBasedID, currentUserName.ToUpper());
+                  iTAssetDetailsModel.OS,iTAssetDetailsModel.MSOffice,iTAssetDetailsModel.Software,iTAssetDetailsModel.Remark, AssetBasedID,iTAssetDetailsModel.InvoiceNo,iTAssetDetailsModel.PaidBy, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -1791,13 +1797,13 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Updated Asset Details are provided below. " +
                     "<br/><br/>Asset ID : {0} <br/> Host Name : {1} <br/> Asset Type : {2} <br/> Brand : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> " +
                     "Unit No: {6} <br/> CPU : {7} <br/> Memory : {8} <br/> HDD : {9} <br/> Monitor : {10} <br/> Keyboard : {11} <br/> Mouse : {12} <br/> OS : {13} <br/> " +
-                    "MS Office : {14}<br/> Software : {15} <br/> Remark : {16} <br/> Additional ID : {17} <br/> Updated By : {18} <br/><br/>" +
+                    "MS Office : {14}<br/> Software : {15} <br/> Remark : {16} <br/> Additional ID : {17} <br/> Invoice No : {18} <br/> Paid By : {19} <br/> Updated By : {20} <br/><br/>" +
                     "" +
                     "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   iTAssetDetailsModel.AssetID, iTAssetDetailsModel.HostName, iTAssetDetailsModel.AssetType, iTAssetDetailsModel.Brand, iTAssetDetailsModel.SerialNumber, iTAssetDetailsModel.PurchaseYear,
                   iTAssetDetailsModel.Unit, iTAssetDetailsModel.CPU, iTAssetDetailsModel.Memory, iTAssetDetailsModel.HDD, iTAssetDetailsModel.Monitor, iTAssetDetailsModel.Keyboard, iTAssetDetailsModel.Mouse,
-                  iTAssetDetailsModel.OS, iTAssetDetailsModel.MSOffice, iTAssetDetailsModel.Software,RemarkData, AssetBasedID, currentUserName.ToUpper());
+                  iTAssetDetailsModel.OS, iTAssetDetailsModel.MSOffice, iTAssetDetailsModel.Software,RemarkData, AssetBasedID, iTAssetDetailsModel.InvoiceNo,iTAssetDetailsModel.PaidBy,currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()

@@ -17,7 +17,7 @@
         $("#CreateButtonITAsset").show();
         $("#AssignITAssetDetails").show();
     }
-    else if (RoleUser == "USER") {GetITAssetdata
+    else if (RoleUser == "USER") {
         $("#CreateButtonITAsset").hide();
         $("#AssignITAssetDetails").hide();
         $("#RevokeButton").hide();
@@ -32,7 +32,7 @@
         url: 'GetITAssetdata',
         //editurl: '',
         datatype: 'json',
-        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department','LastAssetLocation', 'Status', 'View'],
+        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department','LastAssetLocation','InvoiceNo','PaidBy', 'Status', 'View'],
         colModel: [
             {
                 key: false,
@@ -304,6 +304,20 @@
                 hidden: true,
                 editable: false,
                 name: 'LastAssetLocation',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'InvoiceNo',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'PaidBy',
                 width: '65px',
             },
             {
@@ -382,7 +396,7 @@
         url: 'GetAssignedAssetdata',
         //editurl: '',
         datatype: 'json',
-        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department','LastAssetLocation','Status', 'View'],
+        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'LastAssetLocation', 'InvoiceNo', 'PaidBy', 'Status', 'View'],
         colModel: [
             {
                 key: false,
@@ -656,6 +670,20 @@
             },
             {
                 key: false,
+                hidden: true,
+                editable: false,
+                name: 'InvoiceNo',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'PaidBy',
+                width: '65px',
+            },
+            {
+                key: false,
                 hidden: false,
                 name: 'viewStatus',
                 editable: false,
@@ -730,7 +758,7 @@
         url: 'GetScrappedAssetdata',
         //editurl: '',
         datatype: 'json',
-        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department','LastAssetLocation', 'Status', 'View'],
+        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'LastAssetLocation', 'InvoiceNo', 'PaidBy', 'Status', 'View'],
         colModel: [
             {
                 key: false,
@@ -1001,6 +1029,20 @@
                 hidden: true,
                 editable: false,
                 name: 'LastAssetLocation',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'InvoiceNo',
+                width: '65px',
+            },
+            {
+                key: false,
+                hidden: true,
+                editable: false,
+                name: 'PaidBy',
                 width: '65px',
             },
             {
@@ -1164,6 +1206,8 @@
         $('#DepartmentITAsset').val(data.Department);
         $('#RemarkText').val(data.Remark);
         $('#LastAssetLocation').val(data.LastAssetLocation);
+        $('#InvoiceNo').val(data.InvoiceNo);
+        $('#PaidBy').val(data.PaidBy);
         var value = data.ActivityLog;
         var value1 = data.LastUser;
         value = value.replaceAll('\\n', '\n');
@@ -1281,6 +1325,8 @@
         $('#MemoryText').val(data.Memory);
         $('#HDDText').val(data.HDD);
         $('#OSText').val(data.OS);
+        $('#InvoiceNo').val(data.InvoiceNo);
+        $('#PaidBy').val(data.PaidBy);
         // $('#LastUserText').val(data.LastUser);
         $('#SoftwareText').val(data.Software);
         $('#MonitorITAsset').val(data.Monitor);
@@ -1411,6 +1457,8 @@
         $('#DesignationITAsset').val(data.Designation);
         $('#IDAssetDis').html(data.IDAssetDis);
         $('#DepartmentITAsset').val(data.Department);
+        $('#InvoiceNo').val(data.InvoiceNo);
+        $('#PaidBy').val(data.PaidBy);
         $('#LastAssetLocation').val(data.LastAssetLocation);
         var value = data.ActivityLog;
         var value1 = data.LastUser;
@@ -1503,6 +1551,8 @@
         //$('#UpdateITAssetDetails').show();
         //$('#DeleteITAssetDetails').show();
         $('#UpdateAssetITText').show();
+        $('#InvoiceNo').val(data.InvoiceNo);
+        $('#PaidBy').val(data.PaidBy);
         $('#AssetID').val(data.IDAsset);
         $('#UserID').val(data.UserID);
         $('#HostNameText').val(data.HostName);
@@ -1718,6 +1768,8 @@
         var MSOffice = $('#MSOfficeITAsset').val().toUpperCase();
         var Domain = $('#DomainITAsset').val().toUpperCase();
         var AssetID = $('#AssetIDText').val().toUpperCase();
+        var InvoiceNo = $('#InvoiceNo').val().toUpperCase();
+        var PaidBy = $('#PaidBy').val().toUpperCase();
 
         if (AssetType == '' || Brand == '' || Model == '' || SerialNumber == '' || PurchaseYear == "") {
             $('#warningToastMessage').text('Please fill mandatory fields.');
@@ -1752,7 +1804,9 @@
                     Mouse,
                     MSOffice,
                     Domain,
-                    AssetID
+                    AssetID,
+                    InvoiceNo,
+                    PaidBy
                 },
                 dataType: "json",
                 success: function (result) {
@@ -1816,6 +1870,8 @@
         var Domain = $('#DomainITAsset').val();
         var Department = $('#DepartmentITAsset').val();
         var AssetID = $('#AssetIDText').val().toUpperCase();
+        var InvoiceNo = $('#InvoiceNo').val().toUpperCase();
+        var PaidBy = $('#PaidBy').val().toUpperCase();
 
         if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || PurchaseYear == "") {
             $('#warningToastMessage').text('Please fill mandatory fields.');
@@ -1855,7 +1911,9 @@
                     Designation,
                     Department,
                     Domain,
-                    AssetID
+                    AssetID,
+                    InvoiceNo,
+                    PaidBy
                 },
                 dataType: "json",
                 success: function (result) {
@@ -2038,6 +2096,7 @@
         $('#CreateAssetITText').show();
         $('.LastUserField').hide();
         $('#AssetID').val('');
+        $('#AssetIDText').val('');
         $('#HostNameText').val('');
         $('#AssetTypeText').selectpicker('val', '');
         $('#BrandText').selectpicker('val', '');
@@ -2069,6 +2128,8 @@
         $('#ScrappedITAsset').hide();
         $('#BrandText').val('')
         $('#RemarkText').val('')
+        $('#InvoiceNo').val('')
+        $('#PaidBy').val('')
     });
 
     $('#AssignAsset').click(function () {

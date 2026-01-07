@@ -159,7 +159,7 @@
 </fieldset>
 <!--------------------------------------- Remaining Layout Ends ------------------------------------------------>
 <!--------------------------------------- Create Modal Starts -------------------------------------------------->
-<div class="modal fade" id="CreateITAssetDetails" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+<div class="modal fade" id="CreateITAssetDetails" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header text-white" style="background-color:#6F42C1;">
@@ -180,6 +180,16 @@
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.AssetID, "", new { @class = "text-danger" })
                     </div>
                     <div class="col mb-3">
+                        @Html.LabelFor(model => model.ITAssetDetailsModel.InvoiceNo, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.InvoiceNo, new { htmlAttributes = new { @class = "form-control", @id ="InvoiceNo" } })
+                        @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.InvoiceNo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col mb-3">
+                        @Html.LabelFor(model => model.ITAssetDetailsModel.PaidBy, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.PaidBy, new { htmlAttributes = new { @class = "form-control", @id = "PaidBy" } })
+                        @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.PaidBy, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.HostName, htmlAttributes: new { @class = "form-label" })
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.HostName, new { htmlAttributes = new { @class = "form-control", @id = "HostNameText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.HostName, "", new { @class = "text-danger" })
@@ -189,12 +199,12 @@
                         <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
                         @Html.DropDownListFor(model => model.ITAssetDetailsModel.AssetType, new SelectList(ViewBag.AssetType, "Value", "Text"), "Select Asset Type", new { @id = "AssetTypeText", @class = "form-control checkValidITA" })
                         <span class="invalid-feedback">Asset Type is mandatory </span>
-
                     </div>
+                </div>
+                <div class="row">
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Brand, htmlAttributes: new { @class = "form-label" })
                         <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
-                        @* @Html.DropDownListFor(model => model.ITAssetDetailsModel.Brand, new SelectList(ViewBag.BrandITAsset, "Value", "Text"), "Select Brand", new { @id = "BrandText", @class = "form-control checkValidITA" }) *@
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.Brand, new { htmlAttributes = new { @class = "form-control checkValidita", @id = "BrandText" } })
                         <span class="invalid-feedback">Brand is mandatory </span>
                     </div>
@@ -204,8 +214,6 @@
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.Model, new { htmlAttributes = new { @class = "form-control checkValidita", @id = "ModelText" } })
                         <span class="invalid-feedback">Model is mandatory </span>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.SerialNumber, htmlAttributes: new { @class = "form-label" })
                         <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
@@ -223,6 +231,8 @@
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.Unit, new { htmlAttributes = new { @class = "form-control", @id = "UnitText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Unit, "", new { @class = "text-danger" })
                     </div>
+                </div>
+                <div class="row">
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.CPU, htmlAttributes: new { @class = "form-label" })
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.CPU, new { htmlAttributes = new { @class = "form-control", @id = "CPUText" } })
@@ -233,8 +243,6 @@
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.Memory, new { htmlAttributes = new { @class = "form-control", @id = "MemoryText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Memory, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="row">
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.HDD, htmlAttributes: new { @class = "form-label" })
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.HDD, new { htmlAttributes = new { @class = "form-control", @id = "HDDText" } })
@@ -250,6 +258,8 @@
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.Keyboard, new { htmlAttributes = new { @class = "form-control", @id = "KeyboardITAsset" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Keyboard, "", new { @class = "text-danger" })
                     </div>
+                </div>
+                <div class="row">
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Mouse, htmlAttributes: new { @class = "form-label" })
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.Mouse, new { htmlAttributes = new { @class = "form-control", @id = "MouseITAsset" } })
@@ -260,8 +270,6 @@
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.OS, new { htmlAttributes = new { @class = "form-control", @id = "OSText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.OS, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="row">
                     <div class="col mb-3">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.MSOffice, htmlAttributes: new { @class = "form-label" })
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.MSOffice, new { htmlAttributes = new { @class = "form-control", @id = "MSOfficeITAsset" } })
@@ -282,11 +290,8 @@
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.Location, new { htmlAttributes = new { @class = "form-control", @id = "OfficeText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Location, "", new { @class = "text-danger" })
                     </div>
-                    <div class="col mb-3">
-                        @Html.LabelFor(model => model.ITAssetDetailsModel.Remark, htmlAttributes: new { @class = "form-label" })
-                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Remark, new { htmlAttributes = new { @class = "form-control", @id = "RemarkText" } })
-                        @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Remark, "", new { @class = "text-danger" })
-                    </div>
+                </div>
+                <div class="row mt-2">
                     <div class="col mb-3 ActivityData">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.FullName, htmlAttributes: new { @class = "form-label" })
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.FullName, new { htmlAttributes = new { @class = "form-control", @id = "FullNameText" } })
@@ -297,8 +302,6 @@
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.IDAssetDis, new { htmlAttributes = new { @class = "form-control", @id = "IDAssetDisText" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.IDAssetDis, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="row mt-2">
                     <div class="col mb-3 ActivityData">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.Designation, htmlAttributes: new { @class = "form-label" })
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.Designation, new { htmlAttributes = new { @class = "form-control", @id = "DesignationITAsset" } })
@@ -314,6 +317,8 @@
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.Department, new { htmlAttributes = new { @class = "form-control", @id = "DepartmentITAsset" } })
                         @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Department, "", new { @class = "text-danger" })
                     </div>
+                </div>
+                <div class="row">
                     <div class="col mb-3 ActivityData2">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.LastAssetLocation, htmlAttributes: new { @class = "form-label" })
                         @Html.EditorFor(Model => Model.ITAssetDetailsModel.LastAssetLocation, new { htmlAttributes = new { @class = "form-control", @id = "LastAssetLocation" }})
@@ -323,7 +328,12 @@
                         @Html.LabelFor(model => model.ITAssetDetailsModel.LastUser, htmlAttributes: new { @class = "form-label" })
                         @Html.TextAreaFor(Model => Model.ITAssetDetailsModel.LastUser, new { @class = "form-control", rows = "2", cols = "32", wrap = "hard", placeholder = "Activity Data", @id = "LastUserText", style = "resize:none; word-wrap: break-word;overflow-scroll;" })
                     </div>
-                    <div class="col-lg-6 mb-3 ActivityData1">
+                    <div class="col mb-3 ActivityData1">
+                        @Html.LabelFor(model => model.ITAssetDetailsModel.Remark, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(Model => Model.ITAssetDetailsModel.Remark, new { htmlAttributes = new { @class = "form-control", @id = "RemarkText" } })
+                        @Html.ValidationMessageFor(model => model.ITAssetDetailsModel.Remark, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-5 mb-3 ActivityData1">
                         @Html.LabelFor(model => model.ITAssetDetailsModel.ActivityLog, htmlAttributes: new { @class = "form-label" })
                         @Html.TextAreaFor(model => model.ITAssetDetailsModel.ActivityLog, new { @class = "form-control", rows = "2", cols = "32", wrap = "hard", placeholder = "Activity Data", @id = "ActivityLog", style = "resize:none; word-wrap: break-word;overflow-scroll;" })
                     </div>
@@ -349,7 +359,7 @@
 </div>
 <!--------------------------------------- Create Modal Ends ---------------------------------------------------->
 <!--------------------------------------- Assign Modal Starts -------------------------------------------------->
-<div class="modal fade" id="AssignModal" style="background-color:rgba(0,0,0,0.7)" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+<div class="modal fade" id="AssignModal" style="background-color:rgba(0,0,0,0.7)" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="modal-content">
             <div class="modal-header text-white" style="background-color:#6F42C1;">
