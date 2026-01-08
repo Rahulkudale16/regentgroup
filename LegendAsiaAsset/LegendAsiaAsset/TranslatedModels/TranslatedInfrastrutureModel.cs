@@ -19,5 +19,7 @@
         public string? IDInfraDis { get; set; }
         public string? ActivityLog { get; set; }
         public string? Unit { get; set; }
+        public string? InvoiceNo { get; set; }
+        public string? PaidBy { get; set; }
     }
 }

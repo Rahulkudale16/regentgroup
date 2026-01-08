@@ -205,6 +205,8 @@ namespace LegendAsiaAsset.Repository
                 parameters.Add("SerialNumber", infrastructureModel.SerialNumber, DbType.String, ParameterDirection.Input);
                 parameters.Add("PurchaseYear", infrastructureModel.PurchaseYear, DbType.DateTime, ParameterDirection.Input);
                 parameters.Add("Remark", infrastructureModel.Remark?.ToUpper(), DbType.String, ParameterDirection.Input);
+                parameters.Add("InvoiceNo", infrastructureModel.InvoiceNo?.ToUpper(), DbType.String, ParameterDirection.Input);
+                parameters.Add("PaidBy", infrastructureModel.PaidBy?.ToUpper(), DbType.String, ParameterDirection.Input);
                 parameters.Add("Unit", infrastructureModel.Unit ?? string.Empty, DbType.String, ParameterDirection.Input);
                 parameters.Add("IDLocation", infrastructureModel.Location, DbType.String, ParameterDirection.Input);
                 //parameters.Add("Location", infrastructureModel.Location, DbType.String, ParameterDirection.Input);
@@ -267,6 +269,8 @@ namespace LegendAsiaAsset.Repository
                 parameters.Add("PurchaseYear", infrastructureModel.PurchaseYear, DbType.DateTime, ParameterDirection.Input);
                 parameters.Add("IDLocation", infrastructureModel.Location, DbType.String, ParameterDirection.Input);
                 parameters.Add("Remark", infrastructureModel.Remark?.ToUpper(), DbType.String, ParameterDirection.Input);
+                parameters.Add("InvoiceNo", infrastructureModel.InvoiceNo?.ToUpper(), DbType.String, ParameterDirection.Input);
+                parameters.Add("PaidBy", infrastructureModel.PaidBy?.ToUpper(), DbType.String, ParameterDirection.Input);
                 parameters.Add("Unit", infrastructureModel.Unit ?? string.Empty, DbType.String, ParameterDirection.Input);
                 parameters.Add("Status", infrastructureModel.Status, DbType.String, ParameterDirection.Input);
                 parameters.Add("CreatedBy", currentUserName.ToUpper(), DbType.String, ParameterDirection.Input);
@@ -439,7 +443,7 @@ namespace LegendAsiaAsset.Repository
                 throw;
             }
         }
-
+            
         public async Task<bool> DeleteInfra(int IDInfra)
         {
             string currentUserName = GetUserName();

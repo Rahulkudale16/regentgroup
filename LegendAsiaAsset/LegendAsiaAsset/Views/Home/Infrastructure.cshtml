@@ -119,6 +119,16 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.InfrastructureModel.InvoiceNo, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(Model => Model.InfrastructureModel.InvoiceNo, new { htmlAttributes = new { @class = "form-control", @id = "InvoiceNoInfra" } })
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        @Html.LabelFor(model => model.InfrastructureModel.PaidBy, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(Model => Model.InfrastructureModel.PaidBy, new { htmlAttributes = new { @class = "form-control", @id = "PaidByInfra" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
                         @Html.LabelFor(model => model.InfrastructureModel.PurchaseYear, htmlAttributes: new { @class = "form-label" })
                         <span class="RequiredAstrik" style="margin-top: 0px;font-weight:bold">*</span>
                         @Html.EditorFor(Model => Model.InfrastructureModel.PurchaseYear, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @type = "Date", @class = "form-control checkValidInfra", @id = "PurchaseYearInfra" } })

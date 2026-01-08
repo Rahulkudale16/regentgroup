@@ -26,7 +26,7 @@ $(document).ready(function () {
         mtype: 'Get',
         url: 'GetInfrastructuredata',
         datatype: 'json',
-        colNames: ['IDInfra', 'IDInfra', 'ID', 'IDLocation', 'AssetType', 'Brand', 'Model', 'SerialNumber', 'PurchaseYear', 'Remark', 'Unit', 'Location', 'Status', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Status', 'View'],
+        colNames: ['IDInfra', 'IDInfra', 'ID', 'IDLocation', 'AssetType', 'Brand', 'Model', 'SerialNumber', 'PurchaseYear', 'Remark', 'InvoiceNo','PaidBy','Unit', 'Location', 'Status', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Status', 'View'],
         colModel: [
             {
                 key: true,
@@ -86,6 +86,20 @@ $(document).ready(function () {
                 key: false,
                 hidden: true,
                 name: 'Remark',
+                editable: false,
+                width: '125px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'InvoiceNo',
+                editable: false,
+                width: '125px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'PaidBy',
                 editable: false,
                 width: '125px',
             },
@@ -242,6 +256,8 @@ $(document).ready(function () {
         $('#PurchaseYearInfra').val(purchaseYear);
         $('#LocationInfra').selectpicker('val', data.IDLocation);
         $('#RemarkInfra').val(data.Remark);
+        $('#InvoiceNoInfra').val(data.InvoiceNo);
+        $('#PaidByInfra').val(data.PaidBy);
         $('#UnitInfra').val(data.Unit);
         $('#StatusInfra').val(data.Status);
         $('#IDInfraDis').html(data.IDInfraDis);
@@ -283,6 +299,8 @@ $(document).ready(function () {
         $('#ModelInfra1').val('');
         $('#SerialNumberInfra').val('');
         $('#UnitInfra').val('');
+        $('#InvoiceNo').val('');
+        $('#PaidBy').val('');
 
         $('#PurchaseYearInfra').val('');
         $('#LocationInfra').selectpicker('val', '');
@@ -351,6 +369,8 @@ $(document).ready(function () {
         var PurchaseYear = $('#PurchaseYearInfra').val();
         var Location = $('#LocationInfra').val();
         var Remark = $('#RemarkInfra').val().toUpperCase();
+        var InvoiceNo = $('#InvoceNoInfra').val().toUpperCase();
+        var PaidBy = $('#PaidByInfra').val().toUpperCase();
         var Unit = $('#UnitInfra').val().toUpperCase();
         var Status = $('#StatusInfra').val();
         if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || Location == "" || PurchaseYear == "") {
@@ -370,6 +390,8 @@ $(document).ready(function () {
                     PurchaseYear,
                     Location,
                     Remark,
+                    InvoiceNo,
+                    PaidBy,
                     Unit,
                     Status
                 },
@@ -382,6 +404,7 @@ $(document).ready(function () {
                         $('#CreateInfra').modal("hide");
                         $('#loading').hide();
                         DestroyRenderInfraDropdowns();
+                        window.location.reload();
                     }
                     else {
                         if (result.duplicate == true) {
@@ -420,6 +443,8 @@ $(document).ready(function () {
         var PurchaseYear = $('#PurchaseYearInfra').val();
         var Location = $('#LocationInfra').val();
         var Remark = $('#RemarkInfra').val().toUpperCase();
+        var InvoiceNo = $('#InvoiceNoInfra').val();
+        var PaidBy = $('#PaidByInfra').val();
         var Unit = $('#UnitInfra').val().toUpperCase();
         var Status = $('#StatusInfra').val();
         if (AssetType == "" || Brand == "" || Model == "" || SerialNumber == "" || Location == "" || PurchaseYear == "") {
@@ -440,6 +465,8 @@ $(document).ready(function () {
                     PurchaseYear,
                     Location,
                     Remark,
+                    InvoiceNo,
+                    PaidBy,
                     Unit,
                     Status
                 },
@@ -452,6 +479,7 @@ $(document).ready(function () {
                         $('#CreateInfra').modal("hide");
                         $('#loading').hide();
                         DestroyRenderInfraDropdowns();
+                        window.location.reload();
                     }
                     else {
                         if (result.duplicate == true) {

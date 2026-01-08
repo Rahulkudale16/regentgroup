@@ -1901,6 +1901,8 @@ namespace LegendAsiaAsset.Controllers
                                 InfrastructureGrid.SerialNumber ?? string.Empty,
                                 InfrastructureGrid.PurchaseYear ?? string.Empty,
                                 InfrastructureGrid.Remark ?? string.Empty,
+                                InfrastructureGrid.InvoiceNo ?? string.Empty,
+                                InfrastructureGrid.PaidBy ?? string.Empty,
                                 InfrastructureGrid.Unit ?? string.Empty,
                                 InfrastructureGrid.Location ?? string.Empty,
                                 InfrastructureGrid.Status ?? string.Empty,
@@ -2049,11 +2051,11 @@ namespace LegendAsiaAsset.Controllers
                 mail.Subject = "Newly Created Infrastructure's Details";
                 body = string.Format("Dear Admin,<br/><br/> The Infrastructure Details are provided below. " +
                     "<br/><br/>Infrastructure ID : {0} <br/> Asset Type : {1} <br/> Brand : {2} <br/> Model : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> Location : {6} <br/> " +
-                    "Remark : {7} <br/> Unit : {8} <br/> Created By : {9}<br/><br>" +
+                    "Remark : {7} <br/> Unit : {8} <br/> Invoice No : {9}<br/> Paid By : {10}<br/> Created By : {11}<br/><br>" +
                     "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   InfraBasedID, infrastructureModel.AssetType, infrastructureModel.Brand, infrastructureModel.Model, infrastructureModel.SerialNumber,
-                  infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit, currentUserName.ToUpper());
+                  infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit,infrastructureModel.InvoiceNo,infrastructureModel.PaidBy, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -2091,9 +2093,9 @@ namespace LegendAsiaAsset.Controllers
                 mail.From = new MailAddress("donotreply@regentgroup.sg");
                 mail.Subject = "Updated Infrastructure's Details";
                 body = string.Format("Dear Admin,<br/><br/> The Updated Infrastructure Details are provided below. " +
-                    "<br/><br/>Infrastructure ID : {0} <br/> Asset Type : {1} <br/> Brand : {2} <br/> Model : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> Location : {6} <br/> Remark : {7} <br/> Unit : {8} <br/> Updated By : {9} <br/><br>" +
+                    "<br/><br/>Infrastructure ID : {0} <br/> Asset Type : {1} <br/> Brand : {2} <br/> Model : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> Location : {6} <br/> Remark : {7} <br/> Unit : {8} <br/> Invoice No : {9}<br/> Paid By : {10}<br/> Updated By : {11} <br/><br>" +
                     "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
-                  InfraBasedID, infrastructureModel.AssetType, infrastructureModel.Brand, infrastructureModel.Model, infrastructureModel.SerialNumber, infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit, currentUserName.ToUpper());
+                  InfraBasedID, infrastructureModel.AssetType, infrastructureModel.Brand, infrastructureModel.Model, infrastructureModel.SerialNumber, infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit,infrastructureModel.InvoiceNo,infrastructureModel.PaidBy, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()

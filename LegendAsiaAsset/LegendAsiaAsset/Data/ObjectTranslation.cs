@@ -99,6 +99,8 @@ namespace LegendAsiaAsset.Data
                     SerialNumber = item.SerialNumber ?? string.Empty,
                     PurchaseYear = ConvertDate(item.PurchaseYear),
                     Remark = item.Remark ?? string.Empty,
+                    InvoiceNo = item.InvoiceNo ?? string.Empty,
+                    PaidBy = item.PaidBy ?? string.Empty,
                     Unit = item.Unit ?? string.Empty,
                     Location = item.Location ?? string.Empty,
                     Status = item.Status ?? string.Empty,
