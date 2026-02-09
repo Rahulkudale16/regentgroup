@@ -123,7 +123,7 @@ $(document).ready(function () {
 
     SessionTimer = parseInt($("#hdnSessionTimeout").val());
 
-    ("fnSessionRun()", 60000);
+    ("fnSessionRun()", 15000);
     setInterval(function () {
         SessionTimer -= 1;
         var S = SessionTimer % 60;

@@ -311,7 +311,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -352,7 +352,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -447,7 +447,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -497,7 +497,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -549,7 +549,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -638,7 +638,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -692,7 +692,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -735,7 +735,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -1172,7 +1172,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -1213,7 +1213,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -1764,7 +1764,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -1811,7 +1811,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -1949,7 +1949,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -2063,7 +2063,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -2103,7 +2103,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -2605,7 +2605,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
@@ -2678,7 +2678,7 @@ namespace LegendAsiaAsset.Controllers
                     Host = "smtp.office365.com",
                     Port = 587,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "Regent@DR123"), // Enter senders User name and password  
+                    Credentials = new System.Net.NetworkCredential("donotreply@regentgroup.sg", "RegentDNT@DNT123"), // Enter senders User name and password  
                     EnableSsl = true
                 };
                 smtp.Send(mail);
