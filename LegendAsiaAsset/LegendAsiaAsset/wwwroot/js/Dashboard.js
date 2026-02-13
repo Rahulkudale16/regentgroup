@@ -345,7 +345,7 @@ $(document).ready(function () {
         mtype: 'Get',
         url: 'GetInfrastructuredata',
         datatype: 'json',
-        colNames: ['IDInfra', 'IDInfra', 'ID', 'IDLocation', 'AssetType', 'Brand', 'Model', 'SerialNumber', 'PurchaseYear', 'Remark','Unit','Location', 'Status', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Status', 'View'],
+        colNames: ['IDInfra', 'IDInfra', 'ID', 'IDLocation', 'AssetType', 'Brand', 'Model', 'SerialNumber', 'PurchaseYear', 'Remark', 'InvoiceNo', 'PaidBy','Unit','Location', 'Status', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Status', 'View'],
         colModel: [
             {
                 key: true,
@@ -408,6 +408,20 @@ $(document).ready(function () {
                 key: false,
                 hidden: true,
                 name: 'Remark',
+                editable: false,
+                width: '125px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'InvoiceNo',
+                editable: false,
+                width: '125px',
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'PaidBy',
                 editable: false,
                 width: '125px',
             },

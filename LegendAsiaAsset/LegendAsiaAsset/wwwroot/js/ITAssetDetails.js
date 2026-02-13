@@ -39,7 +39,7 @@
                 hidden: false,
                 editable: false,
                 name: 'AssetID',
-                width: '65px',
+                width: '135px',
             },
             {
                 key: true,
@@ -403,7 +403,7 @@
                 hidden: false,
                 editable: false,
                 name: 'AssetID',
-                width: '65px',
+                width: '135px',
             },
             {
                 key: true,

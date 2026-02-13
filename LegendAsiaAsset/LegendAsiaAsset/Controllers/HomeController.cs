@@ -370,6 +370,7 @@ namespace LegendAsiaAsset.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> SaveUserDetails(UserDetails userDetails)
+
         {
             bool success = false;
             bool duplicate = false;
@@ -388,7 +389,7 @@ namespace LegendAsiaAsset.Controllers
                     {
                         _ = MailSend(userDetails);
                     }
-                    _ = MailSendCreationUserData(userDetails);
+                    //_ = MailSendCreationUserData(userDetails);
                 }
                 success = resposnse.Success;
                 duplicate = resposnse.Duplicate;
@@ -415,7 +416,7 @@ namespace LegendAsiaAsset.Controllers
 
             var response1 = await _userDetailsRepository.DeleteAssignAssetDetails(IDUser);
             var response = await _userDetailsRepository.DeleteUserDetails(IDUser);
-            _ = MailSendDeleteUserData(IDUser);
+            //_ = MailSendDeleteUserData(IDUser);
             return Json(new { response1, response, userData });
         }
         public async Task<IActionResult> MailSendDeleteUserData(int IDUser)
@@ -464,7 +465,7 @@ namespace LegendAsiaAsset.Controllers
             UserDetails userData = new();
 
             var response = await _ITAssetDetailsRepository.DeleteITAssetDetails(IDAsset);
-            _ = MailSendDeleteAssetData(IDAsset);
+            //_ = MailSendDeleteAssetData(IDAsset);
             return Json(new { response, userData });
         }
         public async Task<IActionResult> MailSendDeleteAssetData(int IDAsset)
@@ -514,7 +515,7 @@ namespace LegendAsiaAsset.Controllers
             InfrastructureModel InfraData = new();
 
             var response = await _infrastructureRepository.DeleteInfra(IDInfra);
-            _ = MailSendDeleteInfraData(IDInfra);
+            //_ = MailSendDeleteInfraData(IDInfra);
             return Json(new { response, InfraData });
         }
         public async Task<IActionResult> MailSendDeleteInfraData(int IDInfra)
@@ -2569,7 +2570,7 @@ namespace LegendAsiaAsset.Controllers
         public async Task<IActionResult> AssignITAsset(ITAssetDetailsModel iTAssetDetailsModel)
         {
             bool success = await _ITAssetDetailsRepository.AddAssignDetails(iTAssetDetailsModel);
-            _ = MailSendAssignAssetData(iTAssetDetailsModel);
+            //_ = MailSendAssignAssetData(iTAssetDetailsModel);
             return Json(new { success });
         }
 
@@ -2640,7 +2641,7 @@ namespace LegendAsiaAsset.Controllers
             {
                 _ = await _ITAssetDetailsRepository.LastUserValue(UserID, SerialNr);
                 _ = await _ITAssetDetailsRepository.DeleteAssignedAssetByUserID(UserID, SerialNr);
-                _ = MailSendRemoveAssignAssetData(UserID, SerialNr, Status);
+                //_ = MailSendRemoveAssignAssetData(UserID, SerialNr, Status);
             }
 
             return Json(new { success = true });
