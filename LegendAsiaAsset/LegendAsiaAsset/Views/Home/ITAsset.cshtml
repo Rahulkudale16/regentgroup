@@ -142,18 +142,35 @@
 </fieldset>
 <fieldset id="ScrappedFieldset">
     <div class="row mb-4 mt-4" style="border-right: 5px gray solid;">
-        <div class="row text-center mb-4">
-            <h4>
-                <span style="font-size: 17px;"><i class="fa-solid fa-1x fa-square mb-3" style="color:GRAY;"></i> SCRAPPED</span>
-            </h4>
-            <div>
-                <button type="button" class="btn btn-outline-secondary" id="ExportExcelITAsset2"><i class="fa-solid fa-file-excel"></i>&nbsp; Export Scrapped Asset</button>
+        <div class="col-6">
+            <div class="row text-center mb-4">
+                <h4>
+                    <span style="font-size: 17px;"><i class="fa-solid fa-1x fa-square mb-3" style="color:GRAY;"></i> SCRAPPED</span>
+                </h4>
+                <div>
+                    <button type="button" class="btn btn-outline-secondary" id="ExportExcelITAsset2"><i class="fa-solid fa-file-excel"></i>&nbsp; Export Scrapped Asset</button>
+                </div>
+            </div>
+            <div class="container">
+                <table id="ScrappedGrid" class="table table-bordered table-striped" style="width:100%">
+                </table>
+                <div id="ScrappedPager" style="text-align: center; height:30px"></div>
             </div>
         </div>
-        <div class="container">
-            <table id="ScrappedGrid" class="table table-bordered table-striped" style="width:100%">
-            </table>
-            <div id="ScrappedPager" style="text-align: center; height:30px"></div>
+        <div class="col-6">
+            <div class="row text-center mb-4">
+                <h4>
+                    <span style="font-size: 17px;"><i class="fa-solid fa-1x fa-square mb-3" style="color:red;"></i> REPAIRE & DISPOSAL</span>
+                </h4>
+                <div>
+                    <button type="button" class="btn btn-outline-secondary" id="ExportExcelITAsset3"><i class="fa-solid fa-file-excel"></i>&nbsp; Export Repaired & Disposed Asset</button>
+                </div>
+            </div>
+            <div class="container">
+                <table id="RepairGrid" class="table table-bordered table-striped" style="width:100%">
+                </table>
+                <div id="RepairPager" style="text-align: center; height:30px"></div>
+            </div>
         </div>
     </div>
 </fieldset>
@@ -346,6 +363,7 @@
                     <button type="reset" id="RevokeButton" class="btn btn-outline-success"><i class="fa-solid fa-arrow-rotate-left"></i> Available</button>&nbsp;
                     @* <button type="reset" id="DeactiveButton" class="btn btn-outline-danger"><i class="fa-solid fa-power-off"></i> DeActive</button>&nbsp; *@
                     <button type="button" id="RepairButton" class="btn btn-outline-danger"><i class="fa-solid fa-magnifying-glass"></i> Repair</button>&nbsp;
+                    <button type="button" id="DisposeButton" class="btn btn-outline-danger"><i class="fa-solid fa-magnifying-glass"></i> Disposal</button>&nbsp;
                     <button type="button" id="ScrappedITAsset" class="btn btn-outline-secondary"><i class="fa-solid fa-dumpster-fire"></i>&nbsp; Scrapped</button>&nbsp;
                     @* <button id="TransferITAssetDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Transfer</button>&nbsp; *@
                     <button id="SaveITAssetDetails" name="Submit" value="Save" class="btn btn-outline-purple"><i class="fa-solid fa-floppy-disk"></i> Save</button>&nbsp;

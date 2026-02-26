@@ -389,7 +389,7 @@ namespace LegendAsiaAsset.Controllers
                     {
                         _ = MailSend(userDetails);
                     }
-                    //_ = MailSendCreationUserData(userDetails);
+                    _ = MailSendCreationUserData(userDetails);
                 }
                 success = resposnse.Success;
                 duplicate = resposnse.Duplicate;
@@ -1585,6 +1585,121 @@ namespace LegendAsiaAsset.Controllers
             return Json(jsonData);
         }
 
+        public async Task<JsonResult> GetRepairAssetdata(string sidx, string sort, int page, int rows)
+        {
+            string Region = string.Empty;
+            string Country = string.Empty;
+            string Location1 = string.Empty;
+
+            ITAssetDetailsModel itAssetDetailsModel = new();
+
+            if (TempData["ITAssetDetailsModel"] != null)
+            {
+                var ITAsset = TempData["ITAssetDetailsModel"]?.ToString() ?? string.Empty;
+                itAssetDetailsModel = JsonConvert.DeserializeObject<ITAssetDetailsModel>(ITAsset) ?? new ITAssetDetailsModel();
+            }
+            if (TempData["Region"] != null)
+            {
+                Region = TempData["Region"]?.ToString() ?? string.Empty;
+            }
+            if (TempData["Country"] != null)
+            {
+                Country = TempData["Country"]?.ToString() ?? string.Empty;
+            }
+            if (TempData["Location1"] != null)
+            {
+                Location1 = TempData["Location1"]?.ToString() ?? string.Empty;
+            }
+            if (!string.IsNullOrEmpty(Region) || !string.IsNullOrEmpty(Country) || !string.IsNullOrEmpty(Location1))
+            {
+                var Data = await _locationRepository.GetLocationID(Region, Country, Location1);
+                if (Data.Count > 0)
+                {
+                    int Lastindex = Data.Count - 1;
+                    for (int i = 0; i < Data.Count; i++)
+                    {
+                        if (i == Lastindex)
+                        {
+                            itAssetDetailsModel.Remark += Data[i].IDLocation;
+                        }
+                        else
+                        {
+                            itAssetDetailsModel.Remark += Data[i].IDLocation + ",";
+                        }
+                    }
+                }
+            }
+
+            var AssetList = await _ITAssetDetailsRepository.GetRepairAssetList(itAssetDetailsModel);
+            foreach (var item in AssetList)
+            {
+                var LocationDet = (await _ITAssetDetailsRepository.GetLocationfromID(item.IDLocation));
+                item.Location = LocationDet.Location;
+                item.Region = LocationDet.Region;
+            }
+
+            var ITAssetList = ObjectTranslation.ConvertITAssetList(AssetList);
+            int totalRecords = 5;
+            var totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
+            var jsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (from RepairGrid in ITAssetList
+                        select new
+                        {
+                            RepairGrid.IDAsset,
+                            cell = new string[]
+                            {
+                                RepairGrid.AssetID ?? string.Empty,
+                                RepairGrid.IDAsset ?? string.Empty,
+                                string.Empty,
+                                RepairGrid.IDAssetDis ?? string.Empty,
+                                RepairGrid.UserID ?? string.Empty,
+                                RepairGrid.IDLocation ?? string.Empty,
+                                RepairGrid.HostName ?? string.Empty,
+                                RepairGrid.AssetType ?? string.Empty,
+                                RepairGrid.Brand ?? string.Empty,
+                                RepairGrid.Model ?? string.Empty,
+                                RepairGrid.SerialNumber ?? string.Empty,
+                                RepairGrid.PurchaseYear ?? string.Empty,
+                                RepairGrid.EmailID ?? string.Empty,
+                                RepairGrid.Designation ?? string.Empty,
+                                RepairGrid.FullName ?? string.Empty,
+                                RepairGrid.LastUser ?? string.Empty,
+                                RepairGrid.Location ?? string.Empty,
+                                RepairGrid.Region ?? string.Empty,
+                                RepairGrid.Country ?? string.Empty,
+                                RepairGrid.Unit ?? string.Empty,
+                                RepairGrid.CPU ?? string.Empty,
+                                RepairGrid.Memory ?? string.Empty,
+                                RepairGrid.HDD ?? string.Empty,
+                                RepairGrid.OS ?? string.Empty,
+                                RepairGrid.Software ?? string.Empty,
+                                RepairGrid.Remark ?? string.Empty,
+                                RepairGrid.Domain ?? string.Empty,
+                                RepairGrid.Status ?? string.Empty,
+                                RepairGrid.ActivityLog ?? string.Empty,
+                                RepairGrid.CreatedBy ?? string.Empty,
+                                RepairGrid.CreationTimeStamp ?? string.Empty,
+                                RepairGrid.ModifiedBy ?? string.Empty,
+                                RepairGrid.ModificationTimeStamp ?? string.Empty,
+                                RepairGrid.Monitor ?? string.Empty,
+                                RepairGrid.Keyboard ?? string.Empty,
+                                RepairGrid.Mouse ?? string.Empty,
+                                RepairGrid.MSOffice ?? string.Empty,
+                                RepairGrid.HeadPhone ?? string.Empty,
+                                RepairGrid.Department ?? string.Empty,
+                                RepairGrid.LastAssetLocation ?? string.Empty,
+                                RepairGrid.InvoiceNo ?? string.Empty,
+                                RepairGrid.PaidBy ?? string.Empty
+                            }
+                        })
+            };
+            return Json(jsonData);
+        }
+
         public async Task<JsonResult> GetAssigndata(string sidx, string sort, int page, int rows)
         {
             ITAssetDetailsModel iTAssetDetailsModel = new();
@@ -2357,6 +2472,57 @@ namespace LegendAsiaAsset.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ExportITAssetData3(ITAssetDetailsModel iTAssetDetailsModel)
+        {
+            string filename = "";
+
+            if (iTAssetDetailsModel.Country != null)
+            {
+                filename = string.Format("RGRepair&DisposalAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Country, DateTime.Now.ToString("ddMMyyyy"));
+            }
+            else if ((iTAssetDetailsModel.Location != null))
+            {
+                filename = string.Format("RGRepair&DisposalAssetList-({0})({1}).xlsx", iTAssetDetailsModel.Location, DateTime.Now.ToString("ddMMyyyy"));
+            }
+            else
+            {
+                filename = string.Format("RGRepair&DisposalAssetList-({0}).xlsx", DateTime.Now.ToString("ddMMyyyy"));
+            }
+
+            var weeklyLiftings = ObjectTranslation.ConvertITAssetList(await _ITAssetDetailsRepository.GetRepairAssetList(iTAssetDetailsModel));
+
+            if (weeklyLiftings.Any())
+            {
+                DataTable dataTable = CreateITAssetList(weeklyLiftings);
+                using (XLWorkbook xLWorkbook = new())
+                {
+                    var workSheet = xLWorkbook.Worksheets.Add(dataTable, "RG Repair & Disposal Assets");
+                    using (MemoryStream stream = new())
+                    {
+                        xLWorkbook.SaveAs(stream);
+                        byte[] byteStream = stream.ToArray();
+                        string contentType = string.Empty;
+                        var contentDisposition = new ContentDisposition
+                        {
+                            FileName = filename,
+                            Inline = true
+                        };
+                        Response.Headers.Add("content-disposition", contentDisposition.ToString());
+                        contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                        return File(byteStream, contentType);
+                    }
+                    ;
+                }
+                ;
+
+            }
+            else
+            {
+                return Json(new { error = "Unable to Export Document. Please contact IT Support" });
+            }
+        }
+
         private static DataTable CreateITAssetList(List<TranslatedITAssetDetailsModel> ITAssetRecords)
         {
             DataTable dataTable = new("Regent Group Asset List");
@@ -2570,7 +2736,7 @@ namespace LegendAsiaAsset.Controllers
         public async Task<IActionResult> AssignITAsset(ITAssetDetailsModel iTAssetDetailsModel)
         {
             bool success = await _ITAssetDetailsRepository.AddAssignDetails(iTAssetDetailsModel);
-            //_ = MailSendAssignAssetData(iTAssetDetailsModel);
+            _ = MailSendAssignAssetData(iTAssetDetailsModel);
             return Json(new { success });
         }
 
@@ -2641,7 +2807,7 @@ namespace LegendAsiaAsset.Controllers
             {
                 _ = await _ITAssetDetailsRepository.LastUserValue(UserID, SerialNr);
                 _ = await _ITAssetDetailsRepository.DeleteAssignedAssetByUserID(UserID, SerialNr);
-                //_ = MailSendRemoveAssignAssetData(UserID, SerialNr, Status);
+                _ = MailSendRemoveAssignAssetData(UserID, SerialNr, Status);
             }
 
             return Json(new { success = true });

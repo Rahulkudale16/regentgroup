@@ -41,6 +41,7 @@ namespace LegendAsiaAsset.Contracts
         public Task<string> GetAssetID(string SerialNumber);
         public Task<string> GetRemark(string IDAsset);
         public Task<List<ITAssetDetailsModel>> GetScrappedAssetList(ITAssetDetailsModel iTAssetDetailsModel);
+        public Task<List<ITAssetDetailsModel>> GetRepairAssetList(ITAssetDetailsModel iTAssetDetailsModel);
         public Task<List<ITAssetDetailsModel>> GetAssignedAssetList(ITAssetDetailsModel iTAssetDetailsModel);
     }
 }
