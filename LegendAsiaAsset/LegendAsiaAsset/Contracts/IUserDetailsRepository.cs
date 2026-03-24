@@ -16,7 +16,6 @@ namespace LegendAsiaAsset.Contracts
         public Task<ResponseModel> SaveUserDetails(UserDetails userDetails);
         //public Task<bool> GeneratePassword(UserDetails userDetails);
         public Task<ResponseModel> UpdateUserDetails(UserDetails userDetails);
-        public Task<bool> UpdateAssetDetails(UserDetails userDetails);
         public Task<LocationModel> GetLocationfromID(int IDLocation);
         public Task<ResponseModel> ResetUserDetails(UserDetails userDetails);
         //  public Task<bool> SetActiveDeactive(int iduser);

@@ -399,7 +399,7 @@ namespace LegendAsiaAsset.Controllers
                 var response = await _userDetailsRepository.UpdateUserDetails(userDetails);
                 if(response.Success)
                 {
-                    success = await _userDetailsRepository.UpdateAssetDetails(userDetails);
+                    success = await _ITAssetDetailsRepository.UpdateAssetDetails(userDetails);
                     _ = MailSendUpdateUserData(userDetails);
                 }
                 success = response.Success;
@@ -1401,12 +1401,12 @@ namespace LegendAsiaAsset.Controllers
             }
 
             var AssetList = await _ITAssetDetailsRepository.GetAssignedAssetList(itAssetDetailsModel);
-            foreach (var item in AssetList)
-            {
-                var LocationDet = (await _ITAssetDetailsRepository.GetLocationfromID(item.IDLocation));
-                item.Location = LocationDet.Location;
-                item.Region = LocationDet.Region;
-            }
+            //foreach (var item in AssetList)
+            //{
+            //    var LocationDet = (await _ITAssetDetailsRepository.GetLocationfromID(item.IDLocation));
+            //    item.Location = LocationDet.Location;
+            //    item.Region = LocationDet.Region;
+            //}
 
             var ITAssetList = ObjectTranslation.ConvertITAssetList(AssetList);
             int totalRecords = 5;

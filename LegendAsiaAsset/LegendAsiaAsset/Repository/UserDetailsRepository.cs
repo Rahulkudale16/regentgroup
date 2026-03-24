@@ -387,39 +387,6 @@ namespace LegendAsiaAsset.Repository
                 throw;
             }
         }
-        public async Task<bool> UpdateAssetDetails(UserDetails userDetails)
-        {
-            string currentUserName = GetUserName();
-            try
-            {
-                string sp = "SP_UpdateAssetDetailsfromUser";
-
-                var parameters = new DynamicParameters();
-                parameters.Add("IDUser", userDetails.IDUser, DbType.Int16, ParameterDirection.Input);
-                parameters.Add("FullName", userDetails.FullName.ToUpper(), DbType.String, ParameterDirection.Input);
-                parameters.Add("Department", userDetails.Department.ToUpper(), DbType.String, ParameterDirection.Input);
-                parameters.Add("Designation", userDetails.Designation.ToUpper(), DbType.String, ParameterDirection.Input);
-                parameters.Add("Domain", userDetails.Domain?.ToUpper(), DbType.String, ParameterDirection.Input);
-                parameters.Add("EmailID", userDetails.EmailID.ToUpper(), DbType.String, ParameterDirection.Input);
-                using (var connection = _context.CreateConnection())
-                {
-                    int userDetails1 = await connection.ExecuteAsync(sp, parameters, commandType: CommandType.StoredProcedure);
-                    if (userDetails1 == 1)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                ;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
         public async Task<bool> DeleteUserDetails(int IDUser)
         {
             string currentUserName = GetUserName();

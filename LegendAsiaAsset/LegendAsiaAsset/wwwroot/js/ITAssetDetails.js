@@ -1129,7 +1129,7 @@
                 hidden: false,
                 editable: false,
                 name: 'AssetID',
-                width: '65px',
+                width: '135px',
             },
             {
                 key: true,
@@ -1197,7 +1197,7 @@
                 key: false,
                 name: 'PurchaseYear',
                 editable: false,
-                width: '135px',
+                width: '115px',
             },
             {
                 key: false,
@@ -1414,13 +1414,13 @@
                 hidden: false,
                 name: 'viewStatus',
                 editable: false,
-                width: '105px',
+                width: '90px',
             },
             {
                 key: false,
                 editable: false,
                 name: 'UpdateAsset',
-                width: '65px',
+                width: '60px',
             },
 
         ],
@@ -1682,7 +1682,7 @@
         $('#ModelText').val(data.Model);
         $('#SerialNumberText').val(data.SerialNumber);
         $('#PurchaseYearText').val(purchaseYear);
-        $('#OfficeText').val(data.LastAssetLocation);
+        $('#OfficeText').val(data.Location);
         $('#UnitText').val(data.Unit);
         $('#CPUText').val(data.CPU);
         $('#MemoryText').val(data.Memory);
@@ -2058,6 +2058,7 @@
         $('#MonitorITAsset').val(data.Monitor);
         $('#KeyboardITAsset').val(data.Keyboard);
         $('#MouseITAsset').val(data.Mouse);
+        $('#RemarkText').val(data.Remark);
         $('#MSOfficeITAsset').val(data.MSOffice);
         $('#EmailIDITAsset').val(data.EmailID);
         $('#DesignationITAsset').val(data.Designation);
@@ -2086,12 +2087,12 @@
             $("#ScrappedITAsset").hide();
             $("#RepairButton").hide();
             $("#DeactiveButton").hide();
+            $("#DeactiveButton").hide();
+            $("#RevokeButton").hide();
+            $("#DisposeButton").hide();
         }
         else {
-            $("#UpdateITAssetDetails").show();
-            $("#ScrappedITAsset").show();
-            $("#RepairButton").show();
-            $("#DeactiveButton").show();
+            
         }
     });
 

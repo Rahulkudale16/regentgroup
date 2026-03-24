@@ -43,5 +43,6 @@ namespace LegendAsiaAsset.Contracts
         public Task<List<ITAssetDetailsModel>> GetScrappedAssetList(ITAssetDetailsModel iTAssetDetailsModel);
         public Task<List<ITAssetDetailsModel>> GetRepairAssetList(ITAssetDetailsModel iTAssetDetailsModel);
         public Task<List<ITAssetDetailsModel>> GetAssignedAssetList(ITAssetDetailsModel iTAssetDetailsModel);
+        public Task<bool> UpdateAssetDetails(UserDetails userDetails);
     }
 }
