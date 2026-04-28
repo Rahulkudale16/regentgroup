@@ -673,6 +673,11 @@ $(document).ready(function () {
     //--------------------------------------------------Laptop & Desktop Chart Logic Starts ------------------------------------------------------------//
 })
 
+function reload(tableName) {
+    currentPage = tableName.getGridParam('page');
+    tableName.setGridParam({ datatype: "json" }).trigger('reloadGrid');
+}
+
 function AddCountries(regionName) {
     $.ajax({
         type: "GET",

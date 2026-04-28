@@ -26,7 +26,7 @@ $(document).ready(function () {
         mtype: 'Get',
         url: 'GetInfrastructuredata',
         datatype: 'json',
-        colNames: ['IDInfra', 'IDInfra', 'ID', 'IDLocation', 'AssetType', 'Brand', 'Model', 'SerialNumber', 'PurchaseYear', 'Remark', 'InvoiceNo','PaidBy','Unit', 'Location', 'Status', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Status', 'View'],
+        colNames: ['IDInfra', 'IDInfra', 'ID', 'IDLocation', 'AssetType', 'Brand', 'Model', 'SerialNumber', 'PurchaseYear', 'Remark', 'InvoiceNo', 'PaidBy', 'Unit', 'Location', 'Status', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Status', 'View'],
         colModel: [
             {
                 key: true,
@@ -212,9 +212,9 @@ $(document).ready(function () {
 
     $(document).on('click', '.getUpdateInfra', function () {
 
-        
+
         if (RoleUser == 'ADMIN') {
-            
+
             $("#UpdateInfra").show();
             $("#TransferInfra").show();
             $("#DeleteInfra").show();
@@ -222,7 +222,7 @@ $(document).ready(function () {
             $("#statusInfra").show();
         }
         else if (RoleUser == 'HR') {
-  
+
             $("#UpdateInfra").hide();
             $("#TransferInfra").hide();
             $("#DeleteInfra").hide();
@@ -230,14 +230,14 @@ $(document).ready(function () {
             $("#statusInfra").hide();
         }
         else if (RoleUser == "SUPERUSER") {
-            
+
             $("#UpdateInfra").show();
             $("#TransferInfra").show();
             $("#DeleteInfra").show();
             $("#InfraStatus").show();
             $("#statusInfra").show();
         }
-        
+
         var rowId = $(this).data('rowid');
         var data = InfrastructureGrid.jqGrid('getRowData', rowId);
         var purchaseYear = moment(data.PurchaseYear, 'DD-MM-YYYY').format('yyyy-MM-DD');
@@ -369,7 +369,7 @@ $(document).ready(function () {
         var PurchaseYear = $('#PurchaseYearInfra').val();
         var Location = $('#LocationInfra').val();
         var Remark = $('#RemarkInfra').val().toUpperCase();
-        var InvoiceNo = $('#InvoceNoInfra').val().toUpperCase();
+        var InvoiceNo = $('#InvoiceNoInfra').val().toUpperCase();
         var PaidBy = $('#PaidByInfra').val().toUpperCase();
         var Unit = $('#UnitInfra').val().toUpperCase();
         var Status = $('#StatusInfra').val();
@@ -404,7 +404,6 @@ $(document).ready(function () {
                         $('#CreateInfra').modal("hide");
                         $('#loading').hide();
                         DestroyRenderInfraDropdowns();
-                        window.location.reload();
                     }
                     else {
                         if (result.duplicate == true) {
@@ -479,7 +478,6 @@ $(document).ready(function () {
                         $('#CreateInfra').modal("hide");
                         $('#loading').hide();
                         DestroyRenderInfraDropdowns();
-                        window.location.reload();
                     }
                     else {
                         if (result.duplicate == true) {
@@ -700,7 +698,18 @@ $(document).ready(function () {
             });
         }
     })
-})
+});
+
+//function reload(tableName) {
+//    currentPage = tableName.getGridParam('page');
+//    tableName.setGridParam({ datatype: "json" }).trigger('reloadGrid');
+//}
+
+function reload(tableName) {
+    currentPage = $('#' + tableName).getGridParam('page');
+    $('#' + tableName).setGridParam({ datatype: "json" }).trigger('reloadGrid');
+}
+
 
 function ChangeStatusActiveDeactiveInfra(status, idinfra) {
     $.ajax({
@@ -717,11 +726,6 @@ function ChangeStatusActiveDeactiveInfra(status, idinfra) {
             $('#successToast').toast("show");
         }
     });
-}
-
-function reload(tableName) {
-    currentPage = $('#' + tableName).getGridParam('page');
-    $('#' + tableName).setGridParam({ datatype: "json" }).trigger('reloadGrid');
 }
 
 function checkValidationINF(type) {

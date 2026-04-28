@@ -2315,11 +2315,11 @@
                 success: function (result) {
                     if (result.success) {
                         reload('ITAssetDetailsGrid');
+                        reload('AssignedGrid');
                         $('#successToastMessage').text('Asset Created Successfully');
                         $('#successToast').toast("show");
                         $('#CreateITAssetDetails').modal("hide");
                         $("#loading").hide();
-                        window.location.reload();
                         DestroyRenderITAssetDropdowns();
                     }
                     else {
@@ -2422,12 +2422,12 @@
                 success: function (result) {
                     if (result.success) {
                         reload('ITAssetDetailsGrid');
+                        reload('AssignedGrid');
                         $('#successToastMessage').text('Asset Updated Successfully');
                         $('#successToast').toast("show");
                         $('#CreateITAssetDetails').modal("hide");
                         $("#loading").hide();
                         DestroyRenderITAssetDropdowns();
-                        window.location.reload();
                     }
                     else {
                         if (result.duplicate == true) {

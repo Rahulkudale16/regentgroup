@@ -657,7 +657,7 @@ $(document).ready(function () {
                             $("#UserStatus").show();
                             $("#statusShow").show();
                             reload('AssignGrid');
-                            window.location.reload();
+                            //window.location.reload();
                         }
                         else {
                             if (data.duplicate == true) {
@@ -720,11 +720,12 @@ $(document).ready(function () {
                 success: function (result) {
                     if (result.success == true) {
                         reload('UserDetailsGrid');
-                        $('#loading').hide();
+                        $('#loading').show();
                         $('#successToastMessage').text('User Updated Successfully');
                         $('#successToast').toast("show");
                         $('#UpdateAllDetails').modal("hide");
                         DestroyRenderUDDropdowns();
+                        $('#loading').hide();
                     }
                     else {
                         if (result.duplicate == true) {
@@ -1335,8 +1336,8 @@ function reloadGridsByID(rowId) {
 }
 
 function reload(tableName) {
-    currentPage = $('#' + tableName).getGridParam('page');
-    $('#' + tableName).setGridParam({ datatype: "json" }).trigger('reloadGrid');
+    currentPage = tableName.getGridParam('page');
+    tableName.setGridParam({ datatype: "json" }).trigger('reloadGrid');
 }
 
 function ChangeStatusActiveDeactive1(status, iduser) {

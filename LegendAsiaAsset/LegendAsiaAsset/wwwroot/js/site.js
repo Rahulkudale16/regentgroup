@@ -253,6 +253,8 @@ function reload(tableName) {
     tableName.setGridParam({ datatype: "json" }).trigger('reloadGrid');
 }
 
+
+
 function checkForCaching(event) {
     if (event.persisted) {
         $("#loading").fadeOut("slow");
