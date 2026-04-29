@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Newtonsoft.Json;
@@ -33,7 +34,7 @@ namespace LegendAsiaAsset.Controllers
 
         public HomeController(ILogger<HomeController> logger, IUserDetailsRepository userDetailsRepository, ILocationRepository locationRepository, IITAssetDetailsRepository iTAssetDetailsRepository, IInfrastructureRepository infrastructureRepository, DapperContext context, IHttpContextAccessor contextAccessor)
         {
-            
+
             _logger = logger;
             _userDetailsRepository = userDetailsRepository;
             _locationRepository = locationRepository;
@@ -43,6 +44,8 @@ namespace LegendAsiaAsset.Controllers
             _contextAccessor = contextAccessor;
         }
         [Authorize]
+
+
         public async Task<IActionResult> Home()
         {
             // Constant Methods Dropdowns Starts
@@ -193,6 +196,7 @@ namespace LegendAsiaAsset.Controllers
             TempData["ITAssetDetailsModel"] = JsonConvert.SerializeObject(iTAssetDetailsModel);
             return PartialView();
         }
+
         public IActionResult Infrastructure()
         {
             InfrastructureModel infrastructureModel = new();
@@ -302,8 +306,8 @@ namespace LegendAsiaAsset.Controllers
                 mail.From = new MailAddress("donotreply@regentgroup.sg");
                 mail.Subject = "Updated User's Status Details";
                 body = string.Format("Dear Admin,<br/><br/> Please find User detail. <br/><br/> User ID : {0} <br/> Status : {1} <br/> Updated By : {2} " +
-                    "<br/><br/>  With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>", 
-                    userDetails.IDUser,userDetails.Status,currentUserName);
+                    "<br/><br/>  With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
+                    userDetails.IDUser, userDetails.Status, currentUserName);
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -317,7 +321,7 @@ namespace LegendAsiaAsset.Controllers
                 smtp.Send(mail);
             }
             catch (Exception)
-            {}
+            { }
             return Json(new { success = true, msg = "Mail Request Send successfully" });
         }
         public async Task<JsonResult> GetStatusLoc(LocationModel locationModel)
@@ -370,7 +374,6 @@ namespace LegendAsiaAsset.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> SaveUserDetails(UserDetails userDetails)
-
         {
             bool success = false;
             bool duplicate = false;
@@ -378,26 +381,26 @@ namespace LegendAsiaAsset.Controllers
 
             if (userDetails.IDUser == 0)
             {
-                var resposnse = await _userDetailsRepository.SaveUserDetails(userDetails);
-                if (resposnse.Success)
+                var response = await _userDetailsRepository.SaveUserDetails(userDetails);
+                if (response.Success)
                 {
-                    userData = await _userDetailsRepository.GetUserDetailsById(resposnse.ID);
+                    userData = await _userDetailsRepository.GetUserDetailsById(response.ID);
                     userData.Location = userData.IDLocation.ToString();
-                    userDetails.IDUser = resposnse.ID;
-                    userDetails.Password = resposnse.Password;
+                    userDetails.IDUser = response.ID;
+                    userDetails.Password = response.Password;
                     if (userDetails.Role != "USER")
                     {
                         _ = MailSend(userDetails);
                     }
                     _ = MailSendCreationUserData(userDetails);
                 }
-                success = resposnse.Success;
-                duplicate = resposnse.Duplicate;
+                success = response.Success;
+                duplicate = response.Duplicate;
             }
             else
             {
                 var response = await _userDetailsRepository.UpdateUserDetails(userDetails);
-                if(response.Success)
+                if (response.Success)
                 {
                     success = await _ITAssetDetailsRepository.UpdateAssetDetails(userDetails);
                     _ = MailSendUpdateUserData(userDetails);
@@ -405,7 +408,7 @@ namespace LegendAsiaAsset.Controllers
                 success = response.Success;
                 duplicate = response.Duplicate;
             }
-            return Json(new { success, userData, duplicate });
+            return Json(new {success, userData, duplicate });
         }
         [HttpPost]
         public async Task<IActionResult> DeleteUserDetails(int IDUser)
@@ -598,7 +601,7 @@ namespace LegendAsiaAsset.Controllers
                 };
                 smtp.Send(mail);
             }
-            catch (Exception){}
+            catch (Exception) { }
 
             return Json(new { success = true, msg = "Mail Request Send successfully" });
         }
@@ -698,7 +701,7 @@ namespace LegendAsiaAsset.Controllers
                 };
                 smtp.Send(mail);
             }
-            catch (Exception){}
+            catch (Exception) { }
 
             return Json(new { success = true, msg = "Mail Request Send successfully" });
 
@@ -845,7 +848,8 @@ namespace LegendAsiaAsset.Controllers
                         using (FileStream stream = new(uploadPath, FileMode.Create))
                         {
                             await file.CopyToAsync(stream);
-                        };
+                        }
+                        ;
                         _ = await _userDetailsRepository.SaveFile(userDetails);
 
                         messages.Add(new Message { ProtocolVersion = 1, HostId = userDetails.DocName, MessageType = "File Saved Successfully" });
@@ -857,7 +861,8 @@ namespace LegendAsiaAsset.Controllers
                     using (FileStream stream = new(uploadPath, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
-                    };
+                    }
+                    ;
                     _ = await _userDetailsRepository.SaveFile(userDetails);
 
                     messages.Add(new Message { ProtocolVersion = 1, HostId = userDetails.DocName, MessageType = "File Saved Successfully" });
@@ -1091,18 +1096,18 @@ namespace LegendAsiaAsset.Controllers
                 }
                 success = response.Success;
                 duplicate = response.Duplicate;
-                
+
             }
             else
             {
                 var response = await _locationRepository.UpdateLocation(locationModel);
-                if(response.Success)
+                if (response.Success)
                 {
                     _ = MailSendUpdateLocationData(locationModel);
                 }
                 success = response.Success;
                 duplicate = response.Duplicate;
-                
+
             }
             return Json(new { success, duplicate });
         }
@@ -1165,7 +1170,7 @@ namespace LegendAsiaAsset.Controllers
                     "<br/><br/>Location ID : {0} <br/> Region : {1} <br/> Country : {2} <br/> Location : {3} <br/> Created By : {4}<br/><br>" +
                     "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
-                  LocationBasedID, locationModel.Region.ToUpper(),  locationModel.Country.ToUpper(), locationModel.Location.ToUpper(), currentUserName.ToUpper());
+                  LocationBasedID, locationModel.Region.ToUpper(), locationModel.Country.ToUpper(), locationModel.Location.ToUpper(), currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -1522,7 +1527,7 @@ namespace LegendAsiaAsset.Controllers
                 item.Location = LocationDet.Location;
                 item.Region = LocationDet.Region;
             }
-            
+
             var ITAssetList = ObjectTranslation.ConvertITAssetList(AssetList);
             int totalRecords = 5;
             var totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
@@ -1772,7 +1777,7 @@ namespace LegendAsiaAsset.Controllers
             if (iTAssetDetailsModel.IDAsset == 0)
             {
                 var response = await _ITAssetDetailsRepository.SaveITAssetDetails(iTAssetDetailsModel);
-                if(response.Success)
+                if (response.Success)
                 {
                     _ = MailSendCreationAssetData(iTAssetDetailsModel);
                 }
@@ -1782,15 +1787,15 @@ namespace LegendAsiaAsset.Controllers
             else
             {
                 var response = await _ITAssetDetailsRepository.UpdateITAssetDetails(iTAssetDetailsModel);
-                if(response.Success)
+                if (response.Success)
                 {
                     _ = MailSendUpdateAssetData(iTAssetDetailsModel);
                 }
-                
+
                 success = response.Success;
                 duplicate = response.Duplicate;
             }
-            
+
             return Json(new { success, duplicate });
         }
         public async Task<JsonResult> DestroyRenderITAssetDropdowns()
@@ -1871,8 +1876,8 @@ namespace LegendAsiaAsset.Controllers
                     "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   iTAssetDetailsModel.AssetID, iTAssetDetailsModel.HostName, iTAssetDetailsModel.AssetType, iTAssetDetailsModel.Brand, iTAssetDetailsModel.SerialNumber, iTAssetDetailsModel.PurchaseYear,
-                  iTAssetDetailsModel.Unit,iTAssetDetailsModel.CPU,iTAssetDetailsModel.Memory,iTAssetDetailsModel.HDD,iTAssetDetailsModel.Monitor,iTAssetDetailsModel.Keyboard,iTAssetDetailsModel.Mouse,
-                  iTAssetDetailsModel.OS,iTAssetDetailsModel.MSOffice,iTAssetDetailsModel.Software,iTAssetDetailsModel.Remark, AssetBasedID,iTAssetDetailsModel.InvoiceNo,iTAssetDetailsModel.PaidBy, currentUserName.ToUpper());
+                  iTAssetDetailsModel.Unit, iTAssetDetailsModel.CPU, iTAssetDetailsModel.Memory, iTAssetDetailsModel.HDD, iTAssetDetailsModel.Monitor, iTAssetDetailsModel.Keyboard, iTAssetDetailsModel.Mouse,
+                  iTAssetDetailsModel.OS, iTAssetDetailsModel.MSOffice, iTAssetDetailsModel.Software, iTAssetDetailsModel.Remark, AssetBasedID, iTAssetDetailsModel.InvoiceNo, iTAssetDetailsModel.PaidBy, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -1919,7 +1924,7 @@ namespace LegendAsiaAsset.Controllers
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   iTAssetDetailsModel.AssetID, iTAssetDetailsModel.HostName, iTAssetDetailsModel.AssetType, iTAssetDetailsModel.Brand, iTAssetDetailsModel.SerialNumber, iTAssetDetailsModel.PurchaseYear,
                   iTAssetDetailsModel.Unit, iTAssetDetailsModel.CPU, iTAssetDetailsModel.Memory, iTAssetDetailsModel.HDD, iTAssetDetailsModel.Monitor, iTAssetDetailsModel.Keyboard, iTAssetDetailsModel.Mouse,
-                  iTAssetDetailsModel.OS, iTAssetDetailsModel.MSOffice, iTAssetDetailsModel.Software,RemarkData, AssetBasedID, iTAssetDetailsModel.InvoiceNo,iTAssetDetailsModel.PaidBy,currentUserName.ToUpper());
+                  iTAssetDetailsModel.OS, iTAssetDetailsModel.MSOffice, iTAssetDetailsModel.Software, RemarkData, AssetBasedID, iTAssetDetailsModel.InvoiceNo, iTAssetDetailsModel.PaidBy, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -2083,7 +2088,7 @@ namespace LegendAsiaAsset.Controllers
             if (infrastructureModel.IDInfra == 0)
             {
                 var response = await _infrastructureRepository.SaveInfrastructure(infrastructureModel);
-                if(response.Success)
+                if (response.Success)
                 {
                     _ = MailSendCreationInfraData(infrastructureModel);
                 }
@@ -2171,7 +2176,7 @@ namespace LegendAsiaAsset.Controllers
                     "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
                   InfraBasedID, infrastructureModel.AssetType, infrastructureModel.Brand, infrastructureModel.Model, infrastructureModel.SerialNumber,
-                  infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit,infrastructureModel.InvoiceNo,infrastructureModel.PaidBy, currentUserName.ToUpper());
+                  infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit, infrastructureModel.InvoiceNo, infrastructureModel.PaidBy, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -2211,7 +2216,7 @@ namespace LegendAsiaAsset.Controllers
                 body = string.Format("Dear Admin,<br/><br/> The Updated Infrastructure Details are provided below. " +
                     "<br/><br/>Infrastructure ID : {0} <br/> Asset Type : {1} <br/> Brand : {2} <br/> Model : {3} <br/> Serial Number : {4} <br/> Purchase Year : {5} <br/> Location : {6} <br/> Remark : {7} <br/> Unit : {8} <br/> Invoice No : {9}<br/> Paid By : {10}<br/> Updated By : {11} <br/><br>" +
                     "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. Please do not respond. If you need additional help, please contact IT Support.</i></font>",
-                  InfraBasedID, infrastructureModel.AssetType, infrastructureModel.Brand, infrastructureModel.Model, infrastructureModel.SerialNumber, infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit,infrastructureModel.InvoiceNo,infrastructureModel.PaidBy, currentUserName.ToUpper());
+                  InfraBasedID, infrastructureModel.AssetType, infrastructureModel.Brand, infrastructureModel.Model, infrastructureModel.SerialNumber, infrastructureModel.PurchaseYear, LocationDet, infrastructureModel.Remark, infrastructureModel.Unit, infrastructureModel.InvoiceNo, infrastructureModel.PaidBy, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -2229,7 +2234,7 @@ namespace LegendAsiaAsset.Controllers
             return Json(new { success = true, msg = "Mail Request Send successfully" });
 
         }
-        
+
         //-------------------------------------------------------------------------------Infrastructure List View Methods Ends
 
 
@@ -2289,8 +2294,10 @@ namespace LegendAsiaAsset.Controllers
                         Response.Headers.Add("content-disposition", contentDisposition.ToString());
                         contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                         return File(byteStream, contentType);
-                    };
-                };
+                    }
+                    ;
+                }
+                ;
             }
             else
             {
@@ -2360,8 +2367,10 @@ namespace LegendAsiaAsset.Controllers
                         Response.Headers.Add("content-disposition", contentDisposition.ToString());
                         contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                         return File(byteStream, contentType);
-                    };
-                };
+                    }
+                    ;
+                }
+                ;
 
             }
             else
@@ -2557,7 +2566,7 @@ namespace LegendAsiaAsset.Controllers
 
             foreach (var item in ITAssetRecords)
             {
-                dataTable.Rows.Add(item.AssetID,item.AssetType,item.Brand,item.Model, item.SerialNumber, item.PurchaseYear,item.Location,
+                dataTable.Rows.Add(item.AssetID, item.AssetType, item.Brand, item.Model, item.SerialNumber, item.PurchaseYear, item.Location,
                     item.FullName, item.EmailID, item.Department);
 
             }
@@ -2595,7 +2604,7 @@ namespace LegendAsiaAsset.Controllers
                       new DataColumn("Designation"),
                       new DataColumn("EmailID"),
                       new DataColumn("Department"),
-                      
+
                       new DataColumn("LastUser"),
                       new DataColumn("ActivityLog"),
                       new DataColumn("Status")
@@ -2603,7 +2612,7 @@ namespace LegendAsiaAsset.Controllers
 
             foreach (var item in ITAssetRecords)
             {
-                dataTable.Rows.Add(item.IDAssetDis,item.HostName,item.AssetType, item.Brand, item.Model, item.SerialNumber, item.PurchaseYear,item.Unit,item.CPU,item.Memory,item.HDD,item.Monitor,item.Keyboard,item.Mouse,item.OS,item.MSOffice,item.Domain,
+                dataTable.Rows.Add(item.IDAssetDis, item.HostName, item.AssetType, item.Brand, item.Model, item.SerialNumber, item.PurchaseYear, item.Unit, item.CPU, item.Memory, item.HDD, item.Monitor, item.Keyboard, item.Mouse, item.OS, item.MSOffice, item.Domain,
                 item.Software, item.Location, item.Remark, item.FullName, item.Designation, item.EmailID, item.Department, item.LastUser, item.ActivityLog, item.Status);
             }
             return dataTable;
@@ -2636,8 +2645,10 @@ namespace LegendAsiaAsset.Controllers
                         Response.Headers.Add("content-disposition", contentDisposition.ToString());
                         contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                         return File(byteStream, contentType);
-                    };
-                };
+                    }
+                    ;
+                }
+                ;
 
             }
             else
@@ -2699,8 +2710,10 @@ namespace LegendAsiaAsset.Controllers
                         Response.Headers.Add("content-disposition", contentDisposition.ToString());
                         contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                         return File(byteStream, contentType);
-                    };
-                };
+                    }
+                    ;
+                }
+                ;
 
             }
             else
@@ -2764,7 +2777,7 @@ namespace LegendAsiaAsset.Controllers
                     "" +
                     "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
-                  AssetBasedID, iTAssetDetailsModel.FullName,iTAssetDetailsModel.SerialNumber, currentUserName.ToUpper());
+                  AssetBasedID, iTAssetDetailsModel.FullName, iTAssetDetailsModel.SerialNumber, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()
@@ -2837,7 +2850,7 @@ namespace LegendAsiaAsset.Controllers
                     "" +
                     "With regards, <br/> IT Support<b> <br/> <font size=2><i><br/>This email message was auto-generated. " +
                     "Please do not respond. If you need additional help, please contact IT Support.</i></font>",
-                  AssetBasedID, UserID,SerialNr,Status,currentUserName.ToUpper());
+                  AssetBasedID, UserID, SerialNr, Status, currentUserName.ToUpper());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new()

@@ -8,7 +8,7 @@ $(document).ready(function () {
         url: 'GetAssignedAssetdata',
         //editurl: '',
         datatype: 'json',
-        colNames: ['AssetID','ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark','Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'Status', 'View'],
+        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'Status', 'View'],
         colModel: [
             {
                 key: true,
@@ -115,7 +115,7 @@ $(document).ready(function () {
             },
             {
                 key: false,
-                hidden:true,
+                hidden: true,
                 name: 'Location',
                 editable: false,
                 width: '95px',
@@ -345,7 +345,7 @@ $(document).ready(function () {
         mtype: 'Get',
         url: 'GetInfrastructuredata',
         datatype: 'json',
-        colNames: ['IDInfra', 'IDInfra', 'ID', 'IDLocation', 'AssetType', 'Brand', 'Model', 'SerialNumber', 'PurchaseYear', 'Remark', 'InvoiceNo', 'PaidBy','Unit','Location', 'Status', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Status', 'View'],
+        colNames: ['IDInfra', 'IDInfra', 'ID', 'IDLocation', 'AssetType', 'Brand', 'Model', 'SerialNumber', 'PurchaseYear', 'Remark', 'InvoiceNo', 'PaidBy', 'Unit', 'Location', 'Status', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Status', 'View'],
         colModel: [
             {
                 key: true,
@@ -434,7 +434,7 @@ $(document).ready(function () {
             },
             {
                 key: false,
-                hidden:true,
+                hidden: true,
                 name: 'Location',
                 editable: false,
                 width: '150px',
@@ -532,7 +532,7 @@ $(document).ready(function () {
         }
 
     });
-   
+
     //------------------------------------------------- Infrastructure Grid Ends -----------------------------------------------------------//
 
     //------------------------------------------------- Infrastructure Status Starts -----------------------------------------------------------//
@@ -565,8 +565,8 @@ $(document).ready(function () {
         $(regions[i]).find('.fa-solid').hide();
     }
     AddCountries('ASIA');
-             Manipulation('ASIA', '', '');
-       //$('#locationData').show();
+    Manipulation('ASIA', '', '');
+    //$('#locationData').show();
 
     $(document).on('click', '.countries', function () {
         var countries = document.querySelectorAll('.countries');
@@ -583,7 +583,7 @@ $(document).ready(function () {
         Country = $(this).attr('value');
         AddLocation(Country);
         Manipulation(Region, Country, '');
-    
+
 
 
     });
@@ -787,3 +787,29 @@ function ChangeStatusActiveDeactive(status, idAsset) {
         }
     });
 }
+
+
+(function () {
+
+    // MUST match cookie timeout (20 minutes)
+    const SESSION_TIMEOUT_MS = 20 * 60 * 1000; // 20 minutes
+
+    let logoutTimer;
+
+    function resetTimer() {
+        clearTimeout(logoutTimer);
+        logoutTimer = setTimeout(function () {
+            window.location.replace('/Account/Login');
+        }, SESSION_TIMEOUT_MS);
+    }
+
+    // Reset timer on user activity
+    document.addEventListener('mousemove', resetTimer);
+    document.addEventListener('keydown', resetTimer);
+    document.addEventListener('click', resetTimer);
+    document.addEventListener('scroll', resetTimer);
+
+    // Start timer initially
+    resetTimer();
+
+})();

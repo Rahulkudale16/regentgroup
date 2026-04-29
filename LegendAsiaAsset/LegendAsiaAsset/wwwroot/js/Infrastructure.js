@@ -855,3 +855,29 @@ function DestroyRenderInfraDropdowns() {
         }
     });
 }
+
+
+(function () {
+
+    // MUST match cookie timeout (20 minutes)
+    const SESSION_TIMEOUT_MS = 20 * 60 * 1000; // 20 minutes
+
+    let logoutTimer;
+
+    function resetTimer() {
+        clearTimeout(logoutTimer);
+        logoutTimer = setTimeout(function () {
+            window.location.replace('/Account/Login');
+        }, SESSION_TIMEOUT_MS);
+    }
+
+    // Reset timer on user activity
+    document.addEventListener('mousemove', resetTimer);
+    document.addEventListener('keydown', resetTimer);
+    document.addEventListener('click', resetTimer);
+    document.addEventListener('scroll', resetTimer);
+
+    // Start timer initially
+    resetTimer();
+
+})();

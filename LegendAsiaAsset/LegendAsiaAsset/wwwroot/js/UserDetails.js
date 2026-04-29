@@ -623,7 +623,7 @@ $(document).ready(function () {
                     },
                     dataType: "json",
                     success: function (data) {
-                        if (data.success) {
+                        if (data.success == true) {
                             reload('UserDetailsGrid');
                             $('#loading').hide();
                             $('#successToastMessage').text('User Created Successfully');
@@ -659,6 +659,10 @@ $(document).ready(function () {
                             reload('AssignGrid');
                             //window.location.reload();
                         }
+                        else if (data.expired == true) {
+                            window.location.href = '/Account/Login';
+                            return;
+                        }
                         else {
                             if (data.duplicate == true) {
                                 $('#warningToastMessage').text('Dupliatation of record is not allowed.');
@@ -671,6 +675,7 @@ $(document).ready(function () {
                                 $("#loading").hide();
                             }
                         }
+
                     }
                 });
             }
@@ -1431,3 +1436,31 @@ function DestroyRenderUDDropdowns() {
         }
     });
 }
+
+
+
+(function () {
+
+    // MUST match cookie timeout (20 minutes)
+    const SESSION_TIMEOUT_MS = 20 * 60 * 1000; // 20 minutes
+
+    let logoutTimer;
+
+    function resetTimer() {
+        clearTimeout(logoutTimer);
+        logoutTimer = setTimeout(function () {
+            window.location.replace('/Account/Login');
+        }, SESSION_TIMEOUT_MS);
+    }
+
+    // Reset timer on user activity
+    document.addEventListener('mousemove', resetTimer);
+    document.addEventListener('keydown', resetTimer);
+    document.addEventListener('click', resetTimer);
+    document.addEventListener('scroll', resetTimer);
+
+    // Start timer initially
+    resetTimer();
+
+})();
+

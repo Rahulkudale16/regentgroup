@@ -13,6 +13,6 @@
         public bool Duplicate { get; set; }           //
 
         public string? ResponseMessage { get; set; }    //
-
+        public bool expired { get; set; }
     }
 }

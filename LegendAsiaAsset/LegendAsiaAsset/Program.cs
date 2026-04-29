@@ -1,10 +1,11 @@
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using LegendAsiaAsset.Context;
+using LegendAsiaAsset.Contracts;
+using LegendAsiaAsset.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
-using LegendAsiaAsset.Repository;
-using LegendAsiaAsset.Contracts;
-using Microsoft.AspNetCore.HttpOverrides;
-using LegendAsiaAsset.Context;
 //using LegendAsiaAsset.Api;
 using System.Text.RegularExpressions;
 
@@ -32,7 +33,7 @@ builder.Services.AddAuthentication(x =>
 })
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
     {
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
         options.SlidingExpiration = true;
         options.LoginPath = new PathString("/Account/login");
         options.AccessDeniedPath = "/Forbidden/";
@@ -45,7 +46,6 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 
 var app = builder.Build();
 

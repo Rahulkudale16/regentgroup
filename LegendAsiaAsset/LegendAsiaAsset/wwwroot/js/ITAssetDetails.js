@@ -33,7 +33,7 @@
         url: 'GetITAssetdata',
         //editurl: '',
         datatype: 'json',
-        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department','LastAssetLocation','InvoiceNo','PaidBy', 'Status', 'View'],
+        colNames: ['AssetID', 'ID', 'ID', '', 'ID', 'IDLocation', 'Host Name', 'Asset Type', 'Brand', 'Model', 'Serial Number', 'Purchase Year', 'EmailID', 'Designation', 'FullName', 'LastUser', 'Location', 'Region', 'Country', 'Unit', 'CPU', 'Memory', 'HDD', 'OS', 'Software', 'Remark', 'Domain', 'Status', 'ActivityLog', 'CreatedBy', 'CreatedOn', 'ModifiedBy', 'ModifiedOn', 'Monitor', 'Keyboard', 'Mouse', 'MS-Office', 'HeadPhone', 'Department', 'LastAssetLocation', 'InvoiceNo', 'PaidBy', 'Status', 'View'],
         colModel: [
             {
                 key: false,
@@ -141,7 +141,7 @@
             },
             {
                 key: false,
-                hidden:true,
+                hidden: true,
                 name: 'Location',
                 editable: false,
                 width: '125px',
@@ -503,7 +503,7 @@
             },
             {
                 key: false,
-                hidden:true,
+                hidden: true,
                 name: 'Location',
                 editable: false,
                 width: '140px',
@@ -866,7 +866,7 @@
             },
             {
                 key: false,
-                hidden:true,
+                hidden: true,
                 name: 'Location',
                 editable: false,
                 width: '95px',
@@ -2092,7 +2092,7 @@
             $("#DisposeButton").hide();
         }
         else {
-            
+
         }
     });
 
@@ -2102,7 +2102,7 @@
     $("#EmailIDITAsset").attr('readonly', 'readonly');
     $("#DesignationITAsset").attr('readonly', 'readonly');
     $("#DepartmentITAsset").attr('readonly', 'readonly');
-    $("#LastUserText").attr('readonly', 'readonly'); 
+    $("#LastUserText").attr('readonly', 'readonly');
     $("#OfficeText").attr('readonly', 'readonly');
     $("#DomainITAsset").attr('readonly', 'readonly');
     $("#LastAssetLocation").attr('readonly', 'readonly');
@@ -3308,3 +3308,29 @@ function DestroyRenderITAssetDropdowns() {
         }
     });
 }
+
+
+(function () {
+
+    // MUST match cookie timeout (20 minutes)
+    const SESSION_TIMEOUT_MS = 20 * 60 * 1000; // 20 minutes
+
+    let logoutTimer;
+
+    function resetTimer() {
+        clearTimeout(logoutTimer);
+        logoutTimer = setTimeout(function () {
+            window.location.replace('/Account/Login');
+        }, SESSION_TIMEOUT_MS);
+    }
+
+    // Reset timer on user activity
+    document.addEventListener('mousemove', resetTimer);
+    document.addEventListener('keydown', resetTimer);
+    document.addEventListener('click', resetTimer);
+    document.addEventListener('scroll', resetTimer);
+
+    // Start timer initially
+    resetTimer();
+
+})();
