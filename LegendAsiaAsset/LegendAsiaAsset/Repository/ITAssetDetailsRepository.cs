@@ -1053,7 +1053,7 @@ namespace LegendAsiaAsset.Repository
             string currentUserName = GetUserName();
             try
             {
-                string sp = "SP_DeleteITAssetDetails";
+                string sp = "SP_SaveDeleteStatusITAsset";
 
                 var parameters = new DynamicParameters();
                 parameters.Add("IDAsset", IDAsset, DbType.Int16, ParameterDirection.Input);

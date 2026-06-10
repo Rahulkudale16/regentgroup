@@ -449,7 +449,7 @@ namespace LegendAsiaAsset.Repository
             string currentUserName = GetUserName();
             try
             {
-                string sp = "SP_DeleteInfraDetails";
+                string sp = "SP_SaveDeleteStatus";
 
                 var parameters = new DynamicParameters();
                 parameters.Add("IDInfra", IDInfra, DbType.Int16, ParameterDirection.Input);

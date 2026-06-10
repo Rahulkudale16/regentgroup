@@ -32,111 +32,104 @@ $(document).ready(function () {
                 key: true,
                 hidden: true,
                 name: 'IDInfra',
-                width: '90px',
+                width:'120px',
             },
             {
                 key: false,
                 name: 'view',
-                width: '100px',
+                width: '150px',
             },
             {
                 key: false,
                 hidden: true,
                 name: 'IDInfraDis',
                 editable: false,
-                width: '120px',
+                width: '70px',
             },
             {
                 key: false,
                 hidden: true,
                 name: 'IDLocation',
-                width: '420px',
+                width: '70px',
             },
             {
                 key: false,
                 name: 'AssetType',
                 editable: false,
-                width: '125px',
+                width: '150px',
             },
             {
                 key: false,
                 name: 'Brand',
                 editable: false,
-                width: '200px',
+                width: '150px',
             },
             {
                 key: false,
                 name: 'Model',
                 editable: false,
-                width: '200px',
+                width: '150px',
             },
             {
                 key: false,
                 name: 'SerialNumber',
                 editable: false,
-                width: '200px',
+                width: '150px',
             },
             {
                 key: false,
                 name: 'PurchaseYear',
-                editable: false,
-                width: '125px',
-            },
-            {
-                key: false,
-                hidden: true,
-                name: 'Remark',
-                editable: false,
-                width: '125px',
-            },
-            {
-                key: false,
-                hidden: true,
-                name: 'InvoiceNo',
-                editable: false,
-                width: '125px',
-            },
-            {
-                key: false,
-                hidden: true,
-                name: 'PaidBy',
-                editable: false,
-                width: '125px',
-            },
-            {
-                key: false,
-                hidden: true,
-                name: 'Unit',
-                editable: false,
-                width: '125px',
-            },
-            {
-                key: false,
-                //hidden: true,
-                name: 'Location',
                 editable: false,
                 width: '150px',
             },
             {
                 key: false,
                 hidden: true,
+                name: 'Remark',
+                editable: false,
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'InvoiceNo',
+                editable: false,
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'PaidBy',
+                editable: false,
+            },
+            {
+                key: false,
+                hidden: true,
+                name: 'Unit',
+                editable: false,
+            },
+            {
+                key: false,
+                //hidden: true,
+                name: 'Location',
+                editable: false,
+                width: '180px',
+            },
+            {
+                key: false,
+                hidden: true,
                 name: 'Status',
                 editable: false,
-                width: '100px',
             },
             {
                 key: false,
                 hidden: true,
                 name: 'CreatedBy',
                 editable: false,
-                width: '125px',
             },
             {
                 key: false,
                 hidden: true,
                 name: 'CreatedOn',
                 editable: false,
-                width: '125px',
             },
             {
                 key: false,
@@ -157,7 +150,7 @@ $(document).ready(function () {
                 hidden: false,
                 name: 'viewStatus',
                 editable: false,
-                width: '125px',
+                width: '150px',
             },
             {
                 key: false,
@@ -167,11 +160,11 @@ $(document).ready(function () {
             },
         ],
         loadonce: true,
-        responsive: true,
+        responsive: false,
         gridview: true,
         autoencode: false,
         shrinkToFit: true,
-        autowidth: false,
+        autowidth: '',
         pager: '#InfrastructurePager',
         rowNum: 10,
         rowList: [10, 20, 30, 40],
@@ -205,9 +198,9 @@ $(document).ready(function () {
                 selectedRowIds[selectedRowIndex]['view'] = "<button style='border:none; background:transparent;cursor:auto'>" + idinfraDis + "</button>"
                 selectedRowIds[selectedRowIndex]['UpdateInfra'] = "<button class='text-danger fw-bold getUpdateInfra' style='border:none; background:transparent;color:purple!important;' data-rowid='" + idinfra + "'><i class='fa-solid fa-eye'></i></button>"; //
                 InfrastructureGrid.jqGrid('setRowData', temp_var, selectedRowIds[selectedRowIndex]);
+                
             }
-        }
-
+        },
     });
 
     $(document).on('click', '.getUpdateInfra', function () {
@@ -859,15 +852,15 @@ function DestroyRenderInfraDropdowns() {
 
 (function () {
 
-    // MUST match cookie timeout (20 minutes)
-    const SESSION_TIMEOUT_MS = 20 * 60 * 1000; // 20 minutes
+    // MUST match cookie timeout (10 minutes)
+    const SESSION_TIMEOUT_MS = 10 * 60 * 1000; // 10 minutes
 
     let logoutTimer;
 
     function resetTimer() {
         clearTimeout(logoutTimer);
         logoutTimer = setTimeout(function () {
-            window.location.replace('/Account/Login');
+            window.location.replace('/RegentGroupAsset');
         }, SESSION_TIMEOUT_MS);
     }
 
@@ -881,3 +874,7 @@ function DestroyRenderInfraDropdowns() {
     resetTimer();
 
 })();
+
+
+
+

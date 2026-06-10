@@ -253,8 +253,6 @@ function reload(tableName) {
     tableName.setGridParam({ datatype: "json" }).trigger('reloadGrid');
 }
 
-
-
 function checkForCaching(event) {
     if (event.persisted) {
         $("#loading").fadeOut("slow");
@@ -298,16 +296,15 @@ function checkForCaching(event) {
 
 
 (function () {
-
-    // MUST match cookie timeout (20 minutes)
-    const SESSION_TIMEOUT_MS = 20 * 60 * 1000; // 20 minutes
+    // MUST match cookie timeout (10 minutes)
+    const SESSION_TIMEOUT_MS = 10 * 60 * 1000; // 10 minutes
 
     let logoutTimer;
 
     function resetTimer() {
         clearTimeout(logoutTimer);
         logoutTimer = setTimeout(function () {
-            window.location.replace('/Account/Login');
+            window.location.replace('/RegentGroupAsset');
         }, SESSION_TIMEOUT_MS);
     }
 

@@ -1144,7 +1144,6 @@ namespace LegendAsiaAsset.Controllers
         //    return Json(new { RegionList, CountryList, LocationList});
         //}
 
-
         //-------------------------------------------------------------------------------Location List View Methods Ends
         //-------------------------------------------------------------------------------ITAsset List View Methods Starts
 

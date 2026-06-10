@@ -83,13 +83,13 @@
             {
                 key: false,
                 name: 'AssetType',
-                width: '105px',
+                width: '95px',
             },
             {
                 key: false,
                 name: 'Brand',
                 editable: false,
-                width: '100px',
+                width: '90px',
             },
             {
                 key: false,
@@ -337,7 +337,7 @@
 
         ],
         loadonce: true,
-        responsive: true,
+        responsive: false,
         gridview: true,
         autoencode: false,
         shrinkToFit: true,
@@ -3312,15 +3312,15 @@ function DestroyRenderITAssetDropdowns() {
 
 (function () {
 
-    // MUST match cookie timeout (20 minutes)
-    const SESSION_TIMEOUT_MS = 20 * 60 * 1000; // 20 minutes
+    // MUST match cookie timeout (10 minutes)
+    const SESSION_TIMEOUT_MS = 10 * 60 * 1000; // 10 minutes
 
     let logoutTimer;
 
     function resetTimer() {
         clearTimeout(logoutTimer);
         logoutTimer = setTimeout(function () {
-            window.location.replace('/Account/Login');
+            window.location.replace('/RegentGroupAsset');
         }, SESSION_TIMEOUT_MS);
     }
 

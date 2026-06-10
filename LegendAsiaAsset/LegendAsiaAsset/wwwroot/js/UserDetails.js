@@ -167,11 +167,11 @@ $(document).ready(function () {
             },
         ],
         loadonce: true,
-        responsive: true,
+        responsive: false,
         gridview: true,
         autoencode: false,
         shrinkToFit: true,
-        autowidth: false,
+        autowidth: '',
         pager: '#UserDetailsPager',
         rowNum: 10,
         rowList: [10, 20, 30, 40],
@@ -1438,18 +1438,17 @@ function DestroyRenderUDDropdowns() {
 }
 
 
-
 (function () {
 
-    // MUST match cookie timeout (20 minutes)
-    const SESSION_TIMEOUT_MS = 20 * 60 * 1000; // 20 minutes
+    // MUST match cookie timeout (10 minutes)
+    const SESSION_TIMEOUT_MS = 10 * 60 * 1000; // 10 minutes
 
     let logoutTimer;
 
     function resetTimer() {
         clearTimeout(logoutTimer);
         logoutTimer = setTimeout(function () {
-            window.location.replace('/Account/Login');
+            window.location.replace('/RegentGroupAsset');
         }, SESSION_TIMEOUT_MS);
     }
 

@@ -33,7 +33,7 @@ builder.Services.AddAuthentication(x =>
 })
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
     {
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
         options.SlidingExpiration = true;
         options.LoginPath = new PathString("/Account/login");
         options.AccessDeniedPath = "/Forbidden/";
